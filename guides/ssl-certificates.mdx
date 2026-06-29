@@ -1,0 +1,25 @@
+---
+title: "Certificats SSL"
+description: "Comprendre et activer HTTPS pour un domaine."
+icon: "lock"
+---
+
+Un certificat SSL permet d’utiliser HTTPS sur votre domaine.
+
+## Prérequis
+
+- Le domaine doit pointer correctement vers le service.
+- Les ports 80 et 443 doivent être accessibles pour un VPS.
+- Les DNS doivent être propagés.
+
+## Problèmes fréquents
+
+| Problème | Cause possible |
+|---|---|
+| Validation échoue | DNS non propagé ou domaine mal pointé. |
+| HTTPS absent | Certificat non installé ou serveur mal configuré. |
+| Mixed content | Ressources HTTP dans une page HTTPS. |
+
+<Warning>
+Sur VPS, le SSL dépend de votre configuration serveur. Sur Shared hosting, utilisez le panneau de contrôle ou demandez au support.
+</Warning>

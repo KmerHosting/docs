@@ -1,0 +1,26 @@
+---
+title: "Sauvegardes"
+description: "Comprendre les sauvegardes et préparer une restauration."
+icon: "database-backup"
+---
+
+Les sauvegardes réduisent le risque de perte de données, mais elles doivent être testées.
+
+## Ce qu’il faut sauvegarder
+
+- Fichiers du site.
+- Base de données.
+- Emails si nécessaires.
+- Fichiers de configuration.
+- Variables d’environnement privées dans un coffre sécurisé.
+
+## Bonnes pratiques
+
+- Garder plusieurs versions.
+- Stocker une copie hors du serveur principal.
+- Tester la restauration.
+- Documenter les étapes de reprise.
+
+<Warning>
+Ne stockez jamais de dumps SQL publics ou de sauvegardes KYC dans un dépôt Git public.
+</Warning>

@@ -1,0 +1,38 @@
+---
+title: "VPS Servers"
+description: "Serveurs privés virtuels Linux avec accès root, ressources isolées et options réseau."
+icon: "server"
+---
+
+Un VPS KmerHosting est adapté aux applications web, APIs, panels, bases de données, outils internes, environnements de test et projets nécessitant plus de contrôle qu’un hébergement mutualisé.
+
+## Quand choisir un VPS
+
+- Vous avez besoin d’un accès root.
+- Vous installez vos propres services système.
+- Vous voulez isoler votre application.
+- Vous gérez Docker, Node.js, Laravel, Python, PostgreSQL, Redis ou des panels.
+- Vous avez besoin d’un contrôle plus fin sur le firewall, SSH et les processus.
+
+## Responsabilités client
+
+Avec un VPS, vous êtes responsable de la sécurité système sauf contrat de gestion spécifique.
+
+<Steps>
+  <Step title="Sécuriser SSH">
+    Utilisez une clé SSH, désactivez les mots de passe si possible et limitez les IP autorisées.
+  </Step>
+  <Step title="Configurer le firewall">
+    Ouvrez seulement les ports nécessaires : par exemple 22, 80, 443, ou les ports applicatifs validés.
+  </Step>
+  <Step title="Mettre à jour le système">
+    Appliquez régulièrement les mises à jour de sécurité.
+  </Step>
+  <Step title="Configurer les sauvegardes">
+    Planifiez des sauvegardes applicatives et testez la restauration.
+  </Step>
+</Steps>
+
+<Warning>
+Un VPS donne plus de contrôle mais augmente la responsabilité technique : mises à jour, sécurité SSH, firewall, monitoring et sauvegardes.
+</Warning>

@@ -1,0 +1,40 @@
+---
+title: "Gérer le DNS"
+description: "Ajouter, modifier ou supprimer des enregistrements DNS."
+icon: "network"
+---
+
+Les enregistrements DNS contrôlent où pointe votre domaine : site web, email, vérifications, redirections techniques.
+
+## Ajouter un enregistrement
+
+<Steps>
+  <Step title="Ouvrir le domaine">
+    Depuis l’espace client, sélectionnez le domaine standalone ou inclus.
+  </Step>
+  <Step title="Ouvrir DNS Records">
+    Cliquez sur la gestion DNS ou les paramètres de zone.
+  </Step>
+  <Step title="Choisir le type">
+    Sélectionnez `A`, `CNAME`, `TXT`, `MX` ou un autre type supporté.
+  </Step>
+  <Step title="Renseigner la valeur">
+    Copiez exactement la valeur fournie par le service tiers ou par KmerHosting.
+  </Step>
+  <Step title="Enregistrer et attendre">
+    La propagation peut prendre de quelques minutes à plusieurs heures.
+  </Step>
+</Steps>
+
+## Exemples
+
+| Besoin | Type | Exemple |
+|---|---|---|
+| Site vers serveur | `A` | `@ → 203.0.113.10` |
+| Sous-domaine vers service | `CNAME` | `www → example.com` |
+| Vérification domaine | `TXT` | Valeur fournie par le service tiers |
+| Email entrant | `MX` | Serveur mail fourni |
+
+<Warning>
+Supprimer ou modifier un enregistrement DNS peut interrompre le site ou les emails.
+</Warning>

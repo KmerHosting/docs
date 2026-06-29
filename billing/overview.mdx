@@ -1,0 +1,30 @@
+---
+title: "Vue d’ensemble facturation"
+description: "Comprendre les commandes, factures, paiements et crédits de compte."
+icon: "receipt"
+---
+
+La facturation KmerHosting repose sur quatre objets principaux : panier, commande, facture et crédit de compte.
+
+## Cycle standard
+
+```text
+Panier → Commande → Paiement → Facture payée → Activation ou renouvellement
+```
+
+## Objets importants
+
+| Objet | Rôle |
+|---|---|
+| Panier | Contient les services avant validation. |
+| Commande | Représente l’achat demandé. |
+| Facture | Document de paiement et de suivi comptable. |
+| Crédit de compte | Solde disponible pour payer des commandes ou renouvellements. |
+
+## Devise
+
+La documentation utilise le FCFA comme devise principale pour les exemples. Les montants exacts doivent être confirmés dans l’espace client.
+
+<Warning>
+Ne payez jamais une facture sans vérifier son montant, son statut et la méthode de paiement officielle affichée par KmerHosting.
+</Warning>

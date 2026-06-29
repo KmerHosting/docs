@@ -1,0 +1,39 @@
+---
+title: "Vue d’ensemble API"
+description: "Présentation de l’API KmerHosting et des ressources disponibles."
+icon: "braces"
+---
+
+L’API KmerHosting expose des endpoints publics et des endpoints utilisateur sous l’espace `/api/v1`.
+
+## Base URL
+
+```text
+https://kmerhosting.com
+```
+
+## Catégories principales
+
+- Authentication.
+- Catalog.
+- Cart.
+- Orders.
+- Billing.
+- Invoices.
+- Domains.
+- Services.
+- KYC.
+- Notifications.
+- Storage.
+- Users.
+
+## Authentification
+
+Les endpoints publics ne nécessitent pas de session. Les endpoints utilisateur utilisent la session du compte connecté via cookie.
+
+<CardGroup cols={2}>
+  <Card title="Authentification" href="/api/authentication" icon="key" />
+  <Card title="Erreurs" href="/api/errors" icon="triangle-alert" />
+  <Card title="Endpoints" href="/api/endpoints" icon="list" />
+  <Card title="Référence OpenAPI" href="/api-reference" icon="terminal" />
+</CardGroup>

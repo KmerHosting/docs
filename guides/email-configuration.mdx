@@ -1,0 +1,23 @@
+---
+title: "Configuration email"
+description: "Configurer les emails professionnels avec un domaine."
+icon: "mail"
+---
+
+Les emails professionnels utilisent généralement des enregistrements DNS spécifiques.
+
+## Enregistrements courants
+
+| Type | Rôle |
+|---|---|
+| `MX` | Indique les serveurs qui reçoivent les emails. |
+| `SPF` | Autorise les serveurs d’envoi. |
+| `DKIM` | Signe les emails sortants. |
+| `DMARC` | Définit la politique anti-usurpation. |
+
+## Bonnes pratiques
+
+- Configurez SPF, DKIM et DMARC.
+- Utilisez des mots de passe forts pour les boîtes mail.
+- Évitez l’envoi massif non sollicité.
+- Surveillez les erreurs de délivrabilité.

@@ -1,0 +1,27 @@
+---
+title: "Erreurs API"
+description: "Codes HTTP courants et méthodes de diagnostic."
+icon: "triangle-alert"
+---
+
+## Codes courants
+
+| Code | Sens | Action |
+|---:|---|---|
+| `200` | Réponse réussie | Lire le JSON retourné. |
+| `201` | Ressource créée | Conserver l’identifiant retourné. |
+| `400` | Requête invalide | Vérifier le body, les paramètres et le format. |
+| `401` | Authentification requise | Se connecter ou renouveler la session. |
+| `404` | Ressource introuvable | Vérifier l’ID et l’URL. |
+| `500` | Erreur serveur | Réessayer puis contacter le support si persistant. |
+
+## Diagnostic
+
+Incluez ces éléments dans un ticket API :
+
+- endpoint appelé ;
+- méthode HTTP ;
+- code de réponse ;
+- extrait de réponse sans secret ;
+- horodatage ;
+- ID de compte ou commande si applicable.

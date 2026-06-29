@@ -1,0 +1,45 @@
+---
+title: "Vérification KYC"
+description: "Statuts, cycle de validation et bonnes pratiques pour la vérification d’identité."
+icon: "badge-check"
+---
+
+Le KYC permet de vérifier l’identité d’un client lorsque cela est nécessaire pour la sécurité, la conformité ou la prévention des abus.
+
+## Cycle de validation
+
+```text
+pending → submitted → under_review → approved | rejected
+```
+
+## Statuts de soumission
+
+| Statut | Signification |
+|---|---|
+| `pending` | Aucun dossier KYC soumis. |
+| `submitted` | Les informations ont été envoyées. |
+| `under_review` | Le dossier est en cours de vérification. |
+| `approved` | Le dossier est validé. |
+| `rejected` | Le dossier est refusé ou nécessite correction. |
+
+## Statuts de compte
+
+| Statut | Signification |
+|---|---|
+| `unverified` | Compte créé, vérification non complétée. |
+| `submitted` | Documents envoyés. |
+| `verified` | Compte vérifié. |
+| `suspended` | Compte suspendu temporairement. |
+| `disabled` | Compte désactivé. |
+| `terminated` | Compte résilié ou supprimé. |
+
+## Conseils pour éviter un refus
+
+- Utilisez des documents lisibles.
+- Fournissez des informations cohérentes avec le profil client.
+- Ne masquez pas les informations requises.
+- Ne soumettez pas plusieurs dossiers contradictoires.
+
+<Warning>
+Ne transmettez pas de documents KYC par des canaux non demandés. Utilisez uniquement le formulaire ou les instructions officielles.
+</Warning>

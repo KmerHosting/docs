@@ -1,0 +1,28 @@
+---
+title: "Endpoints principaux"
+description: "Résumé des endpoints API KmerHosting les plus utilisés."
+icon: "list"
+---
+
+Cette page résume les familles d’endpoints. La référence détaillée est générée depuis `openapi.json`.
+
+## Public
+
+| Méthode | Endpoint | Usage |
+|---|---|---|
+| `GET` | `/api/v1/content/hero` | Contenu public localisé. |
+| `GET` | `/api/v1/catalog/offers` | Offres disponibles au checkout. |
+| `GET` | `/api/v1/catalog/trending-services` | Services mis en avant. |
+| `POST` | `/api/v1/auth/register` | Création de compte. |
+| `POST` | `/api/v1/newsletter/subscriptions` | Abonnement newsletter. |
+
+## Utilisateur connecté
+
+| Méthode | Endpoint | Usage |
+|---|---|---|
+| `GET` | `/api/v1/users/me/profile` | Profil du compte. |
+| `GET` | `/api/v1/cart` | Panier courant. |
+| `POST` | `/api/v1/orders` | Création d’une commande. |
+| `GET` | `/api/v1/invoices` | Liste des factures. |
+| `GET` | `/api/v1/users/me/services/active` | Services actifs. |
+| `POST` | `/api/v1/domains/availability-checks` | Vérification de disponibilité domaine. |

@@ -1,0 +1,25 @@
+---
+title: "Accès VPS"
+description: "Diagnostiquer un problème SSH ou réseau sur VPS."
+icon: "terminal"
+---
+
+## Vérifications
+
+- IP du VPS.
+- Port SSH.
+- Clé SSH correcte.
+- Firewall local et serveur.
+- Statut du VPS dans l’espace client.
+
+## Commandes utiles
+
+```bash
+ssh -v root@IP_DU_VPS
+ping IP_DU_VPS
+nc -vz IP_DU_VPS 22
+```
+
+<Warning>
+Ne publiez jamais votre clé privée SSH ou un mot de passe root dans un ticket.
+</Warning>
