@@ -30,7 +30,8 @@
   "logo": {
     "light": "/images/logo-docs-light.png",
     "dark": "/images/logo-docs-dark.png",
-    "href": "https://kmerhosting.com"
+    "href": "https://kmerhosting.com",
+    "size": 56
   },
   "favicon": "/images/logo-mark.png",
   "background": {
@@ -61,7 +62,7 @@
     "primary": {
       "type": "button",
       "label": "Client area",
-      "href": "https://kmerhosting.com/customers"
+      "href": "https://kmerhosting.com/dashboard"
     }
   },
   "footer": {
