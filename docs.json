@@ -1,15 +1,15 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "willow",
-  "name": "KmerHosting Docs",
+  "name": "KmerHosting",
   "description": "Customer, hosting, billing, and API documentation for KmerHosting.",
   "colors": {
-    "primary": "#111111",
-    "light": "#D4D4D8",
-    "dark": "#111111"
+    "primary": "#1A73E8",
+    "light": "#8AB4F8",
+    "dark": "#1A73E8"
   },
   "appearance": {
-    "default": "light",
+    "default": "system",
     "strict": false
   },
   "fonts": {
@@ -27,10 +27,16 @@
   "icons": {
     "library": "lucide"
   },
+  "logo": {
+    "light": "/images/logo-docs-light.png",
+    "dark": "/images/logo-docs-dark.png",
+    "href": "https://kmerhosting.com"
+  },
+  "favicon": "/images/logo-mark.png",
   "background": {
     "color": {
-      "light": "#FAFAFA",
-      "dark": "#0F0F10"
+      "light": "#FFFFFF",
+      "dark": "#0A0A0A"
     }
   },
   "navbar": {
