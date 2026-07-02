@@ -19,65 +19,86 @@ mode: "custom"
     className="pointer-events-none absolute right-0 top-24 h-80 w-80 rounded-full bg-black/5 blur-3xl dark:bg-white/[0.03]"
   />
 
-  <div className="relative mx-auto max-w-6xl px-4 py-10 lg:py-16">
-    <div className="max-w-3xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#737373] dark:text-white/45">
-        Customer and infrastructure docs
-      </p>
-      <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#171717] dark:text-white sm:text-5xl">
-        Clear deployment and customer docs for every{" "}
-        <span className="text-[#1A73E8] dark:text-[#8ab4f8]">KmerHosting</span> service.
-      </h1>
-      <p className="mt-5 max-w-2xl text-lg leading-8 text-[#525252] dark:text-white/60">
-        Start with account setup, choose the right hosting model, then follow the deployment
-        recipes for shared hosting or VPS environments.
-      </p>
-    </div>
-
-    <div className="mt-10">
-      <CardGroup cols={2}>
-        <Card title="Quickstart" icon="rocket" href="/quickstart">
-          Create an account, complete verification, place the first order, and find the service after activation.
-        </Card>
-        <Card title="Deployment guides" icon="upload-cloud" href="/guides/deploy-website">
-          Choose shared hosting or VPS and follow stack-specific deployment checklists.
-        </Card>
-        <Card title="Billing and renewals" icon="receipt" href="/billing/overview">
-          Understand invoices, account credit, renewals, refunds, and order states.
-        </Card>
-        <Card title="API and platform" icon="braces" href="/api/overview">
-          Review authentication, error handling, endpoints, and the OpenAPI reference.
-        </Card>
-      </CardGroup>
-    </div>
-
-    <div className="mt-14 grid gap-6 lg:grid-cols-[1.15fr,0.85fr]">
-      <div className="rounded-[1.5rem] border border-[#e5e5e5] bg-white/90 p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.03]">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#737373] dark:text-white/45">
-          Use these docs for
+  <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-10 lg:pt-16">
+    <div className="grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+      <div className="max-w-4xl">
+        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#737373] dark:text-white/45">
+          Customer and infrastructure docs
         </p>
-        <ul className="mt-4 space-y-3 text-sm leading-7 text-[#525252] dark:text-white/60">
-          <li>Choosing between shared hosting, VPS, domains, and support-led custom hosting.</li>
-          <li>Deploying common web stacks with fewer support handoffs.</li>
-          <li>Managing billing, service lifecycle, and customer account workflows.</li>
-          <li>Troubleshooting login, DNS, payment, and access issues.</li>
-        </ul>
+        <h1 className="mt-5 flex flex-col leading-[0.94] tracking-tight text-[#171717] dark:text-white">
+          <span className="text-[clamp(3rem,7vw,5.9rem)] font-extrabold">
+            Host, bill, and support
+          </span>
+          <span className="text-[clamp(3.8rem,8.2vw,6.7rem)] font-black text-[#1A73E8] dark:text-[#8AB4F8]">
+            with clarity
+          </span>
+        </h1>
+        <p className="mt-6 max-w-2xl text-base font-medium leading-8 text-[#525252] dark:text-white/60 md:text-lg">
+          Everything your customers and operators need to start fast, deploy on the right stack,
+          and manage KmerHosting services without unnecessary support friction.
+        </p>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="/quickstart"
+            className="inline-flex items-center justify-center rounded-full bg-[#1A73E8] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#1666cf]"
+          >
+            Open quickstart
+          </a>
+          <a
+            href="/guides/deploy-website"
+            className="inline-flex items-center justify-center rounded-full border border-[#e5e5e5] bg-[#fafafa] px-6 py-3 text-sm font-bold text-[#171717] transition hover:border-[#d4d4d4] hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:bg-white/[0.06]"
+          >
+            View deployment guides
+          </a>
+        </div>
+
+        <div className="mt-12">
+          <CardGroup cols={2}>
+            <Card title="Quickstart" icon="rocket" href="/quickstart">
+              Create an account, complete verification, place the first order, and find the service after activation.
+            </Card>
+            <Card title="Deployment guides" icon="upload-cloud" href="/guides/deploy-website">
+              Choose shared hosting or VPS and follow stack-specific deployment checklists.
+            </Card>
+            <Card title="Billing and renewals" icon="receipt" href="/billing/overview">
+              Understand invoices, account credit, renewals, refunds, and order states.
+            </Card>
+            <Card title="API and platform" icon="braces" href="/api/overview">
+              Review authentication, error handling, endpoints, and the OpenAPI reference.
+            </Card>
+          </CardGroup>
+        </div>
       </div>
 
-      <div className="rounded-[1.5rem] border border-[#e5e5e5] bg-[#fafafa]/90 p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.05]">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#737373] dark:text-white/45">
-          Start here
-        </p>
-        <div className="mt-4 space-y-4 text-sm leading-7 text-[#525252] dark:text-white/60">
-          <p>
-            New customers should begin with <a href="/quickstart">Quickstart</a>.
+      <div className="space-y-5">
+        <div className="rounded-[1.75rem] border border-[#e5e5e5] bg-white/92 p-7 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#737373] dark:text-white/45">
+            Start here
           </p>
-          <p>
-            Teams deploying websites should start with <a href="/guides/deploy-website">Deployment guides</a>.
+          <div className="mt-5 space-y-4 text-sm leading-7 text-[#525252] dark:text-white/60">
+            <p>
+              New customers should begin with <a href="/quickstart">Quickstart</a>.
+            </p>
+            <p>
+              Teams deploying websites should start with <a href="/guides/deploy-website">Deployment guides</a>.
+            </p>
+            <p>
+              API consumers can jump to <a href="/api/overview">API overview</a> or <a href="/api-reference">API reference</a>.
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-[1.75rem] border border-[#e5e5e5] bg-[#fafafa]/92 p-7 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#737373] dark:text-white/45">
+            Use these docs for
           </p>
-          <p>
-            API consumers can jump straight to <a href="/api/overview">API overview</a> or the <a href="/api-reference">API reference</a>.
-          </p>
+          <ul className="mt-5 space-y-3 text-sm leading-7 text-[#525252] dark:text-white/60">
+            <li>Choosing between shared hosting, VPS, domains, and support-led custom hosting.</li>
+            <li>Deploying common web stacks with fewer support handoffs.</li>
+            <li>Managing billing, service lifecycle, and customer account workflows.</li>
+            <li>Troubleshooting login, DNS, payment, and access issues.</li>
+          </ul>
         </div>
       </div>
     </div>

@@ -14,14 +14,14 @@
   },
   "fonts": {
     "family": "Inter",
-    "weight": 400,
+    "weight": 500,
     "heading": {
       "family": "Inter",
-      "weight": 600
+      "weight": 700
     },
     "body": {
       "family": "Inter",
-      "weight": 400
+      "weight": 500
     }
   },
   "icons": {
@@ -30,10 +30,9 @@
   "logo": {
     "light": "/images/logo-docs-light.png",
     "dark": "/images/logo-docs-dark.png",
-    "href": "https://kmerhosting.com",
-    "size": 56
+    "href": "https://kmerhosting.com"
   },
-  "favicon": "/images/logo-mark.png",
+  "favicon": "/images/favicon-192.png",
   "background": {
     "color": {
       "light": "#FFFFFF",

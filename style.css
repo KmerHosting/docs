@@ -1,0 +1,83 @@
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: Inter, "Inter Fallback", sans-serif !important;
+}
+
+body {
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Inter, "Inter Fallback", sans-serif !important;
+  letter-spacing: -0.03em;
+}
+
+#navbar img,
+#navbar picture img,
+#navbar a img {
+  height: 40px !important;
+  width: auto !important;
+  max-height: 40px !important;
+}
+
+#navbar {
+  backdrop-filter: blur(18px);
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #e5e5e5 !important;
+  border-radius: 9999px !important;
+  background: #fafafa !important;
+  box-shadow: none !important;
+  color: #171717 !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #1a73e8 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button {
+  box-shadow: none !important;
+}
+
+.dark input,
+.dark textarea,
+.dark select,
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder,
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus,
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
