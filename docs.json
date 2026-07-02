@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "almond",
   "name": "KmerHosting",
-  "description": "Customer, hosting, billing, and API documentation for KmerHosting.",
+  "description": "Step-by-step guides for Linux VPS, DirectAdmin shared hosting, billing, customer operations, troubleshooting, and API workflows.",
   "colors": {
     "primary": "#1A73E8",
     "light": "#8AB4F8",
@@ -12,113 +12,65 @@
     "default": "system",
     "strict": false
   },
-  "fonts": {
-    "family": "Trebuchet MS",
-    "weight": 400,
-    "heading": {
-      "family": "Trebuchet MS",
-      "weight": 400
-    },
-    "body": {
-      "family": "Trebuchet MS",
-      "weight": 400
-    }
-  },
+  "favicon": "/images/favicon-192.png",
   "icons": {
     "library": "lucide"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "contextual": {
+    "options": ["copy", "view", "assistant"],
+    "display": "header"
   },
   "logo": {
     "light": "/images/logo-docs-light.png",
     "dark": "/images/logo-docs-dark.png",
     "href": "https://kmerhosting.com"
   },
-  "favicon": "/images/favicon-192.png",
-  "background": {
-    "color": {
-      "light": "#FFFFFF",
-      "dark": "#0A0A0A"
-    }
-  },
   "navbar": {
-    "links": [
-      {
-        "label": "Website",
-        "href": "https://kmerhosting.com"
-      },
-      {
-        "label": "Pricing",
-        "href": "https://kmerhosting.com/pricing"
-      },
-      {
-        "label": "Support",
-        "href": "https://kmerhosting.com/support"
-      },
-      {
-        "label": "Status",
-        "href": "https://status.kmerhosting.com"
-      }
-    ],
+    "links": [],
     "primary": {
       "type": "button",
-      "label": "Client area",
+      "label": "Dashboard",
       "href": "https://kmerhosting.com/customers"
     }
   },
   "footer": {
-    "socials": {},
-    "links": [
-      {
-        "header": "Platform",
-        "items": [
-          {
-            "label": "Pricing",
-            "href": "https://kmerhosting.com/pricing"
-          },
-          {
-            "label": "Support",
-            "href": "https://kmerhosting.com/support"
-          },
-          {
-            "label": "Status",
-            "href": "https://status.kmerhosting.com"
-          }
-        ]
-      },
-      {
-        "header": "Legal",
-        "items": [
-          {
-            "label": "Terms",
-            "href": "https://kmerhosting.com/terms-of-service"
-          },
-          {
-            "label": "Privacy",
-            "href": "https://kmerhosting.com/privacy-policy"
-          },
-          {
-            "label": "Refund policy",
-            "href": "https://kmerhosting.com/refund-policy"
-          }
-        ]
-      }
-    ]
-  },
-  "contextual": {
-    "options": [
-      "copy"
-    ],
-    "display": "header"
-  },
-  "styling": {
-    "eyebrows": "breadcrumbs"
+    "socials": {}
   },
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Home",
+          "icon": "house",
+          "href": "/"
+        },
+        {
+          "anchor": "Website",
+          "icon": "globe",
+          "href": "https://kmerhosting.com"
+        },
+        {
+          "anchor": "Support",
+          "icon": "life-buoy",
+          "href": "https://kmerhosting.com/support"
+        },
+        {
+          "anchor": "Status",
+          "icon": "activity",
+          "href": "https://status.kmerhosting.com"
+        }
+      ]
+    },
+    "directory": "card",
     "groups": [
       {
         "group": "Getting started",
         "icon": "rocket",
+        "expanded": true,
         "pages": [
-          "index",
           "quickstart",
           "account/create-account",
           "account/email-verification",
@@ -127,31 +79,14 @@
         ]
       },
       {
-        "group": "Products",
+        "group": "Hosting products",
         "icon": "server",
+        "expanded": true,
         "pages": [
           "products/shared-hosting",
           "products/vps",
           "products/domains",
-          "products/custom-hosting"
-        ]
-      },
-      {
-        "group": "Billing",
-        "icon": "receipt",
-        "pages": [
-          "billing/overview",
-          "billing/account-credit",
-          "billing/orders",
-          "billing/invoices",
-          "billing/renewals",
-          "billing/refunds"
-        ]
-      },
-      {
-        "group": "Deployment guides",
-        "icon": "upload-cloud",
-        "pages": [
+          "products/custom-hosting",
           "guides/deploy-website",
           "guides/shared-hosting-stacks",
           "guides/vps-stacks",
@@ -161,9 +96,16 @@
         ]
       },
       {
-        "group": "Customer guides",
-        "icon": "book-open",
+        "group": "Billing and customer operations",
+        "icon": "wallet",
+        "expanded": true,
         "pages": [
+          "billing/overview",
+          "billing/account-credit",
+          "billing/orders",
+          "billing/invoices",
+          "billing/renewals",
+          "billing/refunds",
           "guides/domain-availability",
           "guides/checkout",
           "guides/service-management",
@@ -173,8 +115,9 @@
         ]
       },
       {
-        "group": "API",
+        "group": "API and automation",
         "icon": "braces",
+        "expanded": true,
         "pages": [
           "api/overview",
           "api/authentication",
@@ -191,18 +134,13 @@
         }
       },
       {
-        "group": "Operations",
-        "icon": "activity",
+        "group": "Operations and troubleshooting",
+        "icon": "wrench",
+        "expanded": true,
         "pages": [
           "operations/status-page",
           "operations/incidents",
-          "operations/maintenance"
-        ]
-      },
-      {
-        "group": "Troubleshooting",
-        "icon": "wrench",
-        "pages": [
+          "operations/maintenance",
           "troubleshooting/login",
           "troubleshooting/payment",
           "troubleshooting/domain-dns",
@@ -213,6 +151,7 @@
       {
         "group": "Legal",
         "icon": "scale",
+        "expanded": true,
         "pages": [
           "legal/terms",
           "legal/privacy",

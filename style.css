@@ -1,134 +1,145 @@
-html,
-body,
-button,
-input,
-textarea,
-select {
-  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif !important;
+:root {
+  --default-border-color: var(--gray-200);
 }
 
-body {
-  color: #171717;
-  font-weight: 400;
+.dark {
+  --default-border-color: var(--gray-800);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif !important;
-  font-weight: 400 !important;
-  letter-spacing: -0.04em;
+#sidebar .nav-dropdown-trigger {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding-left: 0.375rem;
 }
 
-#navbar {
-  backdrop-filter: blur(18px);
+#sidebar .nav-dropdown-trigger:hover {
+  background-color: rgb(0 0 0 / 0.04) !important;
 }
 
-#navbar img,
-#navbar picture img,
-#navbar a img {
-  height: 36px !important;
+.dark #sidebar .nav-dropdown-trigger:hover {
+  background-color: rgb(255 255 255 / 0.06) !important;
+}
+
+#sidebar .nav-dropdown-trigger .nav-dropdown-item-icon {
+  border: none !important;
+  background: transparent !important;
+  height: auto !important;
   width: auto !important;
-  max-height: 36px !important;
+  padding: 0 !important;
 }
 
-.dark body,
-[data-theme="dark"] body {
-  color: #ffffff;
+.nav-dropdown-content .nav-dropdown-item-icon {
+  border: none !important;
+  background: transparent !important;
+  height: auto !important;
+  width: auto !important;
+  padding: 0 !important;
 }
 
-#content-area {
-  background: #0f0f10 !important;
+.nav-dropdown-content .nav-dropdown-item-description {
+  display: none !important;
 }
 
-#content-area > div {
-  background: #0f0f10 !important;
+#sidebar .nav-anchor span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
-#content-area > div > div {
-  background: #0f0f10 !important;
-  color: #ffffff !important;
+body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] {
+  color: rgb(var(--primary)) !important;
+  font-weight: 600 !important;
 }
 
-#content-area .mdx-content {
-  color: #ffffff !important;
-}
-
-#content-area .mdx-content :is(p, li, h1, h2, h3, h4, h5, h6, strong, em, span, blockquote, code) {
+body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] span {
   color: inherit !important;
 }
 
-#content-area > div > div > header,
-#content-area > div > div > .feedback-toolbar,
-#content-area > div > div > div[class*="font-family-mono"] {
-  color: #ffffff !important;
+body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] svg {
+  background-color: rgb(var(--primary)) !important;
 }
 
-#content-area > div > div > header p,
-#content-area > div > div > div[class*="font-family-mono"] {
-  color: rgba(255, 255, 255, 0.62) !important;
+.dark body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] {
+  color: rgb(var(--primary-light) / var(--tw-text-opacity, 1)) !important;
 }
 
-#content-area .mdx-content a,
-#content-area button[aria-label="Toggle assistant panel"] {
-  color: #8ab4f8 !important;
+.dark body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] svg {
+  background-color: rgb(var(--primary-light) / var(--tw-text-opacity, 1)) !important;
 }
 
-input[type="search"],
-input[type="text"],
-textarea {
-  border: 1px solid #e5e5e5 !important;
-  border-radius: 9999px !important;
-  background: #fafafa !important;
+:is(#content-area[data-current-path='/'], [data-current-path='/'] #content-area):has([data-product-guide-index]) {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+:is(#content-area[data-current-path='/'], [data-current-path='/'] #content-area):has([data-product-guide-index]) > div:first-child {
+  background: transparent !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+}
+
+[data-product-guide-index] a:not(.product-guide-feature-card) {
+  background-color: #fafafa !important;
+}
+
+.dark [data-product-guide-index] a:not(.product-guide-feature-card) {
+  background-color: #09090b !important;
+}
+
+.product-guide-feature-card {
+  grid-column: 1 / -1;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 260px;
+  background: url('/images/sample-feature-light.png') center / cover no-repeat !important;
+  border: none !important;
   box-shadow: none !important;
+  color: white !important;
 }
 
-.dark input[type="search"],
-.dark input[type="text"],
-.dark textarea,
-[data-theme="dark"] input[type="search"],
-[data-theme="dark"] input[type="text"],
-[data-theme="dark"] textarea {
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+.dark .product-guide-feature-card {
+  background-image: url('/images/sample-feature-dark.png') !important;
 }
 
-#search-bar-entry-mobile,
-button[aria-label="Open search"] {
-  color: #ffffff !important;
+.product-guide-feature-card > div {
+  display: flex !important;
+  flex: 1;
+  flex-direction: column !important;
+  justify-content: space-between !important;
 }
 
-#search-bar-entry-mobile svg,
-button[aria-label="Open search"] svg {
-  width: 18px !important;
-  height: 18px !important;
-  color: #ffffff !important;
-  stroke-width: 2.4 !important;
+.product-guide-feature-card :is(h2, h3, p, span, svg) {
+  color: white !important;
 }
 
-button[class*="context-menu-dropdown-trigger"] {
-  color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+.product-guide-feature-card :is(svg, [class*='icon']) {
+  background-color: white !important;
+  width: 2em !important;
+  height: 2em !important;
+  margin-top: 2px;
 }
 
-button[class*="context-menu-dropdown-trigger"] > svg:first-child {
-  width: 16px !important;
-  height: 16px !important;
-  background-color: #8ab4f8 !important;
-  color: #8ab4f8 !important;
-  -webkit-mask-image: url("https://d3gk2c5xim1je2.cloudfront.net/lucide/v1.16.0/copy.svg") !important;
-  mask-image: url("https://d3gk2c5xim1je2.cloudfront.net/lucide/v1.16.0/copy.svg") !important;
+.product-guide-feature-card-title {
+  font-size: 1.2em;
+  font-weight: 500;
 }
 
-@media (max-width: 1023px) {
-  #navbar img,
-  #navbar picture img,
-  #navbar a img {
-    height: 32px !important;
-    max-height: 32px !important;
-  }
+.product-guide-feature-card :is(h2, h3, p, span, svg).product-guide-feature-card-description {
+  font-size: 1.05em;
+  font-weight: 400;
+  color: rgb(var(--gray-50) / 62.5%) !important;
+}
+
+.dark .product-guide-feature-card :is(h2, h3, p, span, svg).product-guide-feature-card-description {
+  color: rgb(var(--gray-50) / 50%) !important;
+}
+
+img.nav-logo {
+  max-width: 220px;
+  height: auto;
 }
