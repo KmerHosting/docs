@@ -1,38 +1,44 @@
 ---
-title: "VPS Servers"
-description: "Serveurs privés virtuels Linux avec accès root, ressources isolées et options réseau."
+title: "VPS"
+description: "Virtual private servers for custom runtimes, root access, isolated resources, and production application control."
 icon: "server"
 ---
 
-Un VPS KmerHosting est adapté aux applications web, APIs, panels, bases de données, outils internes, environnements de test et projets nécessitant plus de contrôle qu’un hébergement mutualisé.
+A KmerHosting VPS is built for teams that need full control over the server environment. It fits APIs, internal tools, Docker-based apps, custom web stacks, and workloads that do not fit the boundaries of shared hosting.
 
-## Quand choisir un VPS
+## Choose a VPS when you need
 
-- Vous avez besoin d’un accès root.
-- Vous installez vos propres services système.
-- Vous voulez isoler votre application.
-- Vous gérez Docker, Node.js, Laravel, Python, PostgreSQL, Redis ou des panels.
-- Vous avez besoin d’un contrôle plus fin sur le firewall, SSH et les processus.
+- Root or sudo-level access.
+- Custom packages or operating-system level changes.
+- Node.js, Python, Docker, Redis, queues, or WebSockets.
+- Reverse proxies, firewalls, and process supervision you manage directly.
+- Isolated resources and a clearer operational boundary.
 
-## Responsabilités client
+## Customer responsibilities
 
-Avec un VPS, vous êtes responsable de la sécurité système sauf contrat de gestion spécifique.
+On a VPS, the customer is responsible for the server unless a managed-service agreement says otherwise.
 
 <Steps>
-  <Step title="Sécuriser SSH">
-    Utilisez une clé SSH, désactivez les mots de passe si possible et limitez les IP autorisées.
+  <Step title="Secure SSH access">
+    Prefer SSH keys, remove unnecessary users, and avoid leaving password-only access exposed.
   </Step>
-  <Step title="Configurer le firewall">
-    Ouvrez seulement les ports nécessaires : par exemple 22, 80, 443, ou les ports applicatifs validés.
+  <Step title="Restrict the firewall">
+    Open only the ports the workload actually needs, usually `22`, `80`, and `443`.
   </Step>
-  <Step title="Mettre à jour le système">
-    Appliquez régulièrement les mises à jour de sécurité.
+  <Step title="Patch the system">
+    Keep the operating system, runtime, and package managers updated on a regular schedule.
   </Step>
-  <Step title="Configurer les sauvegardes">
-    Planifiez des sauvegardes applicatives et testez la restauration.
+  <Step title="Back up the service">
+    Protect both application files and databases, then verify restore steps before the first incident.
   </Step>
 </Steps>
 
+## Deployment path
+
+<Card title="Deploy common stacks on a VPS" icon="upload-cloud" href="/guides/vps-stacks">
+  Follow practical recipes for Node.js, Docker Compose, Laravel, and other server-managed stacks.
+</Card>
+
 <Warning>
-Un VPS donne plus de contrôle mais augmente la responsabilité technique : mises à jour, sécurité SSH, firewall, monitoring et sauvegardes.
+VPS hosting gives more control, but it also adds operational responsibility for uptime, patching, application processes, access control, and recovery.
 </Warning>

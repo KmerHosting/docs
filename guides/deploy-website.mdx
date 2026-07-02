@@ -1,31 +1,48 @@
 ---
-title: "Déployer un site web"
-description: "Étapes générales pour publier un site sur KmerHosting."
+title: "Choose a deployment path"
+description: "Decide between shared hosting and VPS, then follow the right stack-specific deployment guide."
 icon: "upload-cloud"
 ---
 
-Le processus dépend du type de service : Shared hosting, VPS ou custom hosting.
+KmerHosting supports two main deployment models:
 
-## Shared hosting
+- Shared hosting for standard websites, WordPress, and classic PHP apps.
+- VPS for custom runtimes, root access, queues, workers, and containerized deployments.
 
-<Steps>
-  <Step title="Récupérer les accès">
-    Ouvrez la fiche du service ou l’email d’activation.
-  </Step>
-  <Step title="Uploader les fichiers">
-    Utilisez le gestionnaire de fichiers ou FTP/SFTP selon le panneau.
-  </Step>
-  <Step title="Configurer la base de données">
-    Créez la base et l’utilisateur si votre application en a besoin.
-  </Step>
-  <Step title="Pointer le domaine">
-    Configurez les DNS vers l’hébergement.
-  </Step>
-  <Step title="Activer SSL">
-    Installez ou activez le certificat SSL.
-  </Step>
-</Steps>
+## Choose the right platform
 
-## VPS
+| Need | Shared hosting | VPS |
+| --- | --- | --- |
+| Static site or brochure website | Good fit | Works, but usually unnecessary |
+| WordPress | Good fit | Better only when you need more control or scale |
+| PHP plus MySQL application | Good fit | Good when you need custom packages or workers |
+| Node.js, Python, Docker, Redis, workers | Not recommended | Good fit |
+| Root access and firewall control | No | Yes |
 
-Sur VPS, installez le serveur web, configurez le firewall, déployez l’application et configurez le reverse proxy ou le service web.
+## Recommended path
+
+<CardGroup cols={2}>
+  <Card title="Shared hosting recipes" icon="panel-top" href="/guides/shared-hosting-stacks">
+    Use this path for static sites, WordPress, and standard PHP plus MySQL applications.
+  </Card>
+  <Card title="VPS recipes" icon="server" href="/guides/vps-stacks">
+    Use this path for Node.js, Docker Compose, Laravel, reverse proxies, and managed services on your own server.
+  </Card>
+</CardGroup>
+
+## Deployment checklist
+
+- Confirm whether the service is shared hosting or VPS before uploading anything.
+- Point the domain or subdomain to the correct server or hosting account.
+- Create the database and environment variables before the first app boot when the stack requires them.
+- Enable SSL only after DNS resolves correctly.
+- Validate backups, login, forms, and file uploads before announcing the site live.
+
+## Related guides
+
+<CardGroup cols={2}>
+  <Card title="DNS management" icon="network" href="/guides/dns-management" />
+  <Card title="SSL certificates" icon="shield-check" href="/guides/ssl-certificates" />
+  <Card title="Backups" icon="database" href="/guides/backups" />
+  <Card title="Service management" icon="sliders-horizontal" href="/guides/service-management" />
+</CardGroup>

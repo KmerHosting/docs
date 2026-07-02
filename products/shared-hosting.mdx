@@ -1,35 +1,38 @@
 ---
 title: "Shared hosting"
-description: "Hébergement mutualisé KmerHosting pour sites, emails, bases de données et WordPress."
+description: "Managed web hosting for standard websites, WordPress, email, databases, and control-panel-based workflows."
 icon: "panel-top"
 ---
 
-Shared hosting convient aux sites vitrines, blogs, petites applications PHP, sites WordPress et projets qui veulent une gestion simple avec un panneau de contrôle.
+Shared hosting is the right starting point for brochure sites, small business websites, WordPress installs, and classic PHP applications that do not need root access or long-running background processes.
 
-## Ce qui est généralement inclus
+## Typical inclusions
 
-- Stockage SSD.
-- Bande passante élevée selon le plan.
-- Comptes email.
-- Bases de données.
-- Certificat SSL.
-- Panneau de contrôle.
-- Sauvegardes automatiques selon l’offre.
-- Support client.
+- SSD-backed storage.
+- Control panel access.
+- Database management.
+- Email accounts where included by plan.
+- SSL support.
+- Backups according to the purchased plan.
+- Standard support for account and service issues.
 
-## Cas d’usage recommandés
+## Best-fit use cases
 
-| Besoin | Recommandation |
-|---|---|
-| Site vitrine | Shared hosting suffit généralement. |
-| Blog WordPress | Shared hosting avec SSL et sauvegardes. |
-| Application lourde | Préférer un VPS. |
-| Emails professionnels | Vérifier les limites email du plan. |
+| Need | Recommendation |
+| --- | --- |
+| Marketing or brochure site | Shared hosting is usually the simplest option. |
+| WordPress site | Shared hosting is a strong default when plugins and traffic are moderate. |
+| Small PHP plus MySQL app | Shared hosting works well if the app does not need workers or custom packages. |
+| Node.js, Docker, or queue workers | Move to a VPS. |
 
-## Activation
+## Deployment path
 
-Après paiement et validation de la commande, le service apparaît dans l’espace client. Les paramètres du serveur ou du panneau de contrôle sont accessibles depuis la fiche du service.
+Use the shared hosting deployment guide when the project is a static site, WordPress, or standard PHP app.
+
+<Card title="Deploy common stacks on shared hosting" icon="upload-cloud" href="/guides/shared-hosting-stacks">
+  Follow practical recipes for static sites, WordPress, and PHP plus MySQL deployments.
+</Card>
 
 <Warning>
-Un hébergement mutualisé partage des ressources avec d’autres clients. Pour des charges isolées ou des configurations système spécifiques, utilisez un VPS.
+Shared hosting is a convenience-first environment. If the application needs system-level tuning, root access, workers, or container orchestration, choose a VPS instead.
 </Warning>

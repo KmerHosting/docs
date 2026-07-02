@@ -1,21 +1,42 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "willow",
   "name": "KmerHosting Docs",
-  "description": "Documentation client, produit, facturation et API pour KmerHosting.",
+  "description": "Customer, hosting, billing, and API documentation for KmerHosting.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#16A34A",
-    "dark": "#22C55E"
+    "primary": "#111111",
+    "light": "#D4D4D8",
+    "dark": "#111111"
   },
   "appearance": {
-    "default": "system",
+    "default": "light",
     "strict": false
+  },
+  "fonts": {
+    "family": "Inter",
+    "weight": 400,
+    "heading": {
+      "family": "Inter",
+      "weight": 600
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    }
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "background": {
+    "color": {
+      "light": "#FAFAFA",
+      "dark": "#0F0F10"
+    }
   },
   "navbar": {
     "links": [
       {
-        "label": "Site web",
+        "label": "Website",
         "href": "https://kmerhosting.com"
       },
       {
@@ -33,7 +54,7 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Espace client",
+      "label": "Client area",
       "href": "https://kmerhosting.com/customers"
     }
   },
@@ -41,10 +62,10 @@
     "socials": {},
     "links": [
       {
-        "header": "Produit",
+        "header": "Platform",
         "items": [
           {
-            "label": "Hébergement",
+            "label": "Pricing",
             "href": "https://kmerhosting.com/pricing"
           },
           {
@@ -52,24 +73,24 @@
             "href": "https://kmerhosting.com/support"
           },
           {
-            "label": "Contact",
-            "href": "https://kmerhosting.com/contact"
+            "label": "Status",
+            "href": "https://status.kmerhosting.com"
           }
         ]
       },
       {
-        "header": "Légal",
+        "header": "Legal",
         "items": [
           {
-            "label": "Conditions",
+            "label": "Terms",
             "href": "https://kmerhosting.com/terms-of-service"
           },
           {
-            "label": "Confidentialité",
+            "label": "Privacy",
             "href": "https://kmerhosting.com/privacy-policy"
           },
           {
-            "label": "Remboursement",
+            "label": "Refund policy",
             "href": "https://kmerhosting.com/refund-policy"
           }
         ]
@@ -78,15 +99,17 @@
   },
   "contextual": {
     "options": [
-      "copy",
-      "chatgpt",
-      "claude"
-    ]
+      "copy"
+    ],
+    "display": "header"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
   },
   "navigation": {
     "groups": [
       {
-        "group": "Démarrage",
+        "group": "Getting started",
         "icon": "rocket",
         "pages": [
           "index",
@@ -98,7 +121,7 @@
         ]
       },
       {
-        "group": "Produits",
+        "group": "Products",
         "icon": "server",
         "pages": [
           "products/shared-hosting",
@@ -108,7 +131,7 @@
         ]
       },
       {
-        "group": "Facturation",
+        "group": "Billing",
         "icon": "receipt",
         "pages": [
           "billing/overview",
@@ -120,19 +143,27 @@
         ]
       },
       {
-        "group": "Guides client",
+        "group": "Deployment guides",
+        "icon": "upload-cloud",
+        "pages": [
+          "guides/deploy-website",
+          "guides/shared-hosting-stacks",
+          "guides/vps-stacks",
+          "guides/dns-management",
+          "guides/ssl-certificates",
+          "guides/backups"
+        ]
+      },
+      {
+        "group": "Customer guides",
         "icon": "book-open",
         "pages": [
           "guides/domain-availability",
-          "guides/dns-management",
           "guides/checkout",
           "guides/service-management",
           "guides/auto-renewal",
           "guides/support-ticket",
-          "guides/deploy-website",
-          "guides/ssl-certificates",
-          "guides/email-configuration",
-          "guides/backups"
+          "guides/email-configuration"
         ]
       },
       {
@@ -146,7 +177,7 @@
         ]
       },
       {
-        "group": "API Reference",
+        "group": "API reference",
         "icon": "terminal",
         "openapi": {
           "source": "openapi.json",
@@ -154,7 +185,7 @@
         }
       },
       {
-        "group": "Opérations",
+        "group": "Operations",
         "icon": "activity",
         "pages": [
           "operations/status-page",
@@ -163,7 +194,7 @@
         ]
       },
       {
-        "group": "Dépannage",
+        "group": "Troubleshooting",
         "icon": "wrench",
         "pages": [
           "troubleshooting/login",
@@ -174,7 +205,7 @@
         ]
       },
       {
-        "group": "Légal",
+        "group": "Legal",
         "icon": "scale",
         "pages": [
           "legal/terms",

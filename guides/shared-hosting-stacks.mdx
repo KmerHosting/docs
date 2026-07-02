@@ -1,0 +1,88 @@
+---
+title: "Deploy common stacks on shared hosting"
+description: "Practical deployment paths for static sites, WordPress, and classic PHP apps on shared hosting."
+icon: "panel-top"
+---
+
+Shared hosting works best when your application can run as files served by the web server plus a standard database. If your stack needs long-running processes, workers, WebSockets, Docker, or root access, move to a VPS.
+
+## Best-fit stacks
+
+| Stack | Shared hosting fit | Notes |
+| --- | --- | --- |
+| Static HTML, CSS, and JavaScript | Good | Upload the built files to the web root. |
+| WordPress | Good | Use a one-click installer if available, or upload WordPress manually. |
+| PHP plus MySQL | Good | Works well for classic CMS and small business apps. |
+| Laravel or Symfony | Limited | Fine only if the app does not depend on queues, supervisors, or custom system packages. |
+| Node.js, Docker, FastAPI, or workers | Poor | Use a VPS instead. |
+
+## Before you deploy
+
+- Confirm the domain or subdomain already points to the hosting account.
+- Locate the document root such as `public_html` or the assigned domain folder.
+- Create the database, database user, and password before uploading apps that need them.
+- Keep a local copy of your `.env`, CMS admin credentials, and backup archive.
+
+## Static site deployment
+
+<Steps>
+  <Step title="Build the site locally">
+    Run the framework build command so you have a static output directory such as `dist`, `build`, or `out`.
+  </Step>
+  <Step title="Upload only the built files">
+    Copy the generated HTML, CSS, JavaScript, and asset files into the document root. Do not upload the source repository unless the framework explicitly requires server-side execution.
+  </Step>
+  <Step title="Set the default index file">
+    Make sure the root contains `index.html` or the platform default entry file expected by the web server.
+  </Step>
+  <Step title="Verify assets and links">
+    Check that images, CSS files, and internal links resolve correctly after upload.
+  </Step>
+</Steps>
+
+## WordPress deployment
+
+<Steps>
+  <Step title="Provision the database">
+    Create a MySQL database and user from the control panel, then keep the credentials ready.
+  </Step>
+  <Step title="Upload WordPress or use the installer">
+    Prefer the host-provided installer when available. Otherwise upload the WordPress package to the document root and extract it there.
+  </Step>
+  <Step title="Run the web installer">
+    Open the site in the browser, enter the database credentials, and create the first admin user.
+  </Step>
+  <Step title="Lock down basics">
+    Enable automatic updates where appropriate, remove unused plugins and themes, and install SSL before accepting logins or form submissions.
+  </Step>
+</Steps>
+
+## PHP plus MySQL deployment
+
+<Steps>
+  <Step title="Upload the application files">
+    Place public files inside the document root. If the framework separates public and private code, keep non-public files outside the web root when the control panel supports it.
+  </Step>
+  <Step title="Set the environment configuration">
+    Update database host, name, username, password, app URL, and mail settings in the app configuration.
+  </Step>
+  <Step title="Import the database">
+    Use phpMyAdmin or the database tool in the panel to import the SQL dump.
+  </Step>
+  <Step title="Test forms, login, and uploads">
+    Validate write permissions for cache, sessions, and uploaded files before going live.
+  </Step>
+</Steps>
+
+## When to move to a VPS
+
+Move the project to a VPS when you need any of the following:
+
+- Node.js or Python application servers.
+- Background jobs, queues, or cron-heavy workloads.
+- Docker, Redis, custom Nginx rules, or package installation.
+- Full control over PHP versions, workers, firewall rules, or deployment automation.
+
+<Card title="See VPS deployment recipes" icon="server" href="/guides/vps-stacks">
+  Use the VPS guide for Node.js, Docker Compose, Laravel, and other server-managed stacks.
+</Card>

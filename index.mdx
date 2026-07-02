@@ -1,42 +1,65 @@
 ---
-title: "Documentation KmerHosting"
-description: "Guides produit, espace client, facturation, domaines, support et API pour KmerHosting."
+title: "KmerHosting Docs"
+description: "Customer, hosting, billing, and API documentation for KmerHosting."
 icon: "house"
+mode: "custom"
 ---
 
-KmerHosting fournit des services d’hébergement web, de serveurs VPS Linux, de noms de domaine, de facturation et de support local depuis une plateforme unique.
+<div className="mx-auto max-w-5xl px-4 py-10 lg:py-16">
+  <div className="max-w-3xl">
+    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
+      Customer and infrastructure docs
+    </p>
+    <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
+      Clear deployment and customer docs for every KmerHosting service.
+    </h1>
+    <p className="mt-5 text-lg leading-8 text-slate-600">
+      Start with account setup, choose the right hosting model, then follow the deployment recipes for
+      shared hosting or VPS environments.
+    </p>
+  </div>
 
-<CardGroup cols={2}>
-  <Card title="Démarrer" icon="rocket" href="/quickstart">
-    Créez un compte, vérifiez votre email et préparez votre première commande.
-  </Card>
-  <Card title="Choisir une offre" icon="server" href="/products/shared-hosting">
-    Comparez Shared hosting, VPS, domaines et services personnalisés.
-  </Card>
-  <Card title="Facturation" icon="receipt" href="/billing/overview">
-    Comprenez les commandes, les factures, le crédit de compte et les renouvellements.
-  </Card>
-  <Card title="API" icon="braces" href="/api/overview">
-    Intégrez le catalogue, les commandes, les domaines et les services client.
-  </Card>
-</CardGroup>
+  <div className="mt-10">
+    <CardGroup cols={2}>
+      <Card title="Quickstart" icon="rocket" href="/quickstart">
+        Create an account, complete verification, place the first order, and find the service after activation.
+      </Card>
+      <Card title="Deployment guides" icon="upload-cloud" href="/guides/deploy-website">
+        Choose shared hosting or VPS and follow stack-specific deployment checklists.
+      </Card>
+      <Card title="Billing and renewals" icon="receipt" href="/billing/overview">
+        Understand invoices, account credit, renewals, refunds, and order states.
+      </Card>
+      <Card title="API and platform" icon="braces" href="/api/overview">
+        Review authentication, error handling, endpoints, and the OpenAPI reference.
+      </Card>
+    </CardGroup>
+  </div>
 
-## Produits principaux
+  <div className="mt-14 grid gap-6 lg:grid-cols-[1.15fr,0.85fr]">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">Use these docs for</p>
+      <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-700">
+        <li>Choosing between shared hosting, VPS, domains, and support-led custom hosting.</li>
+        <li>Deploying common web stacks with fewer support handoffs.</li>
+        <li>Managing billing, service lifecycle, and customer account workflows.</li>
+        <li>Troubleshooting login, DNS, payment, and access issues.</li>
+      </ul>
+    </div>
 
-- **Shared hosting** : hébergement mutualisé pour sites web, emails, bases de données, SSL et panneau de contrôle.
-- **VPS Servers** : serveurs privés virtuels Linux avec accès root, ressources isolées et options réseau.
-- **Domaines** : recherche, enregistrement, renouvellement, DNS et domaines inclus avec certains services.
-- **Custom hosting** : offres personnalisées pour besoins opérationnels spécifiques.
-
-## Ressources rapides
-
-<CardGroup cols={2}>
-  <Card title="Voir les prix" href="https://kmerhosting.com/pricing" icon="badge-dollar-sign" />
-  <Card title="Espace client" href="https://kmerhosting.com/customers" icon="user" />
-  <Card title="Ouvrir un ticket" href="https://kmerhosting.com/open-ticket" icon="message-circle" />
-  <Card title="Statut des services" href="https://status.kmerhosting.com" icon="activity" />
-</CardGroup>
-
-<Note>
-Les prix, délais d’activation et canaux de paiement doivent toujours être confirmés depuis l’espace client ou la page Pricing officielle avant achat.
-</Note>
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">Start here</p>
+      <div className="mt-4 space-y-4 text-sm leading-7 text-slate-700">
+        <p>
+          New customers should begin with <a href="/quickstart">Quickstart</a>.
+        </p>
+        <p>
+          Teams deploying websites should start with <a href="/guides/deploy-website">Deployment guides</a>.
+        </p>
+        <p>
+          API consumers can jump straight to <a href="/api/overview">API overview</a> or the <a href="/api-reference">API reference</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
