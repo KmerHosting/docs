@@ -9,6 +9,7 @@ select {
 
 body {
   font-weight: 500;
+  color: #171717;
 }
 
 h1,
@@ -31,6 +32,58 @@ h6 {
 
 #navbar {
   backdrop-filter: blur(18px);
+}
+
+.dark body,
+[data-theme="dark"] body {
+  color: #ffffff;
+}
+
+.mdx-content {
+  width: 100% !important;
+}
+
+.mdx-content > div[class*="max-w-[600px]"] {
+  max-width: 1120px !important;
+  width: 100% !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+div[class*="max-w-[844px]"][class*="py-12"] {
+  max-width: 1280px !important;
+  width: 100% !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+.mdx-content header h1,
+.mdx-content header p,
+.mdx-content header div {
+  text-align: left !important;
+}
+
+.mdx-content header h1 {
+  max-width: 960px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.mdx-content p,
+.mdx-content li {
+  max-width: 78ch;
+}
+
+.mdx-content .steps,
+.mdx-content [class*="steps"],
+.mdx-content ol {
+  max-width: 960px;
+}
+
+.mdx-content a[class*="group"],
+.mdx-content [class*="rounded-[1.5rem]"],
+.mdx-content [class*="rounded-[1.75rem]"] {
+  text-decoration: none !important;
 }
 
 input,

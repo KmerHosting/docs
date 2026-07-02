@@ -1,105 +1,255 @@
 ---
 title: "KmerHosting Docs"
-description: "Customer, hosting, billing, and API documentation for KmerHosting."
+description: "Linux VPS, DirectAdmin shared hosting, Laravel deployment, billing, and API documentation for KmerHosting."
 icon: "house"
 mode: "custom"
 ---
 
-<div className="relative overflow-hidden bg-white text-[#171717] dark:bg-[#0a0a0a] dark:text-white">
+<div className="relative overflow-hidden bg-white text-[#171717] dark:bg-[#0f0f10] dark:text-white">
   <div
     aria-hidden="true"
     className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:56px_56px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)]"
   />
   <div
     aria-hidden="true"
-    className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#1A73E8]/8 blur-3xl dark:bg-[#1A73E8]/12"
-  />
-  <div
-    aria-hidden="true"
-    className="pointer-events-none absolute right-0 top-24 h-80 w-80 rounded-full bg-black/5 blur-3xl dark:bg-white/[0.03]"
+    className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-[#1A73E8]/10 blur-3xl dark:bg-[#1A73E8]/12"
   />
 
-  <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-10 lg:pt-16">
-    <div className="grid items-start gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-      <div className="max-w-4xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#737373] dark:text-white/45">
-          Customer and infrastructure docs
-        </p>
-        <h1 className="mt-5 flex flex-col leading-[0.94] tracking-tight text-[#171717] dark:text-white">
-          <span className="text-[clamp(3rem,7vw,5.9rem)] font-extrabold">
-            Host, bill, and support
-          </span>
-          <span className="text-[clamp(3.8rem,8.2vw,6.7rem)] font-black text-[#1A73E8] dark:text-[#8AB4F8]">
-            with clarity
-          </span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-base font-medium leading-8 text-[#525252] dark:text-white/60 md:text-lg">
-          Everything your customers and operators need to start fast, deploy on the right stack,
-          and manage KmerHosting services without unnecessary support friction.
-        </p>
-
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a
-            href="/quickstart"
-            className="inline-flex items-center justify-center rounded-full bg-[#1A73E8] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#1666cf]"
-          >
-            Open quickstart
-          </a>
-          <a
-            href="/guides/deploy-website"
-            className="inline-flex items-center justify-center rounded-full border border-[#e5e5e5] bg-[#fafafa] px-6 py-3 text-sm font-bold text-[#171717] transition hover:border-[#d4d4d4] hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:bg-white/[0.06]"
-          >
-            View deployment guides
-          </a>
-        </div>
-
-        <div className="mt-12">
-          <CardGroup cols={2}>
-            <Card title="Quickstart" icon="rocket" href="/quickstart">
-              Create an account, complete verification, place the first order, and find the service after activation.
-            </Card>
-            <Card title="Deployment guides" icon="upload-cloud" href="/guides/deploy-website">
-              Choose shared hosting or VPS and follow stack-specific deployment checklists.
-            </Card>
-            <Card title="Billing and renewals" icon="receipt" href="/billing/overview">
-              Understand invoices, account credit, renewals, refunds, and order states.
-            </Card>
-            <Card title="API and platform" icon="braces" href="/api/overview">
-              Review authentication, error handling, endpoints, and the OpenAPI reference.
-            </Card>
-          </CardGroup>
-        </div>
-      </div>
-
-      <div className="space-y-5">
-        <div className="rounded-[1.75rem] border border-[#e5e5e5] bg-white/92 p-7 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#737373] dark:text-white/45">
-            Start here
-          </p>
-          <div className="mt-5 space-y-4 text-sm leading-7 text-[#525252] dark:text-white/60">
-            <p>
-              New customers should begin with <a href="/quickstart">Quickstart</a>.
-            </p>
-            <p>
-              Teams deploying websites should start with <a href="/guides/deploy-website">Deployment guides</a>.
-            </p>
-            <p>
-              API consumers can jump to <a href="/api/overview">API overview</a> or <a href="/api-reference">API reference</a>.
-            </p>
+  <div className="relative mx-auto max-w-[1280px] px-5 pb-20 pt-10 lg:px-8 lg:pt-14">
+    <div className="rounded-[1.75rem] border border-[#e5e5e5] bg-white/95 p-8 shadow-[0_0_0_1px_rgba(0,0,0,0.02)] dark:border-white/10 dark:bg-[#111214] lg:p-12">
+      <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
+        <div className="min-w-0">
+          <div className="flex items-start gap-5">
+            <img
+              src="/images/logo-mark.png"
+              alt="KmerHosting"
+              className="hidden h-20 w-20 rounded-2xl border border-[#e5e5e5] bg-[#fafafa] p-4 dark:border-white/10 dark:bg-white/[0.04] md:block"
+            />
+            <div className="min-w-0">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#737373] dark:text-white/45">
+                KmerHosting documentation
+              </p>
+              <h1 className="mt-4 text-[clamp(2.7rem,5vw,4.3rem)] font-semibold tracking-tight text-[#171717] dark:text-white">
+                Linux VPS, DirectAdmin shared hosting, and Laravel deployment docs.
+              </h1>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-[#525252] dark:text-white/60">
+                Learn how to provision services, deploy production workloads, manage customer operations,
+                and move faster with infrastructure guides built around how KmerHosting actually works.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="rounded-[1.75rem] border border-[#e5e5e5] bg-[#fafafa]/92 p-7 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.06]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#737373] dark:text-white/45">
-            Use these docs for
+        <div className="rounded-[1.5rem] border border-[#e5e5e5] bg-[#fafafa]/90 p-6 dark:border-white/10 dark:bg-white/[0.04]">
+          <h2 className="text-3xl font-semibold tracking-tight text-[#171717] dark:text-white">
+            Getting Started
+          </h2>
+          <p className="mt-2 text-base leading-7 text-[#525252] dark:text-white/60">
+            Start from account setup, then choose the right deployment path for your hosting stack.
           </p>
-          <ul className="mt-5 space-y-3 text-sm leading-7 text-[#525252] dark:text-white/60">
-            <li>Choosing between shared hosting, VPS, domains, and support-led custom hosting.</li>
-            <li>Deploying common web stacks with fewer support handoffs.</li>
-            <li>Managing billing, service lifecycle, and customer account workflows.</li>
-            <li>Troubleshooting login, DNS, payment, and access issues.</li>
-          </ul>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <a
+              href="/quickstart"
+              className="flex h-24 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-white text-center text-sm font-semibold text-[#171717] transition hover:border-[#1A73E8]/35 hover:text-[#1A73E8] dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:text-[#8AB4F8]"
+            >
+              Account setup
+            </a>
+            <a
+              href="/products/vps"
+              className="flex h-24 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-white text-center text-sm font-semibold text-[#171717] transition hover:border-[#1A73E8]/35 hover:text-[#1A73E8] dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:text-[#8AB4F8]"
+            >
+              Linux VPS
+            </a>
+            <a
+              href="/products/shared-hosting"
+              className="flex h-24 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-white text-center text-sm font-semibold text-[#171717] transition hover:border-[#1A73E8]/35 hover:text-[#1A73E8] dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:text-[#8AB4F8]"
+            >
+              DirectAdmin shared hosting
+            </a>
+            <a
+              href="/guides/vps-stacks#laravel-on-nginx-plus-php-fpm"
+              className="flex h-24 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-white text-center text-sm font-semibold text-[#171717] transition hover:border-[#1A73E8]/35 hover:text-[#1A73E8] dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:text-[#8AB4F8]"
+            >
+              Laravel deployment
+            </a>
+            <a
+              href="/guides/dns-management"
+              className="flex h-24 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-white text-center text-sm font-semibold text-[#171717] transition hover:border-[#1A73E8]/35 hover:text-[#1A73E8] dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:text-[#8AB4F8]"
+            >
+              DNS and domains
+            </a>
+            <a
+              href="/billing/overview"
+              className="flex h-24 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-white text-center text-sm font-semibold text-[#171717] transition hover:border-[#1A73E8]/35 hover:text-[#1A73E8] dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:text-[#8AB4F8]"
+            >
+              Billing and renewals
+            </a>
+          </div>
+
+          <a
+            href="/guides/deploy-website"
+            className="mt-6 inline-flex items-center rounded-full border border-[#d4d4d4] bg-white px-5 py-2.5 text-sm font-semibold text-[#171717] transition hover:border-[#1A73E8]/35 hover:text-[#1A73E8] dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:hover:text-[#8AB4F8]"
+          >
+            Start with deployment guides
+          </a>
         </div>
+      </div>
+    </div>
+
+    <div className="mt-16">
+      <h2 className="text-[2rem] font-semibold tracking-tight text-[#171717] dark:text-white">
+        Products
+      </h2>
+
+      <div className="mt-7 grid gap-5 lg:grid-cols-2">
+        <a
+          href="/products/vps"
+          className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]"
+        >
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">Linux VPS</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Root access, isolated compute, Docker-ready environments, reverse proxies, queues,
+            and production server control for serious workloads.
+          </p>
+        </a>
+
+        <a
+          href="/products/shared-hosting"
+          className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]"
+        >
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">DirectAdmin shared hosting</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Customer-friendly hosting for standard websites, PHP apps, WordPress, mailboxes, SSL,
+            and control-panel-based management.
+          </p>
+        </a>
+
+        <a
+          href="/guides/vps-stacks#laravel-on-nginx-plus-php-fpm"
+          className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]"
+        >
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">Laravel optimized hosting</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Deploy Laravel with Nginx, PHP-FPM, queues, scheduled jobs, storage links, config cache,
+            and production-grade server hygiene.
+          </p>
+        </a>
+
+        <a
+          href="/api/overview"
+          className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]"
+        >
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">Platform API</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Integrate catalog, billing, customer, domain, service, and account workflows through the
+            documented KmerHosting API surface.
+          </p>
+        </a>
+      </div>
+    </div>
+
+    <div className="mt-16 border-t border-[#e5e5e5] pt-14 dark:border-white/10">
+      <h2 className="text-[2rem] font-semibold tracking-tight text-[#171717] dark:text-white">
+        Deployment paths
+      </h2>
+
+      <div className="mt-7 grid gap-y-7 lg:grid-cols-3 lg:gap-x-8">
+        <a href="/guides/shared-hosting-stacks" className="flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#fafafa] text-sm font-bold text-[#171717] dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
+            SH
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#171717] dark:text-white">Shared hosting stacks</p>
+            <p className="mt-1 text-sm leading-7 text-[#525252] dark:text-white/60">Static sites, WordPress, and classic PHP plus MySQL deployments.</p>
+          </div>
+        </a>
+
+        <a href="/guides/vps-stacks" className="flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#fafafa] text-sm font-bold text-[#171717] dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
+            VPS
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#171717] dark:text-white">VPS stacks</p>
+            <p className="mt-1 text-sm leading-7 text-[#525252] dark:text-white/60">Node.js, Docker Compose, Laravel, queues, and reverse-proxy based deployments.</p>
+          </div>
+        </a>
+
+        <a href="/guides/dns-management" className="flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#fafafa] text-sm font-bold text-[#171717] dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
+            DNS
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#171717] dark:text-white">Domains and DNS</p>
+            <p className="mt-1 text-sm leading-7 text-[#525252] dark:text-white/60">Domain pointing, propagation, MX, SSL validation, and control-panel DNS workflows.</p>
+          </div>
+        </a>
+
+        <a href="/guides/ssl-certificates" className="flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#fafafa] text-sm font-bold text-[#171717] dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
+            SSL
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#171717] dark:text-white">Certificates</p>
+            <p className="mt-1 text-sm leading-7 text-[#525252] dark:text-white/60">Issue, install, and troubleshoot certificates for shared hosting and VPS services.</p>
+          </div>
+        </a>
+
+        <a href="/billing/overview" className="flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#fafafa] text-sm font-bold text-[#171717] dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
+            PAY
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#171717] dark:text-white">Billing operations</p>
+            <p className="mt-1 text-sm leading-7 text-[#525252] dark:text-white/60">Orders, invoices, renewals, refunds, and account-credit behavior across the platform.</p>
+          </div>
+        </a>
+
+        <a href="/operations/status-page" className="flex items-center gap-4">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#e5e5e5] bg-[#fafafa] text-sm font-bold text-[#171717] dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
+            OPS
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#171717] dark:text-white">Operations</p>
+            <p className="mt-1 text-sm leading-7 text-[#525252] dark:text-white/60">Status communication, incidents, and maintenance guidance for hosted services.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div className="mt-16 border-t border-[#e5e5e5] pt-14 dark:border-white/10">
+      <h2 className="text-[2rem] font-semibold tracking-tight text-[#171717] dark:text-white">
+        Additional resources
+      </h2>
+
+      <div className="mt-7 grid gap-5 lg:grid-cols-2">
+        <a href="/guides/support-ticket" className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]">
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">Support workflows</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Learn how to open useful tickets, include the right IDs, and reduce back-and-forth with support.
+          </p>
+        </a>
+
+        <a href="/troubleshooting/login" className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]">
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">Troubleshooting</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Resolve login, billing, DNS, VPS access, and shared-hosting issues from one troubleshooting surface.
+          </p>
+        </a>
+
+        <a href="/guides/service-management" className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]">
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">Service management</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Understand active service states, credentials, renewals, and the right path for common service actions.
+          </p>
+        </a>
+
+        <a href="/api-reference" className="rounded-[1.5rem] border border-[#e5e5e5] bg-white p-8 transition hover:border-[#1A73E8]/30 dark:border-white/10 dark:bg-[#111214]">
+          <p className="text-xl font-semibold text-[#171717] dark:text-white">API reference</p>
+          <p className="mt-4 text-base leading-8 text-[#525252] dark:text-white/60">
+            Browse the OpenAPI reference for customer, billing, catalog, authentication, domain, and service endpoints.
+          </p>
+        </a>
       </div>
     </div>
   </div>
