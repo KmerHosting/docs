@@ -13,15 +13,15 @@
     "strict": false
   },
   "fonts": {
-    "family": "Inter",
-    "weight": 500,
+    "family": "Trebuchet MS",
+    "weight": 400,
     "heading": {
-      "family": "Inter",
-      "weight": 700
+      "family": "Trebuchet MS",
+      "weight": 400
     },
     "body": {
-      "family": "Inter",
-      "weight": 500
+      "family": "Trebuchet MS",
+      "weight": 400
     }
   },
   "icons": {
@@ -61,7 +61,7 @@
     "primary": {
       "type": "button",
       "label": "Client area",
-      "href": "https://kmerhosting.com/dashboard"
+      "href": "https://kmerhosting.com/customers"
     }
   },
   "footer": {
