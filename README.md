@@ -1,17 +1,17 @@
 # KmerHosting Docs
 
-Documentation Mintlify complète pour KmerHosting.
+Complete Mintlify documentation for KmerHosting.
 
-## Prévisualiser
+## Preview
 
 ```bash
 npm i -g mint
 mint dev --port 3000 --no-open
 ```
 
-## Déployer
+## Deploy
 
-Poussez ces fichiers dans le dépôt GitHub connecté à Mintlify : `kmerhosting/docs`, branche `main`.
+Push these files to the GitHub repository connected to Mintlify: `kmerhosting/docs`, branch `main`.
 
 ```bash
 git add .
@@ -19,10 +19,10 @@ git commit -m "Complete KmerHosting Mintlify documentation"
 git push origin main
 ```
 
-## Domaine
+## Domain
 
-Le projet Mintlify doit avoir :
+The Mintlify project should use:
 
-- custom domain : `kmerhosting.com`
-- base path : `/docs`
-- Cloudflare Worker route : `kmerhosting.com/docs*`
+- custom domain: `kmerhosting.com`
+- base path: `/docs`
+- Cloudflare Worker route: `kmerhosting.com/docs*`

@@ -1,26 +1,26 @@
 ---
-title: "Sauvegardes"
-description: "Comprendre les sauvegardes et préparer une restauration."
+title: "Backups"
+description: "Understand backups and prepare for restoration."
 icon: "database"
 ---
 
-Les sauvegardes réduisent le risque de perte de données, mais elles doivent être testées.
+Backups reduce the risk of data loss, but they still need to be tested.
 
-## Ce qu’il faut sauvegarder
+## What to back up
 
-- Fichiers du site.
-- Base de données.
-- Emails si nécessaires.
-- Fichiers de configuration.
-- Variables d’environnement privées dans un coffre sécurisé.
+- Website files.
+- Database.
+- Email data when needed.
+- Configuration files.
+- Private environment variables stored in a secure vault.
 
-## Bonnes pratiques
+## Best practices
 
-- Garder plusieurs versions.
-- Stocker une copie hors du serveur principal.
-- Tester la restauration.
-- Documenter les étapes de reprise.
+- Keep multiple versions.
+- Store one copy outside the main server.
+- Test the restoration process.
+- Document the recovery steps.
 
 <Warning>
-Ne stockez jamais de dumps SQL publics ou de sauvegardes KYC dans un dépôt Git public.
+Never store public SQL dumps or KYC backups in a public Git repository.
 </Warning>

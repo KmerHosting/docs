@@ -1,28 +1,28 @@
 ---
-title: "Endpoints principaux"
-description: "Résumé des endpoints API KmerHosting les plus utilisés."
+title: "Core endpoints"
+description: "Summary of the KmerHosting API endpoints used most often."
 icon: "list"
 ---
 
-Cette page résume les familles d’endpoints. La référence détaillée est générée depuis `openapi.json`.
+This page summarizes endpoint families. The detailed API reference is generated from `openapi.json`.
 
 ## Public
 
-| Méthode | Endpoint | Usage |
+| Method | Endpoint | Usage |
 |---|---|---|
-| `GET` | `/api/v1/content/hero` | Contenu public localisé. |
-| `GET` | `/api/v1/catalog/offers` | Offres disponibles au checkout. |
-| `GET` | `/api/v1/catalog/trending-services` | Services mis en avant. |
-| `POST` | `/api/v1/auth/register` | Création de compte. |
-| `POST` | `/api/v1/newsletter/subscriptions` | Abonnement newsletter. |
+| `GET` | `/api/v1/content/hero` | Localized public content. |
+| `GET` | `/api/v1/catalog/offers` | Offers available during checkout. |
+| `GET` | `/api/v1/catalog/trending-services` | Highlighted services. |
+| `POST` | `/api/v1/auth/register` | Account creation. |
+| `POST` | `/api/v1/newsletter/subscriptions` | Newsletter subscription. |
 
-## Utilisateur connecté
+## Authenticated user
 
-| Méthode | Endpoint | Usage |
+| Method | Endpoint | Usage |
 |---|---|---|
-| `GET` | `/api/v1/users/me/profile` | Profil du compte. |
-| `GET` | `/api/v1/cart` | Panier courant. |
-| `POST` | `/api/v1/orders` | Création d’une commande. |
-| `GET` | `/api/v1/invoices` | Liste des factures. |
-| `GET` | `/api/v1/users/me/services/active` | Services actifs. |
-| `POST` | `/api/v1/domains/availability-checks` | Vérification de disponibilité domaine. |
+| `GET` | `/api/v1/users/me/profile` | Account profile. |
+| `GET` | `/api/v1/cart` | Current cart. |
+| `POST` | `/api/v1/orders` | Order creation. |
+| `GET` | `/api/v1/invoices` | Invoice list. |
+| `GET` | `/api/v1/users/me/services/active` | Active services. |
+| `POST` | `/api/v1/domains/availability-checks` | Domain availability lookup. |

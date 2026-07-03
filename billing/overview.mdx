@@ -1,30 +1,30 @@
 ---
-title: "Vue d’ensemble facturation"
-description: "Comprendre les commandes, factures, paiements et crédits de compte."
+title: "Billing overview"
+description: "Understand orders, invoices, payments, and account credit."
 icon: "receipt"
 ---
 
-La facturation KmerHosting repose sur quatre objets principaux : panier, commande, facture et crédit de compte.
+KmerHosting billing is built around four main objects: cart, order, invoice, and account credit.
 
-## Cycle standard
+## Standard flow
 
 ```text
-Panier → Commande → Paiement → Facture payée → Activation ou renouvellement
+Cart -> Order -> Payment -> Paid invoice -> Activation or renewal
 ```
 
-## Objets importants
+## Important objects
 
-| Objet | Rôle |
+| Object | Role |
 |---|---|
-| Panier | Contient les services avant validation. |
-| Commande | Représente l’achat demandé. |
-| Facture | Document de paiement et de suivi comptable. |
-| Crédit de compte | Solde disponible pour payer des commandes ou renouvellements. |
+| Cart | Holds services before checkout. |
+| Order | Represents the purchase request. |
+| Invoice | Payment document and accounting record. |
+| Account credit | Available balance used for orders or renewals. |
 
-## Devise
+## Currency
 
-La documentation utilise le FCFA comme devise principale pour les exemples. Les montants exacts doivent être confirmés dans l’espace client.
+This documentation uses FCFA as the main example currency. Exact amounts should always be confirmed in the customer area.
 
 <Warning>
-Ne payez jamais une facture sans vérifier son montant, son statut et la méthode de paiement officielle affichée par KmerHosting.
+Never pay an invoice without confirming the amount, status, and the official payment method shown by KmerHosting.
 </Warning>
