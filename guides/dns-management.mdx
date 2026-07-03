@@ -1,40 +1,40 @@
 ---
-title: "Gérer le DNS"
-description: "Ajouter, modifier ou supprimer des enregistrements DNS."
+title: "Manage DNS"
+description: "Add, update, or remove DNS records."
 icon: "network"
 ---
 
-Les enregistrements DNS contrôlent où pointe votre domaine : site web, email, vérifications, redirections techniques.
+DNS records control where a domain points: website, email, verification, and technical routing.
 
-## Ajouter un enregistrement
+## Add a record
 
 <Steps>
-  <Step title="Ouvrir le domaine">
-    Depuis l’espace client, sélectionnez le domaine standalone ou inclus.
+  <Step title="Open the domain">
+    From the customer area, select the standalone or included domain.
   </Step>
-  <Step title="Ouvrir DNS Records">
-    Cliquez sur la gestion DNS ou les paramètres de zone.
+  <Step title="Open DNS records">
+    Click the DNS management or zone settings section.
   </Step>
-  <Step title="Choisir le type">
-    Sélectionnez `A`, `CNAME`, `TXT`, `MX` ou un autre type supporté.
+  <Step title="Choose the type">
+    Select `A`, `CNAME`, `TXT`, `MX`, or another supported record type.
   </Step>
-  <Step title="Renseigner la valeur">
-    Copiez exactement la valeur fournie par le service tiers ou par KmerHosting.
+  <Step title="Enter the value">
+    Copy the exact value provided by the third-party service or by KmerHosting.
   </Step>
-  <Step title="Enregistrer et attendre">
-    La propagation peut prendre de quelques minutes à plusieurs heures.
+  <Step title="Save and wait">
+    Propagation can take from a few minutes to several hours.
   </Step>
 </Steps>
 
-## Exemples
+## Examples
 
-| Besoin | Type | Exemple |
+| Need | Type | Example |
 |---|---|---|
-| Site vers serveur | `A` | `@ → 203.0.113.10` |
-| Sous-domaine vers service | `CNAME` | `www → example.com` |
-| Vérification domaine | `TXT` | Valeur fournie par le service tiers |
-| Email entrant | `MX` | Serveur mail fourni |
+| Website to server | `A` | `@ → 203.0.113.10` |
+| Subdomain to service | `CNAME` | `www → example.com` |
+| Domain verification | `TXT` | Value provided by the third-party service |
+| Incoming email | `MX` | Mail server provided |
 
 <Warning>
-Supprimer ou modifier un enregistrement DNS peut interrompre le site ou les emails.
+Removing or changing a DNS record can interrupt the website or email flow.
 </Warning>

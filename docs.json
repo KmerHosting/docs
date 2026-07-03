@@ -20,7 +20,7 @@
     "eyebrows": "breadcrumbs"
   },
   "contextual": {
-    "options": ["copy", "view", "assistant"],
+    "options": ["copy", "view"],
     "display": "header"
   },
   "logo": {
@@ -29,12 +29,7 @@
     "href": "https://kmerhosting.com"
   },
   "navbar": {
-    "links": [],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://kmerhosting.com/customers"
-    }
+    "links": []
   },
   "footer": {
     "socials": {}

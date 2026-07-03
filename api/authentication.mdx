@@ -1,32 +1,32 @@
 ---
-title: "Authentification API"
-description: "Comprendre les endpoints publics et les endpoints protégés par session."
+title: "API authentication"
+description: "Understand public endpoints and endpoints protected by a valid session."
 icon: "key"
 ---
 
-L’API distingue deux niveaux d’accès.
+The API has two access levels.
 
-## Endpoints publics
+## Public endpoints
 
-Les endpoints publics peuvent être appelés sans session. Exemples :
+Public endpoints can be called without a session. Examples include:
 
-- contenu public ;
-- catalogue ;
-- inscription ;
-- demande de réinitialisation de mot de passe ;
-- newsletter ;
-- demandes d’essai.
+- public content;
+- catalog;
+- registration;
+- password reset request;
+- newsletter subscription;
+- trial requests.
 
-## Endpoints utilisateur
+## User endpoints
 
-Les endpoints utilisateur nécessitent une session valide.
+User endpoints require a valid session.
 
 ```text
 authjs.session-token
 ```
 
-Ce cookie est géré par l’application lorsque l’utilisateur est connecté.
+This cookie is managed by the application when the user is signed in.
 
 <Warning>
-Ne copiez pas un cookie de session dans un script partagé. Un cookie de session donne accès au compte associé.
+Do not copy a session cookie into a shared script. A session cookie grants access to the linked account.
 </Warning>

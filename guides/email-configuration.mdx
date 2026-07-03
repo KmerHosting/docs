@@ -1,23 +1,23 @@
 ---
-title: "Configuration email"
-description: "Configurer les emails professionnels avec un domaine."
+title: "Email configuration"
+description: "Configure professional email on a domain."
 icon: "mail"
 ---
 
-Les emails professionnels utilisent généralement des enregistrements DNS spécifiques.
+Professional email usually depends on specific DNS records.
 
-## Enregistrements courants
+## Common records
 
-| Type | Rôle |
+| Type | Role |
 |---|---|
-| `MX` | Indique les serveurs qui reçoivent les emails. |
-| `SPF` | Autorise les serveurs d’envoi. |
-| `DKIM` | Signe les emails sortants. |
-| `DMARC` | Définit la politique anti-usurpation. |
+| `MX` | Tells the domain which servers receive email. |
+| `SPF` | Authorizes sending servers. |
+| `DKIM` | Signs outgoing mail. |
+| `DMARC` | Defines the anti-spoofing policy. |
 
-## Bonnes pratiques
+## Best practices
 
-- Configurez SPF, DKIM et DMARC.
-- Utilisez des mots de passe forts pour les boîtes mail.
-- Évitez l’envoi massif non sollicité.
-- Surveillez les erreurs de délivrabilité.
+- Configure SPF, DKIM, and DMARC.
+- Use strong passwords for mailboxes.
+- Avoid unsolicited bulk sending.
+- Monitor deliverability errors.

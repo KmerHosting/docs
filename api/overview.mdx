@@ -1,10 +1,10 @@
 ---
-title: "Vue d’ensemble API"
-description: "Présentation de l’API KmerHosting et des ressources disponibles."
+title: "API overview"
+description: "Introduction to the KmerHosting API and the available resources."
 icon: "braces"
 ---
 
-L’API KmerHosting expose des endpoints publics et des endpoints utilisateur sous l’espace `/api/v1`.
+The KmerHosting API exposes public endpoints and user endpoints under the `/api/v1` namespace.
 
 ## Base URL
 
@@ -12,28 +12,28 @@ L’API KmerHosting expose des endpoints publics et des endpoints utilisateur so
 https://kmerhosting.com
 ```
 
-## Catégories principales
+## Main categories
 
-- Authentication.
-- Catalog.
-- Cart.
-- Orders.
-- Billing.
-- Invoices.
-- Domains.
-- Services.
-- KYC.
-- Notifications.
-- Storage.
-- Users.
+- Authentication
+- Catalog
+- Cart
+- Orders
+- Billing
+- Invoices
+- Domains
+- Services
+- KYC
+- Notifications
+- Storage
+- Users
 
-## Authentification
+## Authentication
 
-Les endpoints publics ne nécessitent pas de session. Les endpoints utilisateur utilisent la session du compte connecté via cookie.
+Public endpoints do not require a session. User endpoints rely on the signed-in account session through cookies.
 
 <CardGroup cols={2}>
-  <Card title="Authentification" href="/api/authentication" icon="key" />
-  <Card title="Erreurs" href="/api/errors" icon="triangle-alert" />
+  <Card title="Authentication" href="/api/authentication" icon="key" />
+  <Card title="Errors" href="/api/errors" icon="triangle-alert" />
   <Card title="Endpoints" href="/api/endpoints" icon="list" />
-  <Card title="Référence OpenAPI" href="/api-reference" icon="terminal" />
+  <Card title="OpenAPI reference" href="/api-reference" icon="terminal" />
 </CardGroup>
