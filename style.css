@@ -144,23 +144,41 @@ img.nav-logo {
   height: auto;
 }
 
-#search-bar-entry,
-#search-bar-entry-mobile {
-  display: none !important;
+#sidebar [href='/'],
+#sidebar [href='/docs/'],
+#sidebar [href='/docs'] {
+  color: rgb(var(--primary)) !important;
+  font-weight: 600 !important;
 }
 
-.almond-nav-bottom-section {
-  width: auto !important;
+#sidebar [href='/'] svg,
+#sidebar [href='/docs/'] svg,
+#sidebar [href='/docs'] svg {
+  background-color: rgb(var(--primary)) !important;
 }
 
 @media (min-width: 1024px) {
   .almond-nav-bottom-section {
     position: fixed !important;
     top: 0.8rem !important;
-    right: 4.75rem !important;
+    right: 1.25rem !important;
     z-index: 45 !important;
+    width: auto !important;
     padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
   }
+}
+
+#search-bar-entry {
+  display: inline-flex !important;
+  width: 11.5rem !important;
+}
+
+#search-bar-entry-mobile {
+  display: none !important;
 }
 
 #assistant-entry {
@@ -181,6 +199,10 @@ img.nav-logo {
 
 .dark #assistant-entry::after {
   color: rgb(var(--gray-50));
+}
+
+#assistant-entry-mobile {
+  display: none !important;
 }
 
 [data-product-guide-index] .docs-home-card {
