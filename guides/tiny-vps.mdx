@@ -1,0 +1,112 @@
+---
+title: "Use a Tiny VPS"
+description: "Choose, access, secure, and deploy workloads on a KmerHosting Tiny VPS."
+icon: "container"
+---
+
+Tiny VPS provides a lightweight Linux container with root access for small applications, staging environments, automation tasks, and private services.
+
+## Choose a plan
+
+- **LXC1:** experiments, small scripts, cron jobs, and minimal services.
+- **LXC2:** staging applications, small APIs, bots, and private tools.
+- **LXC3:** larger lightweight applications and workloads requiring more RAM.
+
+## Connect to the server
+
+After activation, retrieve the IP address, SSH username, and credentials from the customer console.
+
+~~bash
+ssh root@SERVER_IP
+~~
+
+## Initial security steps
+
+Update the operating system after your first connection:
+
+~~bash
+apt update
+apt upgrade -y
+~~
+
+Create a non-root administrator:
+
+~~bash
+adduser deploy
+usermod -aG sudo deploy
+~~
+
+Configure an SSH key before disabling password authentication.
+
+## Suitable workloads
+
+Tiny VPS works well for:
+
+- Node.js, Python, PHP, and Go applications
+- Development and staging environments
+- Small databases used for testing
+- Background workers and cron jobs
+- Monitoring and private administration tools
+- Lightweight websites and APIs
+
+## Deploy a Node.js application
+
+Install Node.js, npm, Git, and Nginx:
+
+~~bash
+apt install -y nodejs npm git nginx
+~~
+
+Clone the application:
+
+~~bash
+mkdir -p /var/www/application
+git clone YOUR_REPOSITORY_URL /var/www/application
+cd /var/www/application
+~~
+
+Install dependencies and build:
+
+~~bash
+npm install
+npm run build
+~~
+
+Install PM2 and start the application:
+
+~~bash
+npm install --global pm2
+pm2 start npm --name application -- start
+pm2 save
+~~
+
+Enable PM2 at server startup:
+
+~~bash
+pm2 startup
+~~
+
+Run the command displayed by PM2, then execute:
+
+~~bash
+pm2 save
+~~
+
+## When to upgrade
+
+Move to VPS Hosting when you require:
+
+- Dedicated IPv4
+- KVM virtualization
+- Significantly more CPU, RAM, or storage
+- Larger production databases
+- High traffic or sustained compute workloads
+- Advanced operating-system requirements
+
+<Card
+  title="Tiny VPS solution"
+  href="/solutions/tiny-vps"
+  icon="arrow-right"
+>
+  Review the available plans and included features.
+</Card>

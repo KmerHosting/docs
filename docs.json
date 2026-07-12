@@ -94,6 +94,7 @@
         "expanded": true,
         "pages": [
           "solutions/shared-hosting",
+          "solutions/tiny-vps",
           "solutions/vps",
           "solutions/domains",
           "solutions/custom-hosting",
@@ -152,6 +153,7 @@
         "pages": [
           "guides/deploy-website",
           "guides/shared-hosting-stacks",
+          "guides/tiny-vps",
           "guides/vps-stacks",
           "guides/custom-hosting",
           "guides/domain-availability",
@@ -229,6 +231,11 @@
     {
       "source": "/products/custom-hosting",
       "destination": "/solutions/custom-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/products/tiny-vps",
+      "destination": "/solutions/tiny-vps",
       "permanent": true
     }
   ]
