@@ -1,39 +1,26 @@
 ---
 title: "API overview"
-description: "Introduction to the KmerHosting API and the available resources."
+description: "Use the KmerHosting Developer API with account-scoped API keys."
 icon: "braces"
 ---
 
-The KmerHosting API exposes public endpoints and user endpoints under the `/api/v1` namespace.
+The stable KmerHosting Developer API is designed for trusted server-side automations, CI jobs, workers, and command-line tools.
 
 ## Base URL
 
 ```text
-https://kmerhosting.com
+https://kmerhosting.com/api/v1/sdk
 ```
 
-## Main categories
-
-- Authentication
-- Catalog
-- Cart
-- Orders
-- Billing
-- Invoices
-- Domains
-- Services
-- KYC
-- Notifications
-- Storage
-- Users
-
-## Authentication
-
-Public endpoints do not require a session. User endpoints rely on the signed-in account session through cookies.
+## Recommended clients
 
 <CardGroup cols={2}>
-  <Card title="Authentication" href="/api/authentication" icon="key" />
-  <Card title="Errors" href="/api/errors" icon="triangle-alert" />
-  <Card title="Endpoints" href="/api/endpoints" icon="list" />
-  <Card title="OpenAPI reference" href="/api-reference" icon="terminal" />
+  <Card title="TypeScript SDK" href="/developer/sdk" icon="package" />
+  <Card title="KmerHosting CLI" href="/developer/cli" icon="terminal" />
 </CardGroup>
+
+Every account-scoped request uses an API key. Browser session cookies are used by the customer console, not by external integrations.
+
+<Card title="Developer platform" href="/developer/overview" icon="arrow-right">
+Start with API keys, scopes, examples, and security guidance.
+</Card>

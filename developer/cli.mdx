@@ -1,0 +1,40 @@
+---
+title: "KmerHosting CLI"
+description: "Use KmerHosting account resources from a terminal."
+icon: "terminal"
+---
+
+## Install
+
+```bash
+npm install --global @kmerhosting/cli
+```
+
+## Configure
+
+```bash
+export KMERHOSTING_API_KEY="kh_live_..."
+```
+
+On PowerShell:
+
+```powershell
+$env:KMERHOSTING_API_KEY="kh_live_..."
+```
+
+## Commands
+
+```bash
+kh account
+kh services
+kh services vps
+kh domains
+kh invoices
+kh orders
+kh notifications --unread
+kh auto-renew vps SERVICE_ID on
+```
+
+<Card title="CLI source" icon="github" href="https://github.com/KmerHosting/kmerhosting_sdk/tree/main/packages/cli">
+The CLI is maintained in the KmerHosting developer tools repository.
+</Card>

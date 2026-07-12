@@ -1,28 +1,20 @@
 ---
-title: "Core endpoints"
-description: "Summary of the KmerHosting API endpoints used most often."
+title: "Developer API endpoints"
+description: "Stable endpoint families available to customer API keys."
 icon: "list"
 ---
 
-This page summarizes endpoint families. The detailed API reference is generated from `openapi.json`.
+All account automation endpoints use the `/api/v1/sdk` prefix.
 
-## Public
+| Resource | Capabilities |
+|---|---|
+| Account | Read profile, account status, wallet currency, credit, and debt |
+| Services | List and inspect Shared hosting, Custom Hosting, VPS, and Tiny VPS |
+| Auto-renewal | Enable or disable service auto-renewal |
+| Domains | List standalone and service-associated domains |
+| Billing | List issued and upcoming invoices |
+| Orders | List orders and line items |
+| Notifications | List, mark, and delete notifications |
+| KmerHosting AI Agent | Stream messages and manage owned conversations |
 
-| Method | Endpoint | Usage |
-|---|---|---|
-| `GET` | `/api/v1/content/hero` | Localized public content. |
-| `GET` | `/api/v1/catalog/offers` | Offers available during checkout. |
-| `GET` | `/api/v1/catalog/trending-services` | Highlighted services. |
-| `POST` | `/api/v1/auth/register` | Account creation. |
-| `POST` | `/api/v1/newsletter/subscriptions` | Newsletter subscription. |
-
-## Authenticated user
-
-| Method | Endpoint | Usage |
-|---|---|---|
-| `GET` | `/api/v1/users/me/profile` | Account profile. |
-| `GET` | `/api/v1/cart` | Current cart. |
-| `POST` | `/api/v1/orders` | Order creation. |
-| `GET` | `/api/v1/invoices` | Invoice list. |
-| `GET` | `/api/v1/users/me/services/active` | Active services. |
-| `POST` | `/api/v1/domains/availability-checks` | Domain availability lookup. |
+See the generated API reference for request parameters, response schemas, scopes, and examples.

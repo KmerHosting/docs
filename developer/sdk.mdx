@@ -1,0 +1,64 @@
+---
+title: "TypeScript SDK"
+description: "Install and use the official @kmerhosting/sdk package."
+icon: "package"
+---
+
+## Install
+
+```bash
+npm install @kmerhosting/sdk
+```
+
+The SDK requires Node.js 18 or newer and uses the built-in Fetch API.
+
+## Create a client
+
+```ts
+import { KmerHostingClient } from '@kmerhosting/sdk'
+
+const kmerhosting = new KmerHostingClient({
+  apiKey: process.env.KMERHOSTING_API_KEY!,
+})
+```
+
+## Account and services
+
+```ts
+const account = await kmerhosting.account.get()
+const { items: services } = await kmerhosting.services.list()
+const { items: vps } = await kmerhosting.services.list({ type: 'vps' })
+```
+
+## Auto-renewal
+
+```ts
+await kmerhosting.services.setAutoRenew('vps', serviceId, true)
+```
+
+## Domains, invoices, and orders
+
+```ts
+const domains = await kmerhosting.domains.list()
+const invoices = await kmerhosting.invoices.list()
+const orders = await kmerhosting.orders.list()
+```
+
+## Notifications
+
+```ts
+const unread = await kmerhosting.notifications.list({ unreadOnly: true })
+await kmerhosting.notifications.update(notificationId, 'read')
+await kmerhosting.notifications.delete(notificationId)
+```
+
+## KmerHosting AI Agent
+
+```ts
+const conversations = await kmerhosting.aiAgent.conversations.list()
+await kmerhosting.aiAgent.conversations.delete(conversationId)
+```
+
+<Card title="SDK source" icon="github" href="https://github.com/KmerHosting/kmerhosting_sdk">
+View the SDK, CLI, examples, and release history on GitHub.
+</Card>

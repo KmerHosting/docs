@@ -1,4224 +1,151 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "KmerHosting API",
-    "version": "v1",
-    "description": "Canonical OpenAPI contract for the KmerHosting platform. All supported public endpoints use the /api/v1 namespace."
+    "title": "KmerHosting Public Platform API",
+    "version": "5.0.0",
+    "description": "Stable KmerHosting Developer API for API-key integrations and the official KmerHosting SDK. Public catalog operations remain unauthenticated; customer resources require a scoped API key.",
+    "contact": {
+      "name": "KmerHosting Support",
+      "email": "support@kmerhosting.com"
+    }
   },
   "servers": [
     {
       "url": "https://kmerhosting.com",
-      "description": "Production"
-    },
-    {
-      "url": "http://localhost:3000",
-      "description": "Local development server"
+      "description": "Production public platform"
     }
   ],
   "tags": [
     {
-      "name": "AI"
+      "name": "Health",
+      "description": "Service discovery and availability checks."
     },
     {
-      "name": "API Keys"
+      "name": "Content",
+      "description": "Public localized content."
     },
     {
-      "name": "Authentication"
+      "name": "Catalog",
+      "description": "Localized pricing and offers."
     },
     {
-      "name": "Billing"
+      "name": "Orders",
+      "description": "Order creation, lookup, and payment."
     },
     {
-      "name": "Cart"
+      "name": "Invoices",
+      "description": "Issued invoice lookup and PDF documents."
     },
     {
-      "name": "Catalog"
+      "name": "Domains",
+      "description": "Domain operations."
     },
     {
-      "name": "Content"
+      "name": "Services",
+      "description": "Hosting service inventory, credentials, renewals, and auto-renew."
     },
     {
-      "name": "Domains"
+      "name": "Notifications",
+      "description": "In-app notifications."
     },
     {
-      "name": "Invoices"
+      "name": "KmerHosting AI Agent",
+      "description": "KmerHosting AI Agent messages and owned conversations."
     },
     {
-      "name": "KYC"
-    },
-    {
-      "name": "Legal"
-    },
-    {
-      "name": "Newsletter"
-    },
-    {
-      "name": "Notifications"
-    },
-    {
-      "name": "Orders"
-    },
-    {
-      "name": "Services"
-    },
-    {
-      "name": "Storage"
-    },
-    {
-      "name": "Trials"
-    },
-    {
-      "name": "Users"
+      "name": "Pricing downloads",
+      "description": "Generated pricing documents."
     }
   ],
   "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      },
+      "GenericSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "Locale": {
+        "type": "string",
+        "enum": [
+          "en",
+          "fr",
+          "de",
+          "nl",
+          "zh",
+          "es",
+          "pt",
+          "hi",
+          "ar"
+        ]
+      }
+    },
     "securitySchemes": {
-      "sessionCookie": {
-        "type": "apiKey",
-        "in": "cookie",
-        "name": "authjs.session-token"
+      "developerApiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "KmerHosting API Key",
+        "description": "Create an API key in Console > Account > API Keys. Use the full key only in trusted server-side environments."
       }
     }
   },
   "paths": {
-    "/api/v1/content/hero": {
+    "/api/pricing/downloads/{slug}": {
       "get": {
         "tags": [
-          "Content"
+          "Pricing downloads"
         ],
-        "summary": "Get localized hero content",
-        "description": "Canonical GET /api/v1/content/hero operation.",
-        "operationId": "get__api_v1_content_hero",
+        "summary": "Download a generated pricing document",
+        "description": "Public endpoint. No authenticated user session is required.\n\nUse this pricing downloads endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_pricing_downloads_slug",
         "parameters": [
           {
-            "name": "lang",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "en",
-                "fr"
-              ]
-            },
-            "description": "Language code.",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": []
-      }
-    },
-    "/api/v1/catalog/trending-services": {
-      "get": {
-        "tags": [
-          "Catalog"
-        ],
-        "summary": "List trending services",
-        "description": "Canonical GET /api/v1/catalog/trending-services operation.",
-        "operationId": "get__api_v1_catalog_trending_services",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": []
-      }
-    },
-    "/api/v1/catalog/offers": {
-      "get": {
-        "tags": [
-          "Catalog"
-        ],
-        "summary": "List checkout catalog offers",
-        "description": "Canonical GET /api/v1/catalog/offers operation.",
-        "operationId": "get__api_v1_catalog_offers",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": []
-      }
-    },
-    "/api/v1/newsletter/subscriptions": {
-      "post": {
-        "tags": [
-          "Newsletter"
-        ],
-        "summary": "Create a newsletter subscription",
-        "description": "Canonical POST /api/v1/newsletter/subscriptions operation.",
-        "operationId": "post__api_v1_newsletter_subscriptions",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/newsletter/subscriptions/verify": {
-      "post": {
-        "tags": [
-          "Newsletter"
-        ],
-        "summary": "Verify a newsletter subscription",
-        "description": "Canonical POST /api/v1/newsletter/subscriptions/verify operation.",
-        "operationId": "post__api_v1_newsletter_subscriptions_verify",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/trial-requests": {
-      "post": {
-        "tags": [
-          "Trials"
-        ],
-        "summary": "Submit a trial request",
-        "description": "Canonical POST /api/v1/trial-requests operation.",
-        "operationId": "post__api_v1_trial_requests",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ai/chat-messages": {
-      "post": {
-        "tags": [
-          "AI"
-        ],
-        "summary": "Send a chat prompt to the AI assistant",
-        "description": "Canonical POST /api/v1/ai/chat-messages operation.",
-        "operationId": "post__api_v1_ai_chat_messages",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/ai/conversations": {
-      "get": {
-        "tags": [
-          "AI"
-        ],
-        "summary": "List saved AI conversations",
-        "description": "Canonical GET /api/v1/ai/conversations operation.",
-        "operationId": "get__api_v1_ai_conversations",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "AI"
-        ],
-        "summary": "Save an AI conversation",
-        "description": "Canonical POST /api/v1/ai/conversations operation.",
-        "operationId": "post__api_v1_ai_conversations",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/domains/availability-checks": {
-      "post": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Check whether a domain is available",
-        "description": "Canonical POST /api/v1/domains/availability-checks operation.",
-        "operationId": "post__api_v1_domains_availability_checks",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/domains/purchases": {
-      "post": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Purchase a domain",
-        "description": "Canonical POST /api/v1/domains/purchases operation.",
-        "operationId": "post__api_v1_domains_purchases",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/billing/credit-balance": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Get the current user credit balance",
-        "description": "Canonical GET /api/v1/users/me/billing/credit-balance operation.",
-        "operationId": "get__api_v1_users_me_billing_credit_balance",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/billing/credit-top-ups": {
-      "post": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "Get manual credit top-up instructions",
-        "description": "Canonical POST /api/v1/billing/credit-top-ups operation.",
-        "operationId": "post__api_v1_billing_credit_top_ups",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/orders": {
-      "post": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "Create an order from checkout data",
-        "description": "Canonical POST /api/v1/orders operation.",
-        "operationId": "post__api_v1_orders",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/orders/{orderId}": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "Get order details",
-        "description": "Canonical GET /api/v1/orders/[orderId] operation.",
-        "operationId": "get__api_v1_orders_orderId_",
-        "parameters": [
-          {
-            "name": "orderId",
+            "name": "slug",
             "in": "path",
             "required": true,
+            "description": "slug identifier.",
             "schema": {
               "type": "string"
-            },
-            "description": "orderId path parameter."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/orders/{orderId}/payments": {
-      "post": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "Pay an order with account credit",
-        "description": "Canonical POST /api/v1/orders/[orderId]/payments operation.",
-        "operationId": "post__api_v1_orders_orderId_payments",
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "orderId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices": {
-      "get": {
-        "tags": [
-          "Invoices"
-        ],
-        "summary": "List invoices",
-        "description": "Canonical GET /api/v1/invoices operation.",
-        "operationId": "get__api_v1_invoices",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "Invoices"
-        ],
-        "summary": "Create an invoice",
-        "description": "Canonical POST /api/v1/invoices operation.",
-        "operationId": "post__api_v1_invoices",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/invoices/{invoiceId}/document": {
-      "get": {
-        "tags": [
-          "Invoices"
-        ],
-        "summary": "Download an invoice PDF",
-        "description": "Canonical GET /api/v1/invoices/[invoiceId]/document operation.",
-        "operationId": "get__api_v1_invoices_invoiceId_document",
-        "parameters": [
-          {
-            "name": "invoiceId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "invoiceId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful file response.",
-            "content": {
-              "application/pdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/notifications": {
-      "get": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "List notifications",
-        "description": "Canonical GET /api/v1/notifications operation.",
-        "operationId": "get__api_v1_notifications",
-        "parameters": [
-          {
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Page size.",
-            "in": "query"
-          },
-          {
-            "name": "skip",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Offset for pagination.",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "Create a notification",
-        "description": "Canonical POST /api/v1/notifications operation.",
-        "operationId": "post__api_v1_notifications",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/notifications/unread-summary": {
-      "get": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "Get unread notification summary",
-        "description": "Canonical GET /api/v1/notifications/unread-summary operation.",
-        "operationId": "get__api_v1_notifications_unread_summary",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/notifications/{notificationId}": {
-      "patch": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "Mark a notification as read",
-        "description": "Canonical PATCH /api/v1/notifications/[notificationId] operation.",
-        "operationId": "patch__api_v1_notifications_notificationId_",
-        "parameters": [
-          {
-            "name": "notificationId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "notificationId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/auth/session": {
-      "get": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Get the current authenticated session",
-        "description": "Canonical GET /api/v1/auth/session operation.",
-        "operationId": "get__api_v1_auth_session",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/auth/register": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Register a new account",
-        "description": "Canonical POST /api/v1/auth/register operation.",
-        "operationId": "post__api_v1_auth_register",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/auth/password/forgot": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Start the password reset flow",
-        "description": "Canonical POST /api/v1/auth/password/forgot operation.",
-        "operationId": "post__api_v1_auth_password_forgot",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/auth/password/reset": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Complete the password reset flow",
-        "description": "Canonical POST /api/v1/auth/password/reset operation.",
-        "operationId": "post__api_v1_auth_password_reset",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/auth/email-verifications": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Verify an email token",
-        "description": "Canonical POST /api/v1/auth/email-verifications operation.",
-        "operationId": "post__api_v1_auth_email_verifications",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/profile": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get the current user profile",
-        "description": "Canonical GET /api/v1/users/me/profile operation.",
-        "operationId": "get__api_v1_users_me_profile",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Update the current user profile",
-        "description": "Canonical PUT /api/v1/users/me/profile operation.",
-        "operationId": "put__api_v1_users_me_profile",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/settings": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get the current user settings",
-        "description": "Canonical GET /api/v1/users/me/settings operation.",
-        "operationId": "get__api_v1_users_me_settings",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "patch": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Update the current user settings",
-        "description": "Canonical PATCH /api/v1/users/me/settings operation.",
-        "operationId": "patch__api_v1_users_me_settings",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/account-status": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get account status",
-        "description": "Canonical GET /api/v1/users/me/account-status operation.",
-        "operationId": "get__api_v1_users_me_account_status",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/api-keys": {
-      "get": {
-        "tags": [
-          "API Keys"
-        ],
-        "summary": "List API keys",
-        "description": "Canonical GET /api/v1/users/me/api-keys operation.",
-        "operationId": "get__api_v1_users_me_api_keys",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "API Keys"
-        ],
-        "summary": "Create an API key",
-        "description": "Canonical POST /api/v1/users/me/api-keys operation.",
-        "operationId": "post__api_v1_users_me_api_keys",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/api-keys/{keyId}": {
-      "patch": {
-        "tags": [
-          "API Keys"
-        ],
-        "summary": "Update an API key",
-        "description": "Canonical PATCH /api/v1/users/me/api-keys/[keyId] operation.",
-        "operationId": "patch__api_v1_users_me_api_keys_keyId_",
-        "parameters": [
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "keyId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "API Keys"
-        ],
-        "summary": "Delete an API key",
-        "description": "Canonical DELETE /api/v1/users/me/api-keys/[keyId] operation.",
-        "operationId": "delete__api_v1_users_me_api_keys_keyId_",
-        "parameters": [
-          {
-            "name": "keyId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "keyId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/avatar": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get avatar metadata",
-        "description": "Canonical GET /api/v1/users/me/avatar operation.",
-        "operationId": "get__api_v1_users_me_avatar",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Upload an avatar",
-        "description": "Canonical POST /api/v1/users/me/avatar operation.",
-        "operationId": "post__api_v1_users_me_avatar",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Delete the current avatar",
-        "description": "Canonical DELETE /api/v1/users/me/avatar operation.",
-        "operationId": "delete__api_v1_users_me_avatar",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/avatar/files/{filename}": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Fetch an avatar file",
-        "description": "Canonical GET /api/v1/users/me/avatar/files/[filename] operation.",
-        "operationId": "get__api_v1_users_me_avatar_files_filename_",
-        "parameters": [
-          {
-            "name": "filename",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "filename path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/kyc-submissions": {
-      "get": {
-        "tags": [
-          "KYC"
-        ],
-        "summary": "Get KYC verification details",
-        "description": "Canonical GET /api/v1/users/me/kyc-submissions operation.",
-        "operationId": "get__api_v1_users_me_kyc_submissions",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "KYC"
-        ],
-        "summary": "Submit KYC verification data",
-        "description": "Canonical POST /api/v1/users/me/kyc-submissions operation.",
-        "operationId": "post__api_v1_users_me_kyc_submissions",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/kyc-files": {
-      "get": {
-        "tags": [
-          "KYC"
-        ],
-        "summary": "Fetch a KYC file",
-        "description": "Canonical GET /api/v1/users/me/kyc-files operation.",
-        "operationId": "get__api_v1_users_me_kyc_files",
-        "parameters": [
-          {
-            "name": "fileId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "KYC file identifier.",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/billing/incoming-invoices": {
-      "get": {
-        "tags": [
-          "Billing"
-        ],
-        "summary": "List incoming invoices",
-        "description": "Canonical GET /api/v1/users/me/billing/incoming-invoices operation.",
-        "operationId": "get__api_v1_users_me_billing_incoming_invoices",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/active-summary": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "Get active service counts",
-        "description": "Canonical GET /api/v1/users/me/services/active-summary operation.",
-        "operationId": "get__api_v1_users_me_services_active_summary",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/active": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "List active services",
-        "description": "Canonical GET /api/v1/users/me/services/active operation.",
-        "operationId": "get__api_v1_users_me_services_active",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/pending-summary": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "Get pending service counts",
-        "description": "Canonical GET /api/v1/users/me/services/pending-summary operation.",
-        "operationId": "get__api_v1_users_me_services_pending_summary",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/pending": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "List pending services",
-        "description": "Canonical GET /api/v1/users/me/services/pending operation.",
-        "operationId": "get__api_v1_users_me_services_pending",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/orders/pending-summary": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "Get pending order counts",
-        "description": "Canonical GET /api/v1/users/me/orders/pending-summary operation.",
-        "operationId": "get__api_v1_users_me_orders_pending_summary",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/orders/pending": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "List pending orders",
-        "description": "Canonical GET /api/v1/users/me/orders/pending operation.",
-        "operationId": "get__api_v1_users_me_orders_pending",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/renewals": {
-      "post": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "Renew a service immediately",
-        "description": "Canonical POST /api/v1/users/me/services/renewals operation.",
-        "operationId": "post__api_v1_users_me_services_renewals",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/services/auto-renewals": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "Inspect auto-renew configuration",
-        "description": "Canonical GET /api/v1/users/me/services/auto-renewals operation.",
-        "operationId": "get__api_v1_users_me_services_auto_renewals",
-        "parameters": [
-          {
-            "name": "serviceId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Service identifier.",
-            "in": "query"
-          },
-          {
-            "name": "serviceType",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Service type.",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "patch": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "Update auto-renew configuration",
-        "description": "Canonical PATCH /api/v1/users/me/services/auto-renewals operation.",
-        "operationId": "patch__api_v1_users_me_services_auto_renewals",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/services/shared-hosting": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "List Shared hosting services",
-        "description": "Canonical GET /api/v1/users/me/services/shared-hosting operation.",
-        "operationId": "get__api_v1_users_me_services_shared_hosting",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/custom-hosting": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "List custom hosting services",
-        "description": "Canonical GET /api/v1/users/me/services/custom-hosting operation.",
-        "operationId": "get__api_v1_users_me_services_custom_hosting",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/shared-hosting/server-settings": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "Get Shared hosting server settings",
-        "description": "Canonical GET /api/v1/users/me/services/shared-hosting/server-settings operation.",
-        "operationId": "get__api_v1_users_me_services_shared_hosting_server_settings",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/services/vps-servers": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "List VPS services",
-        "description": "Canonical GET /api/v1/users/me/services/vps-servers operation.",
-        "operationId": "get__api_v1_users_me_services_vps_servers",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/domains/standalone": {
-      "get": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "List standalone domains",
-        "description": "Canonical GET /api/v1/users/me/domains/standalone operation.",
-        "operationId": "get__api_v1_users_me_domains_standalone",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/domains/standalone/{domainId}": {
-      "get": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Get a standalone domain",
-        "description": "Canonical GET /api/v1/users/me/domains/standalone/[domainId] operation.",
-        "operationId": "get__api_v1_users_me_domains_standalone_domainId_",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "patch": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Update a standalone domain",
-        "description": "Canonical PATCH /api/v1/users/me/domains/standalone/[domainId] operation.",
-        "operationId": "patch__api_v1_users_me_domains_standalone_domainId_",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/domains/standalone/{domainId}/dns-records": {
-      "post": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Create a standalone domain DNS record",
-        "description": "Canonical POST /api/v1/users/me/domains/standalone/[domainId]/dns-records operation.",
-        "operationId": "post__api_v1_users_me_domains_standalone_domainId_dns_records",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Delete a standalone domain DNS record",
-        "description": "Canonical DELETE /api/v1/users/me/domains/standalone/[domainId]/dns-records operation.",
-        "operationId": "delete__api_v1_users_me_domains_standalone_domainId_dns_records",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/domains/standalone/{domainId}/renewals": {
-      "post": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Renew a standalone domain",
-        "description": "Canonical POST /api/v1/users/me/domains/standalone/[domainId]/renewals operation.",
-        "operationId": "post__api_v1_users_me_domains_standalone_domainId_renewals",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/domains/included": {
-      "get": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "List included domains",
-        "description": "Canonical GET /api/v1/users/me/domains/included operation.",
-        "operationId": "get__api_v1_users_me_domains_included",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/me/domains/included/{domainId}": {
-      "patch": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Update an included domain",
-        "description": "Canonical PATCH /api/v1/users/me/domains/included/[domainId] operation.",
-        "operationId": "patch__api_v1_users_me_domains_included_domainId_",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/users/me/domains/included/{domainId}/dns-records": {
-      "post": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Create an included domain DNS record",
-        "description": "Canonical POST /api/v1/users/me/domains/included/[domainId]/dns-records operation.",
-        "operationId": "post__api_v1_users_me_domains_included_domainId_dns_records",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Delete an included domain DNS record",
-        "description": "Canonical DELETE /api/v1/users/me/domains/included/[domainId]/dns-records operation.",
-        "operationId": "delete__api_v1_users_me_domains_included_domainId_dns_records",
-        "parameters": [
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "domainId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/cart": {
-      "get": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Get the current cart",
-        "description": "Canonical GET /api/v1/cart operation.",
-        "operationId": "get__api_v1_cart",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Clear the current cart",
-        "description": "Canonical DELETE /api/v1/cart operation.",
-        "operationId": "delete__api_v1_cart",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/cart/items": {
-      "post": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Add an item to the cart",
-        "description": "Canonical POST /api/v1/cart/items operation.",
-        "operationId": "post__api_v1_cart_items",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Update a cart item",
-        "description": "Canonical PUT /api/v1/cart/items operation.",
-        "operationId": "put__api_v1_cart_items",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Cart"
-        ],
-        "summary": "Remove a cart item",
-        "description": "Canonical DELETE /api/v1/cart/items operation.",
-        "operationId": "delete__api_v1_cart_items",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/storage/files": {
-      "get": {
-        "tags": [
-          "Storage"
-        ],
-        "summary": "List stored files",
-        "description": "Canonical GET /api/v1/storage/files operation.",
-        "operationId": "get__api_v1_storage_files",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/storage/files/{fileId}": {
-      "get": {
-        "tags": [
-          "Storage"
-        ],
-        "summary": "Download a stored file",
-        "description": "Canonical GET /api/v1/storage/files/[fileId] operation.",
-        "operationId": "get__api_v1_storage_files_fileId_",
-        "parameters": [
-          {
-            "name": "fileId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "fileId path parameter."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful file response.",
+            "description": "Request completed successfully.",
             "content": {
               "application/octet-stream": {
                 "schema": {
@@ -4228,528 +155,1136 @@
               }
             }
           },
-          "201": {
-            "description": "Successful response.",
+          "404": {
+            "description": "The requested resource was not found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
           "500": {
-            "description": "Server error."
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An upstream provider returned an invalid response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      },
-      "delete": {
+        "security": [],
+        "x-kmerhosting-access": "public",
+        "x-kmerhosting-project": "public-platform",
+        "x-source-route": "/api/pricing/downloads/[slug]"
+      }
+    },
+    "/api/v1/catalog/domain-prices": {
+      "get": {
         "tags": [
-          "Storage"
+          "Catalog"
         ],
-        "summary": "Delete a stored file",
-        "description": "Canonical DELETE /api/v1/storage/files/[fileId] operation.",
-        "operationId": "delete__api_v1_storage_files_fileId_",
+        "summary": "List localized domain prices",
+        "description": "Public endpoint. No authenticated user session is required.\n\nUse this catalog endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_catalog_domain_prices",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-kmerhosting-access": "public",
+        "x-kmerhosting-project": "public-platform",
+        "x-source-route": "/api/v1/catalog/domain-prices"
+      }
+    },
+    "/api/v1/catalog/offers": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "List localized hosting and domain offers",
+        "description": "Public endpoint. No authenticated user session is required.\n\nUse this catalog endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_catalog_offers",
         "parameters": [
           {
-            "name": "fileId",
-            "in": "path",
-            "required": true,
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "locale query parameter.",
             "schema": {
-              "type": "string"
-            },
-            "description": "fileId path parameter."
+              "$ref": "#/components/schemas/Locale"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response.",
+            "description": "Request completed successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
                 }
               }
             }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
           },
           "500": {
-            "description": "Server error."
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
+        "security": [],
+        "x-kmerhosting-access": "public",
+        "x-kmerhosting-project": "public-platform",
+        "x-source-route": "/api/v1/catalog/offers"
       }
     },
-    "/api/v1/storage/uploads": {
+    "/api/v1/domains/availability-checks": {
       "post": {
         "tags": [
-          "Storage"
+          "Domains"
         ],
-        "summary": "Upload a file",
-        "description": "Canonical POST /api/v1/storage/uploads operation.",
-        "operationId": "post__api_v1_storage_uploads",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
+        "summary": "Check domain availability and localized price",
+        "description": "Public endpoint. No authenticated user session is required.\n\nUse this domains endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "post_api_v1_domains_availability_checks",
         "requestBody": {
-          "required": false,
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/storage/uploads/chunks": {
-      "post": {
-        "tags": [
-          "Storage"
-        ],
-        "summary": "Upload a file chunk",
-        "description": "Canonical POST /api/v1/storage/uploads/chunks operation.",
-        "operationId": "post__api_v1_storage_uploads_chunks",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                "additionalProperties": false,
+                "required": [
+                  "domain"
+                ],
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "example": "example.com"
+                  }
                 }
               }
             }
-          },
-          "201": {
-            "description": "Successful response.",
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/storage/transfers": {
-      "post": {
-        "tags": [
-          "Storage"
-        ],
-        "summary": "Transfer a remote file into storage",
-        "description": "Canonical POST /api/v1/storage/transfers operation.",
-        "operationId": "post__api_v1_storage_transfers",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
+            "description": "The request is malformed or contains invalid data.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           },
-          "201": {
-            "description": "Successful response.",
+          "500": {
+            "description": "Unexpected server error.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
           }
         },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true
-              }
-            }
-          }
-        }
+        "security": [],
+        "x-kmerhosting-access": "public",
+        "x-kmerhosting-project": "public-platform",
+        "x-source-route": "/api/v1/domains/availability-checks"
       }
     },
-    "/api/v1/storage/presence": {
+    "/api/v1/help-center": {
       "get": {
         "tags": [
-          "Storage"
+          "Content"
         ],
-        "summary": "Get storage presence status",
-        "description": "Canonical GET /api/v1/storage/presence operation.",
-        "operationId": "get__api_v1_storage_presence",
-        "parameters": [],
+        "summary": "Get localized Help Center content",
+        "description": "Public endpoint. No authenticated user session is required.\n\nUse this content endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_help_center",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "lang query parameter.",
+            "schema": {
+              "$ref": "#/components/schemas/Locale"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Successful response.",
+            "description": "Request completed successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
                 }
               }
             }
           },
-          "201": {
-            "description": "Successful response.",
+          "404": {
+            "description": "The requested resource was not found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
           },
           "500": {
-            "description": "Server error."
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-kmerhosting-access": "public",
+        "x-kmerhosting-project": "public-platform",
+        "x-source-route": "/api/v1/help-center"
+      }
+    },
+    "/api/v1": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Get API version and service status",
+        "description": "Public endpoint. No authenticated user session is required.\n\nUse this health endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-kmerhosting-access": "public",
+        "x-kmerhosting-project": "public-platform",
+        "x-source-route": "/api/v1"
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Check API availability without a response body",
+        "description": "Public endpoint. No authenticated user session is required.\n\nUse this health endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "head_api_v1",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully."
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "x-kmerhosting-access": "public",
+        "x-kmerhosting-project": "public-platform",
+        "x-source-route": "/api/v1"
+      }
+    },
+    "/api/v1/sdk/account": {
+      "get": {
+        "tags": [
+          "Developer API"
+        ],
+        "summary": "List or get account",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_account",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         },
         "security": [
           {
-            "sessionCookie": []
+            "developerApiKey": []
           }
-        ]
-      },
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/account"
+      }
+    },
+    "/api/v1/sdk/ai-agent/chat-messages": {
       "post": {
         "tags": [
-          "Storage"
+          "KmerHosting AI Agent"
         ],
-        "summary": "Enable storage presence",
-        "description": "Canonical POST /api/v1/storage/presence operation.",
-        "operationId": "post__api_v1_storage_presence",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ],
+        "summary": "Create or process chat messages",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "post_api_v1_sdk_ai_agent_chat_messages",
         "requestBody": {
-          "required": false,
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "additionalProperties": true
+                "additionalProperties": true,
+                "properties": {
+                  "model": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
-        }
-      },
+        },
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is malformed or contains invalid data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/ai-agent/chat-messages"
+      }
+    },
+    "/api/v1/sdk/ai-agent/conversations/{conversationId}": {
       "delete": {
         "tags": [
-          "Storage"
+          "KmerHosting AI Agent"
         ],
-        "summary": "Disable storage presence",
-        "description": "Canonical DELETE /api/v1/storage/presence operation.",
-        "operationId": "delete__api_v1_storage_presence",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
-                }
-              }
+        "summary": "Delete conversation Id",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "delete_api_v1_sdk_ai_agent_conversations_conversationId",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "description": "conversation Id identifier.",
+            "schema": {
+              "type": "string"
             }
-          },
-          "201": {
-            "description": "Successful response.",
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request completed successfully with no response body.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
-          },
-          "500": {
-            "description": "Server error."
-          }
-        },
-        "security": [
-          {
-            "sessionCookie": []
-          }
-        ]
-      }
-    },
-    "/api/v1/storage/presence/online": {
-      "get": {
-        "tags": [
-          "Storage"
-        ],
-        "summary": "List users currently online in storage",
-        "description": "Canonical GET /api/v1/storage/presence/online operation.",
-        "operationId": "get__api_v1_storage_presence_online",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
+            "description": "The request is malformed or contains invalid data.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           },
-          "201": {
-            "description": "Successful response.",
+          "500": {
+            "description": "Unexpected server error.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/ai-agent/conversations/[conversationId]"
+      }
+    },
+    "/api/v1/sdk/ai-agent/conversations": {
+      "get": {
+        "tags": [
+          "KmerHosting AI Agent"
+        ],
+        "summary": "List or get conversations",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_ai_agent_conversations",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/ai-agent/conversations"
+      },
+      "post": {
+        "tags": [
+          "KmerHosting AI Agent"
+        ],
+        "summary": "Create or process conversations",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "post_api_v1_sdk_ai_agent_conversations",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "model": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
+            "description": "The request is malformed or contains invalid data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error."
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         },
         "security": [
           {
-            "sessionCookie": []
+            "developerApiKey": []
           }
-        ]
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/ai-agent/conversations"
       }
     },
-    "/api/v1/legal/documents/pdf": {
+    "/api/v1/sdk/domains": {
       "get": {
         "tags": [
-          "Legal"
+          "Developer API"
         ],
-        "summary": "Generate a legal document PDF",
-        "description": "Canonical GET /api/v1/legal/documents/pdf operation.",
-        "operationId": "get__api_v1_legal_documents_pdf",
+        "summary": "List or get domains",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_domains",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/domains"
+      }
+    },
+    "/api/v1/sdk/invoices": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "summary": "List or get invoices",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this invoices endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_invoices",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/invoices"
+      }
+    },
+    "/api/v1/sdk/notifications/{notificationId}": {
+      "delete": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Delete notification Id",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this notifications endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "delete_api_v1_sdk_notifications_notificationId",
+        "parameters": [
+          {
+            "name": "notificationId",
+            "in": "path",
+            "required": true,
+            "description": "notification Id identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request completed successfully with no response body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is malformed or contains invalid data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/notifications/[notificationId]"
+      },
+      "patch": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Update notification Id",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this notifications endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "patch_api_v1_sdk_notifications_notificationId",
+        "parameters": [
+          {
+            "name": "notificationId",
+            "in": "path",
+            "required": true,
+            "description": "notification Id identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Request completed successfully with no response body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is malformed or contains invalid data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/notifications/[notificationId]"
+      }
+    },
+    "/api/v1/sdk/notifications": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "List or get notifications",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this notifications endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_notifications",
+        "parameters": [
+          {
+            "name": "unreadOnly",
+            "in": "query",
+            "required": false,
+            "description": "unread Only query parameter.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/notifications"
+      }
+    },
+    "/api/v1/sdk/orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "List or get orders",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this orders endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_orders",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/orders"
+      }
+    },
+    "/api/v1/sdk": {
+      "get": {
+        "tags": [
+          "Developer API"
+        ],
+        "summary": "List or get sdk",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk",
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk"
+      }
+    },
+    "/api/v1/sdk/services/{type}/{serviceId}/auto-renew": {
+      "patch": {
+        "tags": [
+          "Services"
+        ],
+        "summary": "Update auto renew",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this services endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "patch_api_v1_sdk_services_type_serviceId_auto_renew",
         "parameters": [
           {
             "name": "type",
-            "required": false,
+            "in": "path",
+            "required": true,
+            "description": "type identifier.",
             "schema": {
               "type": "string"
-            },
-            "description": "Document type.",
-            "in": "query"
+            }
+          },
+          {
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "description": "service Id identifier.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  }
                 }
               }
             }
-          },
-          "201": {
-            "description": "Successful response.",
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request."
-          },
-          "401": {
-            "description": "Authentication required."
+            "description": "The request is malformed or contains invalid data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error."
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         },
-        "security": []
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/services/[type]/[serviceId]/auto-renew"
+      }
+    },
+    "/api/v1/sdk/services/{type}/{serviceId}": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "summary": "Get service Id",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this services endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_services_type_serviceId",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "type identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "description": "service Id identifier.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/services/[type]/[serviceId]"
+      }
+    },
+    "/api/v1/sdk/services": {
+      "get": {
+        "tags": [
+          "Developer API"
+        ],
+        "summary": "List or get services",
+        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
+        "operationId": "get_api_v1_sdk_services",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "type query parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "status query parameter.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "developerApiKey": []
+          }
+        ],
+        "x-kmerhosting-access": "apiKey",
+        "x-kmerhosting-project": "developer-api",
+        "x-source-route": "/api/v1/sdk/services"
       }
     }
-  }
+  },
+  "x-kmerhosting-project": "public-platform",
+  "x-kmerhosting-generated-at": "2026-07-12T03:10:32.584Z"
 }

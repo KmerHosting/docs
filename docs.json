@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
   "name": "KmerHosting",
-  "description": "Step-by-step guides for Linux VPS, DirectAdmin shared hosting, billing, customer operations, troubleshooting, and API workflows.",
+  "description": "Documentation for KmerHosting hosting products, customer operations, developer tools, and API integrations.",
   "colors": {
     "primary": "#1A73E8",
     "light": "#8AB4F8",
@@ -20,7 +20,10 @@
     "eyebrows": "breadcrumbs"
   },
   "contextual": {
-    "options": ["copy", "view"],
+    "options": [
+      "copy",
+      "view"
+    ],
     "display": "header"
   },
   "logo": {
@@ -29,10 +32,17 @@
     "href": "https://kmerhosting.com"
   },
   "navbar": {
-    "links": []
+    "links": [
+      {
+        "label": "Console",
+        "href": "https://console.kmerhosting.com"
+      }
+    ]
   },
   "footer": {
-    "socials": {}
+    "socials": {
+      "github": "https://github.com/KmerHosting"
+    }
   },
   "navigation": {
     "global": {
@@ -46,6 +56,11 @@
           "anchor": "Website",
           "icon": "globe",
           "href": "https://kmerhosting.com"
+        },
+        {
+          "anchor": "Console",
+          "icon": "layout-dashboard",
+          "href": "https://console.kmerhosting.com"
         },
         {
           "anchor": "Support",
@@ -74,50 +89,31 @@
         ]
       },
       {
-        "group": "Hosting products",
-        "icon": "server",
+        "group": "Products",
+        "icon": "boxes",
         "expanded": true,
         "pages": [
           "products/shared-hosting",
           "products/vps",
           "products/domains",
           "products/custom-hosting",
-          "guides/deploy-website",
-          "guides/shared-hosting-stacks",
-          "guides/vps-stacks",
-          "guides/dns-management",
-          "guides/ssl-certificates",
-          "guides/backups"
+          "products/kmerhosting-cli",
+          "products/kmerhosting-forge",
+          "products/kmerhosting-ai-agent",
+          "products/kmerhosting-drive"
         ]
       },
       {
-        "group": "Billing and customer operations",
-        "icon": "wallet",
-        "expanded": true,
-        "pages": [
-          "billing/overview",
-          "billing/account-credit",
-          "billing/orders",
-          "billing/invoices",
-          "billing/renewals",
-          "billing/refunds",
-          "guides/domain-availability",
-          "guides/checkout",
-          "guides/service-management",
-          "guides/auto-renewal",
-          "guides/support-ticket",
-          "guides/email-configuration"
-        ]
-      },
-      {
-        "group": "API and automation",
+        "group": "Developer platform",
         "icon": "braces",
         "expanded": true,
         "pages": [
-          "api/overview",
-          "api/authentication",
-          "api/errors",
-          "api/endpoints"
+          "developer/overview",
+          "developer/api-keys",
+          "developer/sdk",
+          "developer/cli",
+          "developer/rest-api",
+          "api/errors"
         ]
       },
       {
@@ -129,9 +125,41 @@
         }
       },
       {
+        "group": "Hosting guides",
+        "icon": "server",
+        "expanded": false,
+        "pages": [
+          "guides/deploy-website",
+          "guides/shared-hosting-stacks",
+          "guides/vps-stacks",
+          "guides/dns-management",
+          "guides/ssl-certificates",
+          "guides/backups",
+          "guides/email-configuration"
+        ]
+      },
+      {
+        "group": "Billing and customer operations",
+        "icon": "wallet",
+        "expanded": false,
+        "pages": [
+          "billing/overview",
+          "billing/account-credit",
+          "billing/orders",
+          "billing/invoices",
+          "billing/renewals",
+          "billing/refunds",
+          "guides/domain-availability",
+          "guides/checkout",
+          "guides/service-management",
+          "guides/auto-renewal",
+          "guides/support-ticket"
+        ]
+      },
+      {
         "group": "Operations and troubleshooting",
         "icon": "wrench",
-        "expanded": true,
+        "expanded": false,
         "pages": [
           "operations/status-page",
           "operations/incidents",
@@ -146,7 +174,7 @@
       {
         "group": "Legal",
         "icon": "scale",
-        "expanded": true,
+        "expanded": false,
         "pages": [
           "legal/terms",
           "legal/privacy",

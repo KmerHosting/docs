@@ -1,32 +1,24 @@
 ---
 title: "API authentication"
-description: "Understand public endpoints and endpoints protected by a valid session."
+description: "Authenticate Developer API requests with a KmerHosting API key."
 icon: "key"
 ---
 
-The API has two access levels.
+Create an API key from **Customer console → Account → API Keys**. The complete value is displayed once and is never stored in plaintext by KmerHosting.
 
-## Public endpoints
-
-Public endpoints can be called without a session. Examples include:
-
-- public content;
-- catalog;
-- registration;
-- password reset request;
-- newsletter subscription;
-- trial requests.
-
-## User endpoints
-
-User endpoints require a valid session.
-
-```text
-authjs.session-token
+```http
+Authorization: Bearer kh_live_...
 ```
 
-This cookie is managed by the application when the user is signed in.
+Example:
+
+```bash
+curl https://kmerhosting.com/api/v1/sdk/account \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY"
+```
 
 <Warning>
-Do not copy a session cookie into a shared script. A session cookie grants access to the linked account.
+Keep API keys in server-side secret storage. Never place a key in browser code, a public mobile application, source control, screenshots, or logs.
 </Warning>
+
+Keys are account-scoped, can be deactivated or deleted at any time, and are checked against the scope required by each endpoint.

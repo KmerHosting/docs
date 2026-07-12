@@ -1,0 +1,53 @@
+---
+title: "API keys"
+description: "Create, store, rotate, and revoke KmerHosting API keys safely."
+icon: "key-round"
+---
+
+## Create a key
+
+1. Sign in to `console.kmerhosting.com`.
+2. Open **Account**.
+3. Select **API Keys**.
+4. Choose **New Key** and give it a descriptive name.
+5. Copy the full key immediately.
+
+New keys start with:
+
+```text
+kh_live_
+```
+
+Only a SHA-256 hash is stored by KmerHosting. The full key cannot be recovered after the creation dialog is closed.
+
+## Send the key
+
+Use the HTTP bearer scheme:
+
+```http
+Authorization: Bearer kh_live_...
+```
+
+`X-KmerHosting-Key` is accepted for compatibility, but the bearer header is recommended.
+
+## Default scopes
+
+| Scope | Access |
+|---|---|
+| `account:read` | Account and wallet overview |
+| `services:read` | Hosting service metadata |
+| `services:write` | Auto-renewal configuration |
+| `domains:read` | Domain metadata |
+| `billing:read` | Issued and upcoming invoices |
+| `orders:read` | Orders and line items |
+| `notifications:read` | Notification list |
+| `notifications:write` | Mark or delete notifications |
+| `ai-agent:use` | KmerHosting AI Agent and conversations |
+
+## Rotation
+
+Create a replacement key, update the consuming application, verify requests, then deactivate or delete the old key.
+
+## Rate limits
+
+Each key is limited to 120 requests per minute. KmerHosting AI Agent also uses the account's daily AI quota.

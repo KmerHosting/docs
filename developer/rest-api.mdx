@@ -1,0 +1,54 @@
+---
+title: "REST API"
+description: "Call the KmerHosting Developer API without an SDK."
+icon: "route"
+---
+
+## Request format
+
+```bash
+curl "https://kmerhosting.com/api/v1/sdk/services?type=vps" \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY" \
+  -H "Accept: application/json"
+```
+
+Successful JSON responses use this envelope:
+
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
+Errors use:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "invalid_api_key",
+    "message": "The API key is invalid, inactive, or revoked."
+  }
+}
+```
+
+## Main endpoints
+
+| Method | Endpoint | Scope |
+|---|---|---|
+| `GET` | `/api/v1/sdk/account` | `account:read` |
+| `GET` | `/api/v1/sdk/services` | `services:read` |
+| `GET` | `/api/v1/sdk/services/{type}/{serviceId}` | `services:read` |
+| `PATCH` | `/api/v1/sdk/services/{type}/{serviceId}/auto-renew` | `services:write` |
+| `GET` | `/api/v1/sdk/domains` | `domains:read` |
+| `GET` | `/api/v1/sdk/invoices` | `billing:read` |
+| `GET` | `/api/v1/sdk/orders` | `orders:read` |
+| `GET` | `/api/v1/sdk/notifications` | `notifications:read` |
+| `PATCH` | `/api/v1/sdk/notifications/{notificationId}` | `notifications:write` |
+| `DELETE` | `/api/v1/sdk/notifications/{notificationId}` | `notifications:write` |
+| `POST` | `/api/v1/sdk/ai-agent/chat-messages` | `ai-agent:use` |
+| `GET, POST` | `/api/v1/sdk/ai-agent/conversations` | `ai-agent:use` |
+| `DELETE` | `/api/v1/sdk/ai-agent/conversations/{conversationId}` | `ai-agent:use` |
+
+Use the generated API reference for request and response schemas.

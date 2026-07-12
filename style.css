@@ -1,249 +1,76 @@
-:root {
-  --default-border-color: var(--gray-200);
-}
-
-.dark {
-  --default-border-color: var(--gray-800);
-}
-
-#sidebar .nav-dropdown-trigger {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding-left: 0.375rem;
-}
-
-#sidebar .nav-dropdown-trigger:hover {
-  background-color: rgb(0 0 0 / 0.04) !important;
-}
-
-.dark #sidebar .nav-dropdown-trigger:hover {
-  background-color: rgb(255 255 255 / 0.06) !important;
-}
-
-#sidebar .nav-dropdown-trigger .nav-dropdown-item-icon {
-  border: none !important;
-  background: transparent !important;
-  height: auto !important;
-  width: auto !important;
-  padding: 0 !important;
-}
-
-.nav-dropdown-content .nav-dropdown-item-icon {
-  border: none !important;
-  background: transparent !important;
-  height: auto !important;
-  width: auto !important;
-  padding: 0 !important;
-}
-
-.nav-dropdown-content .nav-dropdown-item-description {
-  display: none !important;
-}
-
-#sidebar .nav-anchor span {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-
-body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] {
-  color: rgb(var(--primary)) !important;
-  font-weight: 600 !important;
-}
-
-body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] span {
-  color: inherit !important;
-}
-
-body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] svg {
-  background-color: rgb(var(--primary)) !important;
-}
-
-.dark body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] {
-  color: rgb(var(--primary-light) / var(--tw-text-opacity, 1)) !important;
-}
-
-.dark body:has([data-product-guide-index]) #sidebar a.nav-anchor[href='/'] svg {
-  background-color: rgb(var(--primary-light) / var(--tw-text-opacity, 1)) !important;
-}
-
-:is(#content-area[data-current-path='/'], [data-current-path='/'] #content-area):has([data-product-guide-index]) {
-  background: transparent !important;
-  padding: 0 !important;
-}
-
-:is(#content-area[data-current-path='/'], [data-current-path='/'] #content-area):has([data-product-guide-index]) > div:first-child {
-  background: transparent !important;
-  padding-right: 0 !important;
-  padding-bottom: 0 !important;
-  padding-left: 0 !important;
-}
-
-[data-product-guide-index] a:not(.product-guide-feature-card) {
-  background-color: #fafafa !important;
-}
-
-.dark [data-product-guide-index] a:not(.product-guide-feature-card) {
-  background-color: #09090b !important;
-}
-
-.product-guide-feature-card {
-  grid-column: 1 / -1;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  min-height: 260px;
-  background: url('/images/sample-feature-light.png') center / cover no-repeat !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: white !important;
-}
-
-.dark .product-guide-feature-card {
-  background-image: url('/images/sample-feature-dark.png') !important;
-}
-
-.product-guide-feature-card > div {
-  display: flex !important;
-  flex: 1;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-}
-
-.product-guide-feature-card :is(h2, h3, p, span, svg) {
-  color: white !important;
-}
-
-.product-guide-feature-card :is(svg, [class*='icon']) {
-  background-color: white !important;
-  width: 2em !important;
-  height: 2em !important;
-  margin-top: 2px;
-}
-
-.product-guide-feature-card-title {
-  font-size: 1.2em;
-  font-weight: 500;
-}
-
-.product-guide-feature-card :is(h2, h3, p, span, svg).product-guide-feature-card-description {
-  font-size: 1.05em;
-  font-weight: 400;
-  color: rgb(var(--gray-50) / 62.5%) !important;
-}
-
-.dark .product-guide-feature-card :is(h2, h3, p, span, svg).product-guide-feature-card-description {
-  color: rgb(var(--gray-50) / 50%) !important;
-}
-
-img.nav-logo {
-  max-width: 86px;
-  height: auto;
-}
-
-#sidebar [href='/'],
-#sidebar [href='/docs/'],
-#sidebar [href='/docs'] {
-  color: rgb(var(--primary)) !important;
-  font-weight: 600 !important;
-}
-
-#sidebar [href='/'] svg,
-#sidebar [href='/docs/'] svg,
-#sidebar [href='/docs'] svg {
-  background-color: rgb(var(--primary)) !important;
-}
+/* KmerHosting documentation topbar ------------------------------------------------- */
 
 @media (min-width: 1024px) {
-  .almond-nav-bottom-section {
-    position: fixed !important;
-    top: 0.8rem !important;
-    right: 1.25rem !important;
-    z-index: 45 !important;
-    width: auto !important;
-    padding: 0 !important;
+  #navbar {
+    position: relative !important;
+  }
+
+  topbar-right-container {
     display: flex !important;
-    flex-direction: row !important;
     align-items: center !important;
-    gap: 0.75rem !important;
+    gap: 0.35rem !important;
+  }
+
+  /* Keep the real Mintlify toggle. Only its position changes, so it remains functional. */
+  #navbar > [data-component-name="theme-toggle"].kh-theme-centered {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    z-index: 30 !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  /* Search remains functional but is displayed as a plain icon. */
+  topbar-right-container > #search-bar-entry.kh-search-icon-only {
+    order: 90 !important;
+    display: inline-flex !important;
+    width: 2.25rem !important;
+    min-width: 2.25rem !important;
+    height: 2.25rem !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 0 !important;
+  }
+
+  topbar-right-container > #search-bar-entry.kh-search-icon-only:hover,
+  topbar-right-container > #search-bar-entry.kh-search-icon-only:focus-visible {
+    color: var(--primary-color, #1a73e8) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #search-bar-entry.kh-search-icon-only kbd {
+    display: none !important;
+  }
+
+  #search-bar-entry.kh-search-icon-only svg {
+    display: block !important;
+    width: 1.1rem !important;
+    height: 1.1rem !important;
+    min-width: 1.1rem !important;
+    margin: 0 !important;
+  }
+
+  /* AI Assistant is the final action on the far right. */
+  topbar-right-container > #assistant-entry.kh-assistant-right {
+    order: 100 !important;
+    margin-left: 0.15rem !important;
   }
 }
 
-#search-bar-entry {
-  display: inline-flex !important;
-  width: 11.5rem !important;
-}
-
-#search-bar-entry-mobile {
-  display: none !important;
-}
-
-#assistant-entry {
-  display: inline-flex !important;
-  width: auto !important;
-  padding: 0 0.875rem !important;
-  gap: 0.5rem !important;
-  border-radius: 0.75rem !important;
-}
-
-#assistant-entry::after {
-  content: "AI Assistant";
-  color: rgb(var(--gray-900));
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1;
-}
-
-.dark #assistant-entry::after {
-  color: rgb(var(--gray-50));
-}
-
-#assistant-entry-mobile {
-  display: none !important;
-}
-
-[data-product-guide-index] .docs-home-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border-radius: 1.25rem;
-  border: 1px solid rgb(var(--gray-200));
-  background: rgb(255 255 255 / 0.92) !important;
-  padding: 1.25rem;
-  box-shadow: none !important;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-[data-product-guide-index] .docs-home-card:hover {
-  transform: translateY(-1px);
-  border-color: rgb(var(--primary) / 0.35);
-}
-
-.dark [data-product-guide-index] .docs-home-card {
-  border-color: rgb(var(--gray-800));
-  background: rgb(var(--gray-950) / 0.92) !important;
-}
-
-.docs-home-card-title {
-  color: rgb(var(--gray-900));
-  font-size: 1.05rem;
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.dark .docs-home-card-title {
-  color: rgb(var(--gray-50));
-}
-
-.docs-home-card-copy {
-  color: rgb(var(--gray-600));
-  font-size: 0.94rem;
-  line-height: 1.65;
-}
-
-.dark .docs-home-card-copy {
-  color: rgb(var(--gray-400));
+/* Desktop nodes moved to the topbar are not duplicated in the mobile layout. */
+@media (max-width: 1023px) {
+  #navbar > [data-component-name="theme-toggle"].kh-theme-centered,
+  topbar-right-container > #search-bar-entry.kh-search-icon-only,
+  topbar-right-container > #assistant-entry.kh-assistant-right {
+    display: none !important;
+  }
 }
