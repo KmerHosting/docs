@@ -1,30 +1,25 @@
 ---
-title: "Billing overview"
-description: "Understand orders, invoices, payments, and account credit."
-icon: "receipt"
----
+    title: "Billing overview"
+    description: "Understand account credit, orders, invoices, renewals, and service billing currency."
+    icon: "wallet"
+    ---
 
-KmerHosting billing is built around four main objects: cart, order, invoice, and account credit.
 
-## Standard flow
+KmerHosting billing combines account credit, orders, invoices, service renewal records, and external top-up settlement.
 
-```text
-Cart -> Order -> Payment -> Paid invoice -> Activation or renewal
-```
+<Frame caption="The Billing page opens on the account-credit view and provides access to invoices.">
+  <img src="/images/screenshots/billing-credit.png" alt="The Billing page opens on the account-credit view and provides access to invoices." />
+</Frame>
 
-## Important objects
 
-| Object | Role |
-|---|---|
-| Cart | Holds services before checkout. |
-| Order | Represents the purchase request. |
-| Invoice | Payment document and accounting record. |
-| Account credit | Available balance used for orders or renewals. |
+## Core records
 
-## Currency
+- **Account credit:** wallet balance used by supported checkout and renewal operations.
+- **Order:** requested items and total before or during payment.
+- **Invoice:** billing document with paid, pending, or overdue state.
+- **Service:** the activated or pending operational resource.
+- **Incoming invoice:** renewal-related billing record shown by the console.
 
-This documentation uses FCFA as the main example currency. Exact amounts should always be confirmed in the customer area.
+## Currency behavior
 
-<Warning>
-Never pay an invoice without confirming the amount, status, and the official payment method shown by KmerHosting.
-</Warning>
+The platform supports regional price books and account billing context. A top-up can be displayed in the wallet currency while CamerPay settlement occurs in XAF. The platform stores enough context to credit the correct wallet amount after a confirmed webhook.

@@ -1,14 +1,29 @@
 ---
-title: "Professional Email"
-description: "Use domain-based mailboxes for professional communication."
-icon: "mail"
----
+    title: "Professional Email"
+    description: "Branded email accounts included with Shared Hosting and accessed through DirectAdmin and Roundcube."
+    icon: "mail-check"
+    ---
 
-Professional Email lets you use addresses based on your own domain for business communication.
 
-Use the customer console to review availability, manage the linked service, and obtain the current mailbox configuration details.
+Professional Email uses addresses such as `hello@example.com` and is currently presented as a Shared Hosting capability.
 
-<CardGroup cols={2}>
-  <Card title="Email configuration guide" href="/guides/email-configuration" icon="settings" />
-  <Card title="Customer console" href="https://console.kmerhosting.com" icon="layout-dashboard" />
-</CardGroup>
+<Frame caption="The console shows the hosted domain, Shared Hosting plan, and the available email-account allowance.">
+  <img src="/images/screenshots/professional-email-list.png" alt="The console shows the hosted domain, Shared Hosting plan, and the available email-account allowance." />
+</Frame>
+
+
+## Current workflow
+
+1. Own or attach a domain to an active Shared Hosting service.
+2. Open the DirectAdmin panel for that hosting account.
+3. Create the mailbox in DirectAdmin.
+4. Open Roundcube from the KmerHosting console or the webmail URL.
+5. Sign in with the complete email address and the mailbox password.
+
+## Important boundary
+
+The KmerHosting Professional Email page does not create the mailbox directly. It lists eligible hosted domains and provides access to Roundcube. Mailbox creation and password changes happen in DirectAdmin.
+
+<Card title="Create and use a mailbox" href="/guides/professional-email" icon="mail-plus">
+Follow the DirectAdmin and Roundcube flow.
+</Card>

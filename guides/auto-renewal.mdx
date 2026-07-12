@@ -1,31 +1,28 @@
 ---
-title: "Auto-renewal"
-description: "Enable or disable automatic renewal."
-icon: "repeat"
----
+    title: "Auto-renewal"
+    description: "Enable or disable automatic renewal for supported KmerHosting services."
+    icon: "refresh-cw"
+    ---
 
-Auto-renewal helps avoid service or domain expiration.
 
-## General conditions
+Auto-renewal controls whether a supported service should attempt renewal at its renewal boundary.
 
-- The service must be eligible.
-- The account must be in good standing.
-- Account credit must be sufficient at renewal time.
-- Billing information must be correct.
+<Frame caption="The service settings modal exposes the current auto-renewal state.">
+  <img src="/images/screenshots/auto-renewal-toggle.png" alt="The service settings modal exposes the current auto-renewal state." />
+</Frame>
 
-## Change the setting
 
-<Steps>
-  <Step title="Open the service">
-    From the customer area, select the related service.
-  </Step>
-  <Step title="Open auto-renewal">
-    Review the current status.
-  </Step>
-  <Step title="Enable or disable">
-    Save the new configuration.
-  </Step>
-  <Step title="Check the credit balance">
-    Make sure the balance covers the next renewal.
-  </Step>
-</Steps>
+## Before enabling
+
+- Confirm the account credit or payment method can cover the expected renewal.
+- Review the renewal price and currency.
+- Confirm the service should remain active beyond the current term.
+- Keep expiry notifications enabled.
+
+## Before disabling
+
+Understand the suspension, expiration, deletion, and recovery policy for the service. Disabling auto-renewal does not necessarily cancel the service immediately; it changes the next renewal behavior.
+
+## API and CLI
+
+Authorized developer keys can update auto-renewal through the Developer API, SDK, or CLI for supported service types.

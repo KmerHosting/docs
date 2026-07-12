@@ -1,71 +1,41 @@
 ---
-title: Home
-description: Step-by-step guides for Linux VPS, DirectAdmin shared hosting, billing, customer operations, and KmerHosting API workflows.
-mode: frame
----
+    title: "KmerHosting documentation"
+    description: "Customer, hosting, billing, storage, and developer documentation for the KmerHosting platform."
+    icon: "book-open"
+    ---
 
-<div data-product-guide-index className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 py-12 md:px-8 lg:px-12 lg:py-16">
-  <div className="flex flex-col items-center gap-5 text-center">
-    <img
-      src="/docs/images/logo-docs-light.png"
-      alt="KmerHosting"
-      className="h-auto w-full max-w-[86px] dark:hidden"
-    />
-    <img
-      src="/docs/images/logo-docs-dark.png"
-      alt="KmerHosting"
-      className="hidden h-auto w-full max-w-[86px] dark:block"
-    />
-    <div className="max-w-2xl space-y-3">
-      <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
-        Welcome to KmerHosting Docs
-      </h1>
-      <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
-        Learn how to deploy on Linux VPS, launch on DirectAdmin shared hosting, manage customer operations,
-        and automate KmerHosting workflows from one documentation hub.
-      </p>
-    </div>
-  </div>
 
-  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-    <a href="/docs/quickstart" className="docs-home-card">
-      <Icon icon="rocket" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-2">
-        <span className="docs-home-card-title">Quickstart</span>
-        <span className="docs-home-card-copy">
-          Create an account, verify access, place the first order, and understand the main customer workflow.
-        </span>
-      </div>
-    </a>
+KmerHosting combines public hosting offers, a protected customer console, domain and billing workflows, free storage, and developer tooling. This documentation explains what the platform currently does, which actions are self-service, and where a support or provider-side step is still required.
 
-    <a href="/docs/guides/shared-hosting-stacks" className="docs-home-card">
-      <Icon icon="globe" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-2">
-        <span className="docs-home-card-title">Shared Hosting Deployments</span>
-        <span className="docs-home-card-copy">
-          Follow common deployment paths for WordPress, PHP apps, static sites, SSL, DNS, and DirectAdmin setup.
-        </span>
-      </div>
-    </a>
+<Frame caption="The KmerHosting public website is the entry point for solutions, pricing, account creation, and documentation.">
+  <img src="/images/screenshots/home-hero.png" alt="The KmerHosting public website is the entry point for solutions, pricing, account creation, and documentation." />
+</Frame>
 
-    <a href="/docs/guides/vps-stacks" className="docs-home-card">
-      <Icon icon="server" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-2">
-        <span className="docs-home-card-title">VPS Deployments</span>
-        <span className="docs-home-card-copy">
-          Deploy Laravel, Node.js, Docker Compose, queues, and custom Linux stacks on KmerHosting VPS plans.
-        </span>
-      </div>
-    </a>
 
-    <a href="/docs/api/overview" className="docs-home-card">
-      <Icon icon="braces" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-2">
-        <span className="docs-home-card-title">API and Automation</span>
-        <span className="docs-home-card-copy">
-          Authenticate requests, handle errors, explore endpoints, and integrate account or infrastructure workflows.
-        </span>
-      </div>
-    </a>
-  </div>
-</div>
+## Choose the right documentation path
+
+<CardGroup cols={2}>
+  <Card title="Create and prepare an account" href="/quickstart" icon="rocket">
+    Register, verify your email, complete onboarding, and understand account status.
+  </Card>
+  <Card title="Choose a hosting solution" href="/solutions/shared-hosting" icon="server">
+    Compare Shared Hosting, Tiny VPS, VPS Hosting, domains, email, SSL, and storage.
+  </Card>
+  <Card title="Use the customer console" href="/console/overview" icon="layout-dashboard">
+    Manage services, domains, billing, notifications, account settings, and API keys.
+  </Card>
+  <Card title="Build with the Developer API" href="/developer/overview" icon="braces">
+    Authenticate with API keys and use the REST API, SDK, or CLI.
+  </Card>
+</CardGroup>
+
+## Platform boundaries
+
+- `kmerhosting.com` hosts public pages, checkout, payment returns, and the existing web backend.
+- `console.kmerhosting.com` hosts the authenticated customer experience while sharing the same platform session.
+- `admin.kmerhosting.com` is an internal administration console and is not part of the public customer API.
+- The official documentation is published under `kmerhosting.com/docs` from the public `KmerHosting/docs` repository.
+
+<Warning>
+Never publish screenshots containing passwords, API keys, root credentials, KYC documents, payment references, or unredacted customer data. The screenshot manifest included with this documentation rewrite states what must be hidden for every image.
+</Warning>

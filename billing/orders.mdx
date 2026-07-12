@@ -1,34 +1,30 @@
 ---
-title: "Orders"
-description: "Create, track, and pay a KmerHosting order."
-icon: "shopping-cart"
----
+    title: "Orders"
+    description: "Track order creation, payment state, expiry, and the transition from order to service."
+    icon: "receipt-text"
+    ---
 
-An order is created when the cart is confirmed. It may cover hosting, VPS, a domain, a renewal, or a custom service.
 
-## Create an order
+An order records one or more requested items and their billing context.
 
-<Steps>
-  <Step title="Add to cart">
-    Select the offer, billing term, options, and domain if needed.
-  </Step>
-  <Step title="Review the cart">
-    Check the amount, term, domain, and options.
-  </Step>
-  <Step title="Confirm the order">
-    Validate the order from the checkout page.
-  </Step>
-  <Step title="Pay">
-    Use account credit or follow the payment instructions.
-  </Step>
-</Steps>
+<Frame caption="Pending Orders is the main console view for an unpaid order that has not expired.">
+  <img src="/images/screenshots/pending-orders.png" alt="Pending Orders is the main console view for an unpaid order that has not expired." />
+</Frame>
 
-## Possible statuses
 
-| Status | Meaning |
-|---|---|
-| Pending | Order created but not paid or not fully validated. |
-| Paid | Payment accepted. |
-| Processing | Activation or execution in progress. |
-| Completed | Service delivered or renewal applied. |
-| Cancelled | Order cancelled or expired. |
+## Account-credit payment
+
+When the payment flow uses account credit, the modal checks the available balance and confirms the amount to debit.
+
+<Frame caption="Do not close the modal while the payment state is still processing.">
+  <img src="/images/screenshots/payment-credit.png" alt="Do not close the modal while the payment state is still processing." />
+</Frame>
+
+
+## State transitions
+
+1. Cart and checkout collect the items.
+2. The platform creates the order and a pending invoice where applicable.
+3. Payment updates the order and invoice state.
+4. Service records are created or activated.
+5. Operational provisioning can continue under Pending Services.

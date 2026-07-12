@@ -1,45 +1,53 @@
 ---
-title: "KYC verification"
-description: "Statuses, validation flow, and best practices for identity verification."
-icon: "badge-check"
----
+    title: "KYC verification"
+    description: "Submit identity and UIN documentation through the protected KmerHosting account flow."
+    icon: "shield-check"
+    ---
 
-KYC verifies a customer identity when required for security, compliance, or abuse prevention.
 
-## Validation flow
+KYC verification is a protected account workflow. The current form collects an identity document and a UIN document or country-equivalent proof, then asks the user to confirm the submission.
 
-```text
-pending -> submitted -> under_review -> approved | rejected
-```
+<Frame caption="Start KYC only from the authenticated account status flow.">
+  <img src="/images/screenshots/kyc-intro.png" alt="Start KYC only from the authenticated account status flow." />
+</Frame>
 
-## Submission statuses
 
-| Status | Meaning |
-|---|---|
-| `pending` | No KYC file has been submitted. |
-| `submitted` | Information has been sent. |
-| `under_review` | The file is currently being checked. |
-| `approved` | The file has been approved. |
-| `rejected` | The file was rejected or needs correction. |
+## Required document groups
 
-## Account statuses
+### Identity document
 
-| Status | Meaning |
-|---|---|
-| `unverified` | Account created, verification not completed. |
-| `submitted` | Documents were sent. |
-| `verified` | Account is verified. |
-| `suspended` | Account is temporarily suspended. |
-| `disabled` | Account is disabled. |
-| `terminated` | Account was terminated or removed. |
+Upload either one PDF containing both sides or separate clear files for the front and back when applicable. The document must be readable and belong to the account owner.
 
-## Tips to avoid rejection
+<Frame caption="Documentation screenshots must use dummy files and must never expose a real identity document.">
+  <img src="/images/screenshots/kyc-id-upload.png" alt="Documentation screenshots must use dummy files and must never expose a real identity document." />
+</Frame>
 
-- Use readable documents.
-- Provide details that match the customer profile.
-- Do not hide required information.
-- Do not submit multiple conflicting files.
+
+### UIN or equivalent document
+
+Upload a clear image or PDF of the UIN document or the equivalent proof used in the account country.
+
+<Frame caption="Use a synthetic placeholder document for documentation captures.">
+  <img src="/images/screenshots/kyc-uin-upload.png" alt="Use a synthetic placeholder document for documentation captures." />
+</Frame>
+
+
+## Review and submission
+
+The final step shows the selected files and requires confirmation that they are correct and belong to the user.
+
+<Frame caption="Review filenames and document categories before submitting.">
+  <img src="/images/screenshots/kyc-review.png" alt="Review filenames and document categories before submitting." />
+</Frame>
+
+
+## Status lifecycle
+
+- **Not submitted:** the account still needs documents.
+- **Pending review:** documents were submitted and are waiting for review.
+- **Approved:** the KYC requirement is satisfied.
+- **Rejected or action required:** replace unclear or incorrect documents using the instructions shown by the platform or support.
 
 <Warning>
-Do not send KYC documents through unofficial channels. Use only the official form or instructions.
+Do not send KYC documents through public GitHub issues, chat screenshots, or unencrypted support posts. Use only the protected KYC form or an explicitly approved support channel.
 </Warning>

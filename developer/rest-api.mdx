@@ -1,54 +1,45 @@
 ---
-title: "REST API"
-description: "Call the KmerHosting Developer API without an SDK."
-icon: "route"
----
+    title: "REST API"
+    description: "Call KmerHosting Developer API endpoints with a Bearer API key."
+    icon: "webhook"
+    ---
 
-## Request format
+
+The REST API uses JSON for normal resources and can return a stream for AI Agent messages.
+
+<Frame caption="Use the generated reference for request schemas, responses, and supported methods.">
+  <img src="/images/screenshots/developer-api-reference.png" alt="Use the generated reference for request schemas, responses, and supported methods." />
+</Frame>
+
+
+## Example request
 
 ```bash
-curl "https://kmerhosting.com/api/v1/sdk/services?type=vps" \
-  -H "Authorization: Bearer $KMERHOSTING_API_KEY" \
-  -H "Accept: application/json"
+curl --request GET \
+  --url https://kmerhosting.com/api/v1/sdk/account \
+  --header "Authorization: Bearer $KMERHOSTING_API_KEY" \
+  --header "Accept: application/json"
 ```
 
-Successful JSON responses use this envelope:
+## Common endpoint families
 
-```json
-{
-  "success": true,
-  "data": {}
-}
+```text
+GET    /account
+GET    /services
+GET    /services/{type}/{serviceId}
+PATCH  /services/{type}/{serviceId}/auto-renew
+GET    /domains
+GET    /invoices
+GET    /orders
+GET    /notifications
+PATCH  /notifications/{notificationId}
+DELETE /notifications/{notificationId}
+POST   /ai-agent/chat-messages
+GET    /ai-agent/conversations
+POST   /ai-agent/conversations
+DELETE /ai-agent/conversations/{conversationId}
 ```
 
-Errors use:
+## Ownership enforcement
 
-```json
-{
-  "success": false,
-  "error": {
-    "code": "invalid_api_key",
-    "message": "The API key is invalid, inactive, or revoked."
-  }
-}
-```
-
-## Main endpoints
-
-| Method | Endpoint | Scope |
-|---|---|---|
-| `GET` | `/api/v1/sdk/account` | `account:read` |
-| `GET` | `/api/v1/sdk/services` | `services:read` |
-| `GET` | `/api/v1/sdk/services/{type}/{serviceId}` | `services:read` |
-| `PATCH` | `/api/v1/sdk/services/{type}/{serviceId}/auto-renew` | `services:write` |
-| `GET` | `/api/v1/sdk/domains` | `domains:read` |
-| `GET` | `/api/v1/sdk/invoices` | `billing:read` |
-| `GET` | `/api/v1/sdk/orders` | `orders:read` |
-| `GET` | `/api/v1/sdk/notifications` | `notifications:read` |
-| `PATCH` | `/api/v1/sdk/notifications/{notificationId}` | `notifications:write` |
-| `DELETE` | `/api/v1/sdk/notifications/{notificationId}` | `notifications:write` |
-| `POST` | `/api/v1/sdk/ai-agent/chat-messages` | `ai-agent:use` |
-| `GET, POST` | `/api/v1/sdk/ai-agent/conversations` | `ai-agent:use` |
-| `DELETE` | `/api/v1/sdk/ai-agent/conversations/{conversationId}` | `ai-agent:use` |
-
-Use the generated API reference for request and response schemas.
+The API must return only resources that belong to the key owner. It must not expose plaintext passwords, VPS root credentials, DirectAdmin passwords, KYC documents, payment secrets, or administrative resources.

@@ -1,0 +1,32 @@
+---
+    title: "AI Agent API"
+    description: "Send messages and manage KmerHosting AI Agent conversations through the SDK or REST API."
+    icon: "bot-message-square"
+    ---
+
+
+KmerHosting AI Agent can be used inside the console or through an API key with the required permission.
+
+<Frame caption="Saved conversations belong to the authenticated account or API-key owner.">
+  <img src="/images/screenshots/ai-agent-conversations.png" alt="Saved conversations belong to the authenticated account or API-key owner." />
+</Frame>
+
+
+## Conversation operations
+
+- List saved conversations.
+- Save a conversation with messages, model, and optional title.
+- Delete a conversation by ID.
+- Stream an assistant response for a message request.
+
+## Delete a conversation with the SDK
+
+```ts
+await client.aiAgent.conversations.delete(conversationId)
+```
+
+The platform verifies ownership before deletion. The operation is permanent.
+
+## Safe prompts
+
+Use sanitized infrastructure context. Remove API keys, credentials, customer data, KYC documents, and confidential source code before sending a prompt.

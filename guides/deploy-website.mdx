@@ -1,48 +1,41 @@
 ---
-title: "Choose a deployment path"
-description: "Decide between shared hosting and VPS, then follow the right stack-specific deployment guide."
-icon: "upload-cloud"
----
+    title: "Deploy a website"
+    description: "Choose a KmerHosting deployment path and publish a website safely."
+    icon: "upload-cloud"
+    ---
 
-KmerHosting supports two main deployment models:
 
-- Shared hosting for standard websites, WordPress, and classic PHP apps.
-- VPS for custom runtimes, root access, queues, workers, and containerized deployments.
+The correct deployment path depends on whether the project needs a managed web environment or server-level control.
 
-## Choose the right platform
+## Choose the platform
 
-| Need | Shared hosting | VPS |
-| --- | --- | --- |
-| Static site or brochure website | Good fit | Works, but usually unnecessary |
-| WordPress | Good fit | Better only when you need more control or scale |
-| PHP plus MySQL application | Good fit | Good when you need custom packages or workers |
-| Node.js, Python, Docker, Redis, workers | Not recommended | Good fit |
-| Root access and firewall control | No | Yes |
+| Workload | Recommended path |
+|---|---|
+| Static HTML/CSS/JavaScript | Shared Hosting or VPS |
+| WordPress and common PHP sites | Shared Hosting |
+| PHP with MySQL and control-panel management | Shared Hosting |
+| Node.js, Python, Go, workers, queues | Tiny VPS or VPS |
+| Docker Compose and custom system packages | VPS |
 
-## Recommended path
+## Shared Hosting deployment
 
-<CardGroup cols={2}>
-  <Card title="Shared hosting recipes" icon="panel-top" href="/guides/shared-hosting-stacks">
-    Use this path for static sites, WordPress, and standard PHP plus MySQL applications.
-  </Card>
-  <Card title="VPS recipes" icon="server" href="/guides/vps-stacks">
-    Use this path for Node.js, Docker Compose, Laravel, reverse proxies, and managed services on your own server.
-  </Card>
-</CardGroup>
+1. Activate a Shared Hosting service.
+2. Open DirectAdmin.
+3. Attach or confirm the domain.
+4. Upload the website to `public_html`.
+5. Configure the runtime or installer.
+6. Confirm DNS and HTTPS.
 
-## Deployment checklist
+<Frame caption="Upload the public website files to the domain document root in DirectAdmin.">
+  <img src="/images/screenshots/directadmin-file-manager.png" alt="Upload the public website files to the domain document root in DirectAdmin." />
+</Frame>
 
-- Confirm whether the service is shared hosting or VPS before uploading anything.
-- Point the domain or subdomain to the correct server or hosting account.
-- Create the database and environment variables before the first app boot when the stack requires them.
-- Enable SSL only after DNS resolves correctly.
-- Validate backups, login, forms, and file uploads before announcing the site live.
 
-## Related guides
+## Server deployment
+
+For Tiny VPS or VPS, connect through SSH, update the system, deploy the application, use a process manager where appropriate, and configure a reverse proxy.
 
 <CardGroup cols={2}>
-  <Card title="DNS management" icon="network" href="/guides/dns-management" />
-  <Card title="SSL certificates" icon="shield-check" href="/guides/ssl-certificates" />
-  <Card title="Backups" icon="database" href="/guides/backups" />
-  <Card title="Service management" icon="sliders-horizontal" href="/guides/service-management" />
+  <Card title="Shared Hosting stacks" href="/guides/shared-hosting-stacks" icon="panel-top">DirectAdmin, static sites, PHP, MySQL, and WordPress.</Card>
+  <Card title="VPS stacks" href="/guides/vps-stacks" icon="server">SSH, runtime installation, PM2, Docker, and Nginx.</Card>
 </CardGroup>

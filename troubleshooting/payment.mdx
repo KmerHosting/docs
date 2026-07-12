@@ -1,17 +1,25 @@
 ---
-title: "Payment not recognized"
-description: "What to do when a payment or credit top-up does not appear."
-icon: "circle-dollar-sign"
----
+    title: "Troubleshoot payments and top-ups"
+    description: "Diagnose pending orders, CamerPay returns, delayed wallet credit, and duplicate-payment risk."
+    icon: "credit-card"
+    ---
 
-## Checks
 
-- Exact amount sent.
-- Transaction reference.
-- Payment method used.
-- Account email.
-- Order or invoice ID.
+Payment troubleshooting must distinguish browser return state from provider confirmation and webhook processing.
 
-## Action
+<Frame caption="Record the provider reference and timestamp without exposing the payer phone number.">
+  <img src="/images/screenshots/camerpay-payment.png" alt="Record the provider reference and timestamp without exposing the payer phone number." />
+</Frame>
 
-Open a ticket with proof of payment. Do not share sensitive information in a public channel.
+
+## Top-up completed but credit is missing
+
+1. Do not immediately repeat the payment.
+2. Refresh Billing and review account credit.
+3. Check the payment return page and any transaction history.
+4. Wait briefly for webhook processing.
+5. Contact support with provider reference, amount, currency, timestamp, and account email.
+
+## Order remains pending
+
+Confirm the invoice and payment state, then review Pending Services. A paid order can still be waiting for provisioning.

@@ -1,0 +1,36 @@
+---
+    title: "Login and account recovery"
+    description: "Sign in, recover access, and understand the shared session between the website and customer console."
+    icon: "log-in"
+    ---
+
+
+KmerHosting uses the public login page for both the website and the customer console. After a successful login, the browser is redirected to `console.kmerhosting.com`.
+
+<Frame caption="The login page supports credentials and configured social providers.">
+  <img src="/images/screenshots/login-page.png" alt="The login page supports credentials and configured social providers." />
+</Frame>
+
+
+## Shared session behavior
+
+The production session cookie is scoped to the KmerHosting parent domain so `kmerhosting.com` and `console.kmerhosting.com` recognize the same authenticated session. If the public homepage shows a profile but the console returns to login, remove stale site cookies for both hosts and sign in again.
+
+## Password recovery
+
+<Frame caption="Password recovery starts with the email address attached to the customer account.">
+  <img src="/images/screenshots/forgot-password.png" alt="Password recovery starts with the email address attached to the customer account." />
+</Frame>
+
+
+1. Open `kmerhosting.com/forgot-password`.
+2. Enter the account email address.
+3. Follow the reset message.
+4. Choose a new password that is not used for DirectAdmin, VPS root, email, or API keys.
+
+## Safe troubleshooting
+
+- Verify the browser is not blocking cookies for KmerHosting.
+- Test in a private window to separate current behavior from stale cookies.
+- Confirm the system clock is correct.
+- Do not copy session cookies into scripts or support messages.

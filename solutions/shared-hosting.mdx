@@ -1,38 +1,40 @@
 ---
-title: "Shared hosting"
-description: "Managed web hosting for standard websites, WordPress, email, databases, and control-panel-based workflows."
-icon: "panel-top"
----
+    title: "Shared Hosting"
+    description: "DirectAdmin-based hosting for websites, WordPress, business email, and managed web workloads."
+    icon: "panel-top"
+    ---
 
-Shared hosting is the right starting point for brochure sites, small business websites, WordPress installs, and classic PHP applications that do not need root access or long-running background processes.
 
-## Typical inclusions
+Shared Hosting is the simplest KmerHosting path for websites that do not require server administration. It is designed around a DirectAdmin environment and is suitable for company sites, portfolios, blogs, WordPress, landing pages, and light e-commerce.
 
-- SSD-backed storage.
-- Control panel access.
-- Database management.
-- Email accounts where included by plan.
-- SSL support.
-- Backups according to the purchased plan.
-- Standard support for account and service issues.
+<Frame caption="The console lists each Shared Hosting service with its tier, status, and renewal context.">
+  <img src="/images/screenshots/shared-hosting-list.png" alt="The console lists each Shared Hosting service with its tier, status, and renewal context." />
+</Frame>
 
-## Best-fit use cases
 
-| Need | Recommendation |
-| --- | --- |
-| Marketing or brochure site | Shared hosting is usually the simplest option. |
-| WordPress site | Shared hosting is a strong default when plugins and traffic are moderate. |
-| Small PHP plus MySQL app | Shared hosting works well if the app does not need workers or custom packages. |
-| Node.js, Docker, or queue workers | Move to a VPS. |
+## Included operational model
 
-## Deployment path
+- DirectAdmin control-panel access.
+- Website and domain management through the shared hosting environment.
+- At least five professional email accounts per Shared Hosting subscription in the current platform presentation.
+- Free SSL through Let’s Encrypt for associated domains.
+- A domain may be included with qualifying plans according to the active pricing offer.
+- Bandwidth and resource limits are defined by the selected plan and current price book.
 
-Use the shared hosting deployment guide when the project is a static site, WordPress, or standard PHP app.
+## Choose Shared Hosting when
 
-<Card title="Deploy common stacks on shared hosting" icon="upload-cloud" href="/guides/shared-hosting-stacks">
-  Follow practical recipes for static sites, WordPress, and PHP plus MySQL deployments.
-</Card>
+- The main workload is a website rather than a custom server application.
+- The project benefits from a control panel and web file manager.
+- The user does not need root access.
+- Email accounts and a simple web stack are more important than operating-system control.
 
-<Warning>
-Shared hosting is a convenience-first environment. If the application needs system-level tuning, root access, workers, or container orchestration, choose a VPS instead.
-</Warning>
+## Do not choose it when
+
+Use Tiny VPS or VPS Hosting for long-running Node.js workers, custom system packages, Docker-heavy deployments, private network services, or workloads that require root access.
+
+<CardGroup cols={2}>
+  <Card title="Deploy a website" href="/guides/deploy-website" icon="upload-cloud">Upload content and connect the domain.</Card>
+  <Card title="Shared Hosting stacks" href="/guides/shared-hosting-stacks" icon="layers">Deploy static, PHP, MySQL, and WordPress workloads.</Card>
+  <Card title="Professional Email" href="/solutions/professional-email" icon="mail">Create branded mailboxes through DirectAdmin and use Roundcube.</Card>
+  <Card title="SSL Certificates" href="/solutions/ssl-certificates" icon="lock">Understand the certificate visibility provided by the console.</Card>
+</CardGroup>

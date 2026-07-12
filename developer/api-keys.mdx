@@ -1,53 +1,48 @@
 ---
-title: "API keys"
-description: "Create, store, rotate, and revoke KmerHosting API keys safely."
-icon: "key-round"
----
+    title: "API keys"
+    description: "Create and manage KmerHosting API keys without exposing customer session cookies."
+    icon: "key-round"
+    ---
+
+
+API keys are created from the Account section of the customer console.
+
+<Frame caption="The API-key tab shows named keys, status, creation time, and usage information.">
+  <img src="/images/screenshots/api-keys-list.png" alt="The API-key tab shows named keys, status, creation time, and usage information." />
+</Frame>
+
 
 ## Create a key
 
-1. Sign in to `console.kmerhosting.com`.
-2. Open **Account**.
-3. Select **API Keys**.
-4. Choose **New Key** and give it a descriptive name.
-5. Copy the full key immediately.
+1. Open Account and select the API Keys tab.
+2. Enter a descriptive name such as `billing-report-production`.
+3. Create the key.
+4. Copy the complete value immediately.
+5. Store it in a secret manager or protected environment variable.
 
-New keys start with:
+<Frame caption="The complete key is shown only at creation and must be replaced with a redacted value before capture.">
+  <img src="/images/screenshots/api-key-created.png" alt="The complete key is shown only at creation and must be replaced with a redacted value before capture." />
+</Frame>
 
-```text
-kh_live_
-```
 
-Only a SHA-256 hash is stored by KmerHosting. The full key cannot be recovered after the creation dialog is closed.
+## Security model
 
-## Send the key
+- New keys use the `kh_live_` prefix.
+- The complete key is returned only once.
+- The platform stores a SHA-256 hash rather than the recoverable plaintext value.
+- Keys can be deactivated, reactivated, and permanently deleted.
+- The API rejects inactive or invalid keys.
+- Usage and last-use information can be shown in the console.
 
-Use the HTTP bearer scheme:
+<Frame caption="Usage visibility helps identify unexpected automation activity.">
+  <img src="/images/screenshots/api-key-usage.png" alt="Usage visibility helps identify unexpected automation activity." />
+</Frame>
 
-```http
-Authorization: Bearer kh_live_...
-```
 
-`X-KmerHosting-Key` is accepted for compatibility, but the bearer header is recommended.
+## Recommended scopes
 
-## Default scopes
+The developer platform can distinguish account, service, domain, billing, order, notification, and AI Agent permissions. Grant only what the integration needs.
 
-| Scope | Access |
-|---|---|
-| `account:read` | Account and wallet overview |
-| `services:read` | Hosting service metadata |
-| `services:write` | Auto-renewal configuration |
-| `domains:read` | Domain metadata |
-| `billing:read` | Issued and upcoming invoices |
-| `orders:read` | Orders and line items |
-| `notifications:read` | Notification list |
-| `notifications:write` | Mark or delete notifications |
-| `ai-agent:use` | KmerHosting AI Agent and conversations |
-
-## Rotation
-
-Create a replacement key, update the consuming application, verify requests, then deactivate or delete the old key.
-
-## Rate limits
-
-Each key is limited to 120 requests per minute. KmerHosting AI Agent also uses the account's daily AI quota.
+<Warning>
+Never place an API key in browser-side JavaScript, a public Git repository, a screenshot, or a support ticket.
+</Warning>

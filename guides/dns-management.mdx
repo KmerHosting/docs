@@ -1,40 +1,47 @@
 ---
-title: "Manage DNS"
-description: "Add, update, or remove DNS records."
-icon: "network"
----
+    title: "Manage nameservers and DNS"
+    description: "Update nameservers and DNS records for standalone and hosting-included domains."
+    icon: "network"
+    ---
 
-DNS records control where a domain points: website, email, verification, and technical routing.
 
-## Add a record
+The console provides nameserver and DNS views for standalone and included domains.
 
-<Steps>
-  <Step title="Open the domain">
-    From the customer area, select the standalone or included domain.
-  </Step>
-  <Step title="Open DNS records">
-    Click the DNS management or zone settings section.
-  </Step>
-  <Step title="Choose the type">
-    Select `A`, `CNAME`, `TXT`, `MX`, or another supported record type.
-  </Step>
-  <Step title="Enter the value">
-    Copy the exact value provided by the third-party service or by KmerHosting.
-  </Step>
-  <Step title="Save and wait">
-    Propagation can take from a few minutes to several hours.
-  </Step>
-</Steps>
+<Frame caption="Nameservers determine which DNS provider is authoritative for the domain.">
+  <img src="/images/screenshots/domain-nameservers.png" alt="Nameservers determine which DNS provider is authoritative for the domain." />
+</Frame>
 
-## Examples
 
-| Need | Type | Example |
-|---|---|---|
-| Website to server | `A` | `@ → 203.0.113.10` |
-| Subdomain to service | `CNAME` | `www → example.com` |
-| Domain verification | `TXT` | Value provided by the third-party service |
-| Incoming email | `MX` | Mail server provided |
+## Nameserver changes
+
+Use the exact hostnames provided by the target DNS or hosting provider. A nameserver change can affect every record under the domain.
+
+## DNS record editor
+
+<Frame caption="The current editor supports A, AAAA, CNAME, MX, TXT, NS, SRV, and CAA records.">
+  <img src="/images/screenshots/domain-dns-records.png" alt="The current editor supports A, AAAA, CNAME, MX, TXT, NS, SRV, and CAA records." />
+</Frame>
+
+
+| Type | Common use |
+|---|---|
+| A | Hostname to IPv4 address |
+| AAAA | Hostname to IPv6 address |
+| CNAME | Alias to another hostname |
+| MX | Mail server routing |
+| TXT | Verification, SPF, and policy data |
+| NS | Delegation for a zone or subdomain |
+| SRV | Service discovery with port and priority |
+| CAA | Certificate-authority authorization |
+
+## Safe change process
+
+1. Export or record the current values.
+2. Change one logical service at a time.
+3. Use realistic TTL values.
+4. Verify the authoritative nameservers.
+5. Test website, email, and verification records after propagation.
 
 <Warning>
-Removing or changing a DNS record can interrupt the website or email flow.
+Deleting or replacing MX, SPF, DKIM, or DMARC records can interrupt email delivery even when the website continues to work.
 </Warning>

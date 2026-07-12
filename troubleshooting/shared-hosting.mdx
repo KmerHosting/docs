@@ -1,22 +1,33 @@
 ---
-title: "Shared hosting issues"
-description: "Diagnose a shared hosting site that is unavailable or slow."
-icon: "panel-top"
----
+    title: "Troubleshoot Shared Hosting"
+    description: "Diagnose DirectAdmin access, website errors, DNS, PHP, database, email, and SSL problems."
+    icon: "panel-top"
+    ---
 
-## Possible causes
 
-- Domain not pointing correctly.
-- SSL not active.
-- Missing index file.
-- PHP or WordPress error.
-- Storage quota reached.
-- Database unavailable.
+<Frame caption="Start with the service page and confirm the hosting status before troubleshooting the website.">
+  <img src="/images/screenshots/shared-hosting-settings.png" alt="Start with the service page and confirm the hosting status before troubleshooting the website." />
+</Frame>
 
-## Useful details
 
-- Domain name.
-- Exact URL.
-- Error message.
-- Last change made.
-- Screenshot.
+## DirectAdmin login fails
+
+Confirm the control-panel URL, username, and current hosting password. Do not use the customer account password unless the service explicitly says so.
+
+## Website shows the wrong page
+
+- Confirm the domain document root.
+- Check `public_html` contents.
+- Confirm DNS points to the correct hosting server.
+- Remove default placeholder files only from the intended domain.
+
+## PHP or database error
+
+- Confirm the selected PHP version.
+- Review error logs.
+- Verify database host, name, user, and grants.
+- Keep secrets out of public files and screenshots.
+
+## Email or SSL error
+
+Use the dedicated [email guide](/guides/email-configuration), [DNS guide](/guides/dns-management), and [SSL guide](/guides/ssl-certificates).

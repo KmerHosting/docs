@@ -1,14 +1,32 @@
 ---
-title: "SSL Certificates"
-description: "Secure websites and services with HTTPS and TLS certificates."
-icon: "lock-keyhole"
----
+    title: "SSL Certificates"
+    description: "Free Let’s Encrypt HTTPS visibility for domains associated with KmerHosting services."
+    icon: "shield-check"
+    ---
 
-SSL certificates protect traffic between visitors and your website or service by enabling HTTPS.
 
-Certificate availability and management depend on the linked KmerHosting service.
+The KmerHosting SSL Interface aggregates domains from Shared Hosting, Tiny VPS, VPS, Custom Hosting, and standalone domain records.
 
-<CardGroup cols={2}>
-  <Card title="SSL certificate guide" href="/guides/ssl-certificates" icon="book-open" />
-  <Card title="Customer console" href="https://console.kmerhosting.com" icon="layout-dashboard" />
-</CardGroup>
+<Frame caption="The SSL Interface shows each domain, its source service, and the platform SSL state.">
+  <img src="/images/screenshots/ssl-interface.png" alt="The SSL Interface shows each domain, its source service, and the platform SSL state." />
+</Frame>
+
+
+## What the current interface does
+
+- Lists domains attached to the authenticated account.
+- Identifies the service source for each domain.
+- Presents the certificate state as active in the current console view.
+- Provides a shortcut to open the HTTPS website.
+
+## Operational interpretation
+
+Certificate issuance and renewal depend on correct DNS, reachable hosting, and the actual Let’s Encrypt or hosting-panel configuration. The console list is not a complete certificate diagnostic tool.
+
+<Warning>
+Do not treat the green state alone as proof that every browser and hostname is correctly serving the expected certificate. Open the site and inspect the certificate when troubleshooting.
+</Warning>
+
+<Card title="SSL troubleshooting and setup" href="/guides/ssl-certificates" icon="lock-keyhole">
+Verify DNS, HTTPS reachability, certificate names, and renewal behavior.
+</Card>

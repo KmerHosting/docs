@@ -1,25 +1,20 @@
 ---
-title: "Incidents"
-description: "Understand incident statuses and the information useful to support."
-icon: "siren"
----
+    title: "Incidents"
+    description: "Interpret service incidents and provide useful account-specific evidence."
+    icon: "siren"
+    ---
 
-An incident is an outage, degradation, or error affecting a service.
 
-## Incident lifecycle
+An incident is an unplanned degradation or outage affecting one or more platform components.
 
-| Status | Meaning |
-|---|---|
-| Investigating | The issue is currently being analyzed. |
-| Identified | The likely cause has been identified. |
-| Monitoring | A fix has been applied and is being watched. |
-| Resolved | The service has returned to normal. |
+## During an incident
 
-## Communication template
+- Avoid repeated destructive retries.
+- Preserve exact error messages and timestamps.
+- Check whether payments, provisioning, or DNS changes may complete later.
+- Do not create duplicate orders or top-ups without verifying state.
+- Follow the status-page updates.
 
-```text
-Incident detected: we are investigating an issue affecting [service].
-Cause identified: a fix is currently being applied.
-Monitoring: the fix is in place and we are monitoring stability.
-Resolved: the service is operating normally again.
-```
+## After recovery
+
+Verify account credit, invoice state, order state, service activation, DNS, and application health. Contact support when an account-specific record remains inconsistent.

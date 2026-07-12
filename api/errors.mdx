@@ -1,27 +1,25 @@
 ---
-title: "API errors"
-description: "Common HTTP codes and practical diagnosis guidance."
-icon: "triangle-alert"
----
+    title: "API errors"
+    description: "Interpret KmerHosting API status codes and prepare safe diagnostic information."
+    icon: "triangle-alert"
+    ---
 
-## Common codes
 
-| Code | Meaning | Action |
+The Developer API returns HTTP status codes and structured error information.
+
+| Code | Meaning | Response |
 |---:|---|---|
-| `200` | Successful response | Read the returned JSON. |
-| `201` | Resource created | Store the returned identifier. |
-| `400` | Invalid request | Check the body, parameters, and format. |
-| `401` | Authentication required | Sign in or refresh the session. |
-| `404` | Resource not found | Verify the ID and the URL. |
-| `500` | Server error | Retry, then contact support if it persists. |
+| 200 | Successful read or update | Read `data` from the response envelope. |
+| 201 | Resource created | Store the returned identifier or one-time secret safely. |
+| 204 | Successful operation with no body | Do not attempt to parse JSON. |
+| 400 | Invalid input | Check path, query, and body fields. |
+| 401 | Missing or invalid API key | Verify the Bearer header and key status. |
+| 403 | Key lacks permission | Use a key with the required scope. |
+| 404 | Resource absent or not owned | Verify the ID and owning account. |
+| 409 | State conflict | Refresh the resource before retrying. |
+| 429 | Rate limit | Back off and retry later. |
+| 500 | Server error | Record time and request context, then contact support. |
 
-## Diagnosis
+## Safe diagnostic bundle
 
-Include these details in an API ticket:
-
-- endpoint called;
-- HTTP method;
-- response code;
-- response excerpt without secrets;
-- timestamp;
-- account or order ID when applicable.
+Include method, endpoint, status code, timestamp, request ID when provided, and a sanitized response excerpt. Never include the Bearer key.

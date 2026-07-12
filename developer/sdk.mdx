@@ -1,8 +1,11 @@
 ---
-title: "TypeScript SDK"
-description: "Install and use the official @kmerhosting/sdk package."
-icon: "package"
----
+    title: "TypeScript SDK"
+    description: "Install and use the official @kmerhosting/sdk package."
+    icon: "package"
+    ---
+
+
+The official SDK is published from the `KmerHosting/kmerhosting_sdk` monorepo.
 
 ## Install
 
@@ -10,55 +13,34 @@ icon: "package"
 npm install @kmerhosting/sdk
 ```
 
-The SDK requires Node.js 18 or newer and uses the built-in Fetch API.
-
 ## Create a client
 
 ```ts
-import { KmerHostingClient } from '@kmerhosting/sdk'
+import { KmerHostingClient } from "@kmerhosting/sdk"
 
-const kmerhosting = new KmerHostingClient({
+const client = new KmerHostingClient({
   apiKey: process.env.KMERHOSTING_API_KEY!,
 })
+
+const account = await client.account.get()
+const services = await client.services.list()
 ```
 
-## Account and services
+<Frame caption="Run SDK examples with a test key and sanitized output.">
+  <img src="/images/screenshots/sdk-terminal.png" alt="Run SDK examples with a test key and sanitized output." />
+</Frame>
 
-```ts
-const account = await kmerhosting.account.get()
-const { items: services } = await kmerhosting.services.list()
-const { items: vps } = await kmerhosting.services.list({ type: 'vps' })
-```
 
-## Auto-renewal
+## Available client areas
 
-```ts
-await kmerhosting.services.setAutoRenew('vps', serviceId, true)
-```
+- `account.get()`
+- `services.list()`, `services.get()`, and `services.setAutoRenew()`
+- `domains.list()`
+- `invoices.list()`
+- `orders.list()`
+- `notifications.list()`, `update()`, and `delete()`
+- `aiAgent.stream()` and conversation operations
 
-## Domains, invoices, and orders
+## Error handling
 
-```ts
-const domains = await kmerhosting.domains.list()
-const invoices = await kmerhosting.invoices.list()
-const orders = await kmerhosting.orders.list()
-```
-
-## Notifications
-
-```ts
-const unread = await kmerhosting.notifications.list({ unreadOnly: true })
-await kmerhosting.notifications.update(notificationId, 'read')
-await kmerhosting.notifications.delete(notificationId)
-```
-
-## KmerHosting AI Agent
-
-```ts
-const conversations = await kmerhosting.aiAgent.conversations.list()
-await kmerhosting.aiAgent.conversations.delete(conversationId)
-```
-
-<Card title="SDK source" icon="github" href="https://github.com/KmerHosting/kmerhosting_sdk">
-View the SDK, CLI, examples, and release history on GitHub.
-</Card>
+Catch `KmerHostingApiError` and inspect its HTTP status, code, and message. Do not log the API key or complete sensitive response data.

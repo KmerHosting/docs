@@ -1,25 +1,31 @@
 ---
-title: "SSL certificates"
-description: "Understand and enable HTTPS for a domain."
-icon: "lock"
----
+    title: "Configure and verify SSL"
+    description: "Confirm DNS, HTTPS, certificate names, and Let’s Encrypt renewal for KmerHosting domains."
+    icon: "lock-keyhole"
+    ---
 
-An SSL certificate allows your domain to serve traffic over HTTPS.
 
-## Requirements
+KmerHosting presents free Let’s Encrypt SSL as part of qualifying hosting services.
 
-- The domain must point correctly to the service.
-- Ports 80 and 443 must be reachable for a VPS.
-- DNS must be propagated.
+<Frame caption="Use the SSL Interface to identify the domain and source service, then verify the public HTTPS endpoint.">
+  <img src="/images/screenshots/ssl-interface.png" alt="Use the SSL Interface to identify the domain and source service, then verify the public HTTPS endpoint." />
+</Frame>
 
-## Common issues
 
-| Problem | Possible cause |
-|---|---|
-| Validation fails | DNS not propagated or domain not pointing correctly. |
-| HTTPS unavailable | Certificate not installed or server not configured correctly. |
-| Mixed content | HTTP resources still loaded inside an HTTPS page. |
+## Verification process
 
-<Warning>
-On VPS, SSL depends on your server configuration. On shared hosting, use the control panel or contact support.
-</Warning>
+1. Confirm the domain resolves to the intended hosting service.
+2. Open `https://DOMAIN` in a clean browser session.
+3. Inspect the certificate subject and alternative names.
+4. Confirm the certificate is currently valid.
+5. Test both apex and `www` hostnames when both are used.
+6. Verify automatic renewal through the hosting environment.
+
+## Common causes of failure
+
+- DNS points to the wrong server.
+- The domain is not attached to the hosting account.
+- Port 80 or 443 is blocked.
+- A proxy serves a different certificate.
+- The certificate does not include every requested hostname.
+- Renewal validation cannot reach the server.

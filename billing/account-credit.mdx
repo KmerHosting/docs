@@ -1,28 +1,42 @@
 ---
-title: "Account credit"
-description: "Use customer balance to pay for orders and renewals."
-icon: "wallet"
----
+    title: "Account credit and top-ups"
+    description: "Add credit through CamerPay and understand wallet currency versus XAF settlement."
+    icon: "circle-dollar-sign"
+    ---
 
-Account credit is an internal balance attached to the customer account. It can be used to pay for an order or renewal when the balance is sufficient.
 
-## Manual top-up
+Account credit is the internal wallet used by supported KmerHosting payment and renewal flows.
 
-<Steps>
-  <Step title="Request the instructions">
-    From the customer area, open the credit section or ask for top-up instructions.
-  </Step>
-  <Step title="Complete the payment">
-    Send the exact amount using a supported payment method.
-  </Step>
-  <Step title="Submit proof">
-    Share the payment proof along with the account email and payment reference.
-  </Step>
-  <Step title="Wait for validation">
-    Support verifies the payment and then credits the account.
-  </Step>
-</Steps>
+<Frame caption="The credit panel shows the available balance and the Add Credit action.">
+  <img src="/images/screenshots/billing-credit.png" alt="The credit panel shows the available balance and the Add Credit action." />
+</Frame>
 
-<Warning>
-Do not publish or share private payment references in a public ticket. Use official channels only.
-</Warning>
+
+## Start a top-up
+
+1. Open Billing.
+2. Select Add Credit.
+3. Enter the amount requested in the wallet context.
+4. Continue to CamerPay.
+5. Choose an available payment method.
+6. Complete the hosted payment flow.
+7. Return to KmerHosting and wait for confirmed crediting.
+
+<Frame caption="Review the amount before leaving for the hosted payment provider.">
+  <img src="/images/screenshots/topup-modal.png" alt="Review the amount before leaving for the hosted payment provider." />
+</Frame>
+
+
+<Frame caption="The hosted payment page is controlled by CamerPay and its payment-provider integrations.">
+  <img src="/images/screenshots/camerpay-payment.png" alt="The hosted payment page is controlled by CamerPay and its payment-provider integrations." />
+</Frame>
+
+
+<Frame caption="A successful return page is not the only source of truth; wallet credit depends on confirmed payment state and webhook processing.">
+  <img src="/images/screenshots/topup-success.png" alt="A successful return page is not the only source of truth; wallet credit depends on confirmed payment state and webhook processing." />
+</Frame>
+
+
+## Payment safety
+
+Do not repeat a payment simply because the browser return is delayed. Check the wallet and transaction state first, then contact support with the provider reference if required.

@@ -1,50 +1,40 @@
 ---
-title: "Domains"
-description: "Domain search, purchase, DNS management, and renewals."
-icon: "globe"
----
+    title: "Domains"
+    description: "Register, view, renew, and manage standalone and hosting-included domains."
+    icon: "globe"
+    ---
 
-KmerHosting lets you search, buy, renew, and manage domains from the customer area.
 
-## Common extensions
+The Domains section separates domains purchased independently from domains attached to hosting services.
 
-| Extension | Recommended use |
-|---|---|
-| `.com` | Global standard. |
-| `.org` | Organizations and communities. |
-| `.net` | Network or technical projects. |
-| `.cm` | Local Cameroon presence. |
-| `.info` | Information websites. |
-| `.biz` | Commercial activities. |
-| `.site` | General-purpose websites. |
-| `.online` | Online presence. |
-| `.store` | E-commerce. |
-| `.app` | Applications. |
-| `.dev` | Developers. |
-| `.ai` | Artificial intelligence and machine learning. |
+<Frame caption="The console separates standalone, included, and combined domain views.">
+  <img src="/images/screenshots/domains-tabs.png" alt="The console separates standalone, included, and combined domain views." />
+</Frame>
 
-<Note>
-Prices change depending on the registrar, active promotions, and billing term. Always check the Pricing page before purchase.
-</Note>
 
-## Domain types
+## Standalone domains
 
-- **Standalone domain**: purchased and managed independently from a hosting service.
-- **Included domain**: attached to a specific offer or hosting service.
+Standalone domain cards can show registration and renewal prices, registration and expiry dates, auto-renewal state, nameservers, transfer lock, DNS records, and renewal controls.
 
-## DNS
+<Frame caption="A standalone domain includes commercial and DNS information in one service card.">
+  <img src="/images/screenshots/standalone-domain-card.png" alt="A standalone domain includes commercial and DNS information in one service card." />
+</Frame>
 
-Common DNS records are:
 
-| Type | Usage |
-|---|---|
-| `A` | Points a name to an IPv4 address. |
-| `AAAA` | Points a name to an IPv6 address. |
-| `CNAME` | Creates an alias to another hostname. |
-| `MX` | Configures incoming mail delivery. |
-| `TXT` | Verification, SPF, DKIM, and DMARC. |
-| `NS` | Defines the authoritative nameservers. |
+## Included domains
 
-<Warning>
-DNS changes take time to propagate. Avoid changing several critical records at the same time.
-</Warning>
+Included domains are associated with Shared Hosting, Tiny VPS, VPS, or Custom Hosting records. The available controls focus on nameservers and DNS. The exact included-domain entitlement depends on the purchased hosting plan.
+
+<Frame caption="Included domains remain linked to the hosting service that granted them.">
+  <img src="/images/screenshots/included-domain-card.png" alt="Included domains remain linked to the hosting service that granted them." />
+</Frame>
+
+
+## Supported DNS record types
+
+The current editor recognizes `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `NS`, `SRV`, and `CAA` records. Use valid values and allow for DNS propagation after changes.
+
+<CardGroup cols={2}>
+  <Card title="Check availability" href="/guides/domain-availability" icon="search">Search for a domain and understand the purchase path.</Card>
+  <Card title="Manage DNS" href="/guides/dns-management" icon="network">Edit nameservers and DNS records safely.</Card>
+</CardGroup>

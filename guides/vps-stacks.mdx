@@ -1,105 +1,63 @@
 ---
-title: "Deploy common stacks on a VPS"
-description: "Recommended deployment patterns for Node.js, Docker Compose, and Laravel on a KmerHosting VPS."
-icon: "server"
----
+    title: "Deploy common stacks on a VPS"
+    description: "Secure a VPS, install runtimes, run applications, and expose them through a reverse proxy."
+    icon: "terminal"
+    ---
 
-A VPS is the right fit when you need root access, system packages, custom web server configuration, background workers, or container-based deployments.
 
-## Common VPS patterns
+VPS Hosting provides server-level control. The customer is responsible for security and maintenance unless a managed agreement states otherwise.
 
-| Stack | Recommended layout | Good for |
-| --- | --- | --- |
-| Node.js app | Node.js plus PM2 plus Nginx | APIs, dashboards, Next.js custom servers, realtime apps |
-| Docker Compose | Docker Engine plus Compose plus Nginx | Multi-service apps with app, database, queue, and cache containers |
-| Laravel | Nginx plus PHP-FPM plus MySQL plus Supervisor | Queue workers, scheduled tasks, and full Laravel control |
-| WordPress on VPS | Nginx or Apache plus PHP-FPM plus MySQL | Higher traffic or custom plugin and cache requirements |
+<Frame caption="Retrieve the credentials from the protected service page and redact them in documentation screenshots.">
+  <img src="/images/screenshots/vps-credentials.png" alt="Retrieve the credentials from the protected service page and redact them in documentation screenshots." />
+</Frame>
 
-## Base server checklist
 
-- Create a non-root sudo user and use SSH keys where possible.
-- Apply system updates before exposing the application.
-- Open only the required ports, typically `22`, `80`, and `443`.
-- Set up DNS before the final SSL step so certificates can validate cleanly.
-- Plan backups for both application files and databases.
-
-## Node.js plus PM2 plus Nginx
-
-<Steps>
-  <Step title="Install runtime packages">
-    Install Node.js LTS, Nginx, and PM2. Keep the app in a dedicated directory owned by the deploy user.
-  </Step>
-  <Step title="Upload the app and install dependencies">
-    Clone the repository or upload the release archive, then run the production install and build steps required by the application.
-  </Step>
-  <Step title="Run the app behind PM2">
-    Start the app with PM2 so it survives restarts and can be monitored centrally.
-  </Step>
-  <Step title="Reverse proxy through Nginx">
-    Point Nginx at the local application port, then add HTTPS once the domain resolves to the VPS.
-  </Step>
-</Steps>
+## Connect through SSH
 
 ```bash
-# Example
-pm2 start npm --name app -- start
+ssh root@SERVER_IP
+```
+
+<Frame caption="A successful SSH session should show only non-sensitive system information.">
+  <img src="/images/screenshots/vps-ssh-terminal.png" alt="A successful SSH session should show only non-sensitive system information." />
+</Frame>
+
+
+## Initial security
+
+```bash
+apt update
+apt upgrade -y
+adduser deploy
+usermod -aG sudo deploy
+```
+
+Add an SSH public key for the non-root user, confirm key login, then reduce password and root-login exposure according to the server policy.
+
+## Node.js with PM2
+
+```bash
+apt install -y git nginx
+# Install a supported Node.js release using your chosen package source.
+git clone YOUR_REPOSITORY_URL /var/www/application
+cd /var/www/application
+npm ci
+npm run build
+npm install --global pm2
+pm2 start npm --name application -- start
 pm2 save
 ```
 
+Configure Nginx as a reverse proxy to the local application port and obtain HTTPS after DNS points to the server.
+
 ## Docker Compose
 
-<Steps>
-  <Step title="Install Docker and Compose">
-    Use the official Docker packages for the target operating system.
-  </Step>
-  <Step title="Store configuration outside the image">
-    Keep `.env` values, mounted uploads, and backups on the server rather than baking them into the image.
-  </Step>
-  <Step title="Run the stack">
-    Start the application with `docker compose up -d`, then confirm that health checks and ports are correct.
-  </Step>
-  <Step title="Put Nginx in front of the public service">
-    Terminate TLS at Nginx and proxy only the required container port to the public internet.
-  </Step>
-</Steps>
+Install Docker from its official repository, deploy a reviewed Compose file, store secrets outside source control, and configure restart policies and backups.
 
-```bash
-docker compose pull
-docker compose up -d
-docker compose ps
-```
+## Maintenance checklist
 
-## Laravel on Nginx plus PHP-FPM
-
-<Steps>
-  <Step title="Prepare PHP, Composer, and MySQL">
-    Install the required PHP version and extensions, Composer, Nginx, MySQL, and Supervisor.
-  </Step>
-  <Step title="Deploy the application code">
-    Upload the release, create the `.env`, run `composer install --no-dev`, and generate the app key if this is the first deploy.
-  </Step>
-  <Step title="Run framework tasks">
-    Execute database migrations, cache warmup, and storage symlink creation as needed.
-  </Step>
-  <Step title="Start background processes">
-    Use Supervisor for queue workers and cron for Laravel scheduler execution.
-  </Step>
-</Steps>
-
-```bash
-php artisan migrate --force
-php artisan config:cache
-php artisan route:cache
-php artisan storage:link
-```
-
-## Final go-live checks
-
-- Confirm the site answers on both the apex domain and `www` if you intend to serve both.
-- Add SSL and force HTTPS after DNS resolves correctly.
-- Test restart behavior for the web server, application process manager, and background workers.
-- Capture one known-good backup after the first successful deployment.
-
-<Card title="Need a simpler path?" icon="panel-top" href="/guides/shared-hosting-stacks">
-  Use shared hosting when the project is a static site, WordPress site, or standard PHP app with no long-running processes.
-</Card>
+- Apply operating-system updates.
+- Back up application data and databases.
+- Monitor disk, memory, load, and certificate renewal.
+- Restrict firewall ports.
+- Rotate credentials after team changes.

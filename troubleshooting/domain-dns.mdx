@@ -1,21 +1,27 @@
 ---
-title: "Domain and DNS issues"
-description: "Diagnose a domain that does not point correctly."
-icon: "globe-2"
----
+    title: "Troubleshoot domains and DNS"
+    description: "Diagnose propagation, nameserver, record, website, email, and certificate issues."
+    icon: "globe-2"
+    ---
 
-## Common causes
 
-- Incorrect DNS record.
-- Incomplete DNS propagation.
-- Wrong nameservers.
-- Expired domain.
-- SSL certificate not validated.
+Domain problems often involve several independent layers: registration, nameservers, DNS records, hosting attachment, application configuration, email records, and SSL.
 
-## What to send to support
+<Frame caption="Record the intended DNS values before changing them.">
+  <img src="/images/screenshots/domain-dns-records.png" alt="Record the intended DNS values before changing them." />
+</Frame>
 
-- Affected domain.
-- Records that were changed.
-- Screenshot of the DNS manager.
-- Expected result.
-- Date and time of the change.
+
+## Diagnostic order
+
+1. Confirm the domain is active and not expired.
+2. Verify authoritative nameservers.
+3. Query the required DNS record.
+4. Confirm the target server or service is reachable.
+5. Check the hosting domain attachment.
+6. Test HTTP and HTTPS.
+7. Check MX and TXT records separately for email.
+
+## Propagation
+
+Cached resolvers can show old values after a correct change. Compare multiple resolvers and wait for the previous TTL where necessary.

@@ -1,38 +1,57 @@
 ---
-title: "Quickstart"
-description: "Create an account, order a service, pay, and reach the first usable deployment state."
-icon: "rocket"
----
+    title: "Quickstart"
+    description: "Create a KmerHosting account, complete onboarding, and reach the customer console safely."
+    icon: "rocket"
+    ---
 
-This guide covers the standard customer journey: account creation, verification, ordering, payment, activation, and first deployment steps.
 
-<Steps>
-  <Step title="Create the account">
-    Go to `https://kmerhosting.com/register`, enter a working email address, and complete the initial profile details carefully.
-  </Step>
-  <Step title="Verify the email">
-    Open the verification link from your inbox. If the link expires, request a fresh one from the login flow before opening a support request.
-  </Step>
-  <Step title="Complete the customer profile">
-    Add billing identity details, contact information, and organization data if the purchase is for a company.
-  </Step>
-  <Step title="Finish KYC when requested">
-    Some services may require identity review before activation or before higher-risk changes are approved.
-  </Step>
-  <Step title="Choose the right service">
-    Shared hosting fits standard websites and WordPress. VPS fits custom runtimes, root access, workers, and container-based deployments.
-  </Step>
-  <Step title="Place the order and pay">
-    Review the plan, create the order, and complete payment with the supported payment path shown in the client area.
-  </Step>
-  <Step title="Find the service after activation">
-    Open the client area and check the service details for credentials, assigned resources, and related domains.
-  </Step>
-  <Step title="Use the correct deployment guide">
-    Follow <a href="/guides/shared-hosting-stacks">shared hosting deployment recipes</a> or <a href="/guides/vps-stacks">VPS deployment recipes</a> based on the service you purchased.
-  </Step>
-</Steps>
+This quickstart follows the normal first-use path from the public website to the customer console.
 
-<Tip>
-  When you contact support, include the account email, domain, order ID, invoice ID, and a short description of what you expected to happen.
-</Tip>
+## 1. Create the account
+
+Open the registration page, provide the requested identity and account information, and choose a strong password. Use an email address you control because email verification and account recovery depend on it.
+
+<Frame caption="Registration creates the customer account used by the website, console, billing, and developer tools.">
+  <img src="/images/screenshots/register-form.png" alt="Registration creates the customer account used by the website, console, billing, and developer tools." />
+</Frame>
+
+
+## 2. Verify the email address
+
+After registration, KmerHosting sends a verification flow. Enter the verification code on the verification page. Do not share the code; it should only be used in the active browser session.
+
+<Frame caption="The verification page confirms ownership of the account email address.">
+  <img src="/images/screenshots/email-verification.png" alt="The verification page confirms ownership of the account email address." />
+</Frame>
+
+
+## 3. Complete onboarding
+
+Onboarding records the role and workload type so the platform can recommend an appropriate hosting path. The current flow distinguishes common profiles such as founder, developer, agency, student, and other, then asks what will be hosted.
+
+<Frame caption="Role selection helps tailor the first recommendation.">
+  <img src="/images/screenshots/onboarding-role.png" alt="Role selection helps tailor the first recommendation." />
+</Frame>
+
+
+<Frame caption="Workload selection separates websites, applications, APIs, infrastructure, and learning use cases.">
+  <img src="/images/screenshots/onboarding-project.png" alt="Workload selection separates websites, applications, APIs, infrastructure, and learning use cases." />
+</Frame>
+
+
+## 4. Review account status
+
+The dashboard status card shows whether additional actions are required. KYC may be requested for account activation, payment risk controls, or service operations.
+
+<Frame caption="Use the account status card as the source of truth for pending account actions.">
+  <img src="/images/screenshots/account-status-card.png" alt="Use the account status card as the source of truth for pending account actions." />
+</Frame>
+
+
+## 5. Choose the next step
+
+- For a website managed through DirectAdmin, start with [Shared Hosting](/solutions/shared-hosting).
+- For a compact Linux container with root access, use [Tiny VPS](/solutions/tiny-vps).
+- For a larger self-managed server, use [VPS Hosting](/solutions/vps).
+- For an existing domain or a new registration, review [Domains](/solutions/domains).
+- To automate account and service reads, continue to [Developer platform](/developer/overview).

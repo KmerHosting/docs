@@ -1,21 +1,31 @@
 ---
-title: "Manage a service"
-description: "Find an active service, review its details, and request support when needed."
-icon: "sliders-horizontal"
----
+    title: "Manage a service"
+    description: "Read service state, access credentials, renew, and request support from the customer console."
+    icon: "server-cog"
+    ---
 
-Active services are available from the customer area. Depending on the service type, you can review settings, renew, manage the related domain, or request support actions.
 
-## Common actions
+Service pages expose different controls depending on the service type.
 
-| Action | Where to do it |
-|---|---|
-| View details | Service page in the customer area. |
-| Renew | Renewal or order section. |
-| Manage the domain | Domains page or related service page. |
-| View server settings | Service page or activation email. |
-| Request a change | Support ticket. |
+## Common information
 
-<Note>
-For sensitive services, some actions may require additional account verification.
-</Note>
+- Service type and tier.
+- Active or pending state.
+- Purchase and billing currency.
+- Activation and renewal dates.
+- Associated domains.
+- Credentials or provider access when applicable.
+- Renewal and auto-renewal controls.
+
+<Frame caption="Start from Active Services and open the dedicated service page.">
+  <img src="/images/screenshots/active-services.png" alt="Start from Active Services and open the dedicated service page." />
+</Frame>
+
+
+## Credential handling
+
+Passwords and tokens should be revealed only when needed, stored in a password manager, and rotated after accidental exposure. Screenshots must cover every secret value.
+
+## Support context
+
+Include the service ID, service type, domain or hostname, timestamp, and exact error. Do not send the root password or API key.

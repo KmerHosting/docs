@@ -1,88 +1,48 @@
 ---
-title: "Deploy common stacks on shared hosting"
-description: "Practical deployment paths for static sites, WordPress, and classic PHP apps on shared hosting."
-icon: "panel-top"
----
+    title: "Deploy common stacks on Shared Hosting"
+    description: "Use DirectAdmin to deploy static sites, PHP applications, MySQL databases, and WordPress."
+    icon: "layers"
+    ---
 
-Shared hosting works best when your application can run as files served by the web server plus a standard database. If your stack needs long-running processes, workers, WebSockets, Docker, or root access, move to a VPS.
 
-## Best-fit stacks
+Shared Hosting is managed through DirectAdmin. The exact tools shown can depend on the server configuration and hosting plan.
 
-| Stack | Shared hosting fit | Notes |
-| --- | --- | --- |
-| Static HTML, CSS, and JavaScript | Good | Upload the built files to the web root. |
-| WordPress | Good | Use a one-click installer if available, or upload WordPress manually. |
-| PHP plus MySQL | Good | Works well for classic CMS and small business apps. |
-| Laravel or Symfony | Limited | Fine only if the app does not depend on queues, supervisors, or custom system packages. |
-| Node.js, Docker, FastAPI, or workers | Poor | Use a VPS instead. |
+<Frame caption="Open DirectAdmin from the service page and sign in with the hosting credentials.">
+  <img src="/images/screenshots/directadmin-login.png" alt="Open DirectAdmin from the service page and sign in with the hosting credentials." />
+</Frame>
 
-## Before you deploy
 
-- Confirm the domain or subdomain already points to the hosting account.
-- Locate the document root such as `public_html` or the assigned domain folder.
-- Create the database, database user, and password before uploading apps that need them.
-- Keep a local copy of your `.env`, CMS admin credentials, and backup archive.
+## Static website
 
-## Static site deployment
+1. Open File Manager.
+2. Enter the domain `public_html` directory.
+3. Remove the default placeholder only when the correct document root is confirmed.
+4. Upload `index.html` and the required assets.
+5. Open the public domain and verify HTTPS.
 
-<Steps>
-  <Step title="Build the site locally">
-    Run the framework build command so you have a static output directory such as `dist`, `build`, or `out`.
-  </Step>
-  <Step title="Upload only the built files">
-    Copy the generated HTML, CSS, JavaScript, and asset files into the document root. Do not upload the source repository unless the framework explicitly requires server-side execution.
-  </Step>
-  <Step title="Set the default index file">
-    Make sure the root contains `index.html` or the platform default entry file expected by the web server.
-  </Step>
-  <Step title="Verify assets and links">
-    Check that images, CSS files, and internal links resolve correctly after upload.
-  </Step>
-</Steps>
+<Frame caption="The document root should contain the public entry file and assets, not the complete private development workspace.">
+  <img src="/images/screenshots/directadmin-file-manager.png" alt="The document root should contain the public entry file and assets, not the complete private development workspace." />
+</Frame>
 
-## WordPress deployment
 
-<Steps>
-  <Step title="Provision the database">
-    Create a MySQL database and user from the control panel, then keep the credentials ready.
-  </Step>
-  <Step title="Upload WordPress or use the installer">
-    Prefer the host-provided installer when available. Otherwise upload the WordPress package to the document root and extract it there.
-  </Step>
-  <Step title="Run the web installer">
-    Open the site in the browser, enter the database credentials, and create the first admin user.
-  </Step>
-  <Step title="Lock down basics">
-    Enable automatic updates where appropriate, remove unused plugins and themes, and install SSL before accepting logins or form submissions.
-  </Step>
-</Steps>
+## PHP and MySQL
 
-## PHP plus MySQL deployment
+1. Upload the application files.
+2. Create a database and database user in DirectAdmin.
+3. Grant the user access to the database.
+4. Put database credentials in the application configuration outside public documentation.
+5. Select a compatible PHP version.
+6. Test the application and review error logs.
 
-<Steps>
-  <Step title="Upload the application files">
-    Place public files inside the document root. If the framework separates public and private code, keep non-public files outside the web root when the control panel supports it.
-  </Step>
-  <Step title="Set the environment configuration">
-    Update database host, name, username, password, app URL, and mail settings in the app configuration.
-  </Step>
-  <Step title="Import the database">
-    Use phpMyAdmin or the database tool in the panel to import the SQL dump.
-  </Step>
-  <Step title="Test forms, login, and uploads">
-    Validate write permissions for cache, sessions, and uploaded files before going live.
-  </Step>
-</Steps>
+## WordPress
 
-## When to move to a VPS
+Use the available installer when the server provides one, or upload WordPress manually. Use a unique database prefix, strong administrator password, and HTTPS URL.
 
-Move the project to a VPS when you need any of the following:
+<Frame caption="Capture the WordPress installer with a test domain and no passwords.">
+  <img src="/images/screenshots/wordpress-installer.png" alt="Capture the WordPress installer with a test domain and no passwords." />
+</Frame>
 
-- Node.js or Python application servers.
-- Background jobs, queues, or cron-heavy workloads.
-- Docker, Redis, custom Nginx rules, or package installation.
-- Full control over PHP versions, workers, firewall rules, or deployment automation.
 
-<Card title="See VPS deployment recipes" icon="server" href="/guides/vps-stacks">
-  Use the VPS guide for Node.js, Docker Compose, Laravel, and other server-managed stacks.
-</Card>
+## When to move to VPS
+
+Move when the project needs custom daemons, long-running workers, Docker, Redis, custom Nginx rules, unsupported packages, or full system administration.

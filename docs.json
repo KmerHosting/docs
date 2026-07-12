@@ -84,8 +84,10 @@
           "quickstart",
           "account/create-account",
           "account/email-verification",
+          "account/onboarding",
           "account/kyc",
-          "account/account-status"
+          "account/account-status",
+          "account/login-and-recovery"
         ]
       },
       {
@@ -118,33 +120,26 @@
       },
       {
         "group": "Applications",
-        "icon": "monitor-smartphone",
+        "icon": "panels-top-left",
         "expanded": false,
         "pages": [
-          "apps/kmerhosting-mobile",
-          "apps/kmerhosting-desktop"
+          "applications/overview",
+          "applications/mobile",
+          "applications/desktop"
         ]
       },
       {
-        "group": "Developer platform",
-        "icon": "braces",
-        "expanded": true,
+        "group": "Customer console",
+        "icon": "layout-dashboard",
+        "expanded": false,
         "pages": [
-          "developer/overview",
-          "developer/api-keys",
-          "developer/sdk",
-          "developer/cli",
-          "developer/rest-api",
-          "api/errors"
+          "console/overview",
+          "console/active-services",
+          "console/pending-orders",
+          "console/pending-services",
+          "console/notifications",
+          "console/settings"
         ]
-      },
-      {
-        "group": "API reference",
-        "icon": "terminal",
-        "openapi": {
-          "source": "openapi.json",
-          "directory": "api-reference"
-        }
       },
       {
         "group": "Hosting guides",
@@ -175,12 +170,34 @@
         "pages": [
           "billing/overview",
           "billing/account-credit",
+          "billing/checkout",
           "billing/orders",
           "billing/invoices",
           "billing/renewals",
-          "billing/refunds",
-          "guides/checkout"
+          "billing/refunds"
         ]
+      },
+      {
+        "group": "Developer platform",
+        "icon": "braces",
+        "expanded": true,
+        "pages": [
+          "developer/overview",
+          "developer/api-keys",
+          "developer/sdk",
+          "developer/cli",
+          "developer/rest-api",
+          "developer/ai-agent",
+          "api/errors"
+        ]
+      },
+      {
+        "group": "API reference",
+        "icon": "terminal",
+        "openapi": {
+          "source": "openapi.json",
+          "directory": "api-reference"
+        }
       },
       {
         "group": "Operations and troubleshooting",
@@ -219,6 +236,11 @@
       "permanent": true
     },
     {
+      "source": "/products/tiny-vps",
+      "destination": "/solutions/tiny-vps",
+      "permanent": true
+    },
+    {
       "source": "/products/vps",
       "destination": "/solutions/vps",
       "permanent": true
@@ -234,8 +256,23 @@
       "permanent": true
     },
     {
-      "source": "/products/tiny-vps",
-      "destination": "/solutions/tiny-vps",
+      "source": "/products/professional-email",
+      "destination": "/solutions/professional-email",
+      "permanent": true
+    },
+    {
+      "source": "/products/ssl-certificates",
+      "destination": "/solutions/ssl-certificates",
+      "permanent": true
+    },
+    {
+      "source": "/products/free-storage",
+      "destination": "/solutions/free-storage",
+      "permanent": true
+    },
+    {
+      "source": "/guides/checkout",
+      "destination": "/billing/checkout",
       "permanent": true
     }
   ]

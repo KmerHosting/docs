@@ -1,11 +1,45 @@
 ---
-title: "Set up Professional Email"
-description: "Prepare a domain and configure professional mailboxes."
-icon: "mail-cog"
----
+    title: "Create a Professional Email mailbox"
+    description: "Create a domain mailbox in DirectAdmin and open it through Roundcube."
+    icon: "mail-plus"
+    ---
 
-Use a domain you control, create the required mailboxes from the available management interface, and apply the DNS and client settings provided for the service.
 
-Never publish mailbox passwords or authentication tokens in support messages or shared screenshots.
+Professional Email is currently included through Shared Hosting. The KmerHosting console lists eligible domains, while mailbox creation occurs in DirectAdmin.
 
-<Card title="Professional Email solution" href="/solutions/professional-email" icon="external-link" />
+<Frame caption="Confirm the domain belongs to an active Shared Hosting plan before creating the mailbox.">
+  <img src="/images/screenshots/professional-email-list.png" alt="Confirm the domain belongs to an active Shared Hosting plan before creating the mailbox." />
+</Frame>
+
+
+## Create the mailbox
+
+1. Open the Shared Hosting service.
+2. Open DirectAdmin.
+3. Go to email account management.
+4. Choose a mailbox such as `support@example.com`.
+5. Generate a unique password.
+6. Save the mailbox and quota settings.
+
+<Frame caption="Use a fictional mailbox and hide the password in documentation captures.">
+  <img src="/images/screenshots/directadmin-email-account.png" alt="Use a fictional mailbox and hide the password in documentation captures." />
+</Frame>
+
+
+## Open Roundcube
+
+Use the link exposed by the Professional Email page or open the configured Roundcube URL. Sign in with the complete email address.
+
+<Frame caption="Roundcube requires the complete mailbox address and its mailbox-specific password.">
+  <img src="/images/screenshots/roundcube-login.png" alt="Roundcube requires the complete mailbox address and its mailbox-specific password." />
+</Frame>
+
+
+## Recommended mailboxes
+
+- `hello@domain`
+- `support@domain`
+- `billing@domain`
+- `security@domain`
+
+Use aliases and forwarding only after the primary mailbox behavior is understood.

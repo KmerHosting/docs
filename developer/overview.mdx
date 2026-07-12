@@ -1,24 +1,18 @@
 ---
-title: "Developer platform"
-description: "Build automations and server-side integrations with KmerHosting API keys, the TypeScript SDK, and the CLI."
-icon: "braces"
----
+    title: "Developer platform"
+    description: "Use API keys, the REST API, TypeScript SDK, and CLI to interact with supported KmerHosting resources."
+    icon: "braces"
+    ---
 
-The KmerHosting Developer Platform lets an authenticated customer work with their own account resources from trusted server-side applications.
 
-<CardGroup cols={3}>
-  <Card title="TypeScript SDK" icon="package" href="/developer/sdk">
-    Install `@kmerhosting/sdk` and use typed resource clients.
-  </Card>
-  <Card title="KmerHosting CLI" icon="terminal" href="/developer/cli">
-    Inspect services, domains, invoices, orders, and notifications from a terminal.
-  </Card>
-  <Card title="REST API" icon="route" href="/developer/rest-api">
-    Call the stable `/api/v1/sdk` endpoints directly.
-  </Card>
-</CardGroup>
+The Developer API is designed for external integrations and uses API keys instead of browser session cookies.
 
-## Production base URL
+<Frame caption="The public Developer API reference documents the endpoints intended for API-key access.">
+  <img src="/images/screenshots/developer-api-reference.png" alt="The public Developer API reference documents the endpoints intended for API-key access." />
+</Frame>
+
+
+## Base URL
 
 ```text
 https://kmerhosting.com/api/v1/sdk
@@ -26,28 +20,22 @@ https://kmerhosting.com/api/v1/sdk
 
 ## Authentication
 
-Every Developer API request uses a KmerHosting API key:
-
-```bash
-curl https://kmerhosting.com/api/v1/sdk/account \
-  -H "Authorization: Bearer $KMERHOSTING_API_KEY"
+```http
+Authorization: Bearer kh_live_REDACTED
 ```
 
-Create and revoke keys from **Console → Account → API Keys**.
+## Main resources
 
-<Warning>
-Never place an API key in browser JavaScript, a public mobile bundle, a Git repository, logs, screenshots, or client-visible environment variables. Use the SDK from a trusted server, worker, CI job, or local terminal.
-</Warning>
+- Account overview.
+- Services and auto-renewal.
+- Domains.
+- Invoices and orders.
+- Notifications.
+- KmerHosting AI Agent conversations.
 
-## Available resources
-
-- account and billing overview;
-- Shared hosting, Custom Hosting, VPS, and Tiny VPS;
-- service expiration and auto-renewal settings;
-- standalone and service-linked domains;
-- issued and upcoming invoices;
-- orders;
-- notifications;
-- KmerHosting AI Agent messages and saved conversations.
-
-The API never returns hosting passwords, VPS root passwords, KYC documents, session cookies, provider secrets, or administrative resources.
+<CardGroup cols={2}>
+  <Card title="API keys" href="/developer/api-keys" icon="key">Create, protect, deactivate, and delete keys.</Card>
+  <Card title="TypeScript SDK" href="/developer/sdk" icon="package">Use `@kmerhosting/sdk` in Node.js applications.</Card>
+  <Card title="KmerHosting CLI" href="/developer/cli" icon="terminal">Use the official terminal client.</Card>
+  <Card title="REST API" href="/developer/rest-api" icon="webhook">Call the API without the SDK.</Card>
+</CardGroup>

@@ -1,14 +1,45 @@
 ---
-title: "KmerHosting CLI"
-description: "A terminal client powered by the KmerHosting TypeScript SDK."
-icon: "terminal"
----
+    title: "KmerHosting CLI"
+    description: "The official terminal client for account, services, domains, invoices, orders, notifications, and renewal automation."
+    icon: "terminal"
+    ---
 
-KmerHosting CLI lets customers inspect their account, services, domains, invoices, orders, and notifications from a terminal.
+
+KmerHosting CLI is published as `@kmerhosting/cli` and uses the official TypeScript SDK.
+
+<Frame caption="The CLI exposes read-only account commands and a controlled auto-renewal command.">
+  <img src="/images/screenshots/cli-terminal.png" alt="The CLI exposes read-only account commands and a controlled auto-renewal command." />
+</Frame>
+
+
+## Install
 
 ```bash
 npm install --global @kmerhosting/cli
 ```
 
-<Card title="CLI documentation" href="/developer/cli" icon="book-open" />
-<Card title="GitHub" href="https://github.com/KmerHosting/kmerhosting_sdk/tree/main/packages/cli" icon="github" />
+## Authenticate
+
+Set `KMERHOSTING_API_KEY` in the environment. Do not pass the key as a visible command-line argument.
+
+```bash
+export KMERHOSTING_API_KEY="kh_live_REDACTED"
+```
+
+## Main commands
+
+```bash
+kh account
+kh services
+kh services vps
+kh domains
+kh invoices
+kh orders
+kh notifications --unread
+kh auto-renew vps SERVICE_ID on
+```
+
+<CardGroup cols={2}>
+  <Card title="CLI guide" href="/developer/cli" icon="book-open">Installation, authentication, examples, and troubleshooting.</Card>
+  <Card title="Source repository" href="https://github.com/KmerHosting/kmerhosting_sdk/tree/main/packages/cli" icon="github">Review the CLI source in the SDK monorepo.</Card>
+</CardGroup>

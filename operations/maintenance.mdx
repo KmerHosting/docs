@@ -1,21 +1,19 @@
 ---
-title: "Maintenance"
-description: "Understand planned maintenance windows and their impact."
-icon: "calendar-clock"
----
+    title: "Maintenance"
+    description: "Prepare for planned KmerHosting maintenance and verify service state afterward."
+    icon: "wrench"
+    ---
 
-Planned maintenance allows updates, migrations, optimizations, or security operations to be applied safely.
 
-## Information to review
+Maintenance is planned work that can affect a component for a defined period.
 
-- Affected service.
-- Date and time.
-- Estimated duration.
-- Expected impact.
-- Required customer actions.
+## Preparation
 
-## Before a critical maintenance window
+- Review the affected components and window.
+- Avoid high-risk deployments during the maintenance period.
+- Confirm backups before server or data changes.
+- Notify application users when customer-facing downtime is possible.
 
-- Back up important data.
-- Avoid DNS or application changes close to the window.
-- Warn your users if the application might be affected.
+## After the window
+
+Check login, console access, service state, application health, DNS, email, billing, and monitoring. Report only persistent issues with exact timestamps.

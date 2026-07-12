@@ -1,32 +1,38 @@
 ---
-title: "Open a ticket"
-description: "Contact support with the information needed to resolve an issue faster."
-icon: "message-circle"
----
+    title: "Contact support"
+    description: "Prepare a KmerHosting support request with the information needed for fast diagnosis."
+    icon: "life-buoy"
+    ---
 
-A clear ticket reduces diagnosis time.
 
-## Information to include
+Use the support page or current support email path when self-service documentation does not resolve the issue.
 
-- Account email.
-- Affected service.
-- Related domain.
-- Order or invoice ID.
-- Exact error message.
-- Screenshot if useful.
-- Approximate date and time of the issue.
-- Troubleshooting steps already attempted.
+<Frame caption="The public support page routes users toward the correct contact path.">
+  <img src="/images/screenshots/support-page.png" alt="The public support page routes users toward the correct contact path." />
+</Frame>
 
-## Example ticket
 
-```text
-Hello,
+<Frame caption="A useful support request includes a narrow problem statement and operational context.">
+  <img src="/images/screenshots/open-ticket-page.png" alt="A useful support request includes a narrow problem statement and operational context." />
+</Frame>
 
-My domain example.com stopped pointing to my website around 14:30.
-Account: client@example.com
-Service: Shared hosting
-Recent action: updated the DNS A record
-Visible error: the browser shows DNS_PROBE_FINISHED_NXDOMAIN
 
-Can you check the DNS zone and the service status?
-```
+## Include
+
+- Account email or customer ID.
+- Service type and service ID.
+- Domain or hostname.
+- Order, invoice, or transaction reference when relevant.
+- Exact timestamp and timezone.
+- Expected result and actual result.
+- Reproduction steps.
+- A sanitized screenshot or log excerpt.
+
+## Never include
+
+- Passwords.
+- API keys.
+- Session cookies.
+- KYC documents.
+- Private keys.
+- Complete database dumps.

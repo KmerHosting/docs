@@ -1,40 +1,53 @@
 ---
-title: "KmerHosting CLI"
-description: "Use KmerHosting account resources from a terminal."
-icon: "terminal"
----
+    title: "KmerHosting CLI guide"
+    description: "Install, authenticate, and use the official KmerHosting terminal client."
+    icon: "square-terminal"
+    ---
+
+
+KmerHosting CLI is published separately from the SDK but lives in the same monorepo.
 
 ## Install
 
 ```bash
 npm install --global @kmerhosting/cli
+kh --help
 ```
 
-## Configure
+## Configure the key
+
+Linux or macOS:
 
 ```bash
-export KMERHOSTING_API_KEY="kh_live_..."
+export KMERHOSTING_API_KEY="kh_live_REDACTED"
 ```
 
-On PowerShell:
+PowerShell:
 
 ```powershell
-$env:KMERHOSTING_API_KEY="kh_live_..."
+$env:KMERHOSTING_API_KEY="kh_live_REDACTED"
 ```
 
-## Commands
+<Frame caption="The CLI should be tested with a restricted test key and read-only commands first.">
+  <img src="/images/screenshots/cli-terminal.png" alt="The CLI should be tested with a restricted test key and read-only commands first." />
+</Frame>
+
+
+## Read-only checks
 
 ```bash
 kh account
 kh services
-kh services vps
 kh domains
 kh invoices
 kh orders
 kh notifications --unread
+```
+
+## Auto-renewal
+
+```bash
 kh auto-renew vps SERVICE_ID on
 ```
 
-<Card title="CLI source" icon="github" href="https://github.com/KmerHosting/kmerhosting_sdk/tree/main/packages/cli">
-The CLI is maintained in the KmerHosting developer tools repository.
-</Card>
+Confirm the service ID and account before running a state-changing command.

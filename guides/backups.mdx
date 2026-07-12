@@ -1,26 +1,28 @@
 ---
-title: "Backups"
-description: "Understand backups and prepare for restoration."
-icon: "database"
----
+    title: "Backups"
+    description: "Plan backups for Shared Hosting, VPS, databases, domains, email, and KmerHosting storage."
+    icon: "database-backup"
+    ---
 
-Backups reduce the risk of data loss, but they still need to be tested.
 
-## What to back up
+A backup is useful only when it is current, independent, restorable, and tested.
 
-- Website files.
-- Database.
-- Email data when needed.
-- Configuration files.
-- Private environment variables stored in a secure vault.
+## Shared Hosting
 
-## Best practices
+Use available DirectAdmin backup tools for website files, databases, email, and account configuration. Download important backups outside the hosting account.
 
-- Keep multiple versions.
-- Store one copy outside the main server.
-- Test the restoration process.
-- Document the recovery steps.
+## Tiny VPS and VPS
 
-<Warning>
-Never store public SQL dumps or KYC backups in a public Git repository.
-</Warning>
+Back up application files, environment configuration, databases, persistent container volumes, and reverse-proxy configuration. A provider snapshot is useful for recovery but should not be the only copy.
+
+## Domains and DNS
+
+Record nameservers and export DNS values before major changes.
+
+## Professional Email
+
+Use IMAP synchronization or mailbox export where appropriate. DNS records and mailbox passwords should be stored securely outside public documentation.
+
+## Restore testing
+
+Periodically restore to a separate test location. A backup that has never been restored is an unverified assumption.

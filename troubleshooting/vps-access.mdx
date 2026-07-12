@@ -1,25 +1,30 @@
 ---
-title: "VPS access"
-description: "Diagnose SSH or network issues on a VPS."
-icon: "terminal"
----
+    title: "Troubleshoot VPS access"
+    description: "Resolve SSH failures without exposing credentials or weakening server security."
+    icon: "terminal"
+    ---
 
-## Checks
 
-- VPS IP address.
-- SSH port.
-- Correct SSH key.
-- Local and server firewall rules.
-- VPS status in the customer area.
+<Frame caption="Capture only sanitized SSH output when asking for help.">
+  <img src="/images/screenshots/vps-ssh-terminal.png" alt="Capture only sanitized SSH output when asking for help." />
+</Frame>
 
-## Useful commands
 
-```bash
-ssh -v root@YOUR_VPS_IP
-ping YOUR_VPS_IP
-nc -vz YOUR_VPS_IP 22
-```
+## Connection refused
 
-<Warning>
-Never share a private SSH key or a root password in a support ticket.
-</Warning>
+- Confirm the IP and SSH port.
+- Confirm the VPS is active.
+- Check provider firewall and server firewall.
+- Verify the SSH service is running through provider console access when available.
+
+## Permission denied
+
+- Confirm the username.
+- Confirm the correct private key is used.
+- Check private-key file permissions.
+- Confirm the public key is in the correct account.
+- Avoid enabling password login globally as the first response.
+
+## Host key changed
+
+Verify that the server was rebuilt or the IP reassigned before removing the old host key. An unexpected change can indicate a security problem.

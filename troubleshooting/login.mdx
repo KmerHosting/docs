@@ -1,17 +1,29 @@
 ---
-title: "Cannot sign in"
-description: "Resolve sign-in issues in the customer area."
-icon: "log-in"
----
+    title: "Troubleshoot login and console redirects"
+    description: "Resolve stale cookies, verification issues, and redirects between kmerhosting.com and console.kmerhosting.com."
+    icon: "log-in"
+    ---
 
-## Quick checks
 
-- Verify the email address being used.
-- Reset the password.
-- Confirm that the account email is verified.
-- Try a private browsing window.
-- Temporarily disable extensions that block cookies.
+A successful login should redirect from `kmerhosting.com/login` to `console.kmerhosting.com` and remain authenticated.
 
-## Contact support
+<Frame caption="Start troubleshooting from a clean login page and test account.">
+  <img src="/images/screenshots/login-page.png" alt="Start troubleshooting from a clean login page and test account." />
+</Frame>
 
-Include the account email, the exact error message, and the approximate time of the failed attempt.
+
+## Homepage shows a profile but console returns to login
+
+1. Sign out.
+2. Remove site data for `kmerhosting.com` and `console.kmerhosting.com`.
+3. Open a private window.
+4. Sign in again.
+5. Confirm the session cookie is scoped to the KmerHosting parent domain, uses path `/`, and is Secure and HttpOnly.
+
+## Other checks
+
+- Complete email verification.
+- Complete onboarding when redirected.
+- Confirm the browser allows cookies.
+- Disable extensions that rewrite cookies or redirects for the test.
+- Check the account status card.
