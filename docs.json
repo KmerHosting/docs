@@ -89,18 +89,39 @@
         ]
       },
       {
+        "group": "Solutions",
+        "icon": "cloud",
+        "expanded": true,
+        "pages": [
+          "solutions/shared-hosting",
+          "solutions/vps",
+          "solutions/domains",
+          "solutions/custom-hosting",
+          "solutions/professional-email",
+          "solutions/ssl-certificates",
+          "solutions/free-storage"
+        ]
+      },
+      {
         "group": "Products",
         "icon": "boxes",
         "expanded": true,
         "pages": [
-          "products/shared-hosting",
-          "products/vps",
-          "products/domains",
-          "products/custom-hosting",
           "products/kmerhosting-cli",
           "products/kmerhosting-forge",
           "products/kmerhosting-ai-agent",
-          "products/kmerhosting-drive"
+          "products/kmerhosting-drive",
+          "products/webcpl",
+          "products/wfilemanager"
+        ]
+      },
+      {
+        "group": "Applications",
+        "icon": "monitor-smartphone",
+        "expanded": false,
+        "pages": [
+          "apps/kmerhosting-mobile",
+          "apps/kmerhosting-desktop"
         ]
       },
       {
@@ -132,10 +153,17 @@
           "guides/deploy-website",
           "guides/shared-hosting-stacks",
           "guides/vps-stacks",
+          "guides/custom-hosting",
+          "guides/domain-availability",
           "guides/dns-management",
           "guides/ssl-certificates",
+          "guides/professional-email",
+          "guides/email-configuration",
+          "guides/free-storage",
           "guides/backups",
-          "guides/email-configuration"
+          "guides/service-management",
+          "guides/auto-renewal",
+          "guides/support-ticket"
         ]
       },
       {
@@ -149,11 +177,7 @@
           "billing/invoices",
           "billing/renewals",
           "billing/refunds",
-          "guides/domain-availability",
-          "guides/checkout",
-          "guides/service-management",
-          "guides/auto-renewal",
-          "guides/support-ticket"
+          "guides/checkout"
         ]
       },
       {
@@ -185,5 +209,27 @@
         ]
       }
     ]
-  }
+  },
+  "redirects": [
+    {
+      "source": "/products/shared-hosting",
+      "destination": "/solutions/shared-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/products/vps",
+      "destination": "/solutions/vps",
+      "permanent": true
+    },
+    {
+      "source": "/products/domains",
+      "destination": "/solutions/domains",
+      "permanent": true
+    },
+    {
+      "source": "/products/custom-hosting",
+      "destination": "/solutions/custom-hosting",
+      "permanent": true
+    }
+  ]
 }
