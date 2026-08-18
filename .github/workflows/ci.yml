@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate documentation manifests
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python -m json.tool docs.json >/dev/null
+          python -m json.tool openapi.json >/dev/null
+          test -s index.mdx
+          test -s README.md
