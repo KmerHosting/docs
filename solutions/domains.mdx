@@ -4,37 +4,38 @@ description: "Register, view, renew, and manage standalone and hosting-included 
 icon: "globe"
 ---
 
-
 The Domains section separates domains purchased independently from domains attached to hosting services.
 
 <Frame caption="The console separates standalone, included, and combined domain views.">
-  <img src="/images/screenshots/domains-tabs.png" alt="The console separates standalone, included, and combined domain views." />
+  ![The console separates standalone, included, and combined domain views.](/images/screenshots/domains-tabs.png)
 </Frame>
-
 
 ## Standalone domains
 
 Standalone domain cards can show registration and renewal prices, registration and expiry dates, auto-renewal state, nameservers, transfer lock, DNS records, and renewal controls.
 
 <Frame caption="A standalone domain includes commercial and DNS information in one service card.">
-  <img src="/images/screenshots/standalone-domain-card.png" alt="A standalone domain includes commercial and DNS information in one service card." />
+  ![A standalone domain includes commercial and DNS information in one service card.](/images/screenshots/standalone-domain-card.png)
 </Frame>
-
 
 ## Included domains
 
-Included domains are associated with Shared Hosting, Tiny VPS, VPS, or Custom Hosting records. The available controls focus on nameservers and DNS. The exact included-domain entitlement depends on the purchased hosting plan.
+Included domains are associated only with service records whose order or legacy entitlement explicitly includes a domain. Shared Hosting and some existing service records can have such an entitlement; LXC VPS does not include a free domain by default. The available controls focus on nameservers and DNS, and the exact entitlement is determined by the purchased service record rather than by a generic VPS label.
 
 <Frame caption="Included domains remain linked to the hosting service that granted them.">
-  <img src="/images/screenshots/included-domain-card.png" alt="Included domains remain linked to the hosting service that granted them." />
+  ![Included domains remain linked to the hosting service that granted them.](/images/screenshots/included-domain-card.png)
 </Frame>
-
 
 ## Supported DNS record types
 
 The current editor recognizes `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `NS`, `SRV`, and `CAA` records. Use valid values and allow for DNS propagation after changes.
 
 <CardGroup cols={2}>
-  <Card title="Check availability" href="/guides/domain-availability" icon="search">Search for a domain and understand the purchase path.</Card>
-  <Card title="Manage DNS" href="/guides/dns-management" icon="network">Edit nameservers and DNS records safely.</Card>
+  <Card title="Check availability" icon="search" href="/guides/domain-availability">
+    Search for a domain and understand the purchase path.
+  </Card>
+
+  <Card title="Manage DNS" icon="network" href="/guides/dns-management">
+    Edit nameservers and DNS records safely.
+  </Card>
 </CardGroup>
