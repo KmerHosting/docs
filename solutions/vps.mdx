@@ -1,39 +1,49 @@
 ---
-title: "VPS Hosting"
-description: "Self-managed virtual servers for applications, APIs, databases, containers, and infrastructure workloads."
+title: "KVM VPS Hosting"
+description: "Full virtual-machine isolation for server workloads when KVM infrastructure capacity is available."
 icon: "server"
+sidebarTitle: "KVM VPS Hosting"
 ---
 
+KVM VPS Hosting is the KmerHosting virtual-machine line for workloads that need full VM isolation and greater operating-system control than Shared Hosting or LXC containers.
 
-VPS Hosting is the main KmerHosting server tier for workloads that need more compute, stronger isolation, and greater operating-system control than Shared Hosting or Tiny VPS.
+<Warning>
+  KVM VPS availability depends on external infrastructure capacity. When the service is marked **Out of stock** on kmerhosting.com, this documentation describes the product model but does not mean a new KVM VPS can currently be ordered.
+</Warning>
 
 <Frame caption="The VPS section lists the account servers and their operational state.">
-  <img src="/images/screenshots/vps-list.png" alt="The VPS section lists the account servers and their operational state." />
+  ![The VPS section lists the account servers and their operational state.](/images/screenshots/vps-list.png)
 </Frame>
-
 
 ## Typical workloads
 
-- Production web applications and APIs.
-- Docker and Docker Compose stacks.
-- Background workers and scheduled jobs.
-- Databases, caches, queues, and private services.
-- Reverse proxies, monitoring, and deployment automation.
-- Self-managed hosting panels when supported by the selected offer.
+- Production web applications and APIs
+- Docker and Docker Compose stacks
+- Background workers and scheduled jobs
+- Databases, caches, queues and private services
+- Reverse proxies, monitoring and deployment automation
+- Self-managed hosting panels when supported by the selected offer
 
 ## Access and responsibility
 
-A VPS can expose root or administrative credentials. The customer is responsible for operating-system updates, SSH security, firewall policy, application configuration, backups, and secret management unless a managed service explicitly says otherwise.
+A KVM VPS can expose root or administrative credentials. The customer is responsible for operating-system updates, SSH security, firewall policy, application configuration, independent backups and secret management unless a managed agreement explicitly says otherwise.
 
 <Frame caption="Credential documentation must cover every secret value before the screenshot is saved.">
-  <img src="/images/screenshots/vps-credentials.png" alt="Credential documentation must cover every secret value before the screenshot is saved." />
+  ![Credential documentation must cover every secret value before the screenshot is saved.](/images/screenshots/vps-credentials.png)
 </Frame>
 
+## KVM compared with LXC VPS
 
-## VPS compared with Tiny VPS
+LXC VPS uses lightweight Linux containers and is the currently available server line for compatible Linux workloads. KVM VPS provides full virtual-machine isolation and depends on external capacity.
 
-Tiny VPS uses a compact LXC model for lightweight workloads. VPS Hosting is the upgrade path when the application needs more resources, KVM-class isolation, dedicated networking, or sustained production capacity.
+Do not infer current orderability from this guide. Check the canonical KVM service page for the current status before planning a deployment.
 
-<Card title="Deploy on a VPS" href="/guides/vps-stacks" icon="terminal">
-Follow the initial SSH, security, runtime, process-manager, and reverse-proxy workflow.
-</Card>
+<CardGroup cols={2}>
+  <Card title="KVM VPS status" icon="server" href="https://kmerhosting.com/services/kvm-vps-hosting">
+    Check current availability and service scope.
+  </Card>
+
+  <Card title="Available LXC VPS" icon="container" href="https://kmerhosting.com/services/lxc-vps-hosting">
+    Compare the currently available LXC plans.
+  </Card>
+</CardGroup>

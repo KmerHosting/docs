@@ -1,10 +1,11 @@
 ---
-title: "Tiny VPS"
-description: "Compact Linux containers for lightweight applications, staging environments, automation tasks, and private workloads."
+title: "LXC VPS Hosting"
+description: "Lightweight Linux containers with explicit CPU, RAM, storage, traffic and snapshot limits."
 icon: "container"
+sidebarTitle: "LXC VPS Hosting"
 ---
 
-Tiny VPS is KmerHosting's entry-level virtual server solution. It provides an isolated Linux environment with SSH and root access while using fewer resources than a full VPS.
+KmerHosting LXC VPS Hosting provides an isolated Linux container with root and SSH access for workloads that need more control than Shared Hosting without requiring a full KVM virtual machine.
 
 ## Best suited for
 
@@ -15,57 +16,47 @@ Tiny VPS is KmerHosting's entry-level virtual server solution. It provides an is
 - Lightweight websites and applications
 - Linux experiments and learning environments
 
-## Plans
+## Current plans
 
-| Plan | CPU | RAM | Storage | Annual price |
-|---|---:|---:|---:|---:|
-| LXC1 | 1 vCPU AMD EPYC | 512 MB DDR4 | 10 GB SSD | 24,000 FCFA |
-| LXC2 | 1 vCPU AMD EPYC | 2 GB DDR4 | 20 GB SSD | 30,000 FCFA |
-| LXC3 | 2 vCPU AMD EPYC | 4 GB DDR4 | 30 GB SSD | 48,000 FCFA |
+| Plan | CPU | RAM | Storage | Traffic | Snapshots | Price |
+| --- | --: | --: | --: | --: | --: | --: |
+| Tiny 512 | 1 vCPU AMD EPYC | 512 MB DDR4 | 10 GB NVMe-backed SSD | 1 TB | 1 | \$1.49/month |
+| Tiny 1G | 1 vCPU AMD EPYC | 1 GB DDR4 | 20 GB NVMe-backed SSD | 2 TB | 1 | \$1.99/month |
+| Tiny 2G | 1 vCPU AMD EPYC | 2 GB DDR4 | 30 GB NVMe-backed SSD | 3 TB | 2 | \$2.99/month |
+| Tiny 4G | 2 vCPU AMD EPYC | 4 GB DDR4 | 50 GB NVMe-backed SSD | 5 TB | 3 | \$4.99/month |
+| Tiny 8G | 4 vCPU AMD EPYC | 8 GB DDR4 | 100 GB NVMe-backed SSD | 8 TB | 5 | \$8.99/month |
 
 <Note>
-Prices shown use the XAF pricing book. The final amount during checkout may depend on the account country and selected currency.
+  Public prices are shown in USD. For Cameroonian users, KmerHosting uses a fixed commercial conversion ratio of 570 XAF = 1 USD. The LXC service portal remains authoritative for live availability, selectable billing terms and the final order total.
 </Note>
 
-## Included with every plan
+## Included and limited by plan
 
 - LXC virtualization
-- One snapshot
-- One free `.com` domain
-- Shared IPv4 and IPv6
 - Linux operating system
-- 200 Mbit/s network port
-- Unlimited traffic
-- Full SSH access
-- Root access
+- Full SSH and root access
+- AMD EPYC compute
+- DDR4 memory
+- NVMe-backed SSD storage
+- Traffic quota shown for the selected plan
+- Snapshot quota shown for the selected plan
 
-## Tiny VPS compared with VPS
+LXC traffic is **not unlimited**. The applicable traffic quota is the amount shown for the selected plan and service record.
 
-Tiny VPS is intended for compact workloads and lower resource usage.
+A free domain is **not** included with LXC VPS unless a specific order or promotion explicitly states otherwise.
 
-Choose VPS Hosting when you require:
+## LXC compared with KVM VPS
 
-- KVM virtualization
-- Dedicated IPv4
-- More CPU and RAM
-- Larger storage
-- Higher network capacity
-- Sustained production workloads
+LXC VPS is the currently available lightweight server line. KVM VPS provides full virtual-machine isolation when external infrastructure capacity is available.
+
+Choose KVM VPS when you specifically require full VM isolation or a workload that does not fit container virtualization. KVM VPS may be marked **Out of stock** when external capacity is unavailable; do not treat its documentation as a statement that it can always be ordered.
 
 <CardGroup cols={2}>
-  <Card
-    title="Customer console"
-    href="https://console.kmerhosting.com"
-    icon="layout-dashboard"
-  >
-    Order and manage your Tiny VPS services.
+  <Card title="LXC VPS service" icon="container" href="https://kmerhosting.com/services/lxc-vps-hosting">
+    Review the public plan details and open the LXC service portal.
   </Card>
 
-  <Card
-    title="VPS Hosting"
-    href="/solutions/vps"
-    icon="server"
-  >
-    Compare Tiny VPS with full VPS Hosting.
+  <Card title="KVM VPS availability" icon="server" href="https://kmerhosting.com/services/kvm-vps-hosting">
+    Review the current KVM status and service scope.
   </Card>
 </CardGroup>

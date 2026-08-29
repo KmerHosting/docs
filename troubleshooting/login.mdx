@@ -4,26 +4,27 @@ description: "Resolve stale cookies, verification issues, and redirects between 
 icon: "log-in"
 ---
 
-
-A successful login should redirect from `kmerhosting.com/login` to `console.kmerhosting.com` and remain authenticated.
+A normal public login request should lead to `dashboard.kmerhosting.com/login` and continue through the current Dashboard authentication flow.
 
 <Frame caption="Start troubleshooting from a clean login page and test account.">
-  <img src="/images/screenshots/login-page.png" alt="Start troubleshooting from a clean login page and test account." />
+  ![Start troubleshooting from a clean login page and test account.](/images/screenshots/login-page.png)
 </Frame>
 
+## Dashboard returns to login
 
-## Homepage shows a profile but console returns to login
-
-1. Sign out.
-2. Remove site data for `kmerhosting.com` and `console.kmerhosting.com`.
+1. Sign out if a partial session is present.
+2. Remove stale site data for `kmerhosting.com` and `dashboard.kmerhosting.com`.
 3. Open a private window.
-4. Sign in again.
-5. Confirm the session cookie is scoped to the KmerHosting parent domain, uses path `/`, and is Secure and HttpOnly.
+4. Sign in again through `dashboard.kmerhosting.com/login`.
+5. Complete any account action explicitly requested by the Dashboard, such as email verification or onboarding.
+
+Do not troubleshoot the current login flow against the legacy `console.kmerhosting.com` hostname.
 
 ## Other checks
 
-- Complete email verification.
+- Complete email verification when requested.
 - Complete onboarding when redirected.
-- Confirm the browser allows cookies.
+- Confirm the browser allows required cookies.
 - Disable extensions that rewrite cookies or redirects for the test.
-- Check the account status card.
+- Check the current account status in the Dashboard.
+- Never send session cookies, passwords or one-time codes to support.

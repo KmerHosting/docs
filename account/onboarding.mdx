@@ -4,31 +4,32 @@ description: "Describe your role and workload so KmerHosting can recommend a pra
 icon: "route"
 ---
 
-
 Onboarding is shown when the account has not completed the required first-use profile. It records the user role and the type of project being hosted.
 
 <Frame caption="Choose the role that best describes how the account will be used.">
-  <img src="/images/screenshots/onboarding-role.png" alt="Choose the role that best describes how the account will be used." />
+  ![Choose the role that best describes how the account will be used.](/images/screenshots/onboarding-role.png)
 </Frame>
-
 
 <Frame caption="Choose the main workload rather than every possible future use case.">
-  <img src="/images/screenshots/onboarding-project.png" alt="Choose the main workload rather than every possible future use case." />
+  ![Choose the main workload rather than every possible future use case.](/images/screenshots/onboarding-project.png)
 </Frame>
-
 
 ## How recommendations are interpreted
 
 - Business websites, blogs, portfolios, and light e-commerce usually fit Shared Hosting.
-- APIs, server applications, and infrastructure workloads usually fit Tiny VPS or VPS Hosting.
+- APIs, server applications, and infrastructure workloads that fit Linux containers usually fit LXC VPS Hosting.
+- KVM VPS should be considered when full virtual-machine isolation is required; new KVM orders depend on current external capacity and may be marked **Out of stock**.
 - Learning and test projects can start small and move to a larger service later.
-- Custom requirements should be reviewed through Custom Hosting or support.
+- Custom requirements should be reviewed with support before ordering.
 
-<Frame caption="The recommendation is guidance; the user can still review the complete pricing catalog.">
-  <img src="/images/screenshots/onboarding-recommendation.png" alt="The recommendation is guidance; the user can still review the complete pricing catalog." />
+<Frame caption="The recommendation is guidance; the user can still review the complete active service catalog.">
+  ![The recommendation is guidance; the user can still review the complete pricing catalog.](/images/screenshots/onboarding-recommendation.png)
 </Frame>
 
+## Re-entering the Dashboard
 
-## Re-entering the console
+After onboarding is saved, continue account management at `dashboard.kmerhosting.com`. The public website links account actions to the current Dashboard rather than the legacy console hostname.
 
-After onboarding is saved, the account should be redirected to `console.kmerhosting.com`. The session cookie is shared across the KmerHosting parent domain so the public website and console recognize the same login.
+<Card title="KmerHosting Dashboard" icon="layout-dashboard" href="https://dashboard.kmerhosting.com">
+  Manage your account, credit, renewals and service access.
+</Card>
