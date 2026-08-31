@@ -1,0 +1,41 @@
+---
+title: "MCP server"
+description: "Connect compatible AI clients to supported KmerHosting account operations."
+---
+
+## Choose a connection mode
+
+### Local stdio
+
+Install the package and place the API key only in the MCP client environment:
+
+```bash
+bun add -g @kmerhosting/mcp
+```
+
+```json
+{
+  "mcpServers": {
+    "kmerhosting": {
+      "command": "kmerhosting-mcp",
+      "env": { "KMERHOSTING_API_KEY": "kh_live_..." }
+    }
+  }
+}
+```
+
+### Hosted OAuth
+
+Use `https://mcp.kmerhosting.com/mcp` with an MCP client that supports OAuth 2.1. The server publishes protected-resource metadata, authorization-server metadata, dynamic client registration, PKCE authorization, token refresh, and revocation. Consent is performed at `https://dashboard.kmerhosting.com/oauth/authorize`; request `offline_access` only when refresh access is needed.
+
+## Tool groups
+
+| Group | Tools |
+| --- | --- |
+| Account and services | `kmerhosting_account_get`, `kmerhosting_services_list`, `kmerhosting_service_get` |
+| Domains | `kmerhosting_domains_list`, `kmerhosting_domain_get`, `kmerhosting_domain_dns_list`, `kmerhosting_domain_dns_create`, `kmerhosting_domain_dns_update`, `kmerhosting_domain_dns_delete`, `kmerhosting_domain_auto_renew`, `kmerhosting_domain_nameservers` |
+| Email | `kmerhosting_email_services_list`, `kmerhosting_email_provision`, `kmerhosting_email_dns_sync` |
+| Shared Hosting | `kmerhosting_hosting_services_list`, `kmerhosting_hosting_stats`, `kmerhosting_hosting_panel_access` |
+| LXC VPS | `kmerhosting_vps_list`, `kmerhosting_vps_get`, `kmerhosting_vps_action`, `kmerhosting_vps_auto_renew`, `kmerhosting_vps_snapshots_list`, `kmerhosting_vps_snapshot_create`, `kmerhosting_vps_snapshot_update`, `kmerhosting_vps_snapshot_delete` |
+
+Every mutating tool accepts an optional `idempotencyKey`. DNS deletion, VPS stop/shutdown, and snapshot deletion require an explicit `confirm: true` value. Treat all returned panel links and resource data as account-sensitive.

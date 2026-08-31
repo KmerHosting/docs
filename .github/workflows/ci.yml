@@ -14,11 +14,38 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Validate documentation manifests
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate documentation contracts
         shell: bash
         run: |
           set -Eeuo pipefail
-          python -m json.tool docs.json >/dev/null
-          python -m json.tool openapi.json >/dev/null
-          test -s index.mdx
-          test -s README.md
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          config = json.loads(Path("docs.json").read_text())
+          openapi = json.loads(Path("openapi.json").read_text())
+          assert openapi["openapi"] == "3.1.0"
+          assert openapi["info"]["title"] == "KmerHosting API"
+          for group in config["navigation"]["groups"]:
+              for page in group.get("pages", []):
+                  path = Path(f"{page}.mdx")
+                  assert path.is_file(), f"navigation target is missing: {path}"
+          PY
+      - name: Verify OpenAPI snapshot matches production
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          curl --fail --silent --show-error https://api.kmerhosting.com/openapi.json -o /tmp/openapi.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          documented = json.loads(Path("openapi.json").read_text())
+          production = json.loads(Path("/tmp/openapi.json").read_text())
+          assert documented == production, "openapi.json is stale; synchronize it from the deployed API contract"
+          PY
+      - name: Validate Mintlify build
+        run: npx --yes mint@4.2.647 validate

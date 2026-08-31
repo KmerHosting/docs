@@ -1,0 +1,33 @@
+---
+title: "Domains and DNS"
+description: "Manage domains owned by your account through the console or supported developer interfaces."
+---
+
+## Supported operations
+
+The public API can list and inspect owned domains, list DNS records, queue DNS changes, change auto-renewal, and queue a nameserver replacement. Domain purchase, transfer, registrant changes, and provider credentials are not public API operations.
+
+| Operation | API scope |
+| --- | --- |
+| List domains, read a domain, list DNS | `domains:read` |
+| Auto-renewal and nameservers | `domains:write` |
+| Create, update, or delete DNS records | `domains:dns:write` |
+
+## DNS records
+
+Supported record types are `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `NS`, `SRV`, and `CAA`. A create request requires a record type and either `content` or `contents`; TTL is constrained to 1–86400 seconds. DNS changes are queued operations and require a unique `Idempotency-Key` when called directly.
+
+```bash
+curl --fail-with-body -X POST \
+  "https://api.kmerhosting.com/v1/domains/DOMAIN_ID/dns" \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY" \
+  -H "Idempotency-Key: dns-example-20260831" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"A","name":"@","content":"203.0.113.10","ttl":300}'
+```
+
+## Nameservers and renewal
+
+Nameserver replacement requires between 2 and 13 non-empty nameserver values. Toggle auto-renewal using an `enabled` boolean. Verify the domain and DNS record IDs with a read request before sending a write.
+
+See the [OpenAPI reference](/api-reference) for exact request shapes.

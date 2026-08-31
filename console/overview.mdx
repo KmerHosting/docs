@@ -1,28 +1,10 @@
 ---
-title: "Customer console overview"
-description: "Navigate the KmerHosting customer console and understand its main operational areas."
-icon: "layout-dashboard"
+title: "Customer console"
+description: "Use the KmerHosting customer console for account, ordering, billing, and service workflows."
 ---
 
+The customer console is the source of truth for account administration, purchases, checkout, billing, and product flows that are not available through the public API. It also shows the customer-facing service inventory and links to developer tools.
 
-The customer console is the protected workspace for account, billing, services, domains, storage, notifications, and developer keys.
+Use the public API, SDK, CLI, or MCP server only for operations documented in this site. They intentionally cannot expose secret-bearing, provider-administration, or broader account-management workflows.
 
-<Frame caption="The overview combines account credit, service counts, pending work, and renewal timing.">
-  <img src="/images/screenshots/dashboard-overview.png" alt="The overview combines account credit, service counts, pending work, and renewal timing." />
-</Frame>
-
-
-## Main areas
-
-- **Active Services:** services already activated for the account.
-- **Pending Orders:** unpaid or incomplete orders that can still be paid before expiry.
-- **Pending Services:** paid or created services waiting for operational activation.
-- **Billing:** account credit, invoices, and incoming renewal records.
-- **Domains:** standalone domains, domains included with services, nameservers, DNS, and renewal controls.
-- **Storage:** 5 GB free storage, uploads, downloads, deletion, and temporary account-to-account transfers.
-- **Account:** profile, avatar, debt visibility, and API keys.
-- **Settings:** notification preferences and interface settings.
-
-## Status and renewal awareness
-
-The overview includes a renewal timeline. It is a planning surface, not a replacement for invoice and service detail pages. Open the specific service before changing renewal behavior.
+<Card title="Open the customer console" icon="layout-dashboard" href="https://dashboard.kmerhosting.com">Manage your account and services.</Card>

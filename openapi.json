@@ -1,1118 +1,219 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "KmerHosting Public Platform API",
-    "version": "5.0.0",
-    "description": "Stable KmerHosting Developer API for API-key integrations and the official KmerHosting SDK. Public catalog operations remain unauthenticated; customer resources require a scoped API key.",
-    "contact": {
-      "name": "KmerHosting Support",
-      "email": "support@kmerhosting.com"
-    }
+    "title": "KmerHosting API",
+    "version": "v1",
+    "description": "Public API for resources owned by the authenticated KmerHosting account. Provider credentials, billing, purchases, account administration, destructive service operations and secrets are intentionally unavailable."
   },
   "servers": [
     {
-      "url": "https://kmerhosting.com",
-      "description": "Production public platform"
+      "url": "https://api.kmerhosting.com",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
     }
   ],
   "tags": [
     {
-      "name": "Health",
-      "description": "Service discovery and availability checks."
+      "name": "Account"
     },
     {
-      "name": "Content",
-      "description": "Public localized content."
+      "name": "Services"
     },
     {
-      "name": "Catalog",
-      "description": "Localized pricing and offers."
+      "name": "Domains"
     },
     {
-      "name": "Orders",
-      "description": "Order creation, lookup, and payment."
+      "name": "Email Hosting"
     },
     {
-      "name": "Invoices",
-      "description": "Issued invoice lookup and PDF documents."
+      "name": "Shared Hosting"
     },
     {
-      "name": "Domains",
-      "description": "Domain operations."
-    },
-    {
-      "name": "Services",
-      "description": "Hosting service inventory, credentials, renewals, and auto-renew."
-    },
-    {
-      "name": "Notifications",
-      "description": "In-app notifications."
-    },
-    {
-      "name": "KmerHosting AI Agent",
-      "description": "KmerHosting AI Agent messages and owned conversations."
-    },
-    {
-      "name": "Pricing downloads",
-      "description": "Generated pricing documents."
+      "name": "LXC VPS"
     }
   ],
-  "components": {
-    "schemas": {
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": false
-          },
-          "error": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "code": {
-            "type": "string"
-          },
-          "details": {
-            "type": "object",
-            "additionalProperties": true
-          }
-        },
-        "additionalProperties": true
-      },
-      "GenericSuccessResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": true
-          },
-          "data": {
-            "type": "object",
-            "additionalProperties": true
-          },
-          "message": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": true
-      },
-      "Locale": {
-        "type": "string",
-        "enum": [
-          "en",
-          "fr",
-          "de",
-          "nl",
-          "zh",
-          "es",
-          "pt",
-          "hi",
-          "ar"
-        ]
-      }
-    },
-    "securitySchemes": {
-      "developerApiKey": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "KmerHosting API Key",
-        "description": "Create an API key in Console > Account > API Keys. Use the full key only in trusted server-side environments."
-      }
-    }
-  },
   "paths": {
-    "/api/pricing/downloads/{slug}": {
+    "/health": {
       "get": {
-        "tags": [
-          "Pricing downloads"
-        ],
-        "summary": "Download a generated pricing document",
-        "description": "Public endpoint. No authenticated user session is required.\n\nUse this pricing downloads endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_pricing_downloads_slug",
-        "parameters": [
-          {
-            "name": "slug",
-            "in": "path",
-            "required": true,
-            "description": "slug identifier.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The requested resource was not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An upstream provider returned an invalid response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
         "security": [],
-        "x-kmerhosting-access": "public",
-        "x-kmerhosting-project": "public-platform",
-        "x-source-route": "/api/pricing/downloads/[slug]"
+        "summary": "API health",
+        "responses": {
+          "200": {
+            "description": "Healthy"
+          }
+        }
       }
     },
-    "/api/v1/catalog/domain-prices": {
+    "/v1/account": {
       "get": {
         "tags": [
-          "Catalog"
+          "Account"
         ],
-        "summary": "List localized domain prices",
-        "description": "Public endpoint. No authenticated user session is required.\n\nUse this catalog endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_catalog_domain_prices",
+        "summary": "Get the authenticated account",
+        "description": "Requires `account:read`.",
         "responses": {
           "200": {
-            "description": "Request completed successfully.",
+            "description": "Account",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                  "$ref": "#/components/schemas/Envelope"
                 }
               }
             }
           },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
+          "401": {
+            "$ref": "#/components/responses/Error"
           }
-        },
-        "security": [],
-        "x-kmerhosting-access": "public",
-        "x-kmerhosting-project": "public-platform",
-        "x-source-route": "/api/v1/catalog/domain-prices"
+        }
       }
     },
-    "/api/v1/catalog/offers": {
+    "/v1/services": {
       "get": {
-        "tags": [
-          "Catalog"
-        ],
-        "summary": "List localized hosting and domain offers",
-        "description": "Public endpoint. No authenticated user session is required.\n\nUse this catalog endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_catalog_offers",
-        "parameters": [
-          {
-            "name": "locale",
-            "in": "query",
-            "required": false,
-            "description": "locale query parameter.",
-            "schema": {
-              "$ref": "#/components/schemas/Locale"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [],
-        "x-kmerhosting-access": "public",
-        "x-kmerhosting-project": "public-platform",
-        "x-source-route": "/api/v1/catalog/offers"
-      }
-    },
-    "/api/v1/domains/availability-checks": {
-      "post": {
-        "tags": [
-          "Domains"
-        ],
-        "summary": "Check domain availability and localized price",
-        "description": "Public endpoint. No authenticated user session is required.\n\nUse this domains endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "post_api_v1_domains_availability_checks",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "domain"
-                ],
-                "properties": {
-                  "domain": {
-                    "type": "string",
-                    "example": "example.com"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request is malformed or contains invalid data.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [],
-        "x-kmerhosting-access": "public",
-        "x-kmerhosting-project": "public-platform",
-        "x-source-route": "/api/v1/domains/availability-checks"
-      }
-    },
-    "/api/v1/help-center": {
-      "get": {
-        "tags": [
-          "Content"
-        ],
-        "summary": "Get localized Help Center content",
-        "description": "Public endpoint. No authenticated user session is required.\n\nUse this content endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_help_center",
-        "parameters": [
-          {
-            "name": "lang",
-            "in": "query",
-            "required": false,
-            "description": "lang query parameter.",
-            "schema": {
-              "$ref": "#/components/schemas/Locale"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The requested resource was not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [],
-        "x-kmerhosting-access": "public",
-        "x-kmerhosting-project": "public-platform",
-        "x-source-route": "/api/v1/help-center"
-      }
-    },
-    "/api/v1": {
-      "get": {
-        "tags": [
-          "Health"
-        ],
-        "summary": "Get API version and service status",
-        "description": "Public endpoint. No authenticated user session is required.\n\nUse this health endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [],
-        "x-kmerhosting-access": "public",
-        "x-kmerhosting-project": "public-platform",
-        "x-source-route": "/api/v1"
-      },
-      "head": {
-        "tags": [
-          "Health"
-        ],
-        "summary": "Check API availability without a response body",
-        "description": "Public endpoint. No authenticated user session is required.\n\nUse this health endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "head_api_v1",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully."
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [],
-        "x-kmerhosting-access": "public",
-        "x-kmerhosting-project": "public-platform",
-        "x-source-route": "/api/v1"
-      }
-    },
-    "/api/v1/sdk/account": {
-      "get": {
-        "tags": [
-          "Developer API"
-        ],
-        "summary": "List or get account",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_account",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/account"
-      }
-    },
-    "/api/v1/sdk/ai-agent/chat-messages": {
-      "post": {
-        "tags": [
-          "KmerHosting AI Agent"
-        ],
-        "summary": "Create or process chat messages",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "post_api_v1_sdk_ai_agent_chat_messages",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true,
-                "properties": {
-                  "model": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request is malformed or contains invalid data.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/ai-agent/chat-messages"
-      }
-    },
-    "/api/v1/sdk/ai-agent/conversations/{conversationId}": {
-      "delete": {
-        "tags": [
-          "KmerHosting AI Agent"
-        ],
-        "summary": "Delete conversation Id",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "delete_api_v1_sdk_ai_agent_conversations_conversationId",
-        "parameters": [
-          {
-            "name": "conversationId",
-            "in": "path",
-            "required": true,
-            "description": "conversation Id identifier.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Request completed successfully with no response body.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request is malformed or contains invalid data.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/ai-agent/conversations/[conversationId]"
-      }
-    },
-    "/api/v1/sdk/ai-agent/conversations": {
-      "get": {
-        "tags": [
-          "KmerHosting AI Agent"
-        ],
-        "summary": "List or get conversations",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_ai_agent_conversations",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/ai-agent/conversations"
-      },
-      "post": {
-        "tags": [
-          "KmerHosting AI Agent"
-        ],
-        "summary": "Create or process conversations",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this kmerhosting ai agent endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "post_api_v1_sdk_ai_agent_conversations",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true,
-                "properties": {
-                  "model": {
-                    "type": "string"
-                  },
-                  "title": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Resource created successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request is malformed or contains invalid data.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/ai-agent/conversations"
-      }
-    },
-    "/api/v1/sdk/domains": {
-      "get": {
-        "tags": [
-          "Developer API"
-        ],
-        "summary": "List or get domains",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_domains",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/domains"
-      }
-    },
-    "/api/v1/sdk/invoices": {
-      "get": {
-        "tags": [
-          "Invoices"
-        ],
-        "summary": "List or get invoices",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this invoices endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_invoices",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/invoices"
-      }
-    },
-    "/api/v1/sdk/notifications/{notificationId}": {
-      "delete": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "Delete notification Id",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this notifications endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "delete_api_v1_sdk_notifications_notificationId",
-        "parameters": [
-          {
-            "name": "notificationId",
-            "in": "path",
-            "required": true,
-            "description": "notification Id identifier.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Request completed successfully with no response body.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request is malformed or contains invalid data.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/notifications/[notificationId]"
-      },
-      "patch": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "Update notification Id",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this notifications endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "patch_api_v1_sdk_notifications_notificationId",
-        "parameters": [
-          {
-            "name": "notificationId",
-            "in": "path",
-            "required": true,
-            "description": "notification Id identifier.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": true,
-                "properties": {}
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Request completed successfully with no response body.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request is malformed or contains invalid data.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/notifications/[notificationId]"
-      }
-    },
-    "/api/v1/sdk/notifications": {
-      "get": {
-        "tags": [
-          "Notifications"
-        ],
-        "summary": "List or get notifications",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this notifications endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_notifications",
-        "parameters": [
-          {
-            "name": "unreadOnly",
-            "in": "query",
-            "required": false,
-            "description": "unread Only query parameter.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/notifications"
-      }
-    },
-    "/api/v1/sdk/orders": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "List or get orders",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this orders endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_orders",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/orders"
-      }
-    },
-    "/api/v1/sdk": {
-      "get": {
-        "tags": [
-          "Developer API"
-        ],
-        "summary": "List or get sdk",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk",
-        "responses": {
-          "200": {
-            "description": "Request completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk"
-      }
-    },
-    "/api/v1/sdk/services/{type}/{serviceId}/auto-renew": {
-      "patch": {
         "tags": [
           "Services"
         ],
-        "summary": "Update auto renew",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this services endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "patch_api_v1_sdk_services_type_serviceId_auto_renew",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "path",
-            "required": true,
-            "description": "type identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "serviceId",
-            "in": "path",
-            "required": true,
-            "description": "service Id identifier.",
-            "schema": {
-              "type": "string"
+        "summary": "List all customer services",
+        "description": "Requires `services:read`.",
+        "responses": {
+          "200": {
+            "description": "Services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
             }
           }
+        }
+      }
+    },
+    "/v1/services/{serviceId}": {
+      "get": {
+        "tags": [
+          "Services"
         ],
+        "summary": "Get one customer service",
+        "description": "Requires `services:read`.",
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/domains": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "List owned domains",
+        "description": "Requires `domains:read`.",
+        "responses": {
+          "200": {
+            "description": "Domains",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/domains/{domainId}": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Get an owned domain",
+        "description": "Requires `domains:read`.",
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "domainId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Domain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/domains/{domainId}/auto-renew": {
+      "put": {
+        "tags": [
+          "Domains"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "domainId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Set domain auto-renew",
+        "description": "Requires the `domains:write` scope and a unique `Idempotency-Key` header.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "additionalProperties": true,
+                "required": [
+                  "enabled"
+                ],
                 "properties": {
                   "enabled": {
                     "type": "boolean"
@@ -1124,167 +225,1365 @@
         },
         "responses": {
           "200": {
-            "description": "Request completed successfully.",
+            "description": "Accepted",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
                 }
               }
             }
           },
           "400": {
-            "description": "The request is malformed or contains invalid data.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Error"
           },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/domains/{domainId}/nameservers": {
+      "put": {
+        "tags": [
+          "Domains"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "domainId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Queue a nameserver update",
+        "description": "Requires the `domains:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "nameServers"
+                ],
+                "properties": {
+                  "nameServers": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 13,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
                 }
               }
             }
           }
         },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/services/[type]/[serviceId]/auto-renew"
-      }
-    },
-    "/api/v1/sdk/services/{type}/{serviceId}": {
-      "get": {
-        "tags": [
-          "Services"
-        ],
-        "summary": "Get service Id",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this services endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_services_type_serviceId",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "path",
-            "required": true,
-            "description": "type identifier.",
-            "schema": {
-              "type": "string"
+        "responses": {
+          "200": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
             }
           },
+          "201": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/domains/{domainId}/dns": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "List DNS records",
+        "description": "Requires `domains:read`.",
+        "parameters": [
           {
-            "name": "serviceId",
             "in": "path",
             "required": true,
-            "description": "service Id identifier.",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "domainId"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request completed successfully.",
+            "description": "DNS records",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                  "$ref": "#/components/schemas/Envelope"
                 }
               }
             }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "domainId"
           },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Queue a DNS record creation",
+        "description": "Requires the `domains:dns:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "type"
+                ],
+                "anyOf": [
+                  {
+                    "required": [
+                      "content"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "contents"
+                    ]
+                  }
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "default": "@"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "AAAA",
+                      "CNAME",
+                      "MX",
+                      "TXT",
+                      "NS",
+                      "SRV",
+                      "CAA"
+                    ]
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "contents": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "ttl": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 86400,
+                    "default": 3600
+                  },
+                  "priority": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
                 }
               }
             }
           }
         },
-        "security": [
-          {
-            "developerApiKey": []
-          }
-        ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/services/[type]/[serviceId]"
-      }
-    },
-    "/api/v1/sdk/services": {
-      "get": {
-        "tags": [
-          "Developer API"
-        ],
-        "summary": "List or get services",
-        "description": "Developer endpoint. Send a KmerHosting API key as Authorization: Bearer <key>. Every resource is scoped to the API key owner and protected by explicit scopes and rate limits.\n\nUse this developer api endpoint for the operation described in the summary. The server validates authorization, ownership, and input before accessing MySQL or external providers.",
-        "operationId": "get_api_v1_sdk_services",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "description": "type query parameter.",
-            "schema": {
-              "type": "string"
+        "responses": {
+          "200": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
             }
           },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "description": "status query parameter.",
-            "schema": {
-              "type": "string"
+          "201": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
             }
+          },
+          "202": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/domains/{domainId}/dns/{recordId}": {
+      "put": {
+        "tags": [
+          "Domains"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "domainId"
+          },
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "recordId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Queue a DNS record update",
+        "description": "Requires the `domains:dns:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "AAAA",
+                      "CNAME",
+                      "MX",
+                      "TXT",
+                      "NS",
+                      "SRV",
+                      "CAA"
+                    ]
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "contents": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "ttl": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 86400
+                  },
+                  "priority": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Domains"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "domainId"
+          },
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "recordId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Queue DNS record deletion",
+        "description": "Requires `domains:dns:write` and a unique `Idempotency-Key` header.",
+        "responses": {
+          "200": {
+            "description": "Queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/email/services": {
+      "get": {
+        "tags": [
+          "Email Hosting"
+        ],
+        "summary": "List owned email hosting services",
+        "description": "Requires `email:read`.",
+        "responses": {
+          "200": {
+            "description": "Email services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/email/services/{serviceId}/provision": {
+      "post": {
+        "tags": [
+          "Email Hosting"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Provision an owned email service",
+        "description": "Requires the `email:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/email/services/{serviceId}/dns/sync": {
+      "post": {
+        "tags": [
+          "Email Hosting"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Synchronize email service DNS",
+        "description": "Requires the `email:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/hosting/services": {
+      "get": {
+        "tags": [
+          "Shared Hosting"
+        ],
+        "summary": "List owned shared-hosting services",
+        "description": "Requires `hosting:read`.",
+        "responses": {
+          "200": {
+            "description": "Shared hosting services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/hosting/services/{serviceId}/stats": {
+      "get": {
+        "tags": [
+          "Shared Hosting"
+        ],
+        "summary": "Get DirectAdmin service statistics",
+        "description": "Requires `hosting:read`. Only DirectAdmin services currently support detailed statistics.",
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
           }
         ],
         "responses": {
           "200": {
-            "description": "Request completed successfully.",
+            "description": "Hosting statistics",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericSuccessResponse"
+                  "$ref": "#/components/schemas/Envelope"
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/v1/hosting/services/{serviceId}/panel-access": {
+      "post": {
+        "tags": [
+          "Shared Hosting"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
           },
-          "500": {
-            "description": "Unexpected server error.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Create a temporary hosting panel link",
+        "description": "Requires the `hosting:panel:access` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "target": {
+                    "type": "string",
+                    "enum": [
+                      "panel",
+                      "filemanager"
+                    ],
+                    "default": "panel"
+                  }
                 }
               }
             }
           }
         },
-        "security": [
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/vps/instances": {
+      "get": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "summary": "List owned LXC VPS instances",
+        "description": "Requires `vps:read`.",
+        "responses": {
+          "200": {
+            "description": "VPS instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vps/instances/{serviceId}": {
+      "get": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "summary": "Get VPS details",
+        "description": "Requires `vps:read`.",
+        "parameters": [
           {
-            "developerApiKey": []
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
           }
         ],
-        "x-kmerhosting-access": "apiKey",
-        "x-kmerhosting-project": "developer-api",
-        "x-source-route": "/api/v1/sdk/services"
+        "responses": {
+          "200": {
+            "description": "VPS details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vps/instances/{serviceId}/actions": {
+      "post": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Start, stop, shut down or restart a VPS",
+        "description": "Requires the `vps:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "action"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "start",
+                      "stop",
+                      "shutdown",
+                      "restart"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/vps/instances/{serviceId}/auto-renew": {
+      "put": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Set VPS auto-renew",
+        "description": "Requires the `vps:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enabled"
+                ],
+                "properties": {
+                  "enabled": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/vps/instances/{serviceId}/snapshots": {
+      "get": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "summary": "List VPS snapshots",
+        "description": "Requires `vps:read`.",
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Snapshots",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Create a VPS snapshot",
+        "description": "Requires the `vps:snapshots:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 30,
+                    "pattern": "^[A-Za-z0-9 -]+$"
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 255
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/vps/instances/{serviceId}/snapshots/{snapshotId}": {
+      "patch": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          },
+          {
+            "in": "path",
+            "name": "snapshotId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 160
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Update a VPS snapshot",
+        "description": "Requires the `vps:snapshots:write` scope and a unique `Idempotency-Key` header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 30,
+                    "pattern": "^[A-Za-z0-9 -]+$"
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 255
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LXC VPS"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": "serviceId"
+          },
+          {
+            "in": "path",
+            "name": "snapshotId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 160
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "summary": "Delete a VPS snapshot",
+        "description": "Requires `vps:snapshots:write` and a unique `Idempotency-Key` header.",
+        "responses": {
+          "200": {
+            "description": "Snapshot deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     }
   },
-  "x-kmerhosting-project": "public-platform",
-  "x-kmerhosting-generated-at": "2026-07-12T03:10:32.584Z"
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "KMERHOSTING_API_KEY or OAuth access token",
+        "description": "`Authorization: Bearer kh_live_...` or a user-scoped `kh_oauth_...` token."
+      }
+    },
+    "parameters": {
+      "IdempotencyKey": {
+        "in": "header",
+        "name": "Idempotency-Key",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9._:-]+$"
+        }
+      }
+    },
+    "schemas": {
+      "Envelope": {
+        "type": "object",
+        "required": [
+          "data",
+          "request_id"
+        ],
+        "properties": {
+          "data": {},
+          "request_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message",
+              "request_id"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "request_id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "Error": {
+        "description": "API error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
 }

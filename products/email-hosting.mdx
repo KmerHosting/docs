@@ -1,0 +1,26 @@
+---
+title: "Email Hosting"
+description: "Inspect and operate Email Hosting services linked to your account."
+---
+
+## What the public API supports
+
+Use `email:read` to list owned Email Hosting services. Service records include their domain name, plan identifier, term, mailbox and domain limits, storage per mailbox, status, renewal dates, and auto-renewal state when available.
+
+With `email:write`, you can request two operations for an owned service:
+
+- Provision the service.
+- Synchronize the service DNS.
+
+Both operations require idempotency when called through the API. They are product workflows and can be accepted before downstream work completes.
+
+```bash
+curl --fail-with-body -X POST \
+  "https://api.kmerhosting.com/v1/email/services/SERVICE_ID/dns/sync" \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY" \
+  -H "Idempotency-Key: email-dns-sync-20260831" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+Mailbox administration and purchases remain console-managed workflows unless they appear in the public API reference.

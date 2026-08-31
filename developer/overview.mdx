@@ -1,41 +1,18 @@
 ---
 title: "Developer platform"
-description: "Use API keys, the REST API, TypeScript SDK, and CLI to interact with supported KmerHosting resources."
-icon: "braces"
+description: "Choose the official KmerHosting interface for server integrations, terminal automation, or AI clients."
 ---
 
-
-The Developer API is designed for external integrations and uses API keys instead of browser session cookies.
-
-<Frame caption="The public Developer API reference documents the endpoints intended for API-key access.">
-  <img src="/images/screenshots/developer-api-reference.png" alt="The public Developer API reference documents the endpoints intended for API-key access." />
-</Frame>
-
-
-## Base URL
-
-```text
-https://kmerhosting.com/api/v1/sdk
-```
-
-## Authentication
-
-```http
-Authorization: Bearer kh_live_REDACTED
-```
-
-## Main resources
-
-- Account overview.
-- Services and auto-renewal.
-- Domains.
-- Invoices and orders.
-- Notifications.
-- KmerHosting AI Agent conversations.
-
 <CardGroup cols={2}>
-  <Card title="API keys" href="/developer/api-keys" icon="key">Create, protect, deactivate, and delete keys.</Card>
-  <Card title="TypeScript SDK" href="/developer/sdk" icon="package">Use `@kmerhosting/sdk` in Node.js applications.</Card>
-  <Card title="KmerHosting CLI" href="/developer/cli" icon="terminal">Use the official terminal client.</Card>
-  <Card title="REST API" href="/developer/rest-api" icon="webhook">Call the API without the SDK.</Card>
+  <Card title="API keys" icon="key" href="/developer/api-keys">Create least-privilege keys for trusted server workloads.</Card>
+  <Card title="REST API" icon="webhook" href="/developer/rest-api">Call the versioned HTTPS API directly.</Card>
+  <Card title="SDKs" icon="package" href="/developer/sdk">Use TypeScript, Python, PHP, or Java.</Card>
+  <Card title="CLI" icon="terminal" href="/developer/cli">Run supported operations from a terminal or CI environment.</Card>
+  <Card title="MCP" icon="bot" href="/developer/mcp">Connect a compatible AI client through stdio or hosted OAuth.</Card>
 </CardGroup>
+
+## Common rules
+
+All developer interfaces operate on resources owned by the authenticated KmerHosting account. Scopes grant access by resource family; a successful response is not permission to perform undocumented or provider-side operations.
+
+Use idempotency for every write. SDKs and the CLI generate a key when you do not supply one, but retries of the same logical request should reuse a stable key. Keep `request_id` values from errors and unexpected results.

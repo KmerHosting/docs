@@ -1,41 +1,23 @@
 ---
 title: "KmerHosting documentation"
-description: "Customer, hosting, billing, storage, and developer documentation for the KmerHosting platform."
-icon: "book-open"
+description: "Official documentation for KmerHosting products, the customer console, and developer integrations."
 ---
 
+<Info>
+This documentation describes publicly supported KmerHosting behavior. The API reference, SDKs, CLI, and MCP server are the source of truth for developer operations.
+</Info>
 
-KmerHosting combines public hosting offers, a protected customer console, domain and billing workflows, free storage, and developer tooling. This documentation explains what the platform currently does, which actions are self-service, and where a support or provider-side step is still required.
+## Build and manage on KmerHosting
 
-<Frame caption="The KmerHosting public website is the entry point for solutions, pricing, account creation, and documentation.">
-  <img src="/images/screenshots/home-hero.png" alt="The KmerHosting public website is the entry point for solutions, pricing, account creation, and documentation." />
-</Frame>
-
-
-## Choose the right documentation path
+KmerHosting currently exposes four managed product areas through its public developer platform: domains and DNS, Email Hosting, Shared Hosting, and LXC VPS. Use the customer console to manage your account and services; use an API key, SDK, CLI, or MCP connection for supported automation.
 
 <CardGroup cols={2}>
-  <Card title="Create and prepare an account" href="/quickstart" icon="rocket">
-    Register, verify your email, complete onboarding, and understand account status.
-  </Card>
-  <Card title="Choose a hosting solution" href="/solutions/shared-hosting" icon="server">
-    Compare Shared Hosting, Tiny VPS, VPS Hosting, domains, email, SSL, and storage.
-  </Card>
-  <Card title="Use the customer console" href="/console/overview" icon="layout-dashboard">
-    Manage services, domains, billing, notifications, account settings, and API keys.
-  </Card>
-  <Card title="Build with the Developer API" href="/developer/overview" icon="braces">
-    Authenticate with API keys and use the REST API, SDK, or CLI.
-  </Card>
+  <Card title="Get started" icon="rocket" href="/quickstart">Connect an account or integration safely.</Card>
+  <Card title="Products" icon="boxes" href="/products/overview">Understand the supported product areas and service lifecycle.</Card>
+  <Card title="Developer platform" icon="braces" href="/developer/overview">Use the REST API, SDKs, CLI, or MCP server.</Card>
+  <Card title="API reference" icon="terminal" href="/api-reference">Browse the generated OpenAPI reference.</Card>
 </CardGroup>
 
-## Platform boundaries
+## What is intentionally not in the public API
 
-- `kmerhosting.com` hosts public pages, checkout, payment returns, and the existing web backend.
-- `console.kmerhosting.com` hosts the authenticated customer experience while sharing the same platform session.
-- `admin.kmerhosting.com` is an internal administration console and is not part of the public customer API.
-- The official documentation is published under `kmerhosting.com/docs` from the public `KmerHosting/docs` repository.
-
-<Warning>
-Never publish screenshots containing passwords, API keys, root credentials, KYC documents, payment references, or unredacted customer data. The screenshot manifest included with this documentation rewrite states what must be hidden for every image.
-</Warning>
+The public API does not expose purchases, billing, provider credentials, account administration, destructive provider-side actions, or secrets. Use the customer console for workflows outside the documented API contract.

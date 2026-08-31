@@ -1,0 +1,18 @@
+---
+title: "Operation troubleshooting"
+description: "Diagnose service, DNS, hosting-panel, and LXC VPS operation results."
+---
+
+## Check ownership and IDs
+
+Start with `services list` and the relevant product list command. Product operations require a resource owned by the authenticated account. A 404 can mean that the ID is unknown, not owned, or not linked to that product system.
+
+## Queued writes
+
+DNS, Email Hosting, temporary panel access, and other product writes can be queued. Keep the idempotency key, then check the matching read endpoint or customer console rather than submitting a second new request.
+
+## Destructive actions
+
+The CLI and MCP require explicit confirmation for DNS deletion, VPS stop/shutdown, and snapshot deletion. Verify the target and existing state before confirming. Use the same idempotency key if a request outcome is uncertain.
+
+For support, provide the `request_id`, endpoint, sanitized error, and time of the request. Do not include keys, passwords, panel URLs, or personal data.

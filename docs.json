@@ -2,278 +2,50 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
   "name": "KmerHosting",
-  "description": "Documentation for KmerHosting hosting products, customer operations, developer tools, and API integrations.",
-  "colors": {
-    "primary": "#1A73E8",
-    "light": "#8AB4F8",
-    "dark": "#1A73E8"
-  },
-  "appearance": {
-    "default": "system",
-    "strict": false
-  },
+  "description": "Official documentation for KmerHosting products and developer tools.",
+  "colors": { "primary": "#1A73E8", "light": "#8AB4F8", "dark": "#1A73E8" },
+  "appearance": { "default": "system", "strict": false },
   "favicon": "/images/favicon-192.png",
-  "icons": {
-    "library": "lucide"
-  },
-  "styling": {
-    "eyebrows": "breadcrumbs"
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view"
-    ],
-    "display": "header"
-  },
-  "logo": {
-    "light": "/images/logo-docs-light.png",
-    "dark": "/images/logo-docs-dark.png",
-    "href": "https://kmerhosting.com"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Console",
-        "href": "https://console.kmerhosting.com"
-      }
-    ]
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/KmerHosting"
-    }
-  },
+  "icons": { "library": "lucide" },
+  "styling": { "eyebrows": "breadcrumbs" },
+  "contextual": { "options": ["copy", "view"], "display": "header" },
+  "logo": { "light": "/images/logo-docs-light.png", "dark": "/images/logo-docs-dark.png", "href": "https://kmerhosting.com" },
+  "navbar": { "links": [{ "label": "Console", "href": "https://dashboard.kmerhosting.com" }] },
+  "footer": { "socials": { "github": "https://github.com/KmerHosting" } },
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Home",
-          "icon": "house",
-          "href": "/"
-        },
-        {
-          "anchor": "Website",
-          "icon": "globe",
-          "href": "https://kmerhosting.com"
-        },
-        {
-          "anchor": "Console",
-          "icon": "layout-dashboard",
-          "href": "https://console.kmerhosting.com"
-        },
-        {
-          "anchor": "Support",
-          "icon": "life-buoy",
-          "href": "https://kmerhosting.com/support"
-        },
-        {
-          "anchor": "Status",
-          "icon": "activity",
-          "href": "https://status.kmerhosting.com"
-        }
-      ]
-    },
-    "directory": "card",
+    "global": { "anchors": [
+      { "anchor": "Home", "icon": "house", "href": "/" },
+      { "anchor": "Console", "icon": "layout-dashboard", "href": "https://dashboard.kmerhosting.com" },
+      { "anchor": "API status", "icon": "activity", "href": "https://api.kmerhosting.com/health" }
+    ] },
     "groups": [
-      {
-        "group": "Getting started",
-        "icon": "rocket",
-        "expanded": true,
-        "pages": [
-          "quickstart",
-          "account/create-account",
-          "account/email-verification",
-          "account/onboarding",
-          "account/kyc",
-          "account/account-status",
-          "account/login-and-recovery"
-        ]
-      },
-      {
-        "group": "Solutions",
-        "icon": "cloud",
-        "expanded": true,
-        "pages": [
-          "solutions/shared-hosting",
-          "solutions/tiny-vps",
-          "solutions/vps",
-          "solutions/domains",
-          "solutions/custom-hosting",
-          "solutions/professional-email",
-          "solutions/ssl-certificates",
-          "solutions/free-storage"
-        ]
-      },
-      {
-        "group": "Products",
-        "icon": "boxes",
-        "expanded": true,
-        "pages": [
-          "products/kmerhosting-cli",
-          "products/kmerhosting-forge",
-          "products/kmerhosting-ai-agent",
-          "products/kmerhosting-drive",
-          "products/webcpl",
-          "products/wfilemanager"
-        ]
-      },
-      {
-        "group": "Applications",
-        "icon": "panels-top-left",
-        "expanded": false,
-        "pages": [
-          "applications/overview",
-          "applications/mobile",
-          "applications/desktop"
-        ]
-      },
-      {
-        "group": "Customer console",
-        "icon": "layout-dashboard",
-        "expanded": false,
-        "pages": [
-          "console/overview",
-          "console/active-services",
-          "console/pending-orders",
-          "console/pending-services",
-          "console/notifications",
-          "console/settings"
-        ]
-      },
-      {
-        "group": "Hosting guides",
-        "icon": "server",
-        "expanded": false,
-        "pages": [
-          "guides/deploy-website",
-          "guides/shared-hosting-stacks",
-          "guides/tiny-vps",
-          "guides/vps-stacks",
-          "guides/custom-hosting",
-          "guides/domain-availability",
-          "guides/dns-management",
-          "guides/ssl-certificates",
-          "guides/professional-email",
-          "guides/email-configuration",
-          "guides/free-storage",
-          "guides/backups",
-          "guides/service-management",
-          "guides/auto-renewal",
-          "guides/support-ticket"
-        ]
-      },
-      {
-        "group": "Billing and customer operations",
-        "icon": "wallet",
-        "expanded": false,
-        "pages": [
-          "billing/overview",
-          "billing/account-credit",
-          "billing/checkout",
-          "billing/orders",
-          "billing/invoices",
-          "billing/renewals",
-          "billing/refunds"
-        ]
-      },
-      {
-        "group": "Developer platform",
-        "icon": "braces",
-        "expanded": true,
-        "pages": [
-          "developer/overview",
-          "developer/api-keys",
-          "developer/sdk",
-          "developer/cli",
-          "developer/rest-api",
-          "developer/ai-agent",
-          "api/errors"
-        ]
-      },
-      {
-        "group": "API reference",
-        "icon": "terminal",
-        "openapi": {
-          "source": "openapi.json",
-          "directory": "api-reference"
-        }
-      },
-      {
-        "group": "Operations and troubleshooting",
-        "icon": "wrench",
-        "expanded": false,
-        "pages": [
-          "operations/status-page",
-          "operations/incidents",
-          "operations/maintenance",
-          "troubleshooting/login",
-          "troubleshooting/payment",
-          "troubleshooting/domain-dns",
-          "troubleshooting/vps-access",
-          "troubleshooting/shared-hosting"
-        ]
-      },
-      {
-        "group": "Legal",
-        "icon": "scale",
-        "expanded": false,
-        "pages": [
-          "legal/terms",
-          "legal/privacy",
-          "legal/refund-policy",
-          "legal/sla",
-          "legal/cookie-policy",
-          "legal/ai-usage-policy"
-        ]
-      }
+      { "group": "Start here", "icon": "rocket", "pages": ["quickstart", "platform/architecture", "console/overview"] },
+      { "group": "Products", "icon": "boxes", "pages": ["products/overview", "products/domains", "products/email-hosting", "products/shared-hosting", "products/lxc-vps"] },
+      { "group": "Developer platform", "icon": "braces", "pages": ["developer/overview", "developer/api-keys", "developer/rest-api", "developer/sdk", "developer/cli", "developer/mcp", "api/errors"] },
+      { "group": "API reference", "icon": "terminal", "openapi": { "source": "openapi.json", "directory": "api-reference" } },
+      { "group": "Help", "icon": "life-buoy", "pages": ["troubleshooting/access-and-credentials", "troubleshooting/operations"] }
     ]
   },
   "redirects": [
-    {
-      "source": "/products/shared-hosting",
-      "destination": "/solutions/shared-hosting",
-      "permanent": true
-    },
-    {
-      "source": "/products/tiny-vps",
-      "destination": "/solutions/tiny-vps",
-      "permanent": true
-    },
-    {
-      "source": "/products/vps",
-      "destination": "/solutions/vps",
-      "permanent": true
-    },
-    {
-      "source": "/products/domains",
-      "destination": "/solutions/domains",
-      "permanent": true
-    },
-    {
-      "source": "/products/custom-hosting",
-      "destination": "/solutions/custom-hosting",
-      "permanent": true
-    },
-    {
-      "source": "/products/professional-email",
-      "destination": "/solutions/professional-email",
-      "permanent": true
-    },
-    {
-      "source": "/products/ssl-certificates",
-      "destination": "/solutions/ssl-certificates",
-      "permanent": true
-    },
-    {
-      "source": "/products/free-storage",
-      "destination": "/solutions/free-storage",
-      "permanent": true
-    },
-    {
-      "source": "/guides/checkout",
-      "destination": "/billing/checkout",
-      "permanent": true
-    }
+    { "source": "/products/tiny-vps", "destination": "/products/lxc-vps", "permanent": true },
+    { "source": "/products/vps", "destination": "/products/lxc-vps", "permanent": true },
+    { "source": "/solutions/domains", "destination": "/products/domains", "permanent": true },
+    { "source": "/solutions/professional-email", "destination": "/products/email-hosting", "permanent": true },
+    { "source": "/solutions/shared-hosting", "destination": "/products/shared-hosting", "permanent": true },
+    { "source": "/solutions/tiny-vps", "destination": "/products/lxc-vps", "permanent": true },
+    { "source": "/solutions/vps", "destination": "/products/lxc-vps", "permanent": true },
+    { "source": "/solutions/custom-hosting", "destination": "/products/overview", "permanent": true },
+    { "source": "/developer/ai-agent", "destination": "/developer/overview", "permanent": true },
+    { "source": "/products/kmerhosting-cli", "destination": "/developer/cli", "permanent": true },
+    { "source": "/products/kmerhosting-forge", "destination": "/developer/overview", "permanent": true },
+    { "source": "/products/kmerhosting-ai-agent", "destination": "/developer/overview", "permanent": true },
+    { "source": "/products/kmerhosting-drive", "destination": "/products/overview", "permanent": true },
+    { "source": "/products/webcpl", "destination": "/products/overview", "permanent": true },
+    { "source": "/products/wfilemanager", "destination": "/products/overview", "permanent": true },
+    { "source": "/guides/dns-management", "destination": "/products/domains", "permanent": true },
+    { "source": "/guides/tiny-vps", "destination": "/products/lxc-vps", "permanent": true },
+    { "source": "/guides/shared-hosting-stacks", "destination": "/products/shared-hosting", "permanent": true },
+    { "source": "/api/overview", "destination": "/developer/rest-api", "permanent": true },
+    { "source": "/api/authentication", "destination": "/developer/api-keys", "permanent": true }
   ]
 }

@@ -1,28 +1,11 @@
 # KmerHosting Docs
 
-Complete Mintlify documentation for KmerHosting.
+Official Mintlify documentation for the KmerHosting customer platform and public developer interfaces.
 
-## Preview
-
-```bash
-npm i -g mint
-mint dev --port 3000 --no-open
-```
-
-## Deploy
-
-Push these files to the GitHub repository connected to Mintlify: `kmerhosting/docs`, branch `main`.
+## Local validation
 
 ```bash
-git add .
-git commit -m "Complete KmerHosting Mintlify documentation"
-git push origin main
+mint validate
 ```
 
-## Domain
-
-The Mintlify project should use:
-
-- custom domain: `kmerhosting.com`
-- base path: `/docs`
-- Cloudflare Worker route: `kmerhosting.com/docs*`
+The committed OpenAPI reference is checked against `https://api.kmerhosting.com/openapi.json` in CI. Read [CONTRIBUTING.md](CONTRIBUTING.md) before documenting a new product or operation.

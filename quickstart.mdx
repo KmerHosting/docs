@@ -1,57 +1,41 @@
 ---
 title: "Quickstart"
-description: "Create a KmerHosting account, complete onboarding, and reach the customer console safely."
-icon: "rocket"
+description: "Inspect your KmerHosting account and services with the official API, SDK, CLI, or MCP server."
 ---
 
+## Choose an interface
 
-This quickstart follows the normal first-use path from the public website to the customer console.
+| Need | Use |
+| --- | --- |
+| Build a server-side integration | [REST API](/developer/rest-api) or [SDK](/developer/sdk) |
+| Run an operational command | [CLI](/developer/cli) |
+| Let a compatible AI client manage supported resources | [MCP](/developer/mcp) |
+| Purchase, pay for, or administer an account | Customer console |
 
-## 1. Create the account
+## 1. Create a scoped API key
 
-Open the registration page, provide the requested identity and account information, and choose a strong password. Use an email address you control because email verification and account recovery depend on it.
+In the customer console, open **Developer tools → API keys**, select only the scopes your integration needs, and copy the secret once. Store it in a server-side secret manager.
 
-<Frame caption="Registration creates the customer account used by the website, console, billing, and developer tools.">
-  <img src="/images/screenshots/register-form.png" alt="Registration creates the customer account used by the website, console, billing, and developer tools." />
-</Frame>
+```bash
+export KMERHOSTING_API_KEY='kh_live_...'
+```
 
+Never put this value in browser code, a mobile app, a repository, screenshots, or logs.
 
-## 2. Verify the email address
+## 2. Verify access
 
-After registration, KmerHosting sends a verification flow. Enter the verification code on the verification page. Do not share the code; it should only be used in the active browser session.
+```bash
+curl --fail-with-body https://api.kmerhosting.com/v1/account \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY"
+```
 
-<Frame caption="The verification page confirms ownership of the account email address.">
-  <img src="/images/screenshots/email-verification.png" alt="The verification page confirms ownership of the account email address." />
-</Frame>
+Every successful API response contains `data` and `request_id`. Keep the request ID when contacting support.
 
+## 3. List services
 
-## 3. Complete onboarding
+```bash
+curl --fail-with-body https://api.kmerhosting.com/v1/services \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY"
+```
 
-Onboarding records the role and workload type so the platform can recommend an appropriate hosting path. The current flow distinguishes common profiles such as founder, developer, agency, student, and other, then asks what will be hosted.
-
-<Frame caption="Role selection helps tailor the first recommendation.">
-  <img src="/images/screenshots/onboarding-role.png" alt="Role selection helps tailor the first recommendation." />
-</Frame>
-
-
-<Frame caption="Workload selection separates websites, applications, APIs, infrastructure, and learning use cases.">
-  <img src="/images/screenshots/onboarding-project.png" alt="Workload selection separates websites, applications, APIs, infrastructure, and learning use cases." />
-</Frame>
-
-
-## 4. Review account status
-
-The dashboard status card shows whether additional actions are required. KYC may be requested for account activation, payment risk controls, or service operations.
-
-<Frame caption="Use the account status card as the source of truth for pending account actions.">
-  <img src="/images/screenshots/account-status-card.png" alt="Use the account status card as the source of truth for pending account actions." />
-</Frame>
-
-
-## 5. Choose the next step
-
-- For a website managed through DirectAdmin, start with [Shared Hosting](/solutions/shared-hosting).
-- For a compact Linux container with root access, use [Tiny VPS](/solutions/tiny-vps).
-- For a larger self-managed server, use [VPS Hosting](/solutions/vps).
-- For an existing domain or a new registration, review [Domains](/solutions/domains).
-- To automate account and service reads, continue to [Developer platform](/developer/overview).
+Continue with [product documentation](/products/overview) for service-specific behavior, or use the [OpenAPI reference](/api-reference) for exact requests and responses.

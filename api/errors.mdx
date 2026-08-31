@@ -1,25 +1,23 @@
 ---
-title: "API errors"
-description: "Interpret KmerHosting API status codes and prepare safe diagnostic information."
-icon: "triangle-alert"
+title: "Errors, retries, and request IDs"
+description: "Handle KmerHosting API errors safely and make write retries idempotent."
 ---
 
+## Error format
 
-The Developer API returns HTTP status codes and structured error information.
+Every API error contains `error.code`, `error.message`, and `error.request_id`. The SDKs convert unsuccessful responses into their language-specific errors; the CLI prints the code, HTTP status, and request ID when available.
 
-| Code | Meaning | Response |
-|---:|---|---|
-| 200 | Successful read or update | Read `data` from the response envelope. |
-| 201 | Resource created | Store the returned identifier or one-time secret safely. |
-| 204 | Successful operation with no body | Do not attempt to parse JSON. |
-| 400 | Invalid input | Check path, query, and body fields. |
-| 401 | Missing or invalid API key | Verify the Bearer header and key status. |
-| 403 | Key lacks permission | Use a key with the required scope. |
-| 404 | Resource absent or not owned | Verify the ID and owning account. |
-| 409 | State conflict | Refresh the resource before retrying. |
-| 429 | Rate limit | Back off and retry later. |
-| 500 | Server error | Record time and request context, then contact support. |
+| Status | Typical meaning | Action |
+| --- | --- | --- |
+| 400 | Invalid input or unsupported mutation body | Correct the request; do not blindly retry. |
+| 401 | Missing, invalid, expired, or revoked credential | Verify the credential source and create or reconnect if needed. |
+| 403 | Key or OAuth token lacks the required scope | Grant the least additional scope needed. |
+| 404 | Resource does not exist, is not owned by the account, or is not linked to the product system | Verify the ID and account. |
+| 409 | Idempotency conflict or conflicting resource state | Reuse the original key only for the same request; inspect the current resource state. |
+| 5xx | Unexpected server or upstream failure | Retry only safe reads or the same write with the same idempotency key. |
 
-## Safe diagnostic bundle
+## Retry a mutation
 
-Include method, endpoint, status code, timestamp, request ID when provided, and a sanitized response excerpt. Never include the Bearer key.
+Keep the original idempotency key, wait using bounded backoff, and repeat the exact request. Do not generate a new key until you intend a new logical action. For queued operations, follow with a read request or check the customer console.
+
+Include `request_id`, approximate timestamp, endpoint, and sanitized response when reporting a problem. Never include an API key, password, panel link, or provider credential.

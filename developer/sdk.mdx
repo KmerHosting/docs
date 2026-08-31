@@ -1,46 +1,59 @@
 ---
-title: "TypeScript SDK"
-description: "Install and use the official @kmerhosting/sdk package."
-icon: "package"
+title: "SDKs"
+description: "Use an official server-side SDK for the KmerHosting API."
 ---
 
+## Packages
 
-The official SDK is published from the `KmerHosting/kmerhosting_sdk` monorepo.
+| Language | Package | Install |
+| --- | --- | --- |
+| TypeScript | `@kmerhosting/sdk` | `npm install @kmerhosting/sdk` |
+| Python | `kmerhosting-sdk` | `pip install kmerhosting-sdk` |
+| PHP | `kmerhosting/sdk` | `composer require kmerhosting/sdk` |
+| Java 17+ | `com.kmerhosting:kmerhosting-sdk` | Maven Central dependency |
 
-## Install
+All clients read `KMERHOSTING_API_KEY` by default and expose the same resource families: `account`, `services`, `domains`, `email`, `hosting`, and `vps`. Write methods generate idempotency keys if none is supplied.
 
-```bash
-npm install @kmerhosting/sdk
-```
-
-## Create a client
+## TypeScript
 
 ```ts
-import { KmerHostingClient } from "@kmerhosting/sdk"
+import { KmerHostingClient } from "@kmerhosting/sdk";
 
-const client = new KmerHostingClient({
-  apiKey: process.env.KMERHOSTING_API_KEY!,
-})
-
-const account = await client.account.get()
-const services = await client.services.list()
+const client = new KmerHostingClient({ apiKey: process.env.KMERHOSTING_API_KEY });
+const services = await client.services.list();
 ```
 
-<Frame caption="Run SDK examples with a test key and sanitized output.">
-  <img src="/images/screenshots/sdk-terminal.png" alt="Run SDK examples with a test key and sanitized output." />
-</Frame>
+## Python
 
+```python
+from kmerhosting import KmerHostingClient
 
-## Available client areas
+client = KmerHostingClient()
+services = client.services.list()
+```
 
-- `account.get()`
-- `services.list()`, `services.get()`, and `services.setAutoRenew()`
-- `domains.list()`
-- `invoices.list()`
-- `orders.list()`
-- `notifications.list()`, `update()`, and `delete()`
-- `aiAgent.stream()` and conversation operations
+## PHP
 
-## Error handling
+```php
+use KmerHosting\Client;
 
-Catch `KmerHostingApiError` and inspect its HTTP status, code, and message. Do not log the API key or complete sensitive response data.
+$client = new Client();
+$services = $client->services()->all();
+```
+
+## Java
+
+```xml
+<dependency>
+  <groupId>com.kmerhosting</groupId>
+  <artifactId>kmerhosting-sdk</artifactId>
+  <version>0.1.1</version>
+</dependency>
+```
+
+```java
+var client = new KmerHostingClient();
+var services = client.services().list();
+```
+
+Java returns Jackson `JsonNode` API envelopes. See each package README and the [API reference](/api-reference) for method-to-endpoint mapping.

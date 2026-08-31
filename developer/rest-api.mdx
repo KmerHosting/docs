@@ -1,45 +1,47 @@
 ---
 title: "REST API"
-description: "Call KmerHosting Developer API endpoints with a Bearer API key."
-icon: "webhook"
+description: "Call the KmerHosting v1 API directly over HTTPS."
 ---
 
+## Base URL and authentication
 
-The REST API uses JSON for normal resources and can return a stream for AI Agent messages.
+The production base URL is `https://api.kmerhosting.com`. Authenticate with an API key or, for the hosted MCP flow, a user-scoped OAuth access token.
 
-<Frame caption="Use the generated reference for request schemas, responses, and supported methods.">
-  <img src="/images/screenshots/developer-api-reference.png" alt="Use the generated reference for request schemas, responses, and supported methods." />
-</Frame>
+```http
+Authorization: Bearer kh_live_...
+```
 
+The health endpoint is public: `GET /health`. All `/v1/*` operations require an appropriate scope.
 
-## Example request
+## Response envelopes
+
+Successful responses use this shape:
+
+```json
+{ "data": {}, "request_id": "UUID" }
+```
+
+Error responses use this shape:
+
+```json
+{ "error": { "code": "string", "message": "string", "request_id": "UUID" } }
+```
+
+## Writes and idempotency
+
+Every documented mutation requires `Idempotency-Key`, 8–128 characters using letters, digits, `.`, `_`, `:`, or `-`. Generate it once per logical operation and reuse it only when retrying that exact operation.
 
 ```bash
-curl --request GET \
-  --url https://kmerhosting.com/api/v1/sdk/account \
-  --header "Authorization: Bearer $KMERHOSTING_API_KEY" \
-  --header "Accept: application/json"
+curl --fail-with-body -X PUT \
+  "https://api.kmerhosting.com/v1/domains/DOMAIN_ID/auto-renew" \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY" \
+  -H "Idempotency-Key: domain-renewal-20260831" \
+  -H "Content-Type: application/json" \
+  -d '{"enabled":true}'
 ```
 
-## Common endpoint families
+Some writes return an accepted or queued result. Poll the relevant read endpoint or the customer console to observe product completion.
 
-```text
-GET    /account
-GET    /services
-GET    /services/{type}/{serviceId}
-PATCH  /services/{type}/{serviceId}/auto-renew
-GET    /domains
-GET    /invoices
-GET    /orders
-GET    /notifications
-PATCH  /notifications/{notificationId}
-DELETE /notifications/{notificationId}
-POST   /ai-agent/chat-messages
-GET    /ai-agent/conversations
-POST   /ai-agent/conversations
-DELETE /ai-agent/conversations/{conversationId}
-```
+## Resource families
 
-## Ownership enforcement
-
-The API must return only resources that belong to the key owner. It must not expose plaintext passwords, VPS root credentials, DirectAdmin passwords, KYC documents, payment secrets, or administrative resources.
+The exact endpoint definitions are generated in the [OpenAPI reference](/api-reference): account, service inventory, domains/DNS, Email Hosting, Shared Hosting, and LXC VPS.

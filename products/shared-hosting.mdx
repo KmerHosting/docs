@@ -1,0 +1,29 @@
+---
+title: "Shared Hosting"
+description: "Use the Shared Hosting catalog and manage supported service access through the public API."
+---
+
+## Catalog and billing
+
+The live Shared Hosting catalog supplies the available plans, control-panel type, limits, features, price, and availability. It supports cPanel and DirectAdmin offerings. The current product workflow supports one-, three-, six-, and twelve-month periods and unmanaged or managed support levels where offered.
+
+The final price, availability, selected panel, and included features must always be read from the live catalog or the purchased service record. Do not rely on a copied price table.
+
+## Supported API operations
+
+| Operation | Scope | Notes |
+| --- | --- | --- |
+| List owned services | `hosting:read` | Returns supported service inventory fields. |
+| Retrieve statistics | `hosting:read` | Detailed statistics currently require a DirectAdmin service. |
+| Create temporary panel access | `hosting:panel:access` | `target` is `panel` or `filemanager`; default is `panel`. |
+
+```bash
+curl --fail-with-body -X POST \
+  "https://api.kmerhosting.com/v1/hosting/services/SERVICE_ID/panel-access" \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY" \
+  -H "Idempotency-Key: panel-access-20260831" \
+  -H "Content-Type: application/json" \
+  -d '{"target":"panel"}'
+```
+
+The returned panel link is temporary. Treat it as sensitive and do not send it to untrusted recipients.
