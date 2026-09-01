@@ -57,8 +57,8 @@
       } catch {
         return
       }
-      link.setAttribute('target', '_blank')
-      link.setAttribute('rel', 'noopener noreferrer')
+      if (link.getAttribute('target') !== '_blank') link.setAttribute('target', '_blank')
+      if (link.getAttribute('rel') !== 'noopener noreferrer') link.setAttribute('rel', 'noopener noreferrer')
     })
   }
 
