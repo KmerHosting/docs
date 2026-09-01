@@ -45,6 +45,34 @@ html[data-current-path='/'] #page-title {
     min-width: 0 !important;
   }
 
+  /* Long unspaced values (URLs, IDs, commands) must wrap inside the article
+     instead of widening the page and creating a horizontal scroll surface. */
+  #content-container {
+    min-width: 0 !important;
+    overflow-x: clip !important;
+  }
+
+  #content-area,
+  #content-area .prose,
+  #content-area p,
+  #content-area li,
+  #content-area a,
+  #content-area td,
+  #content-area th,
+  #content-area code {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  #content-area pre {
+    max-width: 100% !important;
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
   /* The wrapper uses row-reverse: flex-end is the visual left edge. Keeping
      the group there removes the unused gutter beside the expanded navigation
      without pushing the article or outline beyond the viewport. */
