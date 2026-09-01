@@ -28,6 +28,8 @@ bun add --global github:KmerHosting/mcp
 
 Use `https://mcp.kmerhosting.com/mcp` with an MCP client that supports OAuth 2.1. The server publishes protected-resource metadata, authorization-server metadata, dynamic client registration, PKCE authorization, token refresh, and revocation. Consent is performed at `https://dashboard.kmerhosting.com/oauth/authorize`; request `offline_access` only when refresh access is needed.
 
+The consent screen exposes all 22 public API scopes. If the requested selection includes infrastructure power, snapshots, root credentials, LXC reinstallation, or terminal access, the dashboard displays the concrete risks and requires a separate acknowledgement before issuing the authorization code. Keep only the scopes the MCP client needs; dangerous tool calls still require their own explicit confirmation.
+
 ## Tool groups
 
 | Group | Tools |
