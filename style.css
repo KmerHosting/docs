@@ -7,6 +7,23 @@
   display: none !important;
 }
 
+/* The landing page is a visual chooser, so the generic page H1 should not
+   compete with the task cards. Keep the frontmatter title for metadata and
+   hide only its rendered heading on the root page. */
+html[data-current-path='/'] #page-title {
+  display: none !important;
+}
+
+@media (min-width: 1024px) {
+  /* Give the documentation content more room by keeping the on-page outline
+     compact. The outline remains visible and usable, just less dominant. */
+  #toc,
+  #toc > div {
+    width: 11rem !important;
+    max-width: 11rem !important;
+  }
+}
+
 @media (min-width: 1024px) {
   #navbar {
     position: relative !important;
