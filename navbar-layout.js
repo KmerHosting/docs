@@ -62,6 +62,42 @@
     })
   }
 
+  function ensureSidebarToggle() {
+    if (!window.matchMedia('(min-width: 1024px)').matches) return
+
+    let toggle = document.querySelector('#kh-sidebar-toggle')
+    if (!toggle) {
+      toggle = document.createElement('button')
+      toggle.id = 'kh-sidebar-toggle'
+      toggle.type = 'button'
+      toggle.addEventListener('click', () => {
+        const collapsed = document.body.classList.toggle('kh-sidebar-collapsed')
+        toggle.setAttribute('aria-expanded', String(!collapsed))
+        toggle.setAttribute('aria-label', collapsed ? 'Expand navigation' : 'Collapse navigation')
+        toggle.textContent = collapsed ? '»' : '«'
+        try {
+          window.localStorage.setItem('kh-sidebar-collapsed', String(collapsed))
+        } catch {
+          // Private browsing or blocked storage should not break navigation.
+        }
+      })
+      document.body.appendChild(toggle)
+    }
+
+    if (!toggle.hasAttribute('aria-expanded')) {
+      let collapsed = false
+      try {
+        collapsed = window.localStorage.getItem('kh-sidebar-collapsed') === 'true'
+      } catch {
+        // Use the expanded default when storage is unavailable.
+      }
+      document.body.classList.toggle('kh-sidebar-collapsed', collapsed)
+      toggle.setAttribute('aria-expanded', String(!collapsed))
+      toggle.setAttribute('aria-label', collapsed ? 'Expand navigation' : 'Collapse navigation')
+      toggle.textContent = collapsed ? '»' : '«'
+    }
+  }
+
   function scheduleArrange() {
     if (scheduled) return
     scheduled = true
@@ -69,6 +105,7 @@
       arrangeTopbar()
       enforceTwoThemeModes()
       enforceExternalLinks()
+      ensureSidebarToggle()
     })
   }
 
