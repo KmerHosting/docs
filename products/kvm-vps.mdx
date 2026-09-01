@@ -1,0 +1,27 @@
+---
+title: "KVM VPS"
+description: "Manage existing KVM VPS services through the customer portal and supported developer interfaces."
+---
+
+KVM VPS is documented for customers who already own a service. New stock can be unavailable; consult the [live catalog](https://kmerhosting.com/pricing) instead of assuming that a management feature means the product is currently orderable.
+
+## Customer controls
+
+The KVM portal can show instance details and provide start, shutdown, restart, and force-stop controls. It can also expose root-password reset, manual renewal, auto-renew, scheduled cancellation, service recovery, and snapshot list/create/edit/delete/rollback workflows when supported by the instance.
+
+<Warning>
+Force stop can interrupt writes. Snapshot rollback replaces the current disk state, and snapshot deletion removes a recovery point. Verify the instance, current state, snapshot date, and backup coverage before confirming.
+</Warning>
+
+## Public API
+
+| Operation | Scope |
+| --- | --- |
+| List/read KVM instances and snapshots | `kvm:read` |
+| Start, stop, shut down, or restart | `kvm:power:write` |
+| Change auto-renew | `kvm:subscription:write` |
+| Create, update, or delete snapshots | `kvm:snapshots:write` |
+
+Dangerous KVM scopes require a trusted IPv4 allowlist when the API key is created. Writes require idempotency. Password reset, snapshot rollback, manual renewal, cancellation, and service recovery remain portal-managed unless they appear in the current [API reference](/api-reference).
+
+Use `/v1/kvm/instances`; do not use the retired `/v1/vps` resource.

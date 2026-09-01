@@ -5,7 +5,29 @@ description: "Manage domains owned by your account through the console or suppor
 
 ## Supported operations
 
-The public API can list and inspect owned domains, list DNS records, queue DNS changes, change auto-renewal, and queue a nameserver replacement. Domain purchase, transfer, registrant changes, and provider credentials are not public API operations.
+The Domain portal supports live TLD pricing, bulk availability search, registration and transfer orders, domain contacts, renewals, transfer management, registry lock, WHOIS privacy where supported, EPP/transfer-code retrieval, forwarding, glue hosts, DNS, notifications, invoices, and receipts. Registry and provider eligibility determine which controls appear for a domain.
+
+### Register a domain
+
+1. Search the exact name and extension in the Domain portal.
+2. Review live availability, registration and renewal pricing, term, registry rules, and contact requirements.
+3. Select or create accurate registrant contacts and complete any required verification.
+4. Confirm the order once, then follow its status before repeating it.
+5. After activation, verify nameservers, DNS, auto-renew, registry lock, and privacy state.
+
+### Transfer a domain
+
+Unlock the domain at the current registrar, confirm the registrant email is accessible, obtain the EPP/auth code, and check the registry transfer restrictions. Create one transfer order and follow its query/approve/reject/cancel state. A transfer can be delayed by registry policy or a losing registrar; it is not only a DNS operation.
+
+### Renew, restore, and secure
+
+Renew before expiry and keep sufficient account credit if auto-renew is enabled. After expiry, grace and redemption rules depend on the TLD and registry. Restoration is not offered as universal self-service; use the controls shown for the domain or contact support immediately.
+
+Registry lock and WHOIS privacy can be unavailable or restricted for some extensions. Disabling transfer lock and retrieving an EPP code are security-sensitive actions—relock the domain when the transfer is no longer intended.
+
+## Public API operations
+
+The public API can list and inspect owned domains, list DNS records, queue DNS changes, change auto-renewal, and queue a nameserver replacement. Search, purchase, transfer, registrant changes, security controls, and provider credentials are not public API operations.
 
 | Operation | API scope |
 | --- | --- |
@@ -31,3 +53,7 @@ curl --fail-with-body -X POST \
 Nameserver replacement requires between 2 and 13 non-empty nameserver values. Toggle auto-renewal using an `enabled` boolean. Verify the domain and DNS record IDs with a read request before sending a write.
 
 See the [OpenAPI reference](/api-reference) for exact request shapes.
+
+## Contacts, forwarding, and glue hosts
+
+Keep registrant, administrative, technical, and billing contacts accurate. Contact changes or new registrations can trigger email verification. Domain forwarding redirects web requests; it is not a mailbox forward and does not replace DNS for every protocol. Glue or child nameservers are for hosts such as `ns1.example.com` that need IP registration at the parent registry—use them only when operating authoritative DNS.

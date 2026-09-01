@@ -1,23 +1,31 @@
 ---
-title: "KmerHosting documentation"
-description: "Official documentation for KmerHosting products, the customer console, and developer integrations."
+title: "Choose what you want to do"
+description: "Find KmerHosting product guides, customer account procedures, developer tools, and troubleshooting help."
 ---
 
-<Info>
-This documentation describes publicly supported KmerHosting behavior. The API reference, SDKs, and MCP server are the source of truth for developer operations.
-</Info>
+Use these paths to reach the procedure or reference you need. Prices, plan limits, and stock always come from the [live catalog](https://kmerhosting.com/pricing), not copied documentation tables.
 
-## Build and manage on KmerHosting
-
-KmerHosting currently exposes domains and DNS, Email Hosting, Shared Hosting, LXC inventory, and KVM management through its public developer platform. Use the customer console to manage workflows outside the documented API; use an API key, SDK, or MCP connection for supported automation.
-
-<CardGroup cols={2}>
-  <Card title="Get started" icon="rocket" href="/quickstart">Connect an account or integration safely.</Card>
-  <Card title="Products" icon="boxes" href="/products/overview">Understand the supported product areas and service lifecycle.</Card>
-  <Card title="Developer platform" icon="braces" href="/developer/overview">Use the REST API, SDKs, or MCP server.</Card>
-  <Card title="API reference" icon="terminal" href="/api-reference">Browse the generated OpenAPI reference.</Card>
+<CardGroup cols={3}>
+  <Card title="Set up an account" icon="user-plus" href="/quickstart">Create an account, add credit, choose a live product, and find its portal.</Card>
+  <Card title="Manage billing" icon="receipt" href="/console/account-and-billing">Review credit, invoices, renewals, cancellations, and refunds.</Card>
+  <Card title="Manage domains" icon="globe" href="/products/domains">Register, transfer, renew, secure, and configure DNS for a domain.</Card>
+  <Card title="Set up email" icon="mail" href="/products/email-hosting">Verify DNS, create mailboxes, and connect webmail or mail clients.</Card>
+  <Card title="Manage hosting" icon="panels-top-left" href="/products/shared-hosting">Use cPanel or DirectAdmin, inspect usage, renew, or upgrade.</Card>
+  <Card title="Operate a VPS" icon="server" href="/products/lxc-vps">Use LXC controls, snapshots, networking, web domains, and terminal access.</Card>
+  <Card title="Use developer tools" icon="braces" href="/developer/overview">Integrate with the REST API, SDKs, CLI, or MCP server.</Card>
+  <Card title="Troubleshoot a problem" icon="wrench" href="/troubleshooting/overview">Diagnose access, DNS, provisioning, operations, billing, and renewals.</Card>
+  <Card title="Understand the platform" icon="network" href="/platform/architecture">Learn how accounts, portals, providers, regions, and public APIs fit together.</Card>
 </CardGroup>
 
-## What is intentionally not in the public API
+<Info>
+The **Customer Dashboard** is authoritative for your account, balance, invoices, notifications, renewals, API keys, and service inventory. Product portals hold the specialized controls for each service. The API reference is authoritative for supported automation.
+</Info>
 
-The public API does not expose purchases, billing, provider credentials, account administration, destructive provider-side actions, or secrets. Use the customer console for workflows outside the documented API contract.
+## Current products and roadmap
+
+The documentation covers Domains, Professional Email, cPanel and DirectAdmin Shared Hosting, LXC VPS, management of existing KVM VPS instances, and wFileManager. Products that are not orderable are documented only on the [roadmap](/platform/roadmap).
+
+<CardGroup cols={2}>
+  <Card title="Open Customer Dashboard" icon="layout-dashboard" href="https://dashboard.kmerhosting.com">Manage your KmerHosting account and services.</Card>
+  <Card title="Browse API reference" icon="terminal" href="/api-reference">See exact endpoints, scopes, payloads, and responses.</Card>
+</CardGroup>

@@ -7,7 +7,9 @@ description: "Create, scope, protect, and revoke KmerHosting API keys."
 
 In the customer console, open **Developer tools → API keys**. Choose a descriptive name, an expiration, and the minimum scopes required by the integration. The full secret is displayed once; KmerHosting stores a hash and later shows only key metadata.
 
-Choose one of the short expiration presets (from one minute through one calendar month), or a custom expiration up to one calendar year. Custom expirations require an explicit confirmation. Expired keys cannot be used again.
+Choose one of the presets—1 minute, 5 minutes, 15 minutes, 30 minutes, 1 hour, 24 hours, 7 days, or 1 calendar month—or a custom expiration between 1 minute and 1 calendar year. One calendar year is calculated from the creation date rather than fixed to 365 days. Custom expirations require an explicit confirmation and warning acknowledgement. Expired keys cannot be used again.
+
+Scopes that can change infrastructure, subscriptions, snapshots, DNS, provisioning, or temporary access are clearly marked as dangerous. The dashboard shows the risk before creation and requires explicit acknowledgement. If a dangerous scope requires an IPv4 allowlist, enter every trusted public egress IPv4 that will use the key; requests from other addresses are rejected.
 
 ## Scope reference
 
@@ -36,4 +38,12 @@ Choose one of the short expiration presets (from one minute through one calendar
 - Keys that include a dangerous KVM scope must be restricted to one or more trusted IPv4 addresses. Requests from another address are rejected.
 - Dangerous scopes require an explicit acknowledgement at key creation. Review the activity view regularly; it records every API request, including operation calls, route, status, timestamp, and source IPv4.
 
+See [API-key activity and analytics](/console/api-activity) for the full request audit and response procedure.
+
 Use an OAuth connection rather than a copied API key when configuring the hosted [MCP server](/developer/mcp).
+
+## How a request is bound to you
+
+An API key is stored as a hash and bound to the KmerHosting account that created it. Each request must pass the key's expiration, revocation, account ownership, scope, and—when configured—source IPv4 checks. Resource lookup is then restricted to services owned by the same account. Dangerous operations also use explicit confirmation in MCP/CLI and idempotency for safe retries.
+
+These layers reduce the usefulness of a stolen key, but they are not a second human login factor. If an integration needs delegated user authorization, use the hosted MCP OAuth flow instead of sharing an API key.

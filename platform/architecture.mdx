@@ -13,7 +13,8 @@ flowchart LR
   Inventory --> Domains[Domains and DNS]
   Inventory --> Email[Email Hosting]
   Inventory --> Hosting[Shared Hosting]
-  Inventory --> VPS[LXC VPS]
+  Inventory --> LXC[LXC VPS]
+  Inventory --> KVM[KVM VPS]
   API[Public API] --> Inventory
   SDK[SDKs] --> API
   CLI[CLI] --> API
@@ -29,3 +30,9 @@ Writes use idempotency keys. Some product operations are queued: acceptance mean
 ## Pricing and availability
 
 Catalogs are live product data. Documentation does not copy fixed prices or availability because they can change. Shared Hosting currently supports 1-, 3-, 6-, and 12-month billing periods; its catalog determines the applicable plan, panel, support level, price, and availability at checkout or renewal time.
+
+## Interface boundaries
+
+The Customer Dashboard owns central identity, credit, notifications, documents, renewals, API keys, and the cross-product inventory. Product portals own customer-facing controls that require specialized state or interactive confirmation. The developer platform deliberately exposes a smaller, versioned automation contract.
+
+“Portal-only” is therefore a supported boundary, not a missing promise. Provider consoles, provider credentials, internal workers, reconciliation tasks, database structures, and administrator endpoints are never customer API capabilities.

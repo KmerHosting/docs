@@ -9,7 +9,9 @@ description: "The KmerHosting product areas currently available through the publ
   <Card title="Domains and DNS" icon="globe" href="/products/domains">Inspect domains, DNS records, nameservers, and auto-renewal.</Card>
   <Card title="Email Hosting" icon="mail" href="/products/email-hosting">Inspect services, provision them, and synchronize DNS.</Card>
   <Card title="Shared Hosting" icon="panels-top-left" href="/products/shared-hosting">Inspect services, retrieve statistics, and create temporary panel access.</Card>
-  <Card title="LXC instances" icon="container" href="/products/lxc-vps">Inspect owned LXC instances through the public API; use the console for lifecycle operations.</Card>
+  <Card title="LXC VPS" icon="container" href="/products/lxc-vps">Deploy and manage LXC instances in the customer portal; automate public read operations.</Card>
+  <Card title="KVM VPS" icon="server" href="/products/kvm-vps">Manage existing KVM instances, power, renewals, and snapshots.</Card>
+  <Card title="wFileManager" icon="folder" href="/products/wfilemanager">Run a self-hosted file manager on a Linux server you control.</Card>
 </CardGroup>
 
 ## Lifecycle
@@ -21,3 +23,16 @@ Use the central service inventory when you need a cross-product view. Use the pr
 ## Pricing
 
 Prices, terms, plan limits, and availability come from the live product catalog and from the service record after purchase. They are intentionally not duplicated here. A stored service can expose its plan name, renewal price and currency, billing term, renewal date, and auto-renewal state through the console or applicable API response.
+
+## Capability by interface
+
+| Product | Customer portal | Public developer platform |
+| --- | --- | --- |
+| Domains | Ordering, transfers, contacts, DNS, security, renewals, documents | Owned inventory, DNS, nameservers, auto-renew |
+| Email Hosting | Ordering, DNS verification, mailboxes, webmail, billing | List services, provision, synchronize DNS |
+| Shared Hosting | Ordering, service details, panel access, renewal, upgrade, cancellation | List, provider-neutral statistics, temporary panel/File Manager access |
+| LXC VPS | Full customer lifecycle, power, metrics, snapshots, terminal, web domains, billing | List and inspect owned instances |
+| KVM VPS | Existing-service power, credentials, snapshots, renewal, cancellation | Inventory, power, auto-renew, snapshot create/update/delete |
+| wFileManager | Self-hosted application | No KmerHosting account API |
+
+Portal-only does not mean unsupported. It means the workflow needs customer-session context, an interactive confirmation, or a public API contract that has not been released.

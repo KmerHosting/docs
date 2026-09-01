@@ -1,5 +1,12 @@
 /* KmerHosting documentation topbar ------------------------------------------------- */
 
+/* Mintlify natively offers System/Light/Dark. KmerHosting deliberately exposes
+   only explicit Light/Dark preferences; docs.json sets Light as the default. */
+[aria-label='Theme preference'] .kh-system-theme-option,
+[aria-label='Theme preference'] button[aria-label='Switch to system theme'] {
+  display: none !important;
+}
+
 @media (min-width: 1024px) {
   #navbar {
     position: relative !important;

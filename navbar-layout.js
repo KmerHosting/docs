@@ -34,10 +34,28 @@
     }
   }
 
+  function enforceTwoThemeModes() {
+    const preference = document.querySelector('[aria-label="Theme preference"]')
+    if (!preference) return
+
+    const system = preference.querySelector('button[aria-label="Switch to system theme"]')
+    if (system) {
+      system.classList.add('kh-system-theme-option')
+      system.setAttribute('aria-hidden', 'true')
+      system.setAttribute('tabindex', '-1')
+    }
+
+    // Mintlify exposes system/light/dark as a three-way preference. KmerHosting
+    // supports explicit light and dark choices; docs.json sets light as default.
+  }
+
   function scheduleArrange() {
     if (scheduled) return
     scheduled = true
-    window.requestAnimationFrame(arrangeTopbar)
+    window.requestAnimationFrame(() => {
+      arrangeTopbar()
+      enforceTwoThemeModes()
+    })
   }
 
   const observer = new MutationObserver(scheduleArrange)

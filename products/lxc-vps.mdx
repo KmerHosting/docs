@@ -5,7 +5,31 @@ description: "Manage supported LXC VPS instance operations through the console a
 
 ## Supported operations
 
-The public API lists and inspects owned LXC instances. Lifecycle actions, billing changes, terminal access, credentials, and snapshots remain console-only while their customer-safe API contracts are completed.
+The LXC portal supports deployment and purchase, start, stop, restart, freeze, live details and metrics, traffic/quota views, snapshots, root-password rotation, reinstall, failed-provisioning retry, managed web domains, DNS ownership checks, Nginx proxy configuration, Let's Encrypt certificates, short-lived terminal tickets, upgrade quotes, prorated upgrades, billing-period changes, scheduled cancellation and resume, orders, account credit, invoices, and receipts.
+
+## Deploy and access an instance
+
+1. Choose an available plan, region, operating system image, billing period, and other live options.
+2. Review the order once and wait for provisioning; use **Retry provisioning** only when the service explicitly reports a retryable failure.
+3. Store the initial credentials securely and rotate the root password if it may have been exposed.
+4. Restrict network access with an operating-system firewall and update packages before deploying an application.
+5. Use the short-lived web terminal only on a trusted device. The ticket grants interactive access until it expires.
+
+## Power, freeze, reinstall, and snapshots
+
+- **Stop** and **restart** can interrupt applications and writes; prefer a clean shutdown when available.
+- **Freeze** pauses the container and its processes; it is not a backup or graceful application pause.
+- A snapshot is a point-in-time recovery aid. Create one before risky changes, label it clearly, and test independent backups.
+- Snapshot restore replaces current state with the selected snapshot. Confirm the timestamp and affected data first.
+- Reinstallation replaces the operating system and instance data. Download needed backups and require explicit confirmation.
+
+## Web domains and HTTPS
+
+The portal can verify control of a domain, configure its Nginx proxy target, and request a Let's Encrypt certificate. Point the authoritative DNS record to the instance address, verify ownership, confirm the local application is listening on the intended port, then enable HTTPS. A certificate request can fail when DNS still points elsewhere, port 80/443 is blocked, or another proxy answers the validation request.
+
+## Upgrades, billing, and cancellation
+
+Read the upgrade quote before confirming; upgrades can be prorated. Billing-period changes apply according to the displayed effective date and price. Cancellation is normally scheduled rather than immediate. Use **Resume** or revoke cancellation before the termination cutoff when available.
 
 | Operation | Scope |
 | --- | --- |
@@ -17,4 +41,4 @@ curl --fail-with-body \
   -H "Authorization: Bearer $KMERHOSTING_API_KEY"
 ```
 
-Purchases, lifecycle actions, snapshots, reinstalling an operating system, root-password handling, terminal access, and unmanaged provider controls are not public API operations.
+Purchases, lifecycle actions, snapshots, reinstalling an operating system, root-password handling, terminal access, and unmanaged provider controls are portal-only operations until they appear in the current public API reference.

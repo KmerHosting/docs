@@ -1,10 +1,25 @@
 ---
-title: "Customer console"
-description: "Use the KmerHosting customer console for account, ordering, billing, and service workflows."
+title: "Customer Dashboard and product portals"
+description: "Know where to manage KmerHosting account, billing, service, and product-specific workflows."
 ---
 
-The customer console is the source of truth for account administration, purchases, checkout, billing, and product flows that are not available through the public API. It also shows the customer-facing service inventory and links to developer tools.
+The Customer Dashboard is the source of truth for central account work. It provides the overview, service inventory, live product links, developer tools, API keys, notifications, account credit, invoices and receipts, renewals, account settings, and account analytics.
+
+Product portals hold specialized workflows:
+
+| Portal | Typical work |
+| --- | --- |
+| Domains | Search, registration, transfer, contacts, DNS, security, renewal, documents |
+| Email Hosting | Domain setup, DNS verification, mailboxes, webmail, limits, billing |
+| Shared Hosting | Purchase, credentials, cPanel/DirectAdmin access, usage, renewals, upgrades |
+| LXC | Deploy, instance controls, metrics, snapshots, terminal, web domains, billing |
+| KVM | Existing instance controls, password reset, snapshots, renewals, cancellation |
+
+Opening a product portal does not create a second KmerHosting identity. Use the same customer account and follow the ownership links shown in the dashboard.
 
 Use the public API, SDK, CLI, or MCP server only for operations documented in this site. They intentionally cannot expose secret-bearing, provider-administration, or broader account-management workflows.
 
-<Card title="Open the customer console" icon="layout-dashboard" href="https://dashboard.kmerhosting.com">Manage your account and services.</Card>
+<CardGroup cols={2}>
+  <Card title="Open Customer Dashboard" icon="layout-dashboard" href="https://dashboard.kmerhosting.com">Manage your account and services.</Card>
+  <Card title="Account and billing guide" icon="receipt" href="/console/account-and-billing">Understand credit, documents, renewals, and cancellations.</Card>
+</CardGroup>

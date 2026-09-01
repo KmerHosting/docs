@@ -1,0 +1,28 @@
+---
+title: "DNS and email troubleshooting"
+description: "Diagnose nameserver, DNS propagation, email verification, mailbox, and mail-client issues."
+---
+
+## DNS does not resolve
+
+1. Confirm the domain is active and not expired.
+2. Confirm the registry nameservers match the DNS zone you edited.
+3. Check the exact record name, type, content, and TTL.
+4. Remove conflicting records only after confirming which service depends on them.
+5. Wait for the previous TTL and provider processing before repeating the write.
+
+An API write being accepted does not prove that every recursive resolver already sees the result. Keep the request ID and poll the relevant domain read endpoint or portal.
+
+## Email domain is not verified
+
+Open the Email Hosting DNS page and compare every required MX, TXT, and other record with the authoritative DNS zone. Avoid adding the same record to a non-authoritative provider. Use the DNS synchronization feature only when the product confirms it can manage that zone; otherwise copy the required records or use DNS assistance.
+
+## Mailbox or client cannot connect
+
+- Confirm the service and mailbox are active and within plan limits.
+- Re-enter the full email address as the username.
+- Use the protocol, hostname, ports, encryption mode, and authentication values displayed by the email portal.
+- Reset the mailbox password if its state is uncertain; do not request the current password from support.
+- Test webmail to separate a mailbox problem from a local client problem.
+
+When contacting support, provide the domain, mailbox address, timestamp, client name, server hostname, port, encryption mode, and sanitized error. Never provide the mailbox password.

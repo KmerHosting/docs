@@ -4,31 +4,32 @@
   "name": "KmerHosting",
   "description": "Official documentation for KmerHosting products and developer tools.",
   "colors": { "primary": "#1A73E8", "light": "#8AB4F8", "dark": "#1A73E8" },
-  "appearance": { "default": "system", "strict": false },
+  "appearance": { "default": "light", "strict": false },
   "favicon": "/images/favicon-192.png",
   "icons": { "library": "lucide" },
   "styling": { "eyebrows": "breadcrumbs" },
   "contextual": { "options": ["copy", "view"], "display": "header" },
   "logo": { "light": "/images/logo-docs-light.png", "dark": "/images/logo-docs-dark.png", "href": "https://kmerhosting.com" },
-  "navbar": { "links": [{ "label": "Console", "href": "https://dashboard.kmerhosting.com" }] },
+  "navbar": { "links": [{ "label": "Customer Dashboard", "href": "https://dashboard.kmerhosting.com" }] },
   "footer": { "socials": { "github": "https://github.com/KmerHosting" } },
   "navigation": {
     "global": { "anchors": [
       { "anchor": "Home", "icon": "house", "href": "/" },
-      { "anchor": "Console", "icon": "layout-dashboard", "href": "https://dashboard.kmerhosting.com" },
+      { "anchor": "Customer Dashboard", "icon": "layout-dashboard", "href": "https://dashboard.kmerhosting.com" },
       { "anchor": "API status", "icon": "activity", "href": "https://api.kmerhosting.com/health" }
     ] },
     "groups": [
-      { "group": "Start here", "icon": "rocket", "pages": ["quickstart", "platform/architecture", "console/overview"] },
-      { "group": "Products", "icon": "boxes", "pages": ["products/overview", "products/domains", "products/email-hosting", "products/shared-hosting", "products/lxc-vps"] },
+      { "group": "Start here", "icon": "rocket", "pages": ["quickstart", "console/overview", "console/account-and-billing", "console/api-activity"] },
+      { "group": "Products", "icon": "boxes", "pages": ["products/overview", "products/domains", "products/email-hosting", "products/shared-hosting", "products/lxc-vps", "products/kvm-vps", "products/wfilemanager"] },
+      { "group": "Platform", "icon": "network", "pages": ["platform/architecture", "platform/security", "platform/regions-and-networking", "platform/roadmap"] },
       { "group": "Developer platform", "icon": "braces", "pages": ["developer/overview", "developer/api-keys", "developer/rest-api", "developer/sdk", "developer/cli", "developer/mcp", "api/errors"] },
       { "group": "API reference", "icon": "terminal", "openapi": { "source": "openapi.json", "directory": "api-reference" } },
-      { "group": "Help", "icon": "life-buoy", "pages": ["troubleshooting/access-and-credentials", "troubleshooting/operations"] }
+      { "group": "Help", "icon": "life-buoy", "pages": ["troubleshooting/overview", "troubleshooting/access-and-credentials", "troubleshooting/operations", "troubleshooting/dns-and-email", "troubleshooting/billing-and-renewals"] }
     ]
   },
   "redirects": [
     { "source": "/products/tiny-vps", "destination": "/products/lxc-vps", "permanent": true },
-    { "source": "/products/vps", "destination": "/products/lxc-vps", "permanent": true },
+    { "source": "/products/vps", "destination": "/products/overview", "permanent": true },
     { "source": "/solutions/domains", "destination": "/products/domains", "permanent": true },
     { "source": "/solutions/professional-email", "destination": "/products/email-hosting", "permanent": true },
     { "source": "/solutions/shared-hosting", "destination": "/products/shared-hosting", "permanent": true },

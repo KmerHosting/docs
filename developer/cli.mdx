@@ -1,16 +1,35 @@
 ---
-title: "Command-line integrations"
-description: "Use the official KmerHosting SDKs and MCP server from trusted command-line environments."
+title: "Command-line interface"
+description: "Install and use the official KmerHosting CLI from a trusted terminal or CI environment."
 ---
 
 ## Install and authenticate
 
+Install the public package, then provide a short-lived, narrowly scoped API key through the environment:
+
 ```bash
+npm install --global @kmerhosting/cli
 export KMERHOSTING_API_KEY='kh_live_...'
+kmerhosting account get
 ```
 
-Use the TypeScript, Python, PHP, or Java [SDK](/developer/sdks) for scripts and automation. Use the hosted [MCP server](/developer/mcp) for compatible AI clients. There is no separately published KmerHosting CLI package at this time.
+Use `--json` for machine-readable output and `--base-url` only when KmerHosting support has given you a non-production endpoint.
+
+## Resource commands
+
+```bash
+kmerhosting services list
+kmerhosting domains list
+kmerhosting hosting services
+kmerhosting lxc list
+kmerhosting kvm view INSTANCE_ID
+kmerhosting kvm action INSTANCE_ID restart
+```
+
+LXC and KVM are deliberately separate. `lxc` exposes the public read operations currently supported for LXC inventory. `kvm` exposes inventory, power, auto-renew, and snapshot operations for owned KVM services. The retired `vps` resource returns a migration message instead of guessing the product.
+
+Run `kmerhosting --help` for the complete command list. For writes, `--idempotency-key VALUE` lets a retry reuse the same logical request. Destructive operations require `--yes`.
 
 ## Safe automation
 
-Set the API key only in a protected server environment. Every write must have a unique idempotency key. KVM power and snapshot scopes require a matching IPv4 allowlist on the key; do not automate those actions from an untrusted or dynamic address.
+Set the API key only in a protected server environment. Every write must have a unique idempotency key. KVM power and snapshot scopes require a matching IPv4 allowlist on the key; do not automate those actions from an untrusted or dynamic address. See [API keys and scopes](/developer/api-keys) before using the CLI in CI.

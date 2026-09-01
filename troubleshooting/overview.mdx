@@ -1,0 +1,21 @@
+---
+title: "Troubleshooting"
+description: "Start a safe diagnosis for KmerHosting account, product, API, DNS, billing, and operation problems."
+---
+
+## Start here
+
+1. Check the [status page](https://status.kmerhosting.com) for a platform incident or maintenance.
+2. Confirm that you are signed in to the account that owns the service.
+3. Open the central service inventory, then the product portal for the affected service.
+4. Record the time and timezone, service ID, operation, current state, expected result, and sanitized error.
+5. For API failures, preserve the `request_id`, route, status, and idempotency key—but never the API secret.
+
+<CardGroup cols={2}>
+  <Card title="Access and credentials" icon="key" href="/troubleshooting/access-and-credentials">Resolve sign-in, API key, OAuth, CLI, SDK, and MCP failures.</Card>
+  <Card title="Operations" icon="rotate-cw" href="/troubleshooting/operations">Diagnose queued, failed, repeated, or destructive operations.</Card>
+  <Card title="DNS and email" icon="globe" href="/troubleshooting/dns-and-email">Check nameservers, records, propagation, verification, and mail clients.</Card>
+  <Card title="Billing and renewals" icon="receipt" href="/troubleshooting/billing-and-renewals">Review balances, documents, renewal state, cancellation, and failed provisioning.</Card>
+</CardGroup>
+
+If the issue remains, use [support](https://kmerhosting.com/support). Do not send passwords, private keys, API keys, temporary access URLs, full payment-card details, or one-time codes.

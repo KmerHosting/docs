@@ -49,3 +49,5 @@ jobs:
           PY
       - name: Validate Mintlify build
         run: npx --yes mint@4.2.647 validate
+      - name: Check internal documentation links
+        run: python3 scripts/check-links.py

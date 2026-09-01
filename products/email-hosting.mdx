@@ -24,3 +24,24 @@ curl --fail-with-body -X POST \
 ```
 
 Mailbox administration and purchases remain console-managed workflows unless they appear in the public API reference.
+
+## Set up an email domain
+
+1. Choose an available Email Hosting plan and review live mailbox, domain, and storage limits.
+2. Complete checkout with the domain you control.
+3. Open the service's DNS page and copy every required record to the authoritative DNS provider, or use DNS synchronization when the portal confirms it can manage the zone.
+4. Run verification and wait for DNS propagation before repeating the operation.
+5. Create mailboxes within the plan limits and use unique passwords.
+6. Open webmail or configure an email client with the exact IMAP/SMTP hostnames, ports, encryption, and authentication shown by the portal.
+
+## Mailboxes and aliases
+
+The Email portal can create and delete mailboxes and rotate mailbox passwords. Deleting a mailbox can remove access to stored mail; export needed data first. Alias controls can appear where the customer-facing product supports them—an alias routes mail and is not a separate mailbox with storage and login credentials.
+
+## Renewals and suspension
+
+The portal shows billing documents, transactions, renewal state, and applicable grace or suspension status. Keep enough account credit before the renewal attempt. If a service is suspended, resolve billing in the portal before changing DNS or recreating mailboxes; those actions do not renew the service.
+
+<Warning>
+Never send a mailbox password to support. If access is uncertain, rotate the password and update every mail client that uses it.
+</Warning>

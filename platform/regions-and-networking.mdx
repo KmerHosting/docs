@@ -1,0 +1,23 @@
+---
+title: "Regions, IP addresses, and networking"
+description: "Choose a KmerHosting region and understand public IP, DNS, and provider networking boundaries."
+---
+
+KmerHosting advertises multiple infrastructure regions, but region, plan, product, and stock availability are not interchangeable. Select only from the locations shown by the live checkout for the exact service. A region shown elsewhere on the website is not a promise that every product can be deployed there.
+
+## Before choosing a region
+
+- Prefer proximity to your users and required third-party services.
+- Consider data-location, latency, application, licensing, and compliance needs.
+- Check current stock and the plan's network allocation at checkout.
+- Ask support before purchase if a precise location is contractually important.
+
+## IPv4 and IPv6
+
+The order summary or service record determines the addresses allocated to a service. Do not assume a dedicated IPv4, additional IPv4, IPv6 prefix, reverse DNS control, or portable address unless the product explicitly states it.
+
+API-key IPv4 allowlists accept the trusted public source IPv4 addresses that will call the KmerHosting API. They do not configure a VPS firewall and do not accept a private LAN address as a substitute for the public egress address.
+
+## DNS and propagation
+
+DNS changes can take time according to TTL, recursive resolver cache, registry, and provider processing. Confirm authoritative nameservers first, then inspect the record from more than one resolver. See [DNS and email troubleshooting](/troubleshooting/dns-and-email).

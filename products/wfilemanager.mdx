@@ -1,0 +1,29 @@
+---
+title: "wFileManager"
+description: "Install and operate the KmerHosting self-hosted file manager on a Linux server."
+---
+
+wFileManager is a self-hosted file manager for a Linux server you control. It supports browsing, uploading, downloading, editing, moving, copying, renaming, deleting, trash recovery, and application updates. It is separate from the temporary File Manager links offered by Shared Hosting.
+
+## Before installation
+
+- Use a supported Linux server where you have administrative shell access.
+- Review the command published on the [wFileManager product page](https://kmerhosting.com/products/wfilemanager) immediately before running it.
+- Back up important data and choose which directory the application may manage.
+- Confirm the firewall, reverse-proxy, hostname, and TLS plan for remote access.
+
+The installer configures the application and its service. Follow its displayed local administrator setup rather than reusing a server root password.
+
+## Secure operation
+
+- Use a unique administrator password and a TLS-protected hostname.
+- Expose only the required port through a reverse proxy or trusted network.
+- Keep the operating system and wFileManager release current.
+- Treat delete, bulk move, and overwrite actions as destructive even when trash recovery is available.
+- Test restoration from your independent backup; the trash is not a backup.
+
+Use the product's password-reset procedure from the server console if administrator access is lost. Never publish the service without authentication.
+
+<Info>
+The public product page and release repository are the source of truth for the current installer and version. This documentation intentionally does not pin a command that could become stale.
+</Info>

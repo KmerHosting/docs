@@ -1,0 +1,29 @@
+---
+title: "API-key activity and analytics"
+description: "Review every request made with a KmerHosting API key, including operation routes and source IPv4 addresses."
+---
+
+Open **Developer tools → API keys**, select a key, then open its activity details. The view records requests across the whole public API—not only product inventory calls. Service actions, DNS writes, provisioning requests, panel-access operations, and other operation routes appear when they use that key.
+
+## What the activity view shows
+
+- Request time and HTTP method.
+- Route, including operation endpoints.
+- Response status.
+- Source IPv4 address.
+- Request identifier when available.
+- Charts grouped by time, route, status, and source IPv4.
+
+Use the filters and charts to spot unexpected routes, repeated failures, traffic outside the intended schedule, or an unfamiliar IPv4 address. Activity metadata is an audit aid; it is not a copy of request bodies or secrets.
+
+## Respond to suspicious activity
+
+1. Revoke the key immediately.
+2. Preserve request IDs, timestamps, routes, statuses, and source IPv4 values.
+3. Check the affected resources in the relevant product portal.
+4. Create a replacement with fewer scopes, a shorter expiration, and the required IPv4 allowlist.
+5. Contact support with sanitized evidence if an owned resource changed unexpectedly.
+
+<Info>
+An IPv4 allowlist restricts where the key can be used. It does not replace expiration, least-privilege scopes, secret storage, request confirmation, or activity review.
+</Info>

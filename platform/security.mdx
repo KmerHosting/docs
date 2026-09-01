@@ -1,0 +1,27 @@
+---
+title: "Security and shared responsibility"
+description: "Understand KmerHosting security boundaries and the controls customers must operate."
+---
+
+KmerHosting protects its customer portals, public API boundary, service orchestration, and provider credentials. Customers remain responsible for account access, application security, data, DNS intent, server administration where root access is provided, and the safe use of credentials and temporary links.
+
+## Customer security checklist
+
+- Use a unique account password and protect the account email.
+- Give API keys the minimum scopes and shortest useful expiration.
+- Restrict dangerous API keys to trusted IPv4 addresses.
+- Use OAuth for hosted MCP instead of copying an API key into a third-party client.
+- Rotate mailbox, panel, server, database, and application credentials after exposure.
+- Patch applications, plugins, dependencies, and operating systems you manage.
+- Keep independent backups and test restoration.
+- Review notifications, API activity, service state, DNS, and billing regularly.
+
+## Sensitive access links
+
+Temporary panel, File Manager, webmail, and terminal links grant access to customer resources. Do not place them in tickets, analytics, chat transcripts, screenshots, or logs. Let them expire and create a new link when needed.
+
+## What public interfaces never provide
+
+The developer platform does not expose provider credentials, raw provider API proxies, internal reconciliation endpoints, customer impersonation, permanent plaintext passwords, unrestricted API-key creation through another key, or internal logs containing secrets.
+
+Report suspected account or service compromise through [support](https://kmerhosting.com/support). For a platform-wide incident, also check the [status page](https://status.kmerhosting.com).
