@@ -28,11 +28,12 @@ html[data-current-path='/'] #page-title {
     max-width: 12rem !important;
   }
 
-  /* Keep the article close to the primary navigation. Mintlify's default
-     centered wrapper creates a wide, unused gutter between the expanded
-     left navigation and the page content. */
+  /* The wrapper uses row-reverse: flex-end is the visual left edge. Keeping
+     the group there removes the unused gutter beside the expanded navigation
+     without pushing the article or outline beyond the viewport. */
   #content-container > div {
-    justify-content: flex-start !important;
+    justify-content: flex-end !important;
+    min-width: 0 !important;
     padding-left: 0 !important;
   }
 
@@ -79,7 +80,7 @@ html[data-current-path='/'] #page-title {
      the article use the released width while keeping the right-hand outline
      in its own column. */
   body.kh-sidebar-collapsed #content-area {
-    max-width: min(72rem, calc(100vw - 20rem)) !important;
+    max-width: min(72rem, 100%) !important;
   }
 
   body.kh-sidebar-collapsed #kh-sidebar-toggle {
