@@ -13,6 +13,6 @@ DNS, Email Hosting, temporary panel access, and other product writes can be queu
 
 ## Destructive actions
 
-The CLI and MCP require explicit confirmation for DNS deletion, VPS stop/shutdown, and snapshot deletion. Verify the target and existing state before confirming. Use the same idempotency key if a request outcome is uncertain.
+The MCP server requires explicit confirmation for DNS deletion, KVM stop/shutdown, and KVM snapshot deletion. Verify the target and existing state before confirming. Use the same idempotency key if a request outcome is uncertain.
 
 For support, provide the `request_id`, endpoint, sanitized error, and time of the request. Do not include keys, passwords, panel URLs, or personal data.

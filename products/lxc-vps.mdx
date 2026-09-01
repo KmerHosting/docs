@@ -5,27 +5,16 @@ description: "Manage supported LXC VPS instance operations through the console a
 
 ## Supported operations
 
-The public API lists and inspects owned LXC VPS instances. It can start, stop, shut down, or restart an instance; change auto-renewal; and list, create, update, or delete snapshots.
+The public API lists and inspects owned LXC instances. Lifecycle actions, billing changes, terminal access, credentials, and snapshots remain console-only while their customer-safe API contracts are completed.
 
 | Operation | Scope |
 | --- | --- |
-| List, inspect, and list snapshots | `vps:read` |
-| Instance actions and auto-renewal | `vps:write` |
-| Create, update, and delete snapshots | `vps:snapshots:write` |
-
-`stop`, `shutdown`, and snapshot deletion change service state. The CLI and MCP server require explicit confirmation for those operations. Direct API callers must apply their own confirmation policy and always use a unique idempotency key.
-
-## Snapshot constraints
-
-A snapshot name is 1–30 characters and uses letters, digits, spaces, or hyphens. Descriptions are optional and limited to 255 characters. Snapshot identifiers are product-generated values, not necessarily UUIDs.
+| List and inspect | `lxc:read` |
 
 ```bash
-curl --fail-with-body -X POST \
-  "https://api.kmerhosting.com/v1/vps/instances/SERVICE_ID/snapshots" \
-  -H "Authorization: Bearer $KMERHOSTING_API_KEY" \
-  -H "Idempotency-Key: before-upgrade-20260831" \
-  -H "Content-Type: application/json" \
-  -d '{"name":"before upgrade","description":"Before application upgrade"}'
+curl --fail-with-body \
+  "https://api.kmerhosting.com/v1/lxc/instances" \
+  -H "Authorization: Bearer $KMERHOSTING_API_KEY"
 ```
 
-Purchases, reinstalling an operating system, root-password handling, and unmanaged provider controls are not public API operations.
+Purchases, lifecycle actions, snapshots, reinstalling an operating system, root-password handling, terminal access, and unmanaged provider controls are not public API operations.

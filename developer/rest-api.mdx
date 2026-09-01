@@ -44,4 +44,4 @@ Some writes return an accepted or queued result. Poll the relevant read endpoint
 
 ## Resource families
 
-The exact endpoint definitions are generated in the [OpenAPI reference](/api-reference): account, service inventory, domains/DNS, Email Hosting, Shared Hosting, and LXC VPS.
+The exact endpoint definitions are generated in the [OpenAPI reference](/api-reference): account, service inventory, domains/DNS, Email Hosting, provider-neutral Shared Hosting, read-only LXC inventory, and KVM management. The former `/v1/vps/*` resource is retired; use `/v1/lxc/*` or `/v1/kvm/*` explicitly.

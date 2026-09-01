@@ -12,7 +12,7 @@ description: "Use an official server-side SDK for the KmerHosting API."
 | PHP | `kmerhosting/sdk` | `composer require kmerhosting/sdk` |
 | Java 17+ | `com.kmerhosting:kmerhosting-sdk` | Maven Central dependency |
 
-All clients read `KMERHOSTING_API_KEY` by default and expose the same resource families: `account`, `services`, `domains`, `email`, `hosting`, and `vps`. Write methods generate idempotency keys if none is supplied.
+All clients read `KMERHOSTING_API_KEY` by default and expose the same resource families: `account`, `services`, `domains`, `email`, `hosting`, `lxc`, and `kvm`. Write methods generate idempotency keys if none is supplied. The former `vps` resource is retired.
 
 ## TypeScript
 
@@ -47,7 +47,7 @@ $services = $client->services()->all();
 <dependency>
   <groupId>com.kmerhosting</groupId>
   <artifactId>kmerhosting-sdk</artifactId>
-  <version>0.1.1</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 

@@ -1,47 +1,16 @@
 ---
-title: "CLI reference"
-description: "Install and use the official KmerHosting command-line interface."
+title: "Command-line integrations"
+description: "Use the official KmerHosting SDKs and MCP server from trusted command-line environments."
 ---
 
 ## Install and authenticate
 
 ```bash
-bun add -g @kmerhosting/cli
 export KMERHOSTING_API_KEY='kh_live_...'
 ```
 
-The CLI targets `https://api.kmerhosting.com` by default. Use `KMERHOSTING_API_URL` or `--base-url URL` only for an authorized alternate environment. Add `--json` for machine-readable API envelopes.
+Use the TypeScript, Python, PHP, or Java [SDK](/developer/sdks) for scripts and automation. Use the hosted [MCP server](/developer/mcp) for compatible AI clients. There is no separately published KmerHosting CLI package at this time.
 
-## Global options
+## Safe automation
 
-| Option | Meaning |
-| --- | --- |
-| `--json` | Print the complete API envelope as JSON. |
-| `--base-url URL` | Override the API base URL. |
-| `--idempotency-key KEY` | Reuse a write key for a safe retry. |
-| `--target panel\|filemanager` | Select a Shared Hosting access target. |
-| `--yes` | Confirm a destructive CLI operation. |
-| `--version`, `--help` | Print version or usage. |
-
-## Commands
-
-| Resource | Commands |
-| --- | --- |
-| Account | `account get` |
-| Service inventory | `services list`, `services view ID` |
-| Domains | `domains list`, `domains view ID`, `domains auto-renew ID on\|off`, `domains nameservers ID NS...` |
-| DNS | `domains dns list DOMAIN_ID`, `create DOMAIN_ID JSON`, `update DOMAIN_ID RECORD_ID JSON`, `delete DOMAIN_ID RECORD_ID` |
-| Email Hosting | `email services`, `email provision SERVICE_ID`, `email dns-sync SERVICE_ID` |
-| Shared Hosting | `hosting services`, `hosting stats SERVICE_ID`, `hosting panel-access SERVICE_ID` |
-| LXC VPS | `vps list`, `vps view ID`, `vps action ID start\|stop\|shutdown\|restart`, `vps auto-renew ID on\|off` |
-| VPS snapshots | `vps snapshots list ID`, `create ID NAME [DESCRIPTION]`, `update ID SNAPSHOT_ID [NAME] [DESCRIPTION]`, `delete ID SNAPSHOT_ID` |
-
-DNS deletion, VPS `stop` and `shutdown`, and snapshot deletion require `--yes`. Mutations otherwise receive a generated idempotency key; pass your own key when retrying the same operation.
-
-```bash
-kmerhosting domains dns create DOMAIN_ID \
-  '{"type":"A","name":"@","content":"203.0.113.10","ttl":300}' \
-  --idempotency-key dns-example-20260831
-
-kmerhosting vps action INSTANCE_ID restart --json
-```
+Set the API key only in a protected server environment. Every write must have a unique idempotency key. KVM power and snapshot scopes require a matching IPv4 allowlist on the key; do not automate those actions from an untrusted or dynamic address.

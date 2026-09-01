@@ -5,7 +5,9 @@ description: "Create, scope, protect, and revoke KmerHosting API keys."
 
 ## Create a key
 
-In the customer console, open **Developer tools → API keys**. Choose a descriptive name and the minimum scopes required by the integration. The full secret is displayed once; KmerHosting stores a hash and later shows only key metadata.
+In the customer console, open **Developer tools → API keys**. Choose a descriptive name, an expiration, and the minimum scopes required by the integration. The full secret is displayed once; KmerHosting stores a hash and later shows only key metadata.
+
+Choose one of the short expiration presets (from one minute through one calendar month), or a custom expiration up to one calendar year. Custom expirations require an explicit confirmation. Expired keys cannot be used again.
 
 ## Scope reference
 
@@ -19,8 +21,11 @@ In the customer console, open **Developer tools → API keys**. Choose a descrip
 | `email:read`, `email:write` | Email Hosting reads and supported operations |
 | `hosting:read` | Shared Hosting inventory and statistics |
 | `hosting:panel:access` | Temporary Shared Hosting panel access |
-| `vps:read`, `vps:write` | LXC VPS reads, actions, and auto-renewal |
-| `vps:snapshots:write` | LXC VPS snapshot writes |
+| `lxc:read` | Read owned LXC instances |
+| `kvm:read` | Read owned KVM instances and snapshots |
+| `kvm:power:write` | Start, stop, shut down, or restart KVM instances |
+| `kvm:subscription:write` | Change KVM auto-renewal |
+| `kvm:snapshots:write` | Create, update, and delete KVM snapshots |
 
 ## Security
 
@@ -28,5 +33,7 @@ In the customer console, open **Developer tools → API keys**. Choose a descrip
 - Store them in a secret manager or protected environment variable.
 - Never place a key in client-side JavaScript, mobile binaries, source control, shell history, screenshots, or support tickets.
 - Revoke a key immediately if it may have been exposed, then create a replacement with narrower scopes if possible.
+- Keys that include a dangerous KVM scope must be restricted to one or more trusted IPv4 addresses. Requests from another address are rejected.
+- Dangerous scopes require an explicit acknowledgement at key creation. Review the activity view regularly; it records every API request, including operation calls, route, status, timestamp, and source IPv4.
 
 Use an OAuth connection rather than a copied API key when configuring the hosted [MCP server](/developer/mcp).

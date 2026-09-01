@@ -14,7 +14,7 @@ The final price, availability, selected panel, and included features must always
 | Operation | Scope | Notes |
 | --- | --- | --- |
 | List owned services | `hosting:read` | Returns supported service inventory fields. |
-| Retrieve statistics | `hosting:read` | Detailed statistics currently require a DirectAdmin service. |
+| Retrieve statistics | `hosting:read` | Provider-neutral: DirectAdmin or cPanel is selected from the owned service. |
 | Create temporary panel access | `hosting:panel:access` | `target` is `panel` or `filemanager`; default is `panel`. |
 
 ```bash
