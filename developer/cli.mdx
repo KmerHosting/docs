@@ -5,19 +5,32 @@ description: "Install and use the official KmerHosting CLI from a trusted termin
 
 ## Install and authenticate
 
-Install the public package, then provide a short-lived, narrowly scoped API key through the environment:
+Install the CLI, then provide a short-lived, narrowly scoped API key through the environment. The GitHub source install works immediately while the npm organization publication is being completed:
 
 ```bash
-npm install --global @kmerhosting/cli@latest
-# Bun uses the same public npm registry:
-bun add --global @kmerhosting/cli@latest
-# GitHub source fallback (builds the checked-in CLI):
 bun add --global github:KmerHosting/cli
 export KMERHOSTING_API_KEY='kh_live_...'
 kmerhosting account get
 ```
 
-The npm and Bun package commands use the same public npm registry; Bun is not a separate package distribution. The GitHub command is a source fallback and runs the package `prepare` build. If npm returns `E404`, use the GitHub fallback while the publication workflow or npm organization permissions are being completed, and verify that your registry configuration is not pointing at a private mirror.
+On Windows PowerShell, Bun may print a `PATH` warning after a global install. Add its global bin directory to the current session, then run the command:
+
+```powershell
+$env:Path = "$HOME\.bun\bin;$env:Path"
+$env:KMERHOSTING_API_KEY = "kh_live_..."
+kmerhosting account get
+```
+
+To persist the path for future PowerShell windows, add `C:\Users\<you>\.bun\bin` to your user **Path** environment variable and open a new terminal.
+
+The npm and Bun registry commands use the same public npm registry and will be available after `@kmerhosting/cli` is published there:
+
+```bash
+npm install --global @kmerhosting/cli@latest
+bun add --global @kmerhosting/cli@latest
+```
+
+If npm returns `E404`, use the GitHub command above; it means the npm publication or organization permissions are not complete yet, not that the CLI command name is different.
 
 Use `--json` for machine-readable output and `--base-url` only when KmerHosting support has given you a non-production endpoint.
 
