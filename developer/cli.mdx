@@ -21,6 +21,15 @@ $env:KMERHOSTING_API_KEY = "kh_live_..."
 kmerhosting account get
 ```
 
+If you installed the GitHub package before the latest CLI build was published, reinstall it once to refresh the bundled executable:
+
+```powershell
+bun remove --global @kmerhosting/cli
+bun add --global github:KmerHosting/cli
+$env:Path = "$HOME\.bun\bin;$env:Path"
+kmerhosting --help
+```
+
 To persist the path for future PowerShell windows, add `C:\Users\<you>\.bun\bin` to your user **Path** environment variable and open a new terminal.
 
 The npm and Bun registry commands use the same public npm registry and will be available after `@kmerhosting/cli` is published there:
