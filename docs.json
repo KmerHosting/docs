@@ -16,6 +16,7 @@
     "global": { "anchors": [
       { "anchor": "Home", "icon": "house", "href": "/" },
       { "anchor": "Blog", "icon": "notebook", "href": "https://blog.kmerhosting.com" },
+      { "anchor": "Forum", "icon": "message-circle", "href": "https://forum.kmerhosting.com" },
       { "anchor": "System status", "icon": "activity", "href": "https://status.kmerhosting.com" }
     ] },
     "groups": [
