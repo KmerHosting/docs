@@ -11,6 +11,13 @@ The production base URL is `https://api.kmerhosting.com`. Authenticate with an A
 Authorization: Bearer kh_live_...
 ```
 
+<CardGroup cols={2}>
+  <Card title="Open interactive API docs" icon="book-open" href="https://api.kmerhosting.com/docs">Try the REST API in Swagger UI and inspect the live schema.</Card>
+  <Card title="Download the OpenAPI document" icon="file-code" href="https://api.kmerhosting.com/openapi.json">Use the machine-readable contract with generators and API clients.</Card>
+</CardGroup>
+
+The interactive documentation is served by the API itself at [`api.kmerhosting.com/docs`](https://api.kmerhosting.com/docs). It always reflects the deployed gateway contract; use the reference pages in this site for KmerHosting workflows and security guidance.
+
 The health endpoint is public: `GET /health`. All `/v1/*` operations require an appropriate scope.
 
 ## Response envelopes

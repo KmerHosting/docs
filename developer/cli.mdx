@@ -8,10 +8,14 @@ description: "Install and use the official KmerHosting CLI from a trusted termin
 Install the public package, then provide a short-lived, narrowly scoped API key through the environment:
 
 ```bash
-npm install --global @kmerhosting/cli
+npm install --global @kmerhosting/cli@latest
+# Bun uses the same public npm registry:
+bun add --global @kmerhosting/cli@latest
 export KMERHOSTING_API_KEY='kh_live_...'
 kmerhosting account get
 ```
+
+Both commands install the official package from npm (`registry.npmjs.org`); Bun is not a separate GitHub-only distribution. If the registry returns `E404`, verify that the package publication workflow has completed and that your registry configuration is not pointing at a private mirror.
 
 Use `--json` for machine-readable output and `--base-url` only when KmerHosting support has given you a non-production endpoint.
 
