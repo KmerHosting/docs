@@ -22,6 +22,6 @@ Force stop can interrupt writes. Snapshot rollback replaces the current disk sta
 | Change auto-renew | `kvm:subscription:write` |
 | Create, update, or delete snapshots | `kvm:snapshots:write` |
 
-Dangerous KVM scopes require a trusted IPv4 allowlist when the API key is created. Writes require idempotency. Password reset, snapshot rollback, manual renewal, cancellation, and service recovery remain portal-managed unless they appear in the current [API reference](/api-reference).
+Dangerous KVM scopes require a trusted IPv4 allowlist when the API key is created. Writes require idempotency. Password reset, snapshot rollback, manual renewal, cancellation, and service recovery are available through the corresponding API, SDK, CLI, and MCP operations when the account scope and service state allow them.
 
 Use `/v1/kvm/instances`; do not use the retired `/v1/vps` resource.

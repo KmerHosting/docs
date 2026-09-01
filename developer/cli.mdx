@@ -54,7 +54,7 @@ kmerhosting kvm view INSTANCE_ID
 kmerhosting kvm action INSTANCE_ID restart
 ```
 
-LXC and KVM are deliberately separate. `lxc` exposes the public read operations currently supported for LXC inventory. `kvm` exposes inventory, power, auto-renew, and snapshot operations for owned KVM services. The retired `vps` resource returns a migration message instead of guessing the product.
+LXC and KVM are deliberately separate. `lxc` exposes inventory, metrics, power, and snapshot operations. `kvm` exposes inventory, power, credentials, renewal, cancellation/recovery, and snapshot operations for owned KVM services. The retired `vps` resource returns a migration message instead of guessing the product.
 
 Run `kmerhosting --help` for the complete command list. For writes, `--idempotency-key VALUE` lets a retry reuse the same logical request. Destructive operations require `--yes`.
 

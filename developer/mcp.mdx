@@ -37,6 +37,6 @@ Use `https://mcp.kmerhosting.com/mcp` with an MCP client that supports OAuth 2.1
 | Email | `kmerhosting_email_services_list`, `kmerhosting_email_provision`, `kmerhosting_email_dns_sync` |
 | Shared Hosting | `kmerhosting_hosting_services_list`, `kmerhosting_hosting_stats`, `kmerhosting_hosting_panel_access` |
 | LXC | `kmerhosting_lxc_list`, `kmerhosting_lxc_get` |
-| KVM | `kmerhosting_kvm_list`, `kmerhosting_kvm_get`, `kmerhosting_kvm_action`, `kmerhosting_kvm_auto_renew`, `kmerhosting_kvm_snapshots_list`, `kmerhosting_kvm_snapshot_create`, `kmerhosting_kvm_snapshot_update`, `kmerhosting_kvm_snapshot_delete` |
+| KVM | `kmerhosting_kvm_list`, `kmerhosting_kvm_get`, `kmerhosting_kvm_action`, `kmerhosting_kvm_auto_renew`, `kmerhosting_kvm_password`, `kmerhosting_kvm_renew`, `kmerhosting_kvm_cancel`, `kmerhosting_kvm_keep_service`, `kmerhosting_kvm_snapshots_list`, `kmerhosting_kvm_snapshot_create`, `kmerhosting_kvm_snapshot_update`, `kmerhosting_kvm_snapshot_delete`, `kmerhosting_kvm_snapshot_rollback` |
 
-Every mutating tool accepts an optional `idempotencyKey`. DNS deletion, KVM stop/shutdown, and KVM snapshot deletion require an explicit `confirm: true` value. Treat all returned panel links and resource data as account-sensitive.
+Every mutating tool accepts an optional `idempotencyKey`. DNS deletion, KVM stop/shutdown, password reset, cancellation, and snapshot deletion/rollback require an explicit `confirm: true` value. Treat all returned panel links and resource data as account-sensitive.
