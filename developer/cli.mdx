@@ -11,11 +11,13 @@ Install the public package, then provide a short-lived, narrowly scoped API key 
 npm install --global @kmerhosting/cli@latest
 # Bun uses the same public npm registry:
 bun add --global @kmerhosting/cli@latest
+# GitHub source fallback (builds the checked-in CLI):
+bun add --global github:KmerHosting/cli
 export KMERHOSTING_API_KEY='kh_live_...'
 kmerhosting account get
 ```
 
-Both commands install the official package from npm (`registry.npmjs.org`); Bun is not a separate GitHub-only distribution. If the registry returns `E404`, verify that the package publication workflow has completed and that your registry configuration is not pointing at a private mirror.
+The npm and Bun package commands use the same public npm registry; Bun is not a separate package distribution. The GitHub command is a source fallback and runs the package `prepare` build. If npm returns `E404`, use the GitHub fallback while the publication workflow or npm organization permissions are being completed, and verify that your registry configuration is not pointing at a private mirror.
 
 Use `--json` for machine-readable output and `--base-url` only when KmerHosting support has given you a non-production endpoint.
 
