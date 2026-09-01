@@ -50,12 +50,25 @@
     // supports explicit light and dark choices; docs.json sets light as default.
   }
 
+  function enforceExternalLinks() {
+    document.querySelectorAll('a[href^="http"]').forEach((link) => {
+      try {
+        if (new URL(link.href, window.location.href).origin === window.location.origin) return
+      } catch {
+        return
+      }
+      link.setAttribute('target', '_blank')
+      link.setAttribute('rel', 'noopener noreferrer')
+    })
+  }
+
   function scheduleArrange() {
     if (scheduled) return
     scheduled = true
     window.requestAnimationFrame(() => {
       arrangeTopbar()
       enforceTwoThemeModes()
+      enforceExternalLinks()
     })
   }
 

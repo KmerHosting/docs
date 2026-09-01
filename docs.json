@@ -15,8 +15,8 @@
   "navigation": {
     "global": { "anchors": [
       { "anchor": "Home", "icon": "house", "href": "/" },
-      { "anchor": "Customer Dashboard", "icon": "layout-dashboard", "href": "https://dashboard.kmerhosting.com" },
-      { "anchor": "API status", "icon": "activity", "href": "https://api.kmerhosting.com/health" }
+      { "anchor": "Blog", "icon": "notebook", "href": "https://blog.kmerhosting.com" },
+      { "anchor": "System status", "icon": "activity", "href": "https://status.kmerhosting.com" }
     ] },
     "groups": [
       { "group": "Start here", "icon": "rocket", "pages": ["quickstart", "console/overview", "console/account-and-billing", "console/api-activity"] },
