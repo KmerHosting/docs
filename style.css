@@ -92,12 +92,10 @@ html[data-current-path='/'] #page-title {
     margin-left: 0 !important;
   }
 
-  /* Mintlify centers the article and caps it at max-w-xl. Once the primary
-     navigation is hidden, that cap leaves a large unused desktop gutter. Let
-     the article use the released width while keeping the right-hand outline
-     in its own column. */
+  /* Once the primary navigation is hidden, give the article more room without
+     allowing it to crowd or push the right-hand outline out of the viewport. */
   body.kh-sidebar-collapsed #content-area {
-    max-width: min(72rem, 100%) !important;
+    max-width: min(60rem, 100%) !important;
   }
 
   body.kh-sidebar-collapsed #kh-sidebar-toggle {
