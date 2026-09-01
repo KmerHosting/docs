@@ -3,6 +3,11 @@
   "theme": "almond",
   "name": "KmerHosting",
   "description": "Official documentation for KmerHosting products and developer tools.",
+  "seo": {
+    "metatags": {
+      "canonical": "https://kmerhosting.com/docs"
+    }
+  },
   "colors": { "primary": "#1A73E8", "light": "#8AB4F8", "dark": "#1A73E8" },
   "appearance": { "default": "light", "strict": false },
   "favicon": "/images/favicon-192.png",
