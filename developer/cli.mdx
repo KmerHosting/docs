@@ -32,14 +32,7 @@ kmerhosting --help
 
 To persist the path for future PowerShell windows, add `C:\Users\<you>\.bun\bin` to your user **Path** environment variable and open a new terminal.
 
-The npm and Bun registry commands use the same public npm registry and will be available after `@kmerhosting/cli` is published there:
-
-```bash
-npm install --global @kmerhosting/cli@latest
-bun add --global @kmerhosting/cli@latest
-```
-
-If the npm registry cannot find the package, use the GitHub command above or verify that your registry and network settings are correct. The installed command remains `kmerhosting`.
+The CLI is distributed from GitHub. Do not use npm registry installation commands for this package; `@kmerhosting/cli` is not a published npm package. The installed command is `kmerhosting`.
 
 Use `--json` for machine-readable output and `--base-url` only when KmerHosting support has given you a non-production endpoint.
 
