@@ -32,11 +32,11 @@ Use `https://mcp.kmerhosting.com/mcp` with an MCP client that supports OAuth 2.1
 
 | Group | Tools |
 | --- | --- |
-| Account and services | `kmerhosting_account_get`, `kmerhosting_services_list`, `kmerhosting_service_get` |
+| Account and services | `kmerhosting_account_get`, `kmerhosting_account_api_usage`, `kmerhosting_services_list`, `kmerhosting_service_get` |
 | Domains | `kmerhosting_domains_list`, `kmerhosting_domain_get`, `kmerhosting_domain_dns_list`, `kmerhosting_domain_dns_create`, `kmerhosting_domain_dns_update`, `kmerhosting_domain_dns_delete`, `kmerhosting_domain_auto_renew`, `kmerhosting_domain_nameservers` |
 | Email | `kmerhosting_email_services_list`, `kmerhosting_email_provision`, `kmerhosting_email_dns_sync` |
 | Shared Hosting | `kmerhosting_hosting_services_list`, `kmerhosting_hosting_stats`, `kmerhosting_hosting_panel_access` |
-| LXC | `kmerhosting_lxc_list`, `kmerhosting_lxc_get` |
+| LXC | `kmerhosting_lxc_list`, `kmerhosting_lxc_get`, `kmerhosting_lxc_metrics`, `kmerhosting_lxc_action`, `kmerhosting_lxc_snapshots`, `kmerhosting_lxc_password`, `kmerhosting_lxc_reinstall`, `kmerhosting_lxc_terminal_ticket`, `kmerhosting_lxc_auto_renew`, `kmerhosting_lxc_billing_period` |
 | KVM | `kmerhosting_kvm_list`, `kmerhosting_kvm_get`, `kmerhosting_kvm_action`, `kmerhosting_kvm_auto_renew`, `kmerhosting_kvm_password`, `kmerhosting_kvm_renew`, `kmerhosting_kvm_cancel`, `kmerhosting_kvm_keep_service`, `kmerhosting_kvm_snapshots_list`, `kmerhosting_kvm_snapshot_create`, `kmerhosting_kvm_snapshot_update`, `kmerhosting_kvm_snapshot_delete`, `kmerhosting_kvm_snapshot_rollback` |
 
-Every mutating tool accepts an optional `idempotencyKey`. DNS deletion, KVM stop/shutdown, password reset, cancellation, and snapshot deletion/rollback require an explicit `confirm: true` value. Treat all returned panel links and resource data as account-sensitive.
+Every mutating tool accepts an optional `idempotencyKey`. Destructive actions, root-password changes, reinstallations, terminal access, cancellation, and snapshot deletion/rollback require an explicit `confirm: true` value. Disabling LXC auto-renew and changing its billing period also require confirmation. Treat returned panel links and terminal tickets as secrets and do not place them in model memory, transcripts, or logs.

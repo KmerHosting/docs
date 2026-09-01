@@ -51,4 +51,4 @@ Some writes return an accepted or queued result. Poll the relevant read endpoint
 
 ## Resource families
 
-The exact endpoint definitions are generated in the [OpenAPI reference](/api-reference): account and API activity, service inventory, domains/DNS, Email Hosting, provider-neutral Shared Hosting, LXC inventory/actions/metrics/snapshots, and KVM management. Use `GET /v1/account/api-usage` with `account:usage:read` to audit product and non-product calls, including operation IDs and source IPv4 values. The former `/v1/vps/*` resource is retired; use `/v1/lxc/*` or `/v1/kvm/*` explicitly.
+The exact endpoint definitions are generated in the [OpenAPI reference](/api-reference): account and API activity, service inventory, domains/DNS, Email Hosting, provider-neutral Shared Hosting, LXC inventory/actions/metrics/snapshots/credentials/reinstall/terminal/subscription, and KVM management. Use `GET /v1/account/api-usage` with `account:usage:read` to audit product and non-product calls, including operation IDs and source IPv4 values. The former `/v1/vps/*` resource is retired; use `/v1/lxc/*` or `/v1/kvm/*` explicitly.

@@ -9,7 +9,7 @@ In the **main KmerHosting Dashboard** (not a product portal), open **Developer t
 
 Choose one of the presets—1 minute, 5 minutes, 15 minutes, 30 minutes, 1 hour, 24 hours, 7 days, or 1 calendar month—or a custom expiration between 1 minute and 1 calendar year. One calendar year is calculated from the creation date rather than fixed to 365 days. Custom expirations require an explicit confirmation and warning acknowledgement. Expired keys cannot be used again.
 
-Scopes that can change infrastructure, subscriptions, snapshots, DNS, provisioning, or temporary access are clearly marked as dangerous. The dashboard shows the risk before creation and requires explicit acknowledgement. If a dangerous scope requires an IPv4 allowlist, enter every trusted public egress IPv4 that will use the key; requests from other addresses are rejected.
+Scopes that can directly interrupt infrastructure, restore or delete snapshots, change root credentials, reinstall an instance, or create terminal access are clearly marked as dangerous. The dashboard shows the risk before creation and requires explicit acknowledgement. Dangerous scopes require an IPv4 allowlist: enter every trusted public egress IPv4 that will use the key; requests from other addresses are rejected.
 
 ## Scope reference
 
@@ -24,12 +24,18 @@ Scopes that can change infrastructure, subscriptions, snapshots, DNS, provisioni
 | `email:read`, `email:write` | Email Hosting reads and supported operations |
 | `hosting:read` | Shared Hosting inventory and statistics |
 | `hosting:panel:access` | Temporary Shared Hosting panel access |
-| `lxc:read` | Read owned LXC instances |
+| `lxc:read` | Read owned LXC instances, metrics, and snapshots |
+| `lxc:power:write` | Start, stop, restart, or freeze LXC instances (dangerous and IPv4-restricted) |
+| `lxc:snapshots:write` | Create, delete, or restore LXC snapshots (dangerous and IPv4-restricted) |
+| `lxc:credentials:write` | Change LXC root credentials (dangerous and IPv4-restricted) |
+| `lxc:reinstall` | Erase and reinstall an LXC instance (dangerous and IPv4-restricted) |
+| `lxc:terminal:access` | Create a short-lived terminal ticket (dangerous and IPv4-restricted) |
+| `lxc:subscription:write` | Change LXC auto-renewal and billing period |
 | `kvm:read` | Read owned KVM instances and snapshots |
 | `kvm:power:write` | Start, stop, shut down, or restart KVM instances |
 | `kvm:credentials:write` | Reset KVM root credentials (dangerous and IPv4-restricted) |
-| `kvm:subscription:write` | Change KVM auto-renewal |
-| `kvm:snapshots:write` | Create, update, and delete KVM snapshots |
+| `kvm:subscription:write` | Change KVM auto-renewal, renew, schedule cancellation, or keep the service |
+| `kvm:snapshots:write` | Create, update, delete, and roll back KVM snapshots (dangerous and IPv4-restricted) |
 
 ## Security
 
@@ -37,7 +43,8 @@ Scopes that can change infrastructure, subscriptions, snapshots, DNS, provisioni
 - Store them in a secret manager or protected environment variable.
 - Never place a key in client-side JavaScript, mobile binaries, source control, shell history, screenshots, or support tickets.
 - Revoke a key immediately if it may have been exposed, then create a replacement with narrower scopes if possible.
-- Keys that include a dangerous KVM scope must be restricted to one or more trusted IPv4 addresses. Requests from another address are rejected.
+- Keys that include a dangerous LXC or KVM scope must be restricted to one or more trusted IPv4 addresses. The dashboard proposes your current public IPv4, which you may replace with the trusted automation host. Requests from another address are rejected.
+- The key list shows its exact expiration and whether it is enabled, disabled, or expired. An expired key remains visible for audit purposes but cannot be enabled again; revoke it when it is no longer needed.
 - Dangerous scopes require an explicit acknowledgement at key creation. Review the activity view regularly; it records every API request, including operation calls, route, status, timestamp, and source IPv4.
 
 See [API-key activity and analytics](/console/api-activity) for the full request audit and response procedure.

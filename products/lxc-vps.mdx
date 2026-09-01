@@ -33,7 +33,13 @@ Read the upgrade quote before confirming; upgrades can be prorated. Billing-peri
 
 | Operation | Scope |
 | --- | --- |
-| List and inspect | `lxc:read` |
+| List, inspect, metrics, and snapshot reads | `lxc:read` |
+| Start, stop, restart, and freeze | `lxc:power:write` |
+| Create, delete, and restore snapshots | `lxc:snapshots:write` |
+| Change root password | `lxc:credentials:write` |
+| Erase and reinstall | `lxc:reinstall` |
+| Create a 60-second terminal ticket | `lxc:terminal:access` |
+| Auto-renew and billing period | `lxc:subscription:write` |
 
 ```bash
 curl --fail-with-body \
@@ -41,4 +47,4 @@ curl --fail-with-body \
   -H "Authorization: Bearer $KMERHOSTING_API_KEY"
 ```
 
-Purchases, lifecycle actions, snapshots, reinstalling an operating system, root-password handling, terminal access, and unmanaged provider controls are portal-only operations until they appear in the current public API reference.
+Purchases, upgrades, managed web-domain configuration, failed-provisioning retry, orders, invoices, and unmanaged provider controls remain portal-only. The public API exposes the operations listed above; the [live OpenAPI reference](/api-reference) is authoritative for their request bodies and responses.

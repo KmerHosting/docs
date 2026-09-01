@@ -47,10 +47,21 @@ kmerhosting kvm view INSTANCE_ID
 kmerhosting kvm action INSTANCE_ID restart
 ```
 
-LXC and KVM are deliberately separate. `lxc` exposes inventory, metrics, power, and snapshot operations. `kvm` exposes inventory, power, credentials, renewal, cancellation/recovery, and snapshot operations for owned KVM services. The retired `vps` resource returns a migration message instead of guessing the product.
+LXC and KVM are deliberately separate. `lxc` exposes inventory, metrics, power, snapshots, password rotation, reinstall, short-lived terminal tickets, auto-renew, and billing-period operations. `kvm` exposes inventory, power, credentials, renewal, cancellation/recovery, and the complete snapshot lifecycle for owned KVM services. The retired `vps` resource returns a migration message instead of guessing the product.
+
+```bash
+kmerhosting lxc metrics INSTANCE_ID
+kmerhosting lxc snapshots create INSTANCE_ID before-upgrade
+kmerhosting lxc password INSTANCE_ID 'NEW_PASSWORD' --yes
+kmerhosting lxc reinstall INSTANCE_ID "Ubuntu 24.04 LTS" --yes
+kmerhosting lxc terminal-ticket INSTANCE_ID --yes
+kmerhosting lxc auto-renew INSTANCE_ID off --yes
+kmerhosting lxc billing-period INSTANCE_ID 3
+kmerhosting kvm snapshots rollback INSTANCE_ID SNAPSHOT_ID --yes
+```
 
 Run `kmerhosting --help` for the complete command list. For writes, `--idempotency-key VALUE` lets a retry reuse the same logical request. Destructive operations require `--yes`.
 
 ## Safe automation
 
-Set the API key only in a protected server environment. Every write must have a unique idempotency key. KVM power and snapshot scopes require a matching IPv4 allowlist on the key; do not automate those actions from an untrusted or dynamic address. See [API keys and scopes](/developer/api-keys) before using the CLI in CI.
+Set the API key only in a protected server environment. Every write must have a unique idempotency key. Dangerous LXC and KVM scopes require a matching IPv4 allowlist on the key; do not automate those actions from an untrusted or dynamic address. Password arguments can remain in shell history, so prefer a protected automation environment and clear history according to your operating-system policy. See [API keys and scopes](/developer/api-keys) before using the CLI in CI.
