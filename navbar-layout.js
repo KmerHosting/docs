@@ -40,9 +40,10 @@
 
     const system = preference.querySelector('button[aria-label="Switch to system theme"]')
     if (system) {
-      system.classList.add('kh-system-theme-option')
-      system.setAttribute('aria-hidden', 'true')
-      system.setAttribute('tabindex', '-1')
+      // Remove the unsupported third choice entirely so it is not reachable
+      // by keyboard or assistive technology. Mintlify can recreate the
+      // preference group after navigation; the observer removes it again.
+      system.remove()
     }
 
     // Mintlify exposes system/light/dark as a three-way preference. KmerHosting
