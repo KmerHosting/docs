@@ -26,7 +26,7 @@
     ] },
     "groups": [
       { "group": "Start here", "icon": "rocket", "pages": ["quickstart", "console/overview", "console/account-and-billing", "console/api-activity"] },
-      { "group": "Products", "icon": "boxes", "pages": ["products/overview", "products/domains", "products/email-hosting", "products/shared-hosting", "products/lxc-vps", "products/kvm-vps", "products/wfilemanager"] },
+      { "group": "Products", "icon": "boxes", "pages": ["products/overview", "products/domains", "products/email-hosting", "products/shared-hosting", "products/free-hosting", "products/lxc-vps", "products/kvm-vps", "products/wfilemanager"] },
       { "group": "Platform", "icon": "network", "pages": ["platform/architecture", "platform/security", "platform/regions-and-networking", "platform/roadmap"] },
       { "group": "Developer platform", "icon": "braces", "pages": ["developer/overview", "developer/api-keys", "developer/rest-api", "developer/sdk", "developer/cli", "developer/mcp", "api/errors"] },
       { "group": "API reference", "icon": "terminal", "openapi": { "source": "openapi.json", "directory": "api-reference" } },
