@@ -1,6 +1,6 @@
 ---
 title: "Operation troubleshooting"
-description: "Diagnose service, DNS, hosting-panel, and LXC VPS operation results."
+description: "Diagnose service, DNS, hosting-panel, lifecycle, and LXC VPS operation results."
 ---
 
 ## Check ownership and IDs
@@ -11,8 +11,19 @@ Start with `services list` and the relevant product list command. Product operat
 
 DNS, Email Hosting, temporary panel access, and other product writes can be queued. Keep the idempotency key, then check the matching read endpoint or customer console rather than submitting a second new request.
 
+## Free Hosting suspended or terminated
+
+For Free Hosting, the portal is the authoritative place to read the current state and reason.
+
+- **Suspended for inactivity** means the service reached 20 days without qualifying activity. The website and cPanel/DirectAdmin account are suspended. The KmerHosting account remains available. Contact support before the deletion deadline shown in the portal if recovery is needed.
+- Signing in after suspension does not automatically reactivate the provider account and does not move the fixed deletion deadline.
+- **Terminated after suspension** means the suspended Free Hosting service remained unrecovered until 30 days of inactivity. The provider account and hosting data have been permanently deleted.
+- Inactivity termination does not restore the one-time Free Hosting claim. The same KmerHosting account can still purchase paid hosting but cannot claim another Free Hosting service.
+
+See [Free Hosting](/products/free-hosting) for the full warning schedule and lifecycle.
+
 ## Destructive actions
 
 The MCP server requires explicit confirmation for DNS deletion, KVM stop/shutdown, and KVM snapshot deletion. Verify the target and existing state before confirming. Use the same idempotency key if a request outcome is uncertain.
 
-For support, provide the `request_id`, endpoint, sanitized error, and time of the request. Do not include keys, passwords, panel URLs, or personal data.
+For support, provide the `request_id`, endpoint, sanitized error, service ID, and time of the request. Do not include keys, passwords, panel URLs, or personal data.
