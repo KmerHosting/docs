@@ -1,11 +1,11 @@
 ---
 title: "Shared Hosting"
-description: "Use the Shared Hosting catalog and manage supported service access through the public API."
+description: "Use the Shared Hosting catalog and manage cPanel or DirectAdmin services, lifecycle states, billing, and supported API access."
 ---
 
 ## Catalog and billing
 
-The live Shared Hosting catalog supplies the available plans, control-panel type, limits, features, price, and availability. It supports cPanel and DirectAdmin offerings. The current product workflow supports one-, three-, six-, and twelve-month periods and unmanaged or managed support levels where offered.
+The live Shared Hosting catalog supplies the available plans, control-panel type, limits, features, price, and availability. It supports cPanel and DirectAdmin offerings. Paid product workflows support one-, three-, six-, and twelve-month periods and unmanaged or managed support levels where offered.
 
 The final price, availability, selected panel, and included features must always be read from the live catalog or the purchased service record. Do not rely on a copied price table.
 
@@ -13,19 +13,32 @@ The final price, availability, selected panel, and included features must always
 
 Shared Hosting includes cPanel and DirectAdmin plans plus Standard, PHP, WordPress, Node.js, Python, and Laravel families where the live catalog offers them. Runtime families and features differ by control panel; do not assume that a feature present on one plan exists on another.
 
-Free Hosting is documented separately in [Free Hosting](/products/free-hosting). It is part of Shared Hosting, but its zero-price lifecycle and inactivity policy are different from paid plans.
+Free Hosting is documented separately in [Free Hosting](/products/free-hosting). It is part of Shared Hosting, but its zero-price lifecycle and inactivity policy differ from paid plans.
 
 At checkout, confirm the primary domain, DNS readiness, control panel, plan family, managed or unmanaged support level, billing period, limits, final price, and stock. You can use an offered temporary subdomain when the permanent domain is not ready. A move between cPanel and DirectAdmin or between plan families can require a support-assisted migration rather than an in-place upgrade.
 
+## Service states
+
+Shared Hosting service records can expose lifecycle states such as **Pending**, **Active**, **Suspended**, **Cancelled**, and **Terminated**, depending on the workflow.
+
+For Free Hosting, the inactivity lifecycle is explicit:
+
+**Active → Suspended after 20 days of inactivity → Terminated after 30 days of inactivity**
+
+A suspended Free Hosting service shows the suspension reason and deletion deadline. A terminated Free Hosting service shows that it was previously suspended and that provider-side hosting data has been deleted. See [Free Hosting](/products/free-hosting) for the warning schedule and recovery rules.
+
+Paid-service cancellation is a different workflow and should not be interpreted as the Free Hosting inactivity lifecycle.
+
 ## Manage an active service
 
-The Shared Hosting portal shows the primary domain, server, DNS and SSL guidance, credentials, resource statistics, panel type, and temporary control-panel or File Manager access. It also supports auto-renew, manual renewal, prorated upgrade quotes, eligible upgrades, scheduled cancellation, and cancellation revocation.
+The Shared Hosting portal shows the primary domain, server, DNS and SSL guidance, credentials, resource statistics, panel type, and temporary control-panel or File Manager access. It also supports auto-renew, manual renewal, prorated upgrade quotes, eligible upgrades, scheduled cancellation, and cancellation revocation where applicable.
 
 - Use cPanel controls for cPanel services and DirectAdmin controls for DirectAdmin services.
 - Temporary access links are secrets; open them only on a trusted device and let them expire.
 - Resource statistics can be delayed or provider-specific. Compare sustained usage with plan limits before upgrading.
 - Back up site files and databases before application, DNS, migration, or major runtime changes.
 - Downgrades and cross-family/control-panel moves require support review because limits and data layouts can change.
+- Suspended or terminated services do not offer normal panel access.
 
 ## Supported API operations
 
@@ -33,7 +46,7 @@ The Shared Hosting portal shows the primary domain, server, DNS and SSL guidance
 | --- | --- | --- |
 | List owned services | `hosting:read` | Returns supported service inventory fields. |
 | Retrieve statistics | `hosting:read` | Provider-neutral: DirectAdmin or cPanel is selected from the owned service. |
-| Create temporary panel access | `hosting:panel:access` | `target` is `panel` or `filemanager`; default is `panel`. |
+| Create temporary panel access | `hosting:panel:access` | `target` is `panel` or `filemanager`; default is `panel`. Active supported services only. |
 
 ```bash
 curl --fail-with-body -X POST \
