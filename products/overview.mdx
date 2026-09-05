@@ -1,6 +1,6 @@
 ---
 title: "Products and service lifecycle"
-description: "The KmerHosting product areas currently available through the public developer platform."
+description: "The KmerHosting product areas currently available through the customer platform and public developer platform."
 ---
 
 ## Supported product areas
@@ -8,8 +8,8 @@ description: "The KmerHosting product areas currently available through the publ
 <CardGroup cols={2}>
   <Card title="Domains and DNS" icon="globe" href="/products/domains">Inspect domains, DNS records, nameservers, and auto-renewal.</Card>
   <Card title="Email Hosting" icon="mail" href="/products/email-hosting">Inspect services, provision them, and synchronize DNS.</Card>
-  <Card title="Shared Hosting" icon="panels-top-left" href="/products/shared-hosting">Inspect services, retrieve statistics, and create temporary panel access.</Card>
-  <Card title="Free Hosting" icon="gift" href="/products/free-hosting">Claim one free cPanel or DirectAdmin service and review the inactivity and retention rules.</Card>
+  <Card title="Shared Hosting" icon="panels-top-left" href="/products/shared-hosting">Manage cPanel and DirectAdmin services, usage, access, billing, and lifecycle states.</Card>
+  <Card title="Free Hosting" icon="gift" href="/products/free-hosting">Claim one free cPanel or DirectAdmin service and review the inactivity, suspension, and termination rules.</Card>
   <Card title="LXC VPS" icon="container" href="/products/lxc-vps">Deploy in the customer portal; automate supported management and lifecycle operations.</Card>
   <Card title="KVM VPS" icon="server" href="/products/kvm-vps">Manage existing KVM instances, power, renewals, and snapshots.</Card>
   <Card title="wFileManager" icon="folder" href="/products/wfilemanager">Run a self-hosted file manager on a Linux server you control.</Card>
@@ -17,7 +17,11 @@ description: "The KmerHosting product areas currently available through the publ
 
 ## Lifecycle
 
-The customer console is the authoritative interface for ordering and billing. After an order is accepted, the service inventory can show pending, active, suspended, cancelled, or renewal-related states according to the product workflow. API listing endpoints return only services belonging to the authenticated account.
+The customer console is the authoritative interface for ordering and billing. After an order is accepted, service inventory can expose states such as **Pending**, **Active**, **Suspended**, **Cancelled**, **Expired**, or **Terminated**, depending on the product workflow.
+
+A state name does not have the same cause for every product. The product page explains the applicable reason, recovery path, retention period, and provider-side action. For example, Free Hosting uses a documented inactivity sequence of **Active → Suspended → Terminated**.
+
+API listing endpoints return only services belonging to the authenticated account.
 
 Use the central service inventory when you need a cross-product view. Use the product endpoint when you need a specialized operation such as DNS management, panel access, LXC inspection, or KVM snapshot management.
 
@@ -31,7 +35,7 @@ Prices, terms, plan limits, and availability come from the live product catalog 
 | --- | --- | --- |
 | Domains | Ordering, transfers, contacts, DNS, security, renewals, documents | Owned inventory, DNS, nameservers, auto-renew |
 | Email Hosting | Ordering, DNS verification, mailboxes, webmail, billing | List services, provision, synchronize DNS |
-| Shared Hosting | Ordering, service details, panel access, renewal, upgrade, cancellation | List, provider-neutral statistics, temporary panel/File Manager access |
+| Shared Hosting | Ordering, service details, panel access, renewal, upgrade, cancellation, lifecycle status | List, provider-neutral statistics, temporary panel/File Manager access |
 | LXC VPS | Full customer lifecycle, power, metrics, snapshots, terminal, web domains, billing | Inventory, metrics, power, snapshots, credentials, reinstall, terminal tickets, and subscription settings |
 | KVM VPS | Existing-service power, credentials, snapshots, renewal, cancellation | Inventory, power, auto-renew, snapshot create/update/delete |
 | wFileManager | Self-hosted application | No KmerHosting account API |
