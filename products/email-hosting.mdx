@@ -31,12 +31,12 @@ Mailbox administration and purchases remain console-managed workflows unless the
 2. Complete checkout with the domain you control.
 3. Open the service's DNS page and copy every required record to the authoritative DNS provider, or use DNS synchronization when the portal confirms it can manage the zone.
 4. Run verification and wait for DNS propagation before repeating the operation.
-5. Create mailboxes within the plan limits and use unique passwords.
+5. Create mailboxes within the plan limits. The address part before `@` may use letters, numbers, periods, underscores, and hyphens; use a temporary password of at least 10 characters.
 6. Open webmail or configure an email client with the exact IMAP/SMTP hostnames, ports, encryption, and authentication shown by the portal.
 
 ## Mailboxes and aliases
 
-The Email portal can create and delete mailboxes and rotate mailbox passwords. Deleting a mailbox can remove access to stored mail; export needed data first. Alias controls can appear where the customer-facing product supports them—an alias routes mail and is not a separate mailbox with storage and login credentials.
+The Email portal can create and delete mailboxes and rotate mailbox passwords. It validates the selected domain, address format, and minimum password length before sending a create request; a server-side failure remains visible in the form so it can be corrected or retried. Deleting a mailbox can remove access to stored mail; export needed data first. Alias controls can appear where the customer-facing product supports them—an alias routes mail and is not a separate mailbox with storage and login credentials.
 
 ## Renewals and suspension
 
