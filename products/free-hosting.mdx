@@ -1,13 +1,13 @@
 ---
 title: "Free Hosting"
-description: "Claim one free cPanel or DirectAdmin Shared Hosting service and understand its limits, activity policy, and retention rules."
+description: "Claim one free cPanel or DirectAdmin Shared Hosting service and understand its limits, inactivity lifecycle, suspension, and termination rules."
 ---
 
 Free Hosting is a `$0/month` Shared Hosting offer. Choose **cPanel** or **DirectAdmin** in the [Shared Hosting portal](https://shared.kmerhosting.com/?category=free). No payment method, KmerHosting credit, or renewal payment is required.
 
 ## Included resources
 
-Each KmerHosting account may have **one** Free Hosting subscription:
+Each KmerHosting account may claim **one** Free Hosting service:
 
 | Resource | Included |
 | --- | ---: |
@@ -20,29 +20,81 @@ Each KmerHosting account may have **one** Free Hosting subscription:
 | FTP account | 1 |
 | Control panel | cPanel or DirectAdmin |
 
-The live portal remains authoritative for the current plan availability and the final resource presentation. A KmerHosting subdomain can be generated automatically, or you can connect one domain you already own.
+The live portal is authoritative for current availability and the final resource presentation. A KmerHosting subdomain can be generated automatically, or you can connect a domain you already own.
 
-## Free while the service remains active
+## Free while active
 
-Free Hosting is free **as long as the service remains active**. It is not an unconditional promise that the provider account, panel capacity, or hosted data will be retained indefinitely. KmerHosting reserves the right to suspend a Free Hosting plan at any time when operationally necessary, including when available control-panel capacity is needed for paying customers. We will provide notice where practical and legally permitted.
+Free Hosting remains free while the service is active. There is no recurring charge or renewal payment.
 
-## Inactivity warnings and cleanup
+The offer is intended for active use and evaluation. Provider accounts and hosted data are not retained indefinitely when a service is abandoned. KmerHosting may also suspend free capacity for security, abuse, legal, or operational reasons. When that happens, the user-facing portal shows the applicable reason; those suspensions are separate from the inactivity lifecycle below.
 
-To keep the free capacity available for active users, KmerHosting records customer-side activity such as signing in to the KmerHosting account or making an authenticated Shared Hosting management request. The current automated schedule is:
+## What counts as activity
 
-| Inactivity | Action |
+The inactivity lifecycle uses customer-side KmerHosting activity, including:
+
+- signing in to the KmerHosting account; and
+- authenticated Shared Hosting management activity.
+
+While the service is active, recent qualifying activity resets the inactivity clock.
+
+## Inactivity lifecycle
+
+The current automated lifecycle is:
+
+| Inactivity | State / action |
 | --- | --- |
-| 30, 45, 53 and 59 days | Warning notification and email before suspension |
-| 60 days | The Free Hosting service may be suspended |
-| 75 and 83 days after the last activity | Further recovery and cleanup warnings |
-| 90 days | The provider hosting account and its hosted data may be removed |
+| 14 days | First inactivity warning |
+| 17 days | Additional warning |
+| 19 days | Final pre-suspension warning |
+| 20 days | **Suspended** — website and cPanel/DirectAdmin account become unavailable |
+| 23 days | Deletion warning, 3 days after suspension |
+| 27 days | Deletion warning, 7 days after suspension |
+| 29 days | Final deletion warning, 9 days after suspension |
+| 30 days | **Terminated** — provider account and hosting data are permanently deleted |
 
-KmerHosting may act earlier when panel capacity, security, abuse, legal, or other operational requirements make it necessary. The warning schedule does not create a guaranteed retention period. A suspension for inactivity does not create a charge; recovery may require contacting support or moving to a paid plan. Signing in after suspension does not automatically restore the provider account.
+The lifecycle is therefore:
 
-Before the 60-day suspension point, sign in to your KmerHosting account and review the service. Before any cleanup deadline, download site files, databases, email you need, and other backups. After provider cleanup, recovery may not be possible.
+**Active → Suspended (20 days inactive) → Terminated (30 days inactive)**
 
-## Choosing a paid plan
+Notifications and email warnings are sent at the configured warning checkpoints. The portal also exposes the suspension reason and the permanent-deletion deadline.
 
-An active Free Hosting service shows a path to paid plans in the Shared Hosting portal and the KmerHosting Dashboard. Paid plans provide larger resource limits and plan-specific capabilities. cPanel paid plans can include Web Terminal and REST API access; DirectAdmin paid plans expose the paid features shown by the live catalog and do not advertise Web Terminal as a DirectAdmin capability.
+## Suspended at 20 days
+
+When a Free Hosting service reaches 20 days without qualifying activity:
+
+- the KmerHosting service state becomes **Suspended**;
+- the cPanel or DirectAdmin provider account is suspended;
+- the hosted website becomes unavailable;
+- normal panel and File Manager access is no longer offered; and
+- a fixed deletion deadline is set for day 30.
+
+The KmerHosting account itself is not deleted. The customer can still sign in to KmerHosting and see the service state and reason.
+
+A sign-in after suspension does **not** automatically reactivate the hosting account and does **not** move the deletion deadline. If recovery is needed, contact KmerHosting support before the deadline shown in the portal.
+
+## Terminated at 30 days
+
+If the suspended service is not recovered before the deletion deadline, it becomes **Terminated** at 30 days of inactivity.
+
+The portal explains that the service was first suspended at day 20 and then terminated because it remained unrecovered until day 30. At termination:
+
+- the cPanel or DirectAdmin provider account is deleted;
+- hosted files, databases, email data, and other provider-side hosting data are deleted;
+- panel credentials and provider access are no longer usable; and
+- normal recovery should be considered unavailable.
+
+Keep independent backups of anything important before the deletion deadline.
+
+## One Free Hosting claim per account
+
+The Free Hosting entitlement is a one-time claim for the KmerHosting account.
+
+Termination for inactivity does **not** release that entitlement. After an inactivity termination, the same KmerHosting account cannot claim another Free Hosting service, but it can still order paid hosting normally.
+
+Administrative cleanup is separate. KmerHosting may intentionally release a Free Hosting claim when performing an explicit administrative removal.
+
+## Move to paid hosting
+
+An active Free Hosting service exposes a path to paid plans in the Shared Hosting portal. Paid plans provide larger limits and plan-specific capabilities.
 
 Use the [Shared Hosting guide](/products/shared-hosting) for panel access, usage, DNS, renewals, upgrades, and support-assisted migrations.
