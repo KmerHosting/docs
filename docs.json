@@ -26,7 +26,8 @@
     ] },
     "groups": [
       { "group": "Start here", "icon": "rocket", "pages": ["quickstart", "console/overview", "console/account-and-billing", "console/api-activity"] },
-      { "group": "Products", "icon": "boxes", "pages": ["products/overview", "products/domains", "products/email-hosting", "products/shared-hosting", "products/free-hosting", "products/lxc-vps", "products/kvm-vps", "products/wfilemanager"] },
+      { "group": "Services", "icon": "server", "pages": ["products/domains", "products/email-hosting", "products/shared-hosting", "products/free-hosting", "products/lxc-vps", "products/kvm-vps"] },
+      { "group": "Products", "icon": "boxes", "pages": ["products/overview", "products/wfilemanager"] },
       { "group": "Platform", "icon": "network", "pages": ["platform/architecture", "platform/security", "platform/regions-and-networking", "platform/roadmap"] },
       { "group": "Developer platform", "icon": "braces", "pages": ["developer/overview", "developer/api-keys", "developer/rest-api", "developer/sdk", "developer/cli", "developer/mcp", "api/errors"] },
       { "group": "API reference", "icon": "terminal", "openapi": { "source": "openapi.json", "directory": "api-reference" } },
@@ -48,7 +49,6 @@
     { "source": "/products/kmerhosting-ai-agent", "destination": "/developer/overview", "permanent": true },
     { "source": "/products/kmerhosting-drive", "destination": "/products/overview", "permanent": true },
     { "source": "/products/webcpl", "destination": "/products/overview", "permanent": true },
-    { "source": "/products/wfilemanager", "destination": "/products/overview", "permanent": true },
     { "source": "/guides/dns-management", "destination": "/products/domains", "permanent": true },
     { "source": "/guides/tiny-vps", "destination": "/products/lxc-vps", "permanent": true },
     { "source": "/guides/shared-hosting-stacks", "destination": "/products/shared-hosting", "permanent": true },

@@ -1,43 +1,16 @@
 ---
-title: "Products and service lifecycle"
-description: "The KmerHosting product areas currently available through the customer platform and public developer platform."
+title: "Products"
+description: "Standalone KmerHosting products, separate from hosting and infrastructure services."
 ---
 
-## Supported product areas
+## Available products
 
 <CardGroup cols={2}>
-  <Card title="Domains and DNS" icon="globe" href="/products/domains">Inspect domains, DNS records, nameservers, and auto-renewal.</Card>
-  <Card title="Email Hosting" icon="mail" href="/products/email-hosting">Inspect services, provision them, and synchronize DNS.</Card>
-  <Card title="Shared Hosting" icon="panels-top-left" href="/products/shared-hosting">Manage cPanel and DirectAdmin services, usage, access, billing, and lifecycle states.</Card>
-  <Card title="Free Hosting" icon="gift" href="/products/free-hosting">Claim one free cPanel or DirectAdmin service and review the inactivity, suspension, and termination rules.</Card>
-  <Card title="LXC VPS" icon="container" href="/products/lxc-vps">Deploy in the customer portal; automate supported management and lifecycle operations.</Card>
-  <Card title="KVM VPS" icon="server" href="/products/kvm-vps">Manage existing KVM instances, power, renewals, and snapshots.</Card>
   <Card title="wFileManager" icon="folder" href="/products/wfilemanager">Run a self-hosted file manager on a Linux server you control.</Card>
 </CardGroup>
 
-## Lifecycle
+## Services are documented separately
 
-The customer console is the authoritative interface for ordering and billing. After an order is accepted, service inventory can expose states such as **Pending**, **Active**, **Suspended**, **Cancelled**, **Expired**, or **Terminated**, depending on the product workflow.
+Domains, Email Hosting, Shared Hosting, Free Hosting, LXC VPS, and existing KVM VPS instances are services. Find their ordering, lifecycle, and portal guidance under the **Services** navigation group.
 
-A state name does not have the same cause for every product. The product page explains the applicable reason, recovery path, retention period, and provider-side action. For example, Free Hosting uses a documented inactivity sequence of **Active → Suspended → Terminated**.
-
-API listing endpoints return only services belonging to the authenticated account.
-
-Use the central service inventory when you need a cross-product view. Use the product endpoint when you need a specialized operation such as DNS management, panel access, LXC inspection, or KVM snapshot management.
-
-## Pricing
-
-Prices, terms, plan limits, and availability come from the live product catalog and from the service record after purchase. They are intentionally not duplicated here. A stored service can expose its plan name, renewal price and currency, billing term, renewal date, and auto-renewal state through the console or applicable API response.
-
-## Capability by interface
-
-| Product | Customer portal | Public developer platform |
-| --- | --- | --- |
-| Domains | Ordering, transfers, contacts, DNS, security, renewals, documents | Owned inventory, DNS, nameservers, auto-renew |
-| Email Hosting | Ordering, DNS verification, mailboxes, webmail, billing | List services, provision, synchronize DNS |
-| Shared Hosting | Ordering, service details, panel access, renewal, upgrade, cancellation, lifecycle status | List, provider-neutral statistics, temporary panel/File Manager access |
-| LXC VPS | Full customer lifecycle, power, metrics, snapshots, terminal, web domains, billing | Inventory, metrics, power, snapshots, credentials, reinstall, terminal tickets, and subscription settings |
-| KVM VPS | Existing-service power, credentials, snapshots, renewal, cancellation | Inventory, power, auto-renew, snapshot create/update/delete |
-| wFileManager | Self-hosted application | No KmerHosting account API |
-
-Portal-only does not mean unsupported. It means the workflow needs customer-session context, an interactive confirmation, or a public API contract that has not been released.
+The Customer Dashboard is authoritative for the services attached to your account, billing, renewals, and portal entry points. The live catalog is authoritative for availability and pricing.
