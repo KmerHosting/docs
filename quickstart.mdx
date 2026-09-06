@@ -6,10 +6,10 @@ description: "Create a KmerHosting account, choose a live product, and connect d
 ## Start as a customer
 
 1. Create or sign in to your [Customer Dashboard](https://dashboard.kmerhosting.com).
-2. Add account credit through a payment option shown to your account.
-3. Open the [live catalog](https://kmerhosting.com/pricing), choose an available product, and review the final plan, period, region, limits, support level, and renewal price.
+2. Open **Billing → Credit and payments** and add account credit through a payment option shown to your account when needed.
+3. Open **All services and products → Browse catalog**, choose an available product, and review the final plan, period, region, limits, support level, and renewal price. The [public pricing page](https://kmerhosting.com/pricing) is also available for browsing.
 4. Complete checkout only once, then follow the displayed order or provisioning status.
-5. Open the service from the central inventory. KmerHosting sends you to the specialized Domain, Email, Shared Hosting, LXC, or KVM portal when needed.
+5. Return to the Customer Dashboard or the relevant product portal to manage the service after activation.
 
 See [account and billing](/console/account-and-billing) before enabling auto-renew or scheduling cancellation.
 
@@ -24,7 +24,7 @@ See [account and billing](/console/account-and-billing) before enabling auto-ren
 
 ## 1. Create a scoped API key
 
-In the **main KmerHosting Dashboard**, open **Developer tools → API keys**, select only the scopes your integration needs, choose a short expiration, add trusted IPv4 addresses when required, and copy the secret once. Store it in a server-side secret manager.
+In the **Customer Dashboard**, open **Developer → API keys**, select only the scopes your integration needs, choose a short expiration, add trusted IPv4 addresses when required, and copy the secret once. Store it in a server-side secret manager.
 
 ```bash
 export KMERHOSTING_API_KEY='kh_live_...'
