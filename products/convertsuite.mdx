@@ -25,4 +25,16 @@ KmerHosting sends lifecycle notifications for activation, plan changes, renewal 
 
 ## API access
 
-REST API access is included with Pro and Business plans. The API uses the ConvertSuite account session and the same operation reservation rules as the web tools. See the product's API documentation when the endpoint contract is published; the KmerHosting API reference remains authoritative for platform APIs.
+REST API access is included with Pro and Business plans. The processing API is available at `https://api.convertsuite.pro` and uses the ConvertSuite session returned by KmerHosting SSO.
+
+The browser-facing contract is:
+
+- `GET /health` and `GET /v1/tools` for service health and the supported tool catalog.
+- `POST /v1/prepare-upload` with `{ tool, idempotencyKey, files, options }` to reserve one operation per input and receive one-time signed upload URLs.
+- `POST /v1/jobs/{jobId}/start` after all signed uploads complete.
+- `GET /v1/jobs/{jobId}` to poll status and receive short-lived artifact download URLs.
+- `POST /v1/jobs/{jobId}/cancel` to cancel an upload that has not started.
+
+Server-to-server callers send the same KmerHosting ConvertSuite session as `Authorization: Bearer <session>` and add `x-convertsuite-api: 1`; that path requires an active Pro or Business entitlement. Browser web requests use the `x-convertsuite-session` header and remain available on Free.
+
+Inputs are private, limited to 50 MB per file, and retained for up to 24 hours. Daily included operations are consumed before persistent purchased operations, using the same atomic quota functions as the web interface.
