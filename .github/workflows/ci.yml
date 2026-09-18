@@ -29,10 +29,22 @@ jobs:
           openapi = json.loads(Path("openapi.json").read_text())
           assert openapi["openapi"] == "3.1.0"
           assert openapi["info"]["title"] == "KmerHosting API"
-          for group in config["navigation"]["groups"]:
-              for page in group.get("pages", []):
-                  path = Path(f"{page}.mdx")
-                  assert path.is_file(), f"navigation target is missing: {path}"
+          def iter_pages(node):
+              if isinstance(node, dict):
+                  for key, value in node.items():
+                      if key == "pages" and isinstance(value, list):
+                          for page in value:
+                              if isinstance(page, str):
+                                  yield page
+                      else:
+                          yield from iter_pages(value)
+              elif isinstance(node, list):
+                  for item in node:
+                      yield from iter_pages(item)
+
+          for page in iter_pages(config["navigation"]):
+              path = Path(f"{page}.mdx")
+              assert path.is_file(), f"navigation target is missing: {path}"
           PY
       - name: Verify OpenAPI snapshot matches production
         shell: bash

@@ -1,74 +1,110 @@
 ---
-description: "Find KmerHosting product guides, customer account procedures, developer tools, and troubleshooting help."
-title: "KmerHosting documentation"
+description: "Learn how KmerHosting connects hosting, domains, email, VPS infrastructure, products, and developer tools."
+title: "Introduction"
 ---
 
-Use these paths to reach the procedure or reference you need. Prices, plan limits, and stock always come from the live product flow. In the Customer Dashboard, use **All services and products → Availability** to review current service availability, **My services** for services attached to your account, and **My products** for product entry points. The [public pricing page](https://kmerhosting.com/pricing) is also available for browsing.
+KmerHosting brings hosting, domains, professional email, VPS infrastructure, standalone products, and developer interfaces into one account. Use this documentation to move from setup to day-to-day operations without guessing which portal or API owns a workflow.
 
-<CardGroup cols={2}>
-  <Card title="Set up an account" icon="user-plus" href="/quickstart">
-    Create an account, add credit, choose a live product, and find its portal.
+<CardGroup cols={3}>
+  <Card title="One customer account" icon="user-round-check">
+    Billing, renewals, service inventory, API keys, notifications, and central account settings live in the Customer Dashboard.
   </Card>
 
-  <Card title="Manage billing" icon="receipt" href="/console/account-and-billing">
-    Review credit, invoices, renewals, cancellations, and refunds.
+  <Card title="Purpose-built portals" icon="panels-top-left">
+    Domains, Email Hosting, Shared Hosting, LXC, and other products keep specialized controls in their own service portals.
   </Card>
 
-  <Card title="Manage domains" icon="globe" href="/products/domains">
-    Register, transfer, renew, secure, and configure DNS for a domain.
-  </Card>
-
-  <Card title="Set up email" icon="mail" href="/products/email-hosting">
-    Verify DNS, create mailboxes, and connect webmail or mail clients.
-  </Card>
-
-  <Card title="Manage hosting" icon="panels-top-left" href="/products/shared-hosting">
-    Use cPanel or DirectAdmin, inspect usage, renew, or upgrade.
-  </Card>
-
-  <Card title="Free Hosting" icon="gift" href="/products/free-hosting">
-    Claim one free cPanel or DirectAdmin service and understand its activity policy.
-  </Card>
-
-  <Card title="Operate a VPS" icon="server" href="/products/lxc-vps">
-    Use LXC controls, snapshots, networking, web domains, and terminal access.
-  </Card>
-
-  <Card title="Use developer tools" icon="braces" href="/developer/overview">
-    Integrate with the REST API, SDKs, CLI, or MCP server.
-  </Card>
-
-  <Card title="Troubleshoot a problem" icon="wrench" href="/troubleshooting/overview">
-    Diagnose access, DNS, provisioning, operations, billing, and renewals.
-  </Card>
-
-  <Card title="Understand the platform" icon="network" href="/platform/architecture">
-    Learn how accounts, portals, providers, regions, and public APIs fit together.
+  <Card title="Developer-friendly" icon="braces">
+    Automate supported operations through the REST API, official SDKs, CLI, or MCP server.
   </Card>
 </CardGroup>
 
-<Info>
-  The **Customer Dashboard** is authoritative for central account workflows. Its current sidebar uses **Overview**, **Getting started**, **Usage and spending**, **My products**, **My services**, **Availability**, **Renewals**, **Credit and payments**, **Invoices and receipts**, **API keys**, **Developer tools**, **Notifications**, and **Settings**. Product portals hold specialized controls for each service. The API reference is authoritative for supported automation.
-</Info>
-
-## Services
-
-Service documentation covers Domains, Professional Email, cPanel and DirectAdmin Shared Hosting, LXC VPS, and management of existing KVM VPS instances. Availability, prices, and plan limits come from the live catalog. Services that are not orderable are tracked on the [roadmap](/platform/roadmap).
-
-## Products
-
-Product documentation is separate from service documentation. The currently documented products are [wFileManager](/products/wfilemanager), a self-hosted file manager for a Linux server you control, and [ConvertSuite](/products/convertsuite), KmerHosting's document, image, PDF, and media toolkit.
+## What can you do with KmerHosting?
 
 <CardGroup cols={2}>
-  <Card title="Open Customer Dashboard" icon="layout-dashboard" href="https://dashboard.kmerhosting.com">
-    Manage your KmerHosting account and services.
+  <Card title="Host websites" icon="server" href="/products/shared-hosting">
+    Run cPanel or DirectAdmin hosting for PHP, WordPress, Node.js, Python, Laravel, and standard web workloads where the live catalog offers them.
   </Card>
 
-  <Card title="Browse API reference" icon="terminal" href="/api-reference">
-    See exact endpoints, scopes, payloads, and responses.
+  <Card title="Run VPS workloads" icon="container" href="/products/lxc-vps">
+    Deploy and manage Linux containers with power controls, metrics, snapshots, credentials, reinstall, terminal access, and billing operations.
   </Card>
 
-  <Card title="Open interactive API docs" icon="book-open" href="https://api.kmerhosting.com/docs">
-    Try requests in Swagger UI against the live API contract.
+  <Card title="Manage domains and email" icon="globe" href="/products/domains">
+    Register and manage domains, DNS, nameservers, renewals, and professional email services.
+  </Card>
+
+  <Card title="Build integrations" icon="code-2" href="/developer/overview">
+    Connect your backend, terminal automation, CI workflows, or compatible AI clients to documented KmerHosting operations.
+  </Card>
+</CardGroup>
+
+## Quick start
+
+### Choose your path
+
+<CardGroup cols={2}>
+  <Card title="For customers" icon="layout-dashboard" href="/quickstart">
+    Create an account, add credit when needed, choose an available service, and open the correct product portal.
+  </Card>
+
+  <Card title="For developers" icon="terminal" href="/developer/overview">
+    Create a scoped API key, choose an SDK or tool, make your first authenticated request, and keep request IDs for support.
+  </Card>
+</CardGroup>
+
+### Start in three steps
+
+<Steps>
+  <Step title="Open the Customer Dashboard">
+    Sign in at [dashboard.kmerhosting.com](https://dashboard.kmerhosting.com). The dashboard is authoritative for your account, billing, services, renewals, and API keys.
+  </Step>
+
+  <Step title="Choose the right service or interface">
+    Use **All services and products → Availability** for currently orderable services. Developers can start with the [SDKs and tools](/developer/overview).
+  </Step>
+
+  <Step title="Manage the resource in its owning portal">
+    Return to the Customer Dashboard for central account work, or open the dedicated service portal for product-specific operations.
+  </Step>
+</Steps>
+
+## Core areas
+
+<CardGroup cols={3}>
+  <Card title="Hosting" icon="panels-top-left" href="/products/shared-hosting">
+    Shared Hosting, Free Hosting, LXC VPS, and existing KVM VPS instances.
+  </Card>
+
+  <Card title="Domains & Email" icon="mail" href="/products/email-hosting">
+    Domain lifecycle, DNS, nameservers, mailbox provisioning, and professional email.
+  </Card>
+
+  <Card title="Products" icon="boxes" href="/products/overview">
+    Standalone KmerHosting products such as wFileManager and ConvertSuite.
+  </Card>
+
+  <Card title="Developer platform" icon="braces" href="/developer/overview">
+    REST API, API keys, SDKs, CLI, MCP, errors, and the generated API reference.
+  </Card>
+
+  <Card title="Platform" icon="network" href="/platform/architecture">
+    Architecture, security boundaries, regions, networking, and roadmap.
+  </Card>
+
+  <Card title="Troubleshooting" icon="life-buoy" href="/troubleshooting/overview">
+    Access, DNS, service operations, billing, and renewal troubleshooting.
+  </Card>
+</CardGroup>
+
+## Need help?
+
+<CardGroup cols={2}>
+  <Card title="Support" icon="life-buoy" href="https://kmerhosting.com/support">
+    Contact KmerHosting support when a workflow requires account-specific assistance.
+  </Card>
+
+  <Card title="System status" icon="activity" href="https://status.kmerhosting.com">
+    Check current service availability and incident information.
   </Card>
 </CardGroup>
