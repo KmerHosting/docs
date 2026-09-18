@@ -42,3 +42,9 @@ Documentation should reflect the current production behavior of KmerHosting. Avo
 - [Customer Dashboard](https://dashboard.kmerhosting.com)
 - [KmerHosting API](https://api.kmerhosting.com)
 - [GitHub organization](https://github.com/KmerHosting)
+
+## License
+
+Except where otherwise noted, the KmerHosting documentation source and code examples in this repository are licensed under the **GNU General Public License v3.0 only (GPL-3.0-only)**. See [LICENSE](LICENSE).
+
+KmerHosting names, logos, trademarks, and other brand assets are not granted under the GPL merely by being present in this repository.
