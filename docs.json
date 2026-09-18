@@ -112,7 +112,7 @@
         ]
       },
       {
-        "tab": "Hosting",
+        "tab": "Services",
         "groups": [
           {
             "group": "Web hosting",
@@ -129,12 +129,7 @@
               "products/lxc-vps",
               "products/kvm-vps"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "Domains & Email",
-        "groups": [
+          },
           {
             "group": "Domains",
             "icon": "globe",
