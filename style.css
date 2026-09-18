@@ -40,14 +40,6 @@ html[data-current-path='/'] #page-title {
     min-width: 0 !important;
   }
 
-  /* API reference code rail: never constrain it with the compact TOC rules.
-     Mintlify manages this width responsively so request/response snippets stay visible. */
-  html[data-current-path^='/api-reference/'] #content-side-layout {
-    width: auto !important;
-    max-width: none !important;
-    min-width: 20rem !important;
-  }
-
 }
 
 @media (min-width: 1024px) {
