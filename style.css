@@ -23,11 +23,6 @@ html[data-current-path='/'] #page-title {
     max-width: 11rem !important;
   }
 
-  #content-side-layout {
-    width: 12rem !important;
-    max-width: 12rem !important;
-  }
-
   /* Mintlify's outline has its own wider inner rail. Constrain that rail too;
      otherwise it protrudes past the right edge (most noticeably collapsed). */
   #table-of-contents-layout {
@@ -45,13 +40,12 @@ html[data-current-path='/'] #page-title {
     min-width: 0 !important;
   }
 
-  /* The wrapper uses row-reverse: flex-end is the visual left edge. Keeping
-     the group there removes the unused gutter beside the expanded navigation
-     without pushing the article or outline beyond the viewport. */
-  #content-container > div {
-    justify-content: flex-end !important;
-    min-width: 0 !important;
-    padding-left: 0 !important;
+  /* API reference code rail: never constrain it with the compact TOC rules.
+     Mintlify manages this width responsively so request/response snippets stay visible. */
+  html[data-current-path^='/api-reference/'] #content-side-layout {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 20rem !important;
   }
 
 }
