@@ -195,98 +195,333 @@
   },
   "redirects": [
     {
-      "source": "/products/tiny-vps",
-      "destination": "/products/lxc-vps",
+      "source": "/account/account-status",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
       "permanent": true
     },
     {
-      "source": "/products/vps",
-      "destination": "/products/overview",
+      "source": "/account/create-account",
+      "destination": "https://kmerhosting.com/docs/quickstart",
       "permanent": true
     },
     {
-      "source": "/solutions/domains",
-      "destination": "/products/domains",
+      "source": "/account/email-verification",
+      "destination": "https://kmerhosting.com/docs/quickstart",
       "permanent": true
     },
     {
-      "source": "/solutions/professional-email",
-      "destination": "/products/email-hosting",
+      "source": "/account/kyc",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
       "permanent": true
     },
     {
-      "source": "/solutions/shared-hosting",
-      "destination": "/products/shared-hosting",
+      "source": "/account/login-and-recovery",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/access-and-credentials",
       "permanent": true
     },
     {
-      "source": "/solutions/tiny-vps",
-      "destination": "/products/lxc-vps",
-      "permanent": true
-    },
-    {
-      "source": "/solutions/vps",
-      "destination": "/products/lxc-vps",
-      "permanent": true
-    },
-    {
-      "source": "/solutions/custom-hosting",
-      "destination": "/products/overview",
-      "permanent": true
-    },
-    {
-      "source": "/developer/ai-agent",
-      "destination": "/developer/overview",
-      "permanent": true
-    },
-    {
-      "source": "/products/kmerhosting-cli",
-      "destination": "/developer/cli",
-      "permanent": true
-    },
-    {
-      "source": "/products/kmerhosting-forge",
-      "destination": "/developer/overview",
-      "permanent": true
-    },
-    {
-      "source": "/products/kmerhosting-ai-agent",
-      "destination": "/developer/overview",
-      "permanent": true
-    },
-    {
-      "source": "/products/kmerhosting-drive",
-      "destination": "/products/overview",
-      "permanent": true
-    },
-    {
-      "source": "/products/webcpl",
-      "destination": "/products/overview",
-      "permanent": true
-    },
-    {
-      "source": "/guides/dns-management",
-      "destination": "/products/domains",
-      "permanent": true
-    },
-    {
-      "source": "/guides/tiny-vps",
-      "destination": "/products/lxc-vps",
-      "permanent": true
-    },
-    {
-      "source": "/guides/shared-hosting-stacks",
-      "destination": "/products/shared-hosting",
-      "permanent": true
-    },
-    {
-      "source": "/api/overview",
-      "destination": "/developer/rest-api",
+      "source": "/account/onboarding",
+      "destination": "https://kmerhosting.com/docs/quickstart",
       "permanent": true
     },
     {
       "source": "/api/authentication",
-      "destination": "/developer/api-keys",
+      "destination": "https://kmerhosting.com/docs/developer/api-keys",
+      "permanent": true
+    },
+    {
+      "source": "/api/endpoints",
+      "destination": "https://kmerhosting.com/docs/developer/rest-api",
+      "permanent": true
+    },
+    {
+      "source": "/api/overview",
+      "destination": "https://kmerhosting.com/docs/developer/rest-api",
+      "permanent": true
+    },
+    {
+      "source": "/applications/desktop",
+      "destination": "https://kmerhosting.com/docs/platform/roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/applications/mobile",
+      "destination": "https://kmerhosting.com/docs/platform/roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/applications/overview",
+      "destination": "https://kmerhosting.com/docs/platform/roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/apps/kmerhosting-desktop",
+      "destination": "https://kmerhosting.com/docs/platform/roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/apps/kmerhosting-mobile",
+      "destination": "https://kmerhosting.com/docs/platform/roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/billing/account-credit",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/billing/checkout",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/billing/invoices",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/billing/orders",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/billing/overview",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/billing/refunds",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/billing/renewals",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/console/active-services",
+      "destination": "https://kmerhosting.com/docs/console/overview",
+      "permanent": true
+    },
+    {
+      "source": "/console/notifications",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/console/pending-orders",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/console/pending-services",
+      "destination": "https://kmerhosting.com/docs/console/overview",
+      "permanent": true
+    },
+    {
+      "source": "/console/settings",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/developer/ai-agent",
+      "destination": "https://kmerhosting.com/docs/developer/overview",
+      "permanent": true
+    },
+    {
+      "source": "/products/kmerhosting-ai-agent",
+      "destination": "https://kmerhosting.com/docs/developer/overview",
+      "permanent": true
+    },
+    {
+      "source": "/products/kmerhosting-cli",
+      "destination": "https://kmerhosting.com/docs/developer/cli",
+      "permanent": true
+    },
+    {
+      "source": "/products/kmerhosting-drive",
+      "destination": "https://kmerhosting.com/docs/products/overview",
+      "permanent": true
+    },
+    {
+      "source": "/products/kmerhosting-forge",
+      "destination": "https://kmerhosting.com/docs/developer/overview",
+      "permanent": true
+    },
+    {
+      "source": "/products/webcpl",
+      "destination": "https://kmerhosting.com/docs/products/overview",
+      "permanent": true
+    },
+    {
+      "source": "/products/tiny-vps",
+      "destination": "https://kmerhosting.com/docs/products/lxc-vps",
+      "permanent": true
+    },
+    {
+      "source": "/products/vps",
+      "destination": "https://kmerhosting.com/docs/products/overview",
+      "permanent": true
+    },
+    {
+      "source": "/guides/auto-renewal",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/guides/backups",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/operations",
+      "permanent": true
+    },
+    {
+      "source": "/guides/checkout",
+      "destination": "https://kmerhosting.com/docs/console/account-and-billing",
+      "permanent": true
+    },
+    {
+      "source": "/guides/custom-hosting",
+      "destination": "https://kmerhosting.com/docs/products/overview",
+      "permanent": true
+    },
+    {
+      "source": "/guides/deploy-website",
+      "destination": "https://kmerhosting.com/docs/products/shared-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/guides/dns-management",
+      "destination": "https://kmerhosting.com/docs/products/domains",
+      "permanent": true
+    },
+    {
+      "source": "/guides/domain-availability",
+      "destination": "https://kmerhosting.com/docs/products/domains",
+      "permanent": true
+    },
+    {
+      "source": "/guides/email-configuration",
+      "destination": "https://kmerhosting.com/docs/products/email-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/guides/free-storage",
+      "destination": "https://kmerhosting.com/docs/products/overview",
+      "permanent": true
+    },
+    {
+      "source": "/guides/professional-email",
+      "destination": "https://kmerhosting.com/docs/products/email-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/guides/service-management",
+      "destination": "https://kmerhosting.com/docs/console/overview",
+      "permanent": true
+    },
+    {
+      "source": "/guides/shared-hosting-stacks",
+      "destination": "https://kmerhosting.com/docs/products/shared-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/guides/ssl-certificates",
+      "destination": "https://kmerhosting.com/docs/products/shared-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/guides/support-ticket",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/overview",
+      "permanent": true
+    },
+    {
+      "source": "/guides/tiny-vps",
+      "destination": "https://kmerhosting.com/docs/products/lxc-vps",
+      "permanent": true
+    },
+    {
+      "source": "/guides/vps-stacks",
+      "destination": "https://kmerhosting.com/docs/products/lxc-vps",
+      "permanent": true
+    },
+    {
+      "source": "/operations/incidents",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/overview",
+      "permanent": true
+    },
+    {
+      "source": "/operations/maintenance",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/overview",
+      "permanent": true
+    },
+    {
+      "source": "/operations/status-page",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/overview",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/custom-hosting",
+      "destination": "https://kmerhosting.com/docs/products/overview",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/domains",
+      "destination": "https://kmerhosting.com/docs/products/domains",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/free-storage",
+      "destination": "https://kmerhosting.com/docs/products/overview",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/professional-email",
+      "destination": "https://kmerhosting.com/docs/products/email-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/shared-hosting",
+      "destination": "https://kmerhosting.com/docs/products/shared-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/ssl-certificates",
+      "destination": "https://kmerhosting.com/docs/products/shared-hosting",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/tiny-vps",
+      "destination": "https://kmerhosting.com/docs/products/lxc-vps",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/vps",
+      "destination": "https://kmerhosting.com/docs/products/lxc-vps",
+      "permanent": true
+    },
+    {
+      "source": "/troubleshooting/domain-dns",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/dns-and-email",
+      "permanent": true
+    },
+    {
+      "source": "/troubleshooting/login",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/access-and-credentials",
+      "permanent": true
+    },
+    {
+      "source": "/troubleshooting/payment",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/billing-and-renewals",
+      "permanent": true
+    },
+    {
+      "source": "/troubleshooting/shared-hosting",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/operations",
+      "permanent": true
+    },
+    {
+      "source": "/troubleshooting/vps-access",
+      "destination": "https://kmerhosting.com/docs/troubleshooting/operations",
       "permanent": true
     }
   ]
